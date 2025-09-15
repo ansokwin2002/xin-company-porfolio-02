@@ -154,9 +154,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ showAnimations }) => {
           {filteredProjects.map((project, index) => (
             showAnimations ? (
               <Fade direction="up" delay={index * 150} triggerOnce key={project.id}>
-                <div
-                  className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
-                >
+                <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden h-full flex flex-col">
                   {/* Project Image */}
                   <div className="relative overflow-hidden group">
                     <img
@@ -183,9 +181,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ showAnimations }) => {
                   </div>
 
                   {/* Project Content */}
-                  <div className="p-6">
+                  <div className="p-6 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                    <p className="text-gray-600 mb-4 leading-relaxed flex-1">{project.description}</p>
                     
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -200,7 +198,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ showAnimations }) => {
                     </div>
 
                     {/* Links */}
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-4 mt-auto">
                       <a
                         href={project.liveUrl}
                         className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-colors"
@@ -222,7 +220,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ showAnimations }) => {
             ) : (
               <div
                 key={project.id}
-                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden h-full flex flex-col"
               >
                 {/* Project Image */}
                 <div className="relative overflow-hidden group">
@@ -250,9 +248,9 @@ const Portfolio: React.FC<PortfolioProps> = ({ showAnimations }) => {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                  <p className="text-gray-600 mb-4 leading-relaxed flex-1">{project.description}</p>
                   
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -267,7 +265,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ showAnimations }) => {
                   </div>
 
                   {/* Links */}
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 mt-auto">
                     <a
                       href={project.liveUrl}
                       className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-colors"

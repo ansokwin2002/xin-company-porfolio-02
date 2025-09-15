@@ -99,9 +99,7 @@ const Services: React.FC<ServicesProps> = ({ showAnimations }) => {
           {services.map((service, index) => (
             showAnimations ? (
               <Fade direction="up" delay={index * 150} triggerOnce key={index}>
-                <div
-                  className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group"
-                >
+                <div className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group h-full flex flex-col">
                   {/* Icon */}
                   <div className="flex items-center justify-center w-16 h-16 bg-red-50 rounded-lg mb-6 group-hover:bg-red-100 transition-colors">
                     <service.icon className="text-red-600" size={32} />
@@ -109,7 +107,7 @@ const Services: React.FC<ServicesProps> = ({ showAnimations }) => {
 
                   {/* Content */}
                   <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+                  <p className="text-gray-600 mb-6 leading-relaxed flex-1">{service.description}</p>
 
                   {/* Features */}
                   <div className="space-y-3 mb-6">
@@ -122,7 +120,7 @@ const Services: React.FC<ServicesProps> = ({ showAnimations }) => {
                   </div>
 
                   {/* Price */}
-                  <div className="pt-6 border-t border-gray-100">
+                  <div className="pt-6 border-t border-gray-100 mt-auto">
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-bold text-red-600">{service.price}</span>
                       <button
@@ -139,7 +137,7 @@ const Services: React.FC<ServicesProps> = ({ showAnimations }) => {
             ) : (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group"
+                className="bg-white border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 group h-full flex flex-col"
               >
                 {/* Icon */}
                 <div className="flex items-center justify-center w-16 h-16 bg-red-50 rounded-lg mb-6 group-hover:bg-red-100 transition-colors">
@@ -148,7 +146,7 @@ const Services: React.FC<ServicesProps> = ({ showAnimations }) => {
 
                 {/* Content */}
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+                <p className="text-gray-600 mb-6 leading-relaxed flex-1">{service.description}</p>
 
                 {/* Features */}
                 <div className="space-y-3 mb-6">
@@ -161,7 +159,7 @@ const Services: React.FC<ServicesProps> = ({ showAnimations }) => {
                 </div>
 
                 {/* Price */}
-                <div className="pt-6 border-t border-gray-100">
+                <div className="pt-6 border-t border-gray-100 mt-auto">
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-bold text-red-600">{service.price}</span>
                     <button

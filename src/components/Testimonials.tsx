@@ -146,9 +146,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
           {testimonials.map((testimonial, index) => (
             showAnimations ? (
               <Fade direction="up" delay={index * 150} triggerOnce key={testimonial.id}>
-                <div
-                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-                >
+                <div className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
                   {/* Quote Icon */}
                   <div className="flex justify-between items-start mb-4">
                     <Quote className="text-red-600" size={32} />
@@ -160,12 +158,12 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
                   </div>
 
                   {/* Content */}
-                  <p className="text-gray-600 leading-relaxed mb-6 italic">
+                  <p className="text-gray-600 leading-relaxed mb-6 italic flex-1">
                     "{testimonial.content}"
                   </p>
 
                   {/* Client Info */}
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-4 mb-4">
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
@@ -178,7 +176,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
                   </div>
 
                   {/* Project Tag */}
-                  <div className="mt-4 pt-4 border-t border-gray-100">
+                  <div className="pt-4 border-t border-gray-100 mt-auto">
                     <span className="text-xs bg-red-50 text-red-600 px-3 py-1 rounded-full font-medium">
                       {testimonial.project}
                     </span>
@@ -188,7 +186,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
             ) : (
               <div
                 key={testimonial.id}
-                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col"
               >
                 {/* Quote Icon */}
                 <div className="flex justify-between items-start mb-4">
@@ -201,12 +199,12 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
                 </div>
 
                 {/* Content */}
-                <p className="text-gray-600 leading-relaxed mb-6 italic">
+                <p className="text-gray-600 leading-relaxed mb-6 italic flex-1">
                   "{testimonial.content}"
                 </p>
 
                 {/* Client Info */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4 mb-4">
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
@@ -219,7 +217,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
                 </div>
 
                 {/* Project Tag */}
-                <div className="mt-4 pt-4 border-t border-gray-100">
+                <div className="pt-4 border-t border-gray-100 mt-auto">
                   <span className="text-xs bg-red-50 text-red-600 px-3 py-1 rounded-full font-medium">
                     {testimonial.project}
                   </span>
