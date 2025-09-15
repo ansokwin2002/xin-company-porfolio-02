@@ -8,12 +8,22 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ showAnimations }) => {
   const skills = [
-    { name: 'Laravel', level: 95, color: 'bg-red-500' },
+    { name: 'HTML', level: 90, color: 'bg-orange-500' },
+    { name: 'CSS', level: 90, color: 'bg-blue-500' },
+    { name: 'JavaScript', level: 90, color: 'bg-yellow-500' },
+    { name: 'React', level: 90, color: 'bg-blue-400' },
+    { name: 'Next.js', level: 90, color: 'bg-gray-800' },
     { name: 'Vue.js', level: 90, color: 'bg-green-500' },
-    { name: 'Next.js', level: 85, color: 'bg-blue-500' },
-    { name: 'Tailwind CSS', level: 95, color: 'bg-teal-500' },
-    { name: 'React', level: 88, color: 'bg-blue-400' },
-    { name: 'Node.js', level: 80, color: 'bg-green-600' },
+    { name: 'jQuery', level: 90, color: 'bg-blue-700' },
+    { name: 'Bootstrap', level: 90, color: 'bg-purple-600' },
+    { name: 'Tailwind CSS', level: 90, color: 'bg-teal-500' },
+    { name: 'PHP', level: 90, color: 'bg-indigo-500' },
+    { name: 'Laravel', level: 90, color: 'bg-red-500' },
+    { name: 'MySQL', level: 90, color: 'bg-blue-600' },
+    { name: 'AJAX', level: 90, color: 'bg-gray-600' },
+    { name: 'C', level: 90, color: 'bg-blue-700' },
+    { name: 'C++', level: 90, color: 'bg-blue-800' },
+    { name: 'AI', level: 95, color: 'bg-purple-500' },
   ];
 
   const technologies = [
@@ -58,19 +68,28 @@ const About: React.FC<AboutProps> = ({ showAnimations }) => {
                 <h3 className="text-2xl font-bold text-gray-900">My Story</h3>
                 <div className="space-y-4 text-gray-600 leading-relaxed">
                   <p>
-                    I'm a passionate freelance web developer based in the digital world, 
-                    specializing in creating beautiful, functional, and user-friendly websites 
-                    and web applications. My journey in web development started 3 years ago, 
-                    and I've been fortunate to work with amazing clients across various industries.
+                    Hi, I'm An Sokwin – a passionate Full Stack Developer who believes great code tells a story, and every project is an opportunity to create something extraordinary.
                   </p>
                   <p>
-                    I believe in writing clean, maintainable code and staying up-to-date with 
-                    the latest technologies and best practices. My goal is to help businesses 
-                    succeed online by delivering high-quality digital solutions that exceed expectations.
+                    Based in the vibrant tech scene of Phnom Penh, Cambodia, I've spent the last few years mastering the art of building digital experiences that don't just work – they captivate. Having completed my Computer Science degree at the Royal University of Phnom Penh and working as a Full Stack Developer at CIJD Company (a Japanese firm), I've learned that the best solutions come from understanding both the technical challenge and the human behind it.
                   </p>
                   <p>
-                    When I'm not coding, you can find me exploring new technologies, contributing 
-                    to open-source projects, or sharing knowledge with the developer community.
+                    <strong>What drives me?</strong> The thrill of transforming complex problems into elegant, responsive solutions. Whether I'm architecting robust back-end systems, crafting pixel-perfect front-end interfaces, or diving deep into Next.js and React to build lightning-fast web applications, I approach every project with the same philosophy: make it work beautifully, make it scale effortlessly, and make it memorable.
+                  </p>
+                  <p>
+                    My expertise spans the full development spectrum – from Laravel and PHP powering the backend to React, Next.js, and Vue.js creating seamless user experiences. I specialize in fully responsive design because in today's world, your users might discover you on their phone during their morning coffee or their laptop during a late-night session. Every pixel matters, on every screen.
+                  </p>
+                  <p>
+                    But here's what truly sets me apart: I'm not just a developer, I'm an educator and innovation enthusiast at heart. Teaching at ETEC CENTER and NEW INFORMATION TECHNOLOGY has taught me that the best code is code others can understand and build upon. This perspective makes me a collaborative team player who writes clean, maintainable solutions that stand the test of time.
+                  </p>
+                  <p>
+                    <strong>My secret weapon?</strong> I've mastered the art of leveraging AI and advanced research techniques to accelerate development workflows. In today's fast-paced digital landscape, I don't just write code – I strategically combine cutting-edge AI tools with proven development practices to deliver modern, professional results in record time. This approach allows me to meet tight deadlines without compromising quality, turning weeks of work into days and delivering solutions that are both innovative and robust.
+                  </p>
+                  <p>
+                    When I'm not crafting code, you'll find me with a guitar in hand, exploring new music, or diving into books that spark fresh ideas. I believe inspiration comes from everywhere – and that curiosity is what keeps me ahead of the curve in this ever-evolving field.
+                  </p>
+                  <p>
+                    <strong>Ready to build something amazing together?</strong> Let's create digital experiences that don't just meet expectations – they exceed them.
                   </p>
                 </div>
 
@@ -93,19 +112,28 @@ const About: React.FC<AboutProps> = ({ showAnimations }) => {
               <h3 className="text-2xl font-bold text-gray-900">My Story</h3>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  I'm a passionate freelance web developer based in the digital world, 
-                  specializing in creating beautiful, functional, and user-friendly websites 
-                  and web applications. My journey in web development started 3 years ago, 
-                  and I've been fortunate to work with amazing clients across various industries.
+                  Hi, I'm An Sokwin – a passionate Full Stack Developer who believes great code tells a story, and every project is an opportunity to create something extraordinary.
                 </p>
                 <p>
-                  I believe in writing clean, maintainable code and staying up-to-date with 
-                  the latest technologies and best practices. My goal is to help businesses 
-                  succeed online by delivering high-quality digital solutions that exceed expectations.
+                  Based in the vibrant tech scene of Phnom Penh, Cambodia, I've spent the last few years mastering the art of building digital experiences that don't just work – they captivate. Having completed my Computer Science degree at the Royal University of Phnom Penh and working as a Full Stack Developer at CIJD Company (a Japanese firm), I've learned that the best solutions come from understanding both the technical challenge and the human behind it.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new technologies, contributing 
-                  to open-source projects, or sharing knowledge with the developer community.
+                  <strong>What drives me?</strong> The thrill of transforming complex problems into elegant, responsive solutions. Whether I'm architecting robust back-end systems, crafting pixel-perfect front-end interfaces, or diving deep into Next.js and React to build lightning-fast web applications, I approach every project with the same philosophy: make it work beautifully, make it scale effortlessly, and make it memorable.
+                </p>
+                <p>
+                  My expertise spans the full development spectrum – from Laravel and PHP powering the backend to React, Next.js, and Vue.js creating seamless user experiences. I specialize in fully responsive design because in today's world, your users might discover you on their phone during their morning coffee or their laptop during a late-night session. Every pixel matters, on every screen.
+                </p>
+                <p>
+                  But here's what truly sets me apart: I'm not just a developer, I'm an educator and innovation enthusiast at heart. Teaching at ETEC CENTER and NEW INFORMATION TECHNOLOGY has taught me that the best code is code others can understand and build upon. This perspective makes me a collaborative team player who writes clean, maintainable solutions that stand the test of time.
+                </p>
+                <p>
+                  <strong>My secret weapon?</strong> I've mastered the art of leveraging AI and advanced research techniques to accelerate development workflows. In today's fast-paced digital landscape, I don't just write code – I strategically combine cutting-edge AI tools with proven development practices to deliver modern, professional results in record time. This approach allows me to meet tight deadlines without compromising quality, turning weeks of work into days and delivering solutions that are both innovative and robust.
+                </p>
+                <p>
+                  When I'm not crafting code, you'll find me with a guitar in hand, exploring new music, or diving into books that spark fresh ideas. I believe inspiration comes from everywhere – and that curiosity is what keeps me ahead of the curve in this ever-evolving field.
+                </p>
+                <p>
+                  <strong>Ready to build something amazing together?</strong> Let's create digital experiences that don't just meet expectations – they exceed them.
                 </p>
               </div>
 

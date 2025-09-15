@@ -48,9 +48,9 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                 </h2>
                 
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                  I create stunning, high-performance websites and web applications that drive results. 
-                  With expertise in modern technologies like Laravel, Vue.js, and Next.js, I help businesses 
-                  establish a powerful online presence.
+                  I craft stunning, high-performance full-stack web applications that drive results. 
+                  Leveraging expertise in modern technologies including Laravel, React, Next.js, and AI, 
+                  I empower businesses to establish a powerful and intelligent online presence.
                 </p>
               </div>
             </Fade>
@@ -65,9 +65,9 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
               </h2>
               
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                I create stunning, high-performance websites and web applications that drive results. 
-                With expertise in modern technologies like Laravel, Vue.js, and Next.js, I help businesses 
-                establish a powerful online presence.
+                I craft stunning, high-performance full-stack web applications that drive results. 
+                Leveraging expertise in modern technologies including Laravel, React, Next.js, and AI, 
+                I empower businesses to establish a powerful and intelligent online presence.
               </p>
             </div>
           )}
@@ -112,7 +112,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
             <Fade direction="up" delay={600} triggerOnce>
               <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-gray-200">
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-red-600">50+</div>
+                  <div className="text-3xl md:text-4xl font-bold text-red-600">2+</div>
                   <div className="text-gray-600 font-medium">Projects Completed</div>
                 </div>
                 <div className="text-center">
@@ -128,7 +128,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
           ) : (
             <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-gray-200">
               <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-red-600">50+</div>
+                <div className="text-3xl md:text-4xl font-bold text-red-600">2+</div>
                 <div className="text-gray-600 font-medium">Projects Completed</div>
               </div>
               <div className="text-center">
