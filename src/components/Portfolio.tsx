@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { ExternalLink, Github, Filter } from 'lucide-react';
+import { Fade } from 'react-awesome-reveal';
 
-const Portfolio: React.FC = () => {
+interface PortfolioProps {
+  showAnimations: boolean;
+}
+
+const Portfolio: React.FC<PortfolioProps> = ({ showAnimations }) => {
   const [activeFilter, setActiveFilter] = useState('all');
 
   const filters = [
@@ -81,112 +86,227 @@ const Portfolio: React.FC = () => {
   return (
     <section id="portfolio" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            My <span className="text-red-600">Portfolio</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Here are some of my recent projects that showcase my skills and expertise 
-            in web development across different industries and technologies.
-          </p>
-        </div>
+        {showAnimations ? (
+          <Fade direction="down" triggerOnce>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                My <span className="text-red-600">Portfolio</span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Here are some of my recent projects that showcase my skills and expertise 
+                in web development across different industries and technologies.
+              </p>
+            </div>
+          </Fade>
+        ) : (
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              My <span className="text-red-600">Portfolio</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Here are some of my recent projects that showcase my skills and expertise 
+              in web development across different industries and technologies.
+            </p>
+          </div>
+        )}
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {filters.map((filter) => (
-            <button
-              key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
-              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
-                activeFilter === filter.id
-                  ? 'bg-red-600 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-red-50 hover:text-red-600'
-              }`}
-            >
-              <Filter size={16} />
-              <span>{filter.label}</span>
-            </button>
-          ))}
-        </div>
+        {showAnimations ? (
+          <Fade direction="up" delay={200} triggerOnce>
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              {filters.map((filter) => (
+                <button
+                  key={filter.id}
+                  onClick={() => setActiveFilter(filter.id)}
+                  className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
+                    activeFilter === filter.id
+                      ? 'bg-red-600 text-white shadow-lg'
+                      : 'bg-white text-gray-700 hover:bg-red-50 hover:text-red-600'
+                  }`}
+                >
+                  <Filter size={16} />
+                  <span>{filter.label}</span>
+                </button>
+              ))}
+            </div>
+          </Fade>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {filters.map((filter) => (
+              <button
+                key={filter.id}
+                onClick={() => setActiveFilter(filter.id)}
+                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center space-x-2 ${
+                  activeFilter === filter.id
+                    ? 'bg-red-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-red-50 hover:text-red-600'
+                }`}
+              >
+                <Filter size={16} />
+                <span>{filter.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
-            >
-              {/* Project Image */}
-              <div className="relative overflow-hidden group">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-red-600/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
-                  <a
-                    href={project.liveUrl}
-                    className="bg-white text-red-600 p-3 rounded-full hover:bg-red-50 transition-colors"
-                    title="View Live"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    className="bg-white text-red-600 p-3 rounded-full hover:bg-red-50 transition-colors"
-                    title="View Code"
-                  >
-                    <Github size={20} />
-                  </a>
-                </div>
-              </div>
+          {filteredProjects.map((project, index) => (
+            showAnimations ? (
+              <Fade direction="up" delay={index * 150} triggerOnce key={project.id}>
+                <div
+                  className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
+                >
+                  {/* Project Image */}
+                  <div className="relative overflow-hidden group">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-red-600/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                      <a
+                        href={project.liveUrl}
+                        className="bg-white text-red-600 p-3 rounded-full hover:bg-red-50 transition-colors"
+                        title="View Live"
+                      >
+                        <ExternalLink size={20} />
+                      </a>
+                      <a
+                        href={project.githubUrl}
+                        className="bg-white text-red-600 p-3 rounded-full hover:bg-red-50 transition-colors"
+                        title="View Code"
+                      >
+                        <Github size={20} />
+                      </a>
+                    </div>
+                  </div>
 
-              {/* Project Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-                
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-red-50 text-red-600 text-sm font-medium rounded-full"
+                  {/* Project Content */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                    <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                    
+                    {/* Technologies */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 bg-red-50 text-red-600 text-sm font-medium rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex space-x-4">
+                      <a
+                        href={project.liveUrl}
+                        className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-colors"
+                      >
+                        <ExternalLink size={16} />
+                        <span>Live Demo</span>
+                      </a>
+                      <a
+                        href={project.githubUrl}
+                        className="flex items-center space-x-2 text-gray-600 hover:text-gray-700 font-medium transition-colors"
+                      >
+                        <Github size={16} />
+                        <span>Code</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </Fade>
+            ) : (
+              <div
+                key={project.id}
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
+              >
+                {/* Project Image */}
+                <div className="relative overflow-hidden group">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-red-600/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
+                    <a
+                      href={project.liveUrl}
+                      className="bg-white text-red-600 p-3 rounded-full hover:bg-red-50 transition-colors"
+                      title="View Live"
                     >
-                      {tech}
-                    </span>
-                  ))}
+                      <ExternalLink size={20} />
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      className="bg-white text-red-600 p-3 rounded-full hover:bg-red-50 transition-colors"
+                      title="View Code"
+                    >
+                      <Github size={20} />
+                    </a>
+                  </div>
                 </div>
 
-                {/* Links */}
-                <div className="flex space-x-4">
-                  <a
-                    href={project.liveUrl}
-                    className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                    <span>Live Demo</span>
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    className="flex items-center space-x-2 text-gray-600 hover:text-gray-700 font-medium transition-colors"
-                  >
-                    <Github size={16} />
-                    <span>Code</span>
-                  </a>
+                {/* Project Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
+                  
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 bg-red-50 text-red-600 text-sm font-medium rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex space-x-4">
+                    <a
+                      href={project.liveUrl}
+                      className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      <span>Live Demo</span>
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      className="flex items-center space-x-2 text-gray-600 hover:text-gray-700 font-medium transition-colors"
+                    >
+                      <Github size={16} />
+                      <span>Code</span>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+            )
           ))}
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-16">
-          <p className="text-gray-600 mb-6">Interested in seeing more of my work?</p>
-          <button className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
-            View All Projects
-          </button>
-        </div>
+        {showAnimations ? (
+          <Fade direction="up" delay={600} triggerOnce>
+            <div className="text-center mt-16">
+              <p className="text-gray-600 mb-6">Interested in seeing more of my work?</p>
+              <button className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+                View All Projects
+              </button>
+            </div>
+          </Fade>
+        ) : (
+          <div className="text-center mt-16">
+            <p className="text-gray-600 mb-6">Interested in seeing more of my work?</p>
+            <button className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105">
+              View All Projects
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

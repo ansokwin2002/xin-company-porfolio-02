@@ -1,7 +1,12 @@
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
+import { Fade } from 'react-awesome-reveal';
 
-const Testimonials: React.FC = () => {
+interface TestimonialsProps {
+  showAnimations: boolean;
+}
+
+const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
   const testimonials = [
     {
       id: 1,
@@ -59,103 +64,213 @@ const Testimonials: React.FC = () => {
     }
   ];
 
+  const scrollToContact = () => {
+    const section = document.getElementById('contact');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="testimonials" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Client <span className="text-red-600">Testimonials</span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don't just take my word for it. Here's what my clients have to say about 
-            working with me and the results they've achieved.
-          </p>
-        </div>
+        {showAnimations ? (
+          <Fade direction="down" triggerOnce>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Client <span className="text-red-600">Testimonials</span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Don't just take my word for it. Here's what my clients have to say about 
+                working with me and the results they've achieved.
+              </p>
+            </div>
+          </Fade>
+        ) : (
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Client <span className="text-red-600">Testimonials</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Don't just take my word for it. Here's what my clients have to say about 
+              working with me and the results they've achieved.
+            </p>
+          </div>
+        )}
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 text-center">
-          <div className="bg-red-50 p-6 rounded-lg">
-            <div className="text-3xl font-bold text-red-600 mb-2">50+</div>
-            <div className="text-gray-600 font-medium">Happy Clients</div>
+        {showAnimations ? (
+          <Fade direction="up" delay={200} triggerOnce>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 text-center">
+              <div className="bg-red-50 p-6 rounded-lg">
+                <div className="text-3xl font-bold text-red-600 mb-2">50+</div>
+                <div className="text-gray-600 font-medium">Happy Clients</div>
+              </div>
+              <div className="bg-red-50 p-6 rounded-lg">
+                <div className="text-3xl font-bold text-red-600 mb-2">100%</div>
+                <div className="text-gray-600 font-medium">Satisfaction Rate</div>
+              </div>
+              <div className="bg-red-50 p-6 rounded-lg">
+                <div className="text-3xl font-bold text-red-600 mb-2">98%</div>
+                <div className="text-gray-600 font-medium">On-time Delivery</div>
+              </div>
+              <div className="bg-red-50 p-6 rounded-lg">
+                <div className="text-3xl font-bold text-red-600 mb-2">95%</div>
+                <div className="text-gray-600 font-medium">Repeat Clients</div>
+              </div>
+            </div>
+          </Fade>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 text-center">
+            <div className="bg-red-50 p-6 rounded-lg">
+              <div className="text-3xl font-bold text-red-600 mb-2">50+</div>
+              <div className="text-gray-600 font-medium">Happy Clients</div>
+            </div>
+            <div className="bg-red-50 p-6 rounded-lg">
+              <div className="text-3xl font-bold text-red-600 mb-2">100%</div>
+              <div className="text-gray-600 font-medium">Satisfaction Rate</div>
+            </div>
+            <div className="bg-red-50 p-6 rounded-lg">
+              <div className="text-3xl font-bold text-red-600 mb-2">98%</div>
+              <div className="text-gray-600 font-medium">On-time Delivery</div>
+            </div>
+            <div className="bg-red-50 p-6 rounded-lg">
+              <div className="text-3xl font-bold text-red-600 mb-2">95%</div>
+              <div className="text-gray-600 font-medium">Repeat Clients</div>
+            </div>
           </div>
-          <div className="bg-red-50 p-6 rounded-lg">
-            <div className="text-3xl font-bold text-red-600 mb-2">100%</div>
-            <div className="text-gray-600 font-medium">Satisfaction Rate</div>
-          </div>
-          <div className="bg-red-50 p-6 rounded-lg">
-            <div className="text-3xl font-bold text-red-600 mb-2">98%</div>
-            <div className="text-gray-600 font-medium">On-time Delivery</div>
-          </div>
-          <div className="bg-red-50 p-6 rounded-lg">
-            <div className="text-3xl font-bold text-red-600 mb-2">95%</div>
-            <div className="text-gray-600 font-medium">Repeat Clients</div>
-          </div>
-        </div>
+        )}
 
         {/* Testimonials Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
-            <div
-              key={testimonial.id}
-              className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-            >
-              {/* Quote Icon */}
-              <div className="flex justify-between items-start mb-4">
-                <Quote className="text-red-600" size={32} />
-                <div className="flex space-x-1">
-                  {[...Array(testimonial.rating)].map((_, index) => (
-                    <Star key={index} className="text-yellow-400 fill-current" size={16} />
-                  ))}
+          {testimonials.map((testimonial, index) => (
+            showAnimations ? (
+              <Fade direction="up" delay={index * 150} triggerOnce key={testimonial.id}>
+                <div
+                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  {/* Quote Icon */}
+                  <div className="flex justify-between items-start mb-4">
+                    <Quote className="text-red-600" size={32} />
+                    <div className="flex space-x-1">
+                      {[...Array(testimonial.rating)].map((_, starIndex) => (
+                        <Star key={starIndex} className="text-yellow-400 fill-current" size={16} />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <p className="text-gray-600 leading-relaxed mb-6 italic">
+                    "{testimonial.content}"
+                  </p>
+
+                  {/* Client Info */}
+                  <div className="flex items-center space-x-4">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-600">{testimonial.title}</p>
+                    </div>
+                  </div>
+
+                  {/* Project Tag */}
+                  <div className="mt-4 pt-4 border-t border-gray-100">
+                    <span className="text-xs bg-red-50 text-red-600 px-3 py-1 rounded-full font-medium">
+                      {testimonial.project}
+                    </span>
+                  </div>
+                </div>
+              </Fade>
+            ) : (
+              <div
+                key={testimonial.id}
+                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              >
+                {/* Quote Icon */}
+                <div className="flex justify-between items-start mb-4">
+                  <Quote className="text-red-600" size={32} />
+                  <div className="flex space-x-1">
+                    {[...Array(testimonial.rating)].map((_, starIndex) => (
+                      <Star key={starIndex} className="text-yellow-400 fill-current" size={16} />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <p className="text-gray-600 leading-relaxed mb-6 italic">
+                  "{testimonial.content}"
+                </p>
+
+                {/* Client Info */}
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                    <p className="text-sm text-gray-600">{testimonial.title}</p>
+                  </div>
+                </div>
+
+                {/* Project Tag */}
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <span className="text-xs bg-red-50 text-red-600 px-3 py-1 rounded-full font-medium">
+                    {testimonial.project}
+                  </span>
                 </div>
               </div>
-
-              {/* Content */}
-              <p className="text-gray-600 leading-relaxed mb-6 italic">
-                "{testimonial.content}"
-              </p>
-
-              {/* Client Info */}
-              <div className="flex items-center space-x-4">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
-                  <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-600">{testimonial.title}</p>
-                </div>
-              </div>
-
-              {/* Project Tag */}
-              <div className="mt-4 pt-4 border-t border-gray-100">
-                <span className="text-xs bg-red-50 text-red-600 px-3 py-1 rounded-full font-medium">
-                  {testimonial.project}
-                </span>
-              </div>
-            </div>
+            )
           ))}
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-16 bg-gray-50 p-8 rounded-2xl">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
-            Ready to Join My Happy Clients?
-          </h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Let's discuss your project and how I can help you achieve your goals. 
-            I'm committed to delivering exceptional results that exceed your expectations.
-          </p>
-          <button
-            onClick={() => {
-              const section = document.getElementById('contact');
-              if (section) section.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
-          >
-            Start Your Project
-          </button>
-        </div>
+        {showAnimations ? (
+          <Fade direction="up" delay={600} triggerOnce>
+            <div className="text-center mt-16 bg-gray-50 p-8 rounded-2xl">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Ready to Join My Happy Clients?
+              </h3>
+              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                Let's discuss your project and how I can help you achieve your goals. 
+                I'm committed to delivering exceptional results that exceed your expectations.
+              </p>
+              <button
+                onClick={() => {
+                  const section = document.getElementById('contact');
+                  if (section) section.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
+              >
+                Start Your Project
+              </button>
+            </div>
+          </Fade>
+        ) : (
+          <div className="text-center mt-16 bg-gray-50 p-8 rounded-2xl">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Ready to Join My Happy Clients?
+            </h3>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Let's discuss your project and how I can help you achieve your goals. 
+              I'm committed to delivering exceptional results that exceed your expectations.
+            </p>
+            <button
+              onClick={() => {
+                const section = document.getElementById('contact');
+                if (section) section.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
+            >
+              Start Your Project
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

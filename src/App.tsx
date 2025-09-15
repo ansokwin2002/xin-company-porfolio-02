@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -10,16 +10,23 @@ import Contact from './components/Contact';
 import ChatBot from './components/ChatBot';
 
 function App() {
+  const [showAnimations, setShowAnimations] = useState(true);
+
+  useEffect(() => {
+    // Animations will always show on refresh
+    setShowAnimations(true);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
-      <Hero />
-      <About />
-      <Portfolio />
-      <Services />
-      <FAQ />
-      <Testimonials />
-      <Contact />
+      <Hero showAnimations={showAnimations} />
+      <About showAnimations={showAnimations} />
+      <Portfolio showAnimations={showAnimations} />
+      <Services showAnimations={showAnimations} />
+      <FAQ showAnimations={showAnimations} />
+      <Testimonials showAnimations={showAnimations} />
+      <Contact showAnimations={showAnimations} />
       <ChatBot />
       
       {/* Footer */}

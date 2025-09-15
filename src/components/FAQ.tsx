@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
+import { Fade } from 'react-awesome-reveal';
 
-const FAQ: React.FC = () => {
+interface FAQProps {
+  showAnimations: boolean;
+}
+
+const FAQ: React.FC<FAQProps> = ({ showAnimations }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const faqs = [
@@ -54,65 +59,135 @@ const FAQ: React.FC = () => {
   return (
     <section id="faq" className="py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <HelpCircle className="text-red-600" size={32} />
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Frequently Asked <span className="text-red-600">Questions</span>
-            </h2>
+        {showAnimations ? (
+          <Fade direction="down" triggerOnce>
+            <div className="text-center mb-16">
+              <div className="flex items-center justify-center space-x-3 mb-6">
+                <HelpCircle className="text-red-600" size={32} />
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+                  Frequently Asked <span className="text-red-600">Questions</span>
+                </h2>
+              </div>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Get answers to common questions about my web development services, 
+                pricing, and process. Can't find what you're looking for? Feel free to contact me!
+              </p>
+            </div>
+          </Fade>
+        ) : (
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center space-x-3 mb-6">
+              <HelpCircle className="text-red-600" size={32} />
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+                Frequently Asked <span className="text-red-600">Questions</span>
+              </h2>
+            </div>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get answers to common questions about my web development services, 
+              pricing, and process. Can't find what you're looking for? Feel free to contact me!
+            </p>
           </div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Get answers to common questions about my web development services, 
-            pricing, and process. Can't find what you're looking for? Feel free to contact me!
-          </p>
-        </div>
+        )}
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
-            >
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded-lg"
-              >
-                <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
-                <ChevronDown
-                  size={20}
-                  className={`text-gray-500 transition-transform duration-200 flex-shrink-0 ${
-                    activeIndex === index ? 'transform rotate-180 text-red-600' : ''
-                  }`}
-                />
-              </button>
-              
-              {activeIndex === index && (
-                <div className="px-6 pb-5">
-                  <div className="border-t border-gray-100 pt-4">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                  </div>
+            showAnimations ? (
+              <Fade direction="up" delay={index * 100} triggerOnce key={index}>
+                <div
+                  className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
+                >
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded-lg"
+                  >
+                    <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-500 transition-transform duration-200 flex-shrink-0 ${ 
+                        activeIndex === index ? 'transform rotate-180 text-red-600' : ''
+                      }`}
+                    />
+                  </button>
+                  
+                  {activeIndex === index && (
+                    <div className="px-6 pb-5">
+                      <div className="border-t border-gray-100 pt-4">
+                        <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </Fade>
+            ) : (
+              <div
+                key={index}
+                className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 rounded-lg"
+                >
+                  <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <ChevronDown
+                    size={20}
+                    className={`text-gray-500 transition-transform duration-200 flex-shrink-0 ${ 
+                      activeIndex === index ? 'transform rotate-180 text-red-600' : ''
+                    }`}
+                  />
+                </button>
+                
+                {activeIndex === index && (
+                  <div className="px-6 pb-5">
+                    <div className="border-t border-gray-100 pt-4">
+                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
           ))}
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-16 p-8 bg-white rounded-xl border border-gray-200">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Still Have Questions?</h3>
-          <p className="text-gray-600 mb-6">
-            I'm here to help! Get in touch and I'll answer any questions you have about your project.
-          </p>
-          <button
-            onClick={() => {
-              const section = document.getElementById('contact');
-              if (section) section.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
-          >
-            Contact Me
-          </button>
-        </div>
+        {showAnimations ? (
+          <Fade direction="up" delay={600} triggerOnce>
+            <div className="text-center mt-16 p-8 bg-white rounded-xl border border-gray-200">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Still Have Questions?
+              </h3>
+              <p className="text-gray-600 mb-6">
+                I\'m here to help! Get in touch and I\'ll answer any questions you have about your project.
+              </p>
+              <button
+                onClick={() => {
+                  const section = document.getElementById('contact');
+                  if (section) section.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
+              >
+                Contact Me
+              </button>
+            </div>
+          </Fade>
+        ) : (
+          <div className="text-center mt-16 p-8 bg-white rounded-xl border border-gray-200">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Still Have Questions?
+            </h3>
+            <p className="text-gray-600 mb-6">
+              I\'m here to help! Get in touch and I\'ll answer any questions you have about your project.
+            </p>
+            <button
+              onClick={() => {
+                const section = document.getElementById('contact');
+                if (section) section.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105"
+            >
+              Contact Me
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
