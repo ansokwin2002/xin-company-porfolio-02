@@ -23,14 +23,14 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
             <Fade direction="down" triggerOnce>
               <div className="flex justify-center">
                 <div className="w-32 h-32 bg-red-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-                  AJ
+                  AS
                 </div>
               </div>
             </Fade>
           ) : (
             <div className="flex justify-center">
               <div className="w-32 h-32 bg-red-600 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-                AJ
+                AS
               </div>
             </div>
           )}
@@ -40,7 +40,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
             <Fade direction="up" delay={200} triggerOnce>
               <div className="space-y-6">
                 <h1 className="text-5xl md:text-7xl font-bold text-gray-900">
-                  Alex <span className="text-red-600">Johnson</span>
+                  An <span className="text-red-600">Sokwin</span>
                 </h1>
                 
                 <h2 className="text-2xl md:text-3xl font-semibold text-gray-700">
@@ -57,7 +57,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
           ) : (
             <div className="space-y-6">
               <h1 className="text-5xl md:text-7xl font-bold text-gray-900">
-                Alex <span className="text-red-600">Johnson</span>
+                An <span className="text-red-600">Sokwin</span>
               </h1>
               
               <h2 className="text-2xl md:text-3xl font-semibold text-gray-700">

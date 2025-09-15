@@ -51,7 +51,7 @@ const Navigation: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <Code className="text-red-600" size={24} />
-            <span className="font-bold text-xl text-gray-900">Alex Johnson</span>
+            <span className="font-bold text-xl text-gray-900">An Sokwin</span>
           </div>
 
           {/* Desktop Navigation */}
