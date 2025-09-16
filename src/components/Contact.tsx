@@ -1,45 +1,42 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
 import { Fade } from 'react-awesome-reveal';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 interface ContactProps {
   showAnimations: boolean;
 }
 
 const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    budget: '',
-    timeline: ''
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    company: Yup.string(),
+    website: Yup.string().url(),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    phone: Yup.string(),
+    subject: Yup.string().required('Project type is required'),
+    department: Yup.string(),
+    services: Yup.array().of(Yup.string()),
+    referral: Yup.string(),
+    message: Yup.string().required('Project details are required'),
+    budget: Yup.string(),
+    timeline: Yup.string(),
+    priority: Yup.string(),
+    file: Yup.mixed(),
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (values: any, { setSubmitting, resetForm }: any) => {
     setIsSubmitting(true);
     
     // Simulate form submission
     setTimeout(() => {
       alert('Thank you for your message! I\'ll get back to you within 24 hours.');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-        budget: '',
-        timeline: ''
-      });
+      resetForm();
       setIsSubmitting(false);
+      setSubmitting(false);
     }, 1000);
   };
 
@@ -222,142 +219,257 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
         {showAnimations ? (
           <Fade direction="right" delay={400} triggerOnce>
             <div className="">
-              <div className="bg-white p-10 rounded-2xl shadow-lg">
+              <div className="bg-white p-10 rounded-2xl shadow-xl">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Me a Message</h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-                  </div>
+                <Formik
+                  initialValues={{
+                    name: '',
+                    company: '',
+                    website: '',
+                    email: '',
+                    phone: '',
+                    subject: '',
+                    department: '',
+                    services: [],
+                    referral: '',
+                    message: '',
+                    budget: '',
+                    timeline: '',
+                    priority: '',
+                    file: ''
+                  }}
+                  validationSchema={validationSchema}
+                  onSubmit={handleSubmit}
+                >
+                  {({ isSubmitting }) => (
+                    <Form className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                            Name *
+                          </label>
+                          <Field
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                            placeholder="Your name"
+                          />
+                          <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
+                        </div>
+                        
+                        <div>
+                          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                            Company
+                          </label>
+                          <Field
+                            type="text"
+                            id="company"
+                            name="company"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                            placeholder="Your company"
+                          />
+                          <ErrorMessage name="company" component="div" className="text-red-500 text-sm mt-1" />
+                        </div>
+                      </div>
 
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Type *
-                    </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                    >
-                      <option value="">Select project type</option>
-                      <option value="website">New Website</option>
-                      <option value="webapp">Web Application</option>
-                      <option value="ecommerce">E-Commerce Store</option>
-                      <option value="redesign">Website Redesign</option>
-                      <option value="maintenance">Maintenance & Support</option>
-                      <option value="consultation">Consultation</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                            Email *
+                          </label>
+                          <Field
+                            type="email"
+                            id="email"
+                            name="email"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                            placeholder="your.email@example.com"
+                          />
+                          <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+                        </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-                        Budget Range
-                      </label>
-                      <select
-                        id="budget"
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                        <div>
+                          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                            Phone Number
+                          </label>
+                          <Field
+                            type="text"
+                            id="phone"
+                            name="phone"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                            placeholder="Your phone number"
+                          />
+                          <ErrorMessage name="phone" component="div" className="text-red-500 text-sm mt-1" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-2">
+                          Website
+                        </label>
+                        <Field
+                          type="url"
+                          id="website"
+                          name="website"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                          placeholder="https://yourwebsite.com"
+                        />
+                        <ErrorMessage name="website" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+
+                      <div>
+                        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                          Project Type *
+                        </label>
+                        <Field
+                          as="select"
+                          id="subject"
+                          name="subject"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                        >
+                          <option value="">Select project type</option>
+                          <option value="website">New Website</option>
+                          <option value="webapp">Web Application</option>
+                          <option value="ecommerce">E-Commerce Store</option>
+                          <option value="redesign">Website Redesign</option>
+                          <option value="maintenance">Maintenance & Support</option>
+                          <option value="consultation">Consultation</option>
+                          <option value="other">Other</option>
+                        </Field>
+                        <ErrorMessage name="subject" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">How did you hear about us?</label>
+                        <div role="group" aria-labelledby="referral-group" className="space-y-2">
+                          <label className="flex items-center">
+                            <Field type="radio" name="referral" value="Google" className="form-radio h-5 w-5 text-red-600" />
+                            <span className="ml-2">Google</span>
+                          </label>
+                          <label className="flex items-center">
+                            <Field type="radio" name="referral" value="Social Media" className="form-radio h-5 w-5 text-red-600" />
+                            <span className="ml-2">Social Media</span>
+                          </label>
+                          <label className="flex items-center">
+                            <Field type="radio" name="referral" value="Friend" className="form-radio h-5 w-5 text-red-600" />
+                            <span className="ml-2">Friend</span>
+                          </label>
+                          <label className="flex items-center">
+                            <Field type="radio" name="referral" value="Other" className="form-radio h-5 w-5 text-red-600" />
+                            <span className="ml-2">Other</span>
+                          </label>
+                        </div>
+                        <ErrorMessage name="referral" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+                            Budget Range
+                          </label>
+                          <Field
+                            as="select"
+                            id="budget"
+                            name="budget"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                          >
+                            <option value="">Select budget range</option>
+                            <option value="1000-2500">$1,000 - $2,500</option>
+                            <option value="2500-5000">$2,500 - $5,000</option>
+                            <option value="5000-10000">$5,000 - $10,000</option>
+                            <option value="10000+">$10,000+</option>
+                          </Field>
+                          <ErrorMessage name="budget" component="div" className="text-red-500 text-sm mt-1" />
+                        </div>
+                        
+                        <div>
+                          <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
+                            Timeline
+                          </label>
+                          <Field
+                            as="select"
+                            id="timeline"
+                            name="timeline"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                          >
+                            <option value="">Select timeline</option>
+                            <option value="asap">ASAP</option>
+                            <option value="1-2weeks">1-2 weeks</option>
+                            <option value="1month">1 month</option>
+                            <option value="2-3months">2-3 months</option>
+                            <option value="flexible">I'm flexible</option>
+                          </Field>
+                          <ErrorMessage name="timeline" component="div" className="text-red-500 text-sm mt-1" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="priority" className="block text-sm font-medium text-gray-700 mb-2">
+                          Priority
+                        </label>
+                        <Field
+                          as="select"
+                          id="priority"
+                          name="priority"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                        >
+                          <option value="">Select priority</option>
+                          <option value="low">Low</option>
+                          <option value="medium">Medium</option>
+                          <option value="high">High</option>
+                        </Field>
+                        <ErrorMessage name="priority" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+
+                      <div>
+                        <label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-2">
+                          Attachments
+                        </label>
+                        <Field
+                          type="file"
+                          id="file"
+                          name="file"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                        />
+                        <ErrorMessage name="file" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                          Project Details *
+                        </label>
+                        <Field
+                          as="textarea"
+                          id="message"
+                          name="message"
+                          rows={6}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors resize-none"
+                          placeholder="Tell me about your project requirements, goals, and any specific features you need..."
+                        />
+                        <ErrorMessage name="message" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
                       >
-                        <option value="">Select budget range</option>
-                        <option value="1000-2500">$1,000 - $2,500</option>
-                        <option value="2500-5000">$2,500 - $5,000</option>
-                        <option value="5000-10000">$5,000 - $10,000</option>
-                        <option value="10000+">$10,000+</option>
-                      </select>
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
-                        Timeline
-                      </label>
-                      <select
-                        id="timeline"
-                        name="timeline"
-                        value={formData.timeline}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                      >
-                        <option value="">Select timeline</option>
-                        <option value="asap">ASAP</option>
-                        <option value="1-2weeks">1-2 weeks</option>
-                        <option value="1month">1 month</option>
-                        <option value="2-3months">2-3 months</option>
-                        <option value="flexible">I'm flexible</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Details *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors resize-none"
-                      placeholder="Tell me about your project requirements, goals, and any specific features you need..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send size={20} />
-                        <span>Send Message</span>
-                      </>
-                    )}
-                  </button>
-                </form>
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            <span>Sending...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Send size={20} />
+                            <span>Send Message</span>
+                          </>
+                        )}
+                      </button>
+                    </Form>
+                  )}
+                </Formik>
               </div>
             </div>
           </Fade>
@@ -366,139 +478,156 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
             <div className="bg-white p-10 rounded-2xl shadow-lg">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Me a Message</h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
+              <Formik
+                initialValues={{
+                  name: '',
+                  company: '',
+                  website: '',
+                  email: '',
+                  phone: '',
+                  subject: '',
+                  department: '',
+                  services: [],
+                  referral: '',
+                  message: '',
+                  budget: '',
+                  timeline: '',
+                  priority: '',
+                  file: ''
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                {({ isSubmitting }) => (
+                  <Form className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                          Name *
+                        </label>
+                        <Field
+                          type="text"
+                          id="name"
+                          name="name"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                          placeholder="Your name"
+                        />
+                        <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                          Email *
+                        </label>
+                        <Field
+                          type="email"
+                          id="email"
+                          name="email"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                          placeholder="your.email@example.com"
+                        />
+                        <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+                    </div>
 
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Type *
-                  </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                  >
-                    <option value="">Select project type</option>
-                    <option value="website">New Website</option>
-                    <option value="webapp">Web Application</option>
-                    <option value="ecommerce">E-Commerce Store</option>
-                    <option value="redesign">Website Redesign</option>
-                    <option value="maintenance">Maintenance & Support</option>
-                    <option value="consultation">Consultation</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                        Project Type *
+                      </label>
+                      <Field
+                        as="select"
+                        id="subject"
+                        name="subject"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                      >
+                        <option value="">Select project type</option>
+                        <option value="website">New Website</option>
+                        <option value="webapp">Web Application</option>
+                        <option value="ecommerce">E-Commerce Store</option>
+                        <option value="redesign">Website Redesign</option>
+                        <option value="maintenance">Maintenance & Support</option>
+                        <option value="consultation">Consultation</option>
+                        <option value="other">Other</option>
+                      </Field>
+                      <ErrorMessage name="subject" component="div" className="text-red-500 text-sm mt-1" />
+                    </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-                      Budget Range
-                    </label>
-                    <select
-                      id="budget"
-                      name="budget"
-                      value={formData.budget}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+                          Budget Range
+                        </label>
+                        <Field
+                          as="select"
+                          id="budget"
+                          name="budget"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                        >
+                          <option value="">Select budget range</option>
+                          <option value="1000-2500">$1,000 - $2,500</option>
+                          <option value="2500-5000">$2,500 - $5,000</option>
+                          <option value="5000-10000">$5,000 - $10,000</option>
+                          <option value="10000+">$10,000+</option>
+                        </Field>
+                        <ErrorMessage name="budget" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+                      
+                      <div>
+                        <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
+                          Timeline
+                        </label>
+                        <Field
+                          as="select"
+                          id="timeline"
+                          name="timeline"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
+                        >
+                          <option value="">Select timeline</option>
+                          <option value="asap">ASAP</option>
+                          <option value="1-2weeks">1-2 weeks</option>
+                          <option value="1month">1 month</option>
+                          <option value="2-3months">2-3 months</option>
+                          <option value="flexible">I'm flexible</option>
+                        </Field>
+                        <ErrorMessage name="timeline" component="div" className="text-red-500 text-sm mt-1" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                        Project Details *
+                      </label>
+                      <Field
+                        as="textarea"
+                        id="message"
+                        name="message"
+                        rows={6}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors resize-none"
+                        placeholder="Tell me about your project requirements, goals, and any specific features you need..."
+                      />
+                      <ErrorMessage name="message" component="div" className="text-red-500 text-sm mt-1" />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
                     >
-                      <option value="">Select budget range</option>
-                      <option value="1000-2500">$1,000 - $2,500</option>
-                      <option value="2500-5000">$2,500 - $5,000</option>
-                      <option value="5000-10000">$5,000 - $10,000</option>
-                      <option value="10000+">$10,000+</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
-                      Timeline
-                    </label>
-                    <select
-                      id="timeline"
-                      name="timeline"
-                      value={formData.timeline}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors"
-                    >
-                      <option value="">Select timeline</option>
-                      <option value="asap">ASAP</option>
-                      <option value="1-2weeks">1-2 weeks</option>
-                      <option value="1month">1 month</option>
-                      <option value="2-3months">2-3 months</option>
-                      <option value="flexible">I'm flexible</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Details *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={6}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors resize-none"
-                    placeholder="Tell me about your project requirements, goals, and any specific features you need..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-red-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send size={20} />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </button>
-              </form>
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          <span>Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={20} />
+                          <span>Send Message</span>
+                        </>
+                      )}
+                    </button>
+                  </Form>
+                )}
+              </Formik>
             </div>
           </div>
         )}
