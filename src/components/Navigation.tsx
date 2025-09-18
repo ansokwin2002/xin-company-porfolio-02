@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code } from 'lucide-react';
+import { Menu, X, Code, Sun, Moon, Sparkles } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'services', label: 'Services' },
-    { id: 'faq', label: 'FAQ' },
-    { id: 'testimonials', label: 'Testimonials' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', label: 'Home', icon: '🏠' },
+    { id: 'about', label: 'About', icon: '👨‍💻' },
+    { id: 'portfolio', label: 'Portfolio', icon: '💼' },
+    { id: 'services', label: 'Services', icon: '⚡' },
+    { id: 'faq', label: 'FAQ', icon: '❓' },
+    { id: 'testimonials', label: 'Testimonials', icon: '⭐' },
+    { id: 'contact', label: 'Contact', icon: '📧' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+
       const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100;
+      const currentScrollPosition = scrollPosition + 100;
 
       sections.forEach((section, index) => {
         if (section) {
           const sectionTop = section.offsetTop;
           const sectionHeight = section.offsetHeight;
           
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          if (currentScrollPosition >= sectionTop && currentScrollPosition < sectionTop + sectionHeight) {
             setActiveSection(navItems[index].id);
           }
         }
@@ -45,59 +51,121 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-30">
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      isScrolled 
+        ? theme === 'dark'
+          ? 'bg-gray-900/90 backdrop-blur-xl shadow-lg border-b border-gray-700/30'
+          : 'bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-200/30'
+        : theme === 'dark'
+          ? 'bg-gray-900/20 backdrop-blur-md'
+          : 'bg-white/20 backdrop-blur-md'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Code className="text-red-600" size={24} />
-            <span className="font-bold text-xl text-gray-900">An Sokwin</span>
+          <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('home')}>
+            <div className="relative">
+              <Code className="text-red-500 dark:text-red-400 group-hover:scale-110 transition-transform duration-300" size={28} />
+              <Sparkles className="absolute -top-1 -right-1 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={12} />
+            </div>
+            <span className="font-bold text-2xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+              An Sokwins
+            </span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-red-600 ${
-                  activeSection === item.id ? 'text-red-600' : 'text-gray-700'
+                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 group ${
+                  activeSection === item.id 
+                    ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20' 
+                    : 'text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
                 }`}
               >
-                {item.label}
+                <span className="flex items-center space-x-2">
+                  <span className="text-base">{item.icon}</span>
+                  <span>{item.label}</span>
+                </span>
+                {activeSection === item.id && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-red-500 dark:bg-red-400 rounded-full"></div>
+                )}
               </button>
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Theme Toggle & Mobile Menu */}
+          <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-red-600 transition-colors"
+              onClick={toggleTheme}
+              className={`relative p-3 rounded-xl transition-all duration-300 group ${
+                theme === 'dark'
+                  ? 'bg-gray-800/80 hover:bg-gray-700/80 border border-gray-600/30'
+                  : 'bg-gray-100/80 hover:bg-gray-200/80 border border-gray-300/30'
+              }`}
+              aria-label="Toggle theme"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              <div className="relative w-6 h-6">
+                <Sun className={`absolute inset-0 text-yellow-500 transition-all duration-300 ${
+                  theme === 'light' ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
+                }`} size={24} />
+                <Moon className={`absolute inset-0 text-blue-400 transition-all duration-300 ${
+                  theme === 'dark' ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
+                }`} size={24} />
+              </div>
             </button>
+
+            {/* Mobile menu button */}
+            <div className="lg:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`p-3 rounded-xl transition-all duration-300 ${
+                  theme === 'dark'
+                    ? 'bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 border border-gray-600/30'
+                    : 'bg-gray-100/80 hover:bg-gray-200/80 text-gray-700 border border-gray-300/30'
+                }`}
+              >
+                <div className="relative w-6 h-6">
+                  <Menu className={`absolute inset-0 transition-all duration-300 ${
+                    isOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
+                  }`} size={24} />
+                  <X className={`absolute inset-0 transition-all duration-300 ${
+                    isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
+                  }`} size={24} />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors duration-200 hover:text-red-600 hover:bg-gray-50 rounded-md ${
-                    activeSection === item.id ? 'text-red-600 bg-red-50' : 'text-gray-700'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+        <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
+          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <div className={`py-4 space-y-2 backdrop-blur-xl rounded-2xl mt-2 border ${
+            theme === 'dark'
+              ? 'bg-gray-900/95 border-gray-700/30'
+              : 'bg-white/95 border-gray-200/30'
+          }`}>
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`w-full flex items-center space-x-3 px-6 py-3 text-left font-medium transition-all duration-300 ${
+                  activeSection === item.id 
+                    ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-r-4 border-red-500 dark:border-red-400' 
+                    : 'text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
+                }`}
+              >
+                <span className="text-xl">{item.icon}</span>
+                <span>{item.label}</span>
+              </button>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

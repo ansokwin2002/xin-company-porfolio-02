@@ -94,7 +94,7 @@ const ChatBot: React.FC = () => {
           {/* Header */}
           <div className="bg-red-600 text-white p-4 rounded-t-lg flex justify-between items-center">
             <div>
-              <h3 className="font-semibold">An Sokwin</h3>
+              <h3 className="font-semibold">An Sokwins</h3>
               <p className="text-sm text-red-100">Web Developer Assistant</p>
             </div>
             <button

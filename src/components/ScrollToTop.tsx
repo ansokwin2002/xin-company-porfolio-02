@@ -1,0 +1,88 @@
+import React, { useState, useEffect } from 'react';
+import { ArrowUp, Rocket } from 'lucide-react';
+
+const ScrollToTop: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      const scrolled = document.documentElement.scrollTop;
+      const maxHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrolled / maxHeight) * 100;
+      
+      setScrollProgress(progress);
+      setIsVisible(scrolled > 300);
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed bottom-8 right-8 z-40 group">
+      {/* Progress Ring */}
+      <div className="relative">
+        <svg className="w-14 h-14 transform -rotate-90" viewBox="0 0 36 36">
+          <path
+            className="text-gray-300 dark:text-gray-600"
+            stroke="currentColor"
+            strokeWidth="2"
+            fill="none"
+            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <path
+            className="text-red-500 dark:text-red-400"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeDasharray={`${scrollProgress}, 100`}
+            strokeLinecap="round"
+            fill="none"
+            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+        </svg>
+        
+        {/* Button */}
+        <button
+          onClick={scrollToTop}
+          className="absolute inset-0 w-14 h-14 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 border border-gray-200 dark:border-gray-600"
+          aria-label="Scroll to top"
+        >
+          <div className="relative">
+            <ArrowUp 
+              size={20} 
+              className={`transition-all duration-300 ${
+                scrollProgress > 90 ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
+              }`} 
+            />
+            <Rocket 
+              size={20} 
+              className={`absolute inset-0 transition-all duration-300 ${
+                scrollProgress > 90 ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+              }`} 
+            />
+          </div>
+        </button>
+      </div>
+
+      {/* Tooltip */}
+      <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <div className="bg-gray-900 dark:bg-gray-700 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap">
+          {scrollProgress > 90 ? 'Blast off to top! 🚀' : 'Back to top'}
+          <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ScrollToTop;
