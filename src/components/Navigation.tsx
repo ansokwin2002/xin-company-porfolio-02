@@ -150,7 +150,7 @@ const Navigation: React.FC = () => {
 
         {/* Mobile Navigation */}
         <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}>
           <div className={`py-4 space-y-2 backdrop-blur-xl rounded-2xl mt-2 border ${
             theme === 'dark'
