@@ -51,7 +51,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations }) => (
           {/* Logo and Name */}
           <div className="space-y-4">
             <h3 className="text-4xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-              An Sokwins
+              An Sokwin
             </h3>
             <p className="text-xl text-gray-300 font-medium">Freelance Web Developer</p>
             <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 mx-auto rounded-full"></div>
@@ -91,7 +91,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations }) => (
           {/* Copyright */}
           <div className="pt-8 border-t border-white/10">
             <p className="text-gray-400 text-sm leading-relaxed">
-              © {new Date().getFullYear()} An Sokwins — Crafting Digital Experiences with Modern Technologies
+              © {new Date().getFullYear()} An Sokwin — Crafting Digital Experiences with Modern Technologies
               <br />
               <span className="text-xs opacity-75">
                 Frontend: React, Next.js, TypeScript & Tailwind CSS • Backend: Laravel & Node.js • AI Integration

@@ -27,7 +27,7 @@ const LoadingScreen: React.FC = () => {
         {/* Brand Name */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl font-bold text-white">
-            An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwins</span>
+            An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwin</span>
           </h1>
           <p className="text-xl text-white/80">Freelance Web Developer</p>
         </div>

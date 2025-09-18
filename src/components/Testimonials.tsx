@@ -16,7 +16,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
       name: 'Sarah Johnson',
       title: 'CEO, TechStart Inc.',
       avatar: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=150',
-      content: 'An Sokwins delivered an exceptional e-commerce platform for our business. His attention to detail, communication throughout the project, and technical expertise exceeded our expectations. Our online sales have increased by 150% since launch!',
+      content: 'An Sokwin delivered an exceptional e-commerce platform for our business. His attention to detail, communication throughout the project, and technical expertise exceeded our expectations. Our online sales have increased by 150% since launch!',
       rating: 5,
       project: 'E-Commerce Platform'
     },
@@ -25,7 +25,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
       name: 'Michael Chen',
       title: 'Restaurant Owner',
       avatar: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=150',
-      content: 'Working with An Sokwins was a pleasure. He created a beautiful, responsive website for our restaurant with an integrated reservation system. The site perfectly captures our brand, and we\'ve seen a significant increase in online bookings.',
+      content: 'Working with An Sokwin was a pleasure. He created a beautiful, responsive website for our restaurant with an integrated reservation system. The site perfectly captures our brand, and we\'ve seen a significant increase in online bookings.',
       rating: 5,
       project: 'Restaurant Website'
     },
@@ -34,7 +34,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
       name: 'Emily Rodriguez',
       title: 'Marketing Director, GrowthCo',
       avatar: 'https://images.pexels.com/photos/3763152/pexels-photo-3763152.jpeg?auto=compress&cs=tinysrgb&w=150',
-      content: 'An Sokwins transformed our outdated website into a modern, fast, and SEO-optimized platform. His expertise in both design and development is remarkable. The project was completed on time and within budget.',
+      content: 'An Sokwin transformed our outdated website into a modern, fast, and SEO-optimized platform. His expertise in both design and development is remarkable. The project was completed on time and within budget.',
       rating: 5,
       project: 'Corporate Website Redesign'
     },
@@ -43,7 +43,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
       name: 'David Thompson',
       title: 'Startup Founder',
       avatar: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=150',
-      content: 'An Sokwins built our MVP web application from scratch, including user authentication, payment processing, and an admin dashboard. His code quality is excellent, and he provided valuable suggestions that improved our product.',
+      content: 'An Sokwin built our MVP web application from scratch, including user authentication, payment processing, and an admin dashboard. His code quality is excellent, and he provided valuable suggestions that improved our product.',
       rating: 5,
       project: 'SaaS Web Application'
     },
@@ -52,7 +52,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
       name: 'Lisa Park',
       title: 'Non-profit Director',
       avatar: 'https://images.pexels.com/photos/3763189/pexels-photo-3763189.jpeg?auto=compress&cs=tinysrgb&w=150',
-      content: 'An Sokwins created a beautiful website for our non-profit organization that perfectly represents our mission. He was patient with our feedback, responsive to our needs, and delivered a site that our donors and volunteers love.',
+      content: 'An Sokwin created a beautiful website for our non-profit organization that perfectly represents our mission. He was patient with our feedback, responsive to our needs, and delivered a site that our donors and volunteers love.',
       rating: 5,
       project: 'Non-profit Website'
     },
@@ -61,7 +61,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ showAnimations }) => {
       name: 'James Wilson',
       title: 'E-learning Company CEO',
       avatar: 'https://images.pexels.com/photos/3785076/pexels-photo-3785076.jpeg?auto=compress&cs=tinysrgb&w=150',
-      content: 'The learning management system An Sokwins developed for us has been a game-changer. The platform handles video streaming, user progress tracking, and course management flawlessly. His technical skills are top-notch.',
+      content: 'The learning management system An Sokwin developed for us has been a game-changer. The platform handles video streaming, user progress tracking, and course management flawlessly. His technical skills are top-notch.',
       rating: 5,
       project: 'Learning Management System'
     }

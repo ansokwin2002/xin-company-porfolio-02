@@ -160,10 +160,10 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
 
               {/* Text Content */}
               <div className="space-y-6">
-                <h1 className={`text-5xl xl:text-7xl font-bold ${
+                <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold drop-shadow-2xl ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>
-                  An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwins</span>
+                  An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwin</span>
                 </h1>
                 
                 <h2 className={`text-2xl xl:text-4xl font-semibold ${
@@ -278,7 +278,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                 <h1 className={`text-5xl md:text-6xl font-bold ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>
-                  An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwins</span>
+                  An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwin</span>
                 </h1>
                 
                 <h2 className={`text-2xl md:text-3xl font-semibold ${
@@ -388,7 +388,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                 <h1 className={`text-3xl font-bold ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>
-                  An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwins</span>
+                  An <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">Sokwin</span>
                 </h1>
                 
                 <h2 className={`text-lg font-semibold ${

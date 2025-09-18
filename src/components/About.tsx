@@ -380,7 +380,7 @@ const About: React.FC<AboutProps> = ({ showAnimations }) => {
                     theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                   }`}>
                     <p>
-                      Hi, I'm <strong className="text-red-500">An Sokwins</strong> – a passionate Full Stack Developer who believes great code tells a story, and every project is an opportunity to create something extraordinary.
+                      Hi, I'm <strong className="text-red-500">An Sokwin</strong> – a passionate Full Stack Developer who believes great code tells a story, and every project is an opportunity to create something extraordinary.
                     </p>
                     <p>
                       Based in the vibrant tech scene of <strong>Phnom Penh, Cambodia</strong>, I've spent the last few years mastering the art of building digital experiences that don't just work – they captivate. Having completed my Computer Science degree at the Royal University of Phnom Penh and working as a Full Stack Developer at CIJD Company (a Japanese firm), I've learned that the best solutions come from understanding both the technical challenge and the human behind it.
@@ -439,7 +439,7 @@ const About: React.FC<AboutProps> = ({ showAnimations }) => {
                   theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                 }`}>
                   <p>
-                    Hi, I'm <strong className="text-red-500">An Sokwins</strong> – a passionate Full Stack Developer who believes great code tells a story, and every project is an opportunity to create something extraordinary.
+                    Hi, I'm <strong className="text-red-500">An Sokwin</strong> – a passionate Full Stack Developer who believes great code tells a story, and every project is an opportunity to create something extraordinary.
                   </p>
                   <p>
                     Based in the vibrant tech scene of <strong>Phnom Penh, Cambodia</strong>, I've spent the last few years mastering the art of building digital experiences that don't just work – they captivate. Having completed my Computer Science degree at the Royal University of Phnom Penh and working as a Full Stack Developer at CIJD Company (a Japanese firm), I've learned that the best solutions come from understanding both the technical challenge and the human behind it.

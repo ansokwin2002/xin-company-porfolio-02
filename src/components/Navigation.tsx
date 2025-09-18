@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code, Sun, Moon, Sparkles } from 'lucide-react';
+import { Menu, X, Code, Sun, Moon, Sparkles, Zap, Laptop } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Navigation: React.FC = () => {
@@ -65,11 +65,18 @@ const Navigation: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('home')}>
             <div className="relative">
-              <Code className="text-red-500 dark:text-red-400 group-hover:scale-110 transition-transform duration-300" size={28} />
-              <Sparkles className="absolute -top-1 -right-1 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={12} />
+              {/* Main Logo Icon */}
+              <div className="relative w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+                <Laptop className="text-white" size={20} />
+                <div className="absolute inset-0 bg-gradient-to-br from-red-400 to-red-600 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-300"></div>
+              </div>
+              {/* Floating Elements */}
+              <Code className="absolute -top-1 -right-1 text-red-500 dark:text-red-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:rotate-12" size={14} />
+              <Zap className="absolute -bottom-1 -left-1 text-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-rotate-12" size={12} />
+              <Sparkles className="absolute top-0 left-0 text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100" size={10} />
             </div>
-            <span className="font-bold text-2xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
-              An Sokwins
+            <span className="font-bold text-2xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent group-hover:from-red-600 group-hover:to-red-800 dark:group-hover:from-red-400 dark:group-hover:to-red-600 transition-all duration-300">
+              An Sokwin
             </span>
           </div>
 
