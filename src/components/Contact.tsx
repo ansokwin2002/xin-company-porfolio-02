@@ -64,7 +64,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
   ];
 
   return (
-    <section id="contact" className={`py-24 transition-colors duration-500 relative overflow-hidden ${
+    <section id="contact" className={`py-16 md:py-24 transition-colors duration-500 relative overflow-hidden ${
       theme === 'dark' 
         ? 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800' 
         : ''
@@ -133,22 +133,22 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
         {/* Header */}
         {showAnimations ? (
           <Fade direction="down" triggerOnce>
-            <div className="text-center mb-20">
-              <div className="inline-flex items-center space-x-2 mb-6">
-                <Sparkles className="text-red-500" size={24} />
-                <span className={`text-sm font-semibold tracking-wider uppercase ${
+            <div className="text-center mb-12 md:mb-20">
+              <div className="inline-flex items-center space-x-2 mb-4 md:mb-6">
+                <Sparkles className="text-red-500" size={20} />
+                <span className={`text-xs md:text-sm font-semibold tracking-wider uppercase ${
                   theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                 }`}>
                   Get In Touch
                 </span>
-                <Sparkles className="text-red-500" size={24} />
+                <Sparkles className="text-red-500" size={20} />
               </div>
-              <h2 className={`text-5xl md:text-6xl font-bold mb-6 ${
+              <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${
                 theme === 'dark' ? 'text-white' : 'text-gray-900'
               }`}>
                 Let's Work <span className="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">Together</span>
               </h2>
-              <p className={`text-xl max-w-4xl mx-auto leading-relaxed ${
+              <p className={`text-base md:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed px-4 ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 Ready to start your next project? Get in touch and let's discuss how 
@@ -157,22 +157,22 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
             </div>
           </Fade>
         ) : (
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center space-x-2 mb-6">
-              <Sparkles className="text-red-500" size={24} />
-              <span className={`text-sm font-semibold tracking-wider uppercase ${
+          <div className="text-center mb-12 md:mb-20">
+            <div className="inline-flex items-center space-x-2 mb-4 md:mb-6">
+              <Sparkles className="text-red-500" size={20} />
+              <span className={`text-xs md:text-sm font-semibold tracking-wider uppercase ${
                 theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
               }`}>
                 Get In Touch
               </span>
-              <Sparkles className="text-red-500" size={24} />
+              <Sparkles className="text-red-500" size={20} />
             </div>
-            <h2 className={`text-5xl md:text-6xl font-bold mb-6 ${
+            <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 ${
               theme === 'dark' ? 'text-white' : 'text-gray-900'
             }`}>
               Let's Work <span className="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">Together</span>
             </h2>
-            <p className={`text-xl max-w-4xl mx-auto leading-relaxed ${
+            <p className={`text-base md:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed px-4 ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}>
               Ready to start your next project? Get in touch and let's discuss how 
@@ -181,22 +181,22 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
           </div>
         )}
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
           {/* Contact Information */}
           {showAnimations ? (
             <Fade direction="left" delay={200} triggerOnce>
-              <div className="space-y-8">
-                <div className={`p-8 rounded-3xl backdrop-blur-sm border ${
+              <div className="space-y-6 md:space-y-8">
+                <div className={`p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-sm border ${
                   theme === 'dark' 
                     ? 'bg-white/10 border-white/20' 
                     : 'bg-white/80 border-gray-200/50'
                 }`}>
-                  <h3 className={`text-3xl font-bold mb-6 ${
+                  <h3 className={`text-2xl md:text-3xl font-bold mb-4 md:mb-6 ${
                     theme === 'dark' ? 'text-white' : 'text-gray-900'
                   }`}>
                     Get in Touch
                   </h3>
-                  <p className={`mb-8 leading-relaxed text-lg ${
+                  <p className={`mb-6 md:mb-8 leading-relaxed text-base md:text-lg ${
                     theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                   }`}>
                     I'm always interested in new projects and opportunities. 
@@ -205,31 +205,31 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                   </p>
 
                   {/* Contact Info */}
-                  <div className="space-y-6">
+                  <div className="space-y-4 md:space-y-6">
                     {contactInfo.map((info, index) => (
                       <a
                         key={index}
                         href={info.href}
-                        className={`flex items-center space-x-4 p-6 rounded-2xl transition-all duration-300 group hover:scale-105 ${
+                        className={`flex items-center space-x-3 md:space-x-4 p-4 md:p-6 rounded-xl md:rounded-2xl transition-all duration-300 group hover:scale-105 ${
                           theme === 'dark' 
                             ? 'bg-white/5 hover:bg-white/10 border border-white/10' 
                             : 'bg-white hover:bg-gray-50 border border-gray-200 shadow-sm hover:shadow-md'
                         }`}
                       >
-                        <div className={`flex items-center justify-center w-16 h-16 rounded-2xl transition-colors ${
+                        <div className={`flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl transition-colors ${
                           theme === 'dark' 
                             ? 'bg-red-900/30 group-hover:bg-red-800/40' 
                             : 'bg-red-50 group-hover:bg-red-100'
                         }`}>
-                          <info.icon className="text-red-500" size={24} />
+                          <info.icon className="text-red-500" size={20} />
                         </div>
                         <div>
-                          <h4 className={`font-bold text-lg ${
+                          <h4 className={`font-bold text-base md:text-lg ${
                             theme === 'dark' ? 'text-white' : 'text-gray-900'
                           }`}>
                             {info.title}
                           </h4>
-                          <p className={`${
+                          <p className={`text-sm md:text-base ${
                             theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                           }`}>
                             {info.content}
@@ -240,19 +240,19 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                   </div>
 
                   {/* Social Links */}
-                  <div className="mt-8">
-                    <h4 className={`font-bold text-lg mb-6 ${
+                  <div className="mt-6 md:mt-8">
+                    <h4 className={`font-bold text-base md:text-lg mb-4 md:mb-6 ${
                       theme === 'dark' ? 'text-white' : 'text-gray-900'
                     }`}>
                       Follow Me
                     </h4>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-3 md:space-x-4">
                       {socialLinks.map((social, index) => (
                         <a
                           key={index}
                           href={social.href}
                           aria-label={social.label}
-                          className={`flex items-center justify-center w-14 h-14 rounded-2xl transition-all duration-300 group hover:scale-110 ${
+                          className={`flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl transition-all duration-300 group hover:scale-110 ${
                             theme === 'dark' 
                               ? 'bg-white/10 hover:bg-white/20 border border-white/20' 
                               : 'bg-white hover:bg-red-50 border border-gray-200 shadow-sm hover:shadow-md'
@@ -262,27 +262,27 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                             theme === 'dark' 
                               ? 'text-gray-400 group-hover:text-red-400' 
                               : 'text-gray-600 group-hover:text-red-600'
-                          }`} size={24} />
+                          }`} size={20} />
                         </a>
                       ))}
                     </div>
                   </div>
 
                   {/* Availability */}
-                  <div className={`mt-8 p-6 rounded-2xl border ${
+                  <div className={`mt-6 md:mt-8 p-4 md:p-6 rounded-xl md:rounded-2xl border ${
                     theme === 'dark' 
                       ? 'bg-green-900/20 border-green-500/20' 
                       : 'bg-green-50 border-green-200'
                   }`}>
-                    <div className="flex items-center space-x-3 mb-2">
-                      <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className={`font-bold ${
+                    <div className="flex items-center space-x-2 md:space-x-3 mb-2">
+                      <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className={`font-bold text-sm md:text-base ${
                         theme === 'dark' ? 'text-green-400' : 'text-green-800'
                       }`}>
                         Available for Projects
                       </span>
                     </div>
-                    <p className={`text-sm ${
+                    <p className={`text-xs md:text-sm ${
                       theme === 'dark' ? 'text-green-300' : 'text-green-700'
                     }`}>
                       Currently accepting new projects with start dates in 2024
@@ -292,18 +292,18 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
               </div>
             </Fade>
           ) : (
-            <div className="space-y-8">
-              <div className={`p-8 rounded-3xl backdrop-blur-sm border ${
+            <div className="space-y-6 md:space-y-8">
+              <div className={`p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-sm border ${
                 theme === 'dark' 
                   ? 'bg-white/10 border-white/20' 
                   : 'bg-white/80 border-gray-200/50'
               }`}>
-                <h3 className={`text-3xl font-bold mb-6 ${
+                <h3 className={`text-2xl md:text-3xl font-bold mb-4 md:mb-6 ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>
                   Get in Touch
                 </h3>
-                <p className={`mb-8 leading-relaxed text-lg ${
+                <p className={`mb-6 md:mb-8 leading-relaxed text-base md:text-lg ${
                   theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                 }`}>
                   I'm always interested in new projects and opportunities. 
@@ -312,31 +312,31 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                 </p>
 
                 {/* Contact Info */}
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                   {contactInfo.map((info, index) => (
                     <a
                       key={index}
                       href={info.href}
-                      className={`flex items-center space-x-4 p-6 rounded-2xl transition-all duration-300 group hover:scale-105 ${
+                      className={`flex items-center space-x-3 md:space-x-4 p-4 md:p-6 rounded-xl md:rounded-2xl transition-all duration-300 group hover:scale-105 ${
                         theme === 'dark' 
                           ? 'bg-white/5 hover:bg-white/10 border border-white/10' 
                           : 'bg-white hover:bg-gray-50 border border-gray-200 shadow-sm hover:shadow-md'
                       }`}
                     >
-                      <div className={`flex items-center justify-center w-16 h-16 rounded-2xl transition-colors ${
+                      <div className={`flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl transition-colors ${
                         theme === 'dark' 
                           ? 'bg-red-900/30 group-hover:bg-red-800/40' 
                           : 'bg-red-50 group-hover:bg-red-100'
                       }`}>
-                        <info.icon className="text-red-500" size={24} />
+                        <info.icon className="text-red-500" size={20} />
                       </div>
                       <div>
-                        <h4 className={`font-bold text-lg ${
+                        <h4 className={`font-bold text-base md:text-lg ${
                           theme === 'dark' ? 'text-white' : 'text-gray-900'
                         }`}>
                           {info.title}
                         </h4>
-                        <p className={`${
+                        <p className={`text-sm md:text-base ${
                           theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                         }`}>
                           {info.content}
@@ -347,19 +347,19 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                 </div>
 
                 {/* Social Links */}
-                <div className="mt-8">
-                  <h4 className={`font-bold text-lg mb-6 ${
+                <div className="mt-6 md:mt-8">
+                  <h4 className={`font-bold text-base md:text-lg mb-4 md:mb-6 ${
                     theme === 'dark' ? 'text-white' : 'text-gray-900'
                   }`}>
                     Follow Me
                   </h4>
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-3 md:space-x-4">
                     {socialLinks.map((social, index) => (
                       <a
                         key={index}
                         href={social.href}
                         aria-label={social.label}
-                        className={`flex items-center justify-center w-14 h-14 rounded-2xl transition-all duration-300 group hover:scale-110 ${
+                        className={`flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl transition-all duration-300 group hover:scale-110 ${
                           theme === 'dark' 
                             ? 'bg-white/10 hover:bg-white/20 border border-white/20' 
                             : 'bg-white hover:bg-red-50 border border-gray-200 shadow-sm hover:shadow-md'
@@ -369,27 +369,27 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                           theme === 'dark' 
                             ? 'text-gray-400 group-hover:text-red-400' 
                             : 'text-gray-600 group-hover:text-red-600'
-                        }`} size={24} />
+                        }`} size={20} />
                       </a>
                     ))}
                   </div>
                 </div>
 
                 {/* Availability */}
-                <div className={`mt-8 p-6 rounded-2xl border ${
+                <div className={`mt-6 md:mt-8 p-4 md:p-6 rounded-xl md:rounded-2xl border ${
                   theme === 'dark' 
                     ? 'bg-green-900/20 border-green-500/20' 
                     : 'bg-green-50 border-green-200'
                 }`}>
-                  <div className="flex items-center space-x-3 mb-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className={`font-bold ${
+                  <div className="flex items-center space-x-2 md:space-x-3 mb-2">
+                    <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className={`font-bold text-sm md:text-base ${
                       theme === 'dark' ? 'text-green-400' : 'text-green-800'
                     }`}>
                       Available for Projects
                     </span>
                   </div>
-                  <p className={`text-sm ${
+                  <p className={`text-xs md:text-sm ${
                     theme === 'dark' ? 'text-green-300' : 'text-green-700'
                   }`}>
                     Currently accepting new projects with start dates in 2024
@@ -402,21 +402,21 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
           {/* Contact Form */}
           {showAnimations ? (
             <Fade direction="right" delay={400} triggerOnce>
-              <div className={`p-10 rounded-3xl backdrop-blur-sm border shadow-2xl ${
+              <div className={`p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl backdrop-blur-sm border shadow-2xl ${
                 theme === 'dark' 
                   ? 'bg-white/10 border-white/20' 
                   : 'bg-white/80 border-gray-200/50'
               }`}>
-                <h3 className={`text-3xl font-bold mb-8 ${
+                <h3 className={`text-2xl md:text-3xl font-bold mb-6 md:mb-8 ${
                   theme === 'dark' ? 'text-white' : 'text-gray-900'
                 }`}>
                   Send Me a Message
                 </h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
                     <div>
-                      <label htmlFor="name" className={`block text-sm font-semibold mb-3 ${
+                      <label htmlFor="name" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                         theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                       }`}>
                         Name *
@@ -428,7 +428,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 ${
+                        className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
                           theme === 'dark' 
                             ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
                             : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -438,7 +438,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                     </div>
                     
                     <div>
-                      <label htmlFor="email" className={`block text-sm font-semibold mb-3 ${
+                      <label htmlFor="email" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                         theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                       }`}>
                         Email *
@@ -450,7 +450,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 ${
+                        className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
                           theme === 'dark' 
                             ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
                             : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -461,7 +461,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className={`block text-sm font-semibold mb-3 ${
+                    <label htmlFor="subject" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                       theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                     }`}>
                       Project Type *
@@ -472,7 +472,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 ${
+                      className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
                         theme === 'dark' 
                           ? 'bg-white/10 border-white/20 text-white' 
                           : 'bg-white border-gray-300 text-gray-900'
@@ -490,7 +490,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className={`block text-sm font-semibold mb-3 ${
+                    <label htmlFor="message" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                       theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                     }`}>
                       Project Details *
@@ -501,8 +501,8 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      rows={6}
-                      className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none ${
+                      rows={4}
+                      className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none text-sm md:text-base ${
                         theme === 'dark' 
                           ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
                           : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -514,16 +514,16 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-8 py-5 rounded-2xl font-bold text-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl"
+                    className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-6 md:px-8 py-4 md:py-5 rounded-xl md:rounded-2xl font-bold text-base md:text-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2 md:space-x-3 shadow-lg hover:shadow-xl"
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 md:w-6 md:h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         <span>Sending...</span>
                       </>
                     ) : (
                       <>
-                        <Send size={24} />
+                        <Send size={20} className="md:w-6 md:h-6" />
                         <span>Send Message</span>
                       </>
                     )}
@@ -532,21 +532,21 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
               </div>
             </Fade>
           ) : (
-            <div className={`p-10 rounded-3xl backdrop-blur-sm border shadow-2xl ${
+            <div className={`p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-3xl backdrop-blur-sm border shadow-2xl ${
               theme === 'dark' 
                 ? 'bg-white/10 border-white/20' 
                 : 'bg-white/80 border-gray-200/50'
             }`}>
-              <h3 className={`text-3xl font-bold mb-8 ${
+              <h3 className={`text-2xl md:text-3xl font-bold mb-6 md:mb-8 ${
                 theme === 'dark' ? 'text-white' : 'text-gray-900'
               }`}>
                 Send Me a Message
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
                   <div>
-                    <label htmlFor="name" className={`block text-sm font-semibold mb-3 ${
+                    <label htmlFor="name" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                       theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                     }`}>
                       Name *
@@ -558,7 +558,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 ${
+                      className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
                         theme === 'dark' 
                           ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
                           : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -568,7 +568,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className={`block text-sm font-semibold mb-3 ${
+                    <label htmlFor="email" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                       theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                     }`}>
                       Email *
@@ -580,7 +580,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 ${
+                      className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
                         theme === 'dark' 
                           ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
                           : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -591,7 +591,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className={`block text-sm font-semibold mb-3 ${
+                  <label htmlFor="subject" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                     theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                   }`}>
                     Project Type *
@@ -602,7 +602,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 ${
+                    className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
                       theme === 'dark' 
                         ? 'bg-white/10 border-white/20 text-white' 
                         : 'bg-white border-gray-300 text-gray-900'
@@ -620,7 +620,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className={`block text-sm font-semibold mb-3 ${
+                  <label htmlFor="message" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                     theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                   }`}>
                     Project Details *
@@ -631,8 +631,8 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={6}
-                    className={`w-full px-6 py-4 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none ${
+                    rows={4}
+                    className={`w-full px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none text-sm md:text-base ${
                       theme === 'dark' 
                         ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
                         : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -644,16 +644,16 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-8 py-5 rounded-2xl font-bold text-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl"
+                  className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-6 md:px-8 py-4 md:py-5 rounded-xl md:rounded-2xl font-bold text-base md:text-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center space-x-2 md:space-x-3 shadow-lg hover:shadow-xl"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="w-5 h-5 md:w-6 md:h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                       <span>Sending...</span>
                     </>
                   ) : (
                     <>
-                      <Send size={24} />
+                      <Send size={20} className="md:w-6 md:h-6" />
                       <span>Send Message</span>
                     </>
                   )}
