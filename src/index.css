@@ -2,16 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Cursor Styles - Only hide on desktop */
-@media (min-width: 768px) {
-  * {
-    cursor: none !important;
-  }
-  
-  body, html {
-    cursor: none !important;
-  }
-}
+
 
 /* Keep default cursor on mobile devices */
 @media (max-width: 767px) {
@@ -64,27 +55,4 @@ html {
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.cursor-effect {
-  position: fixed;
-  width: 30px; /* Size of the circle */
-  height: 30px;
-  border: 2px solid #ef4444; /* Tailwind red-500 */
-  border-radius: 50%;
-  pointer-events: none; /* Allow clicking through the cursor */
-  transform: translate(-50%, -50%); /* Center the circle on the cursor */
-  transition: transform 0.1s ease-out, width 0.2s ease-out, height 0.2s ease-out, border-color 0.2s ease-out, background-color 0.2s ease-out; /* Smoother transform transition */
-  z-index: 9999; /* Ensure it's on top of other elements */
-  background-color: rgba(239, 68, 68, 0.2); /* Semi-transparent background */
-}
-
-/* Optional: Add a hover effect for interactive elements */
-a:hover ~ .cursor-effect,
-button:hover ~ .cursor-effect,
-.interactive-element:hover ~ .cursor-effect {
-  width: 40px;
-  height: 40px;
-  border-color: #dc2626; /* A darker red on hover */
-  background-color: rgba(220, 38, 38, 0.4); /* Darker semi-transparent background on hover */
 }
