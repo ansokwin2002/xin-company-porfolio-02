@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Code, Sun, Moon, Sparkles, Zap, Laptop } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { t, i18n } = useTranslation();
 
   const navItems = [
-    { id: 'home', label: 'Home', icon: '🏠' },
-    { id: 'about', label: 'About', icon: '👨‍💻' },
-    { id: 'portfolio', label: 'Portfolio', icon: '💼' },
-    { id: 'services', label: 'Services', icon: '⚡' },
-    { id: 'faq', label: 'FAQ', icon: '❓' },
-    { id: 'testimonials', label: 'Testimonials', icon: '⭐' },
-    { id: 'contact', label: 'Contact', icon: '📧' },
+    { id: 'home', label: t('home'), icon: '🏠' },
+    { id: 'about', label: t('about'), icon: '👨‍💻' },
+    { id: 'portfolio', label: t('portfolio'), icon: '💼' },
+    { id: 'services', label: t('services'), icon: '⚡' },
+    { id: 'faq', label: t('faq'), icon: '❓' },
+    { id: 'testimonials', label: t('testimonials'), icon: '⭐' },
+    { id: 'contact', label: t('contact'), icon: '📧' },
   ];
 
   useEffect(() => {
@@ -103,8 +105,24 @@ const Navigation: React.FC = () => {
             ))}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
+          {/* Theme Toggle, Language & Mobile Menu */}
           <div className="flex items-center space-x-4">
+            {/* Language Switcher */}
+            <select
+              value={i18n.language || 'en'}
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors border ${
+                theme === 'dark'
+                  ? 'bg-gray-800/80 text-gray-200 border-gray-600/30 hover:bg-gray-700/80'
+                  : 'bg-white/80 text-gray-700 border-gray-300/30 hover:bg-gray-100/80'
+              }`}
+              aria-label="Select language"
+            >
+              <option value="en">English</option>
+              <option value="km">ខ្មែរ</option>
+              <option value="zh-CN">中文（简体）</option>
+            </select>
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}

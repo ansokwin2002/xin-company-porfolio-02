@@ -17,16 +17,28 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>('light');
 
-  // Load theme from localStorage on mount
+  // Auto switch theme based on Cambodia time
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') as Theme;
-    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
-      setThemeState(savedTheme);
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setThemeState(prefersDark ? 'dark' : 'light');
-    }
+    const checkTimeAndSetTheme = () => {
+      const cambodiaTime = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Phnom_Penh',
+        hour: 'numeric',
+        hour12: false,
+      }).format(new Date());
+
+      const hour = parseInt(cambodiaTime, 10);
+
+      if (hour >= 6 && hour < 18) {
+        setThemeState('light');
+      } else {
+        setThemeState('dark');
+      }
+    };
+
+    checkTimeAndSetTheme();
+    const interval = setInterval(checkTimeAndSetTheme, 60000); // Check every minute
+
+    return () => clearInterval(interval);
   }, []);
 
   // Apply theme to document
@@ -37,8 +49,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     } else {
       root.classList.remove('dark');
     }
-    // Save to localStorage
-    localStorage.setItem('portfolio-theme', theme);
+
   }, [theme]);
 
   const toggleTheme = () => {
