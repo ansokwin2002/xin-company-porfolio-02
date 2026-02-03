@@ -22,6 +22,18 @@ export default {
       backdropBlur: {
         xs: '2px',
       },
+      borderRadius: {
+        'button': 'var(--button-border-radius)',
+      },
+      backgroundImage: {
+        'gradient-blue': 'linear-gradient(90deg, var(--button-gradient-start) 0%, var(--button-gradient-end) 100%)',
+      },
+      boxShadow: {
+        'button': 'var(--button-shadow-offset-x) var(--button-shadow-offset-y) var(--button-shadow-blur-radius) var(--button-shadow-color)',
+      },
+      colors: {
+        gold: 'var(--color-gold)',
+      },
     },
   },
   plugins: [],

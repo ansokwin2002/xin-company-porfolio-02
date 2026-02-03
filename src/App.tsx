@@ -13,7 +13,7 @@ import Services from './components/Services';
 import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
-import ChatBot from './components/ChatBot';
+import TelegramLink from './components/TelegramLink';
 
 // Admin Components
 import Login from './components/admin/Login';
@@ -35,7 +35,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations }) => (
     <FAQ showAnimations={showAnimations} />
     <Testimonials showAnimations={showAnimations} />
     <Contact showAnimations={showAnimations} />
-    <ChatBot />
+    <TelegramLink />
     <ScrollToTop />
     
     {/* Modern Footer */}

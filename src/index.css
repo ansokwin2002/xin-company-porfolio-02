@@ -2,7 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
+:root {
+  --button-border-radius: 50px;
+  --button-gradient-start: #1E88E5;
+  --button-gradient-end: #42A5F5;
+  --button-shadow-color: rgba(30, 136, 229, 0.4);
+  --button-shadow-offset-x: 0px;
+  --button-shadow-offset-y: 4px;
+  --button-shadow-blur-radius: 12px;
+  --color-gold: #F4C430;
+}
 
 /* Keep default cursor on mobile devices */
 @media (max-width: 767px) {

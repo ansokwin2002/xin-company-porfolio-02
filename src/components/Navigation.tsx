@@ -1,31 +1,134 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Code, Sun, Moon, Sparkles, Zap, Laptop } from 'lucide-react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { Transition } from '@headlessui/react';
+
+// Contact Icon Component (Taxi/Car SVG)
+const ContactIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 28 28" fill="none">
+    <circle cx="5.16431" cy="25.9375" r="1.5625" fill="url(#paint0_linear_9_331)"/>
+    <circle cx="22.0393" cy="25.9375" r="1.5625" fill="url(#paint1_linear_9_331)"/>
+    <path d="M13.6018 21.25L1.72681 20V24.7475C1.72681 25.21 2.17868 26.1038 3.46556 26.3731C11.6568 27.6231 15.8656 27.5931 23.8181 26.3431C25.1043 26.1438 25.4768 25.21 25.4768 24.7475V20L13.6018 21.25Z" fill="url(#paint2_linear_9_331)"/>
+    <path d="M3.90743 21.25L1.45368 19.6012L1.10181 20V24.7475C1.10181 25.21 1.55368 26.1037 2.84056 26.3731C3.20368 26.4288 3.55493 26.4781 3.90743 26.5288V21.25Z" fill="url(#paint3_linear_9_331)"/>
+    <path d="M22.3518 20.3125V26.5638C22.8318 26.495 23.3199 26.4213 23.8181 26.3431C25.1043 26.1438 25.4768 25.21 25.4768 24.7475V20L22.3518 20.3125Z" fill="url(#paint4_linear_9_331)"/>
+    <path d="M27.0393 5.00063L26.3512 3.62375C26.1899 3.30125 25.9218 3.045 25.5924 2.89813L24.3493 2.34563C21.7268 1.25 18.6018 0 13.6018 0C8.60182 0 5.47682 1.25 2.85432 2.34625L1.6112 2.89875C1.28182 3.045 1.0137 3.30125 0.852448 3.62375L0.164323 5.00063C-0.0344272 5.3975 -0.0538021 5.86063 0.111198 6.27313L0.881823 8.82438C1.0087 9.14188 1.34745 9.32063 1.6812 9.24625L6.69807 8.27C7.09557 8.18187 7.40307 7.8675 7.48308 7.46812L7.56995 7.03312L7.97682 4.375C8.20932 3.9875 8.6287 3.75 9.08057 3.75H13.6018H18.1231C18.575 3.75 18.9943 3.9875 19.2268 4.375L19.7206 7.46813C19.8006 7.8675 20.1081 8.18188 20.5056 8.27L25.5225 9.24625C25.8562 9.32063 26.195 9.14188 26.3218 8.82438L27.0925 6.27313C27.2575 5.86063 27.2381 5.3975 27.0393 5.00063Z" fill="url(#paint5_linear_9_331)"/>
+    <path d="M19.2668 3.72313C20.2643 7.11438 21.0025 7.57313 22.5881 8.66L19.6262 8.00188L19.2668 3.72313Z" fill="url(#paint6_linear_9_331)"/>
+    <path d="M7.95991 3.72313C6.96241 7.11438 6.10491 7.57313 4.51929 8.66L7.84054 7.6725L7.95991 3.72313Z" fill="url(#paint7_linear_9_331)"/>
+    <path d="M23.0369 9.74063C22.945 9.38812 22.7194 9.08375 22.2856 8.83H13.6019H4.85186C4.56186 9.05375 4.26874 9.33938 4.16686 9.74063L1.72686 20C1.58936 20.6525 2.32811 21.2169 3.01999 21.33C10.64 22.0894 16.8637 22.1044 24.1825 21.33C24.895 21.2469 25.6144 20.6525 25.4769 20L23.0369 9.74063Z" fill="url(#paint8_linear_9_331)"/>
+    <path d="M18.3993 7.14938L17.418 7.035V5.625H9.78615V7.035L8.55552 7.20938C7.06115 7.42688 5.84302 8.15188 4.78552 8.885H9.78615H13.6018H17.4174H22.378C21.1224 8.0325 19.8936 7.36688 18.3993 7.14938Z" fill="url(#paint9_linear_9_331)"/>
+    <path d="M0.356188 5.87188C0.222438 5.87188 0.0943132 5.79375 0.0330629 5.66C-0.0519371 5.475 0.358063 4.91813 0.536813 4.83063C9.41306 0.438751 17.7612 0.0512509 26.6674 4.44188C26.8456 4.53063 27.2562 5.475 27.1712 5.66063C27.0862 5.845 26.8737 5.9225 26.6949 5.83687C17.9918 1.54438 9.18244 1.545 0.509313 5.83563C0.459938 5.86 0.407438 5.87188 0.356188 5.87188Z" fill="url(#paint10_linear_9_331)"/>
+    <defs>
+      <linearGradient id="paint0_linear_9_331" x1="5.14431" y1="24.0862" x2="5.14431" y2="27.1869" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#333332"/>
+        <stop offset="0.806" stopColor="#3F3F3F"/>
+        <stop offset="0.294" stopColor="#5B5B5B"/>
+        <stop stopColor="#666666"/>
+      </linearGradient>
+      <linearGradient id="paint1_linear_9_331" x1="22.0193" y1="24.0862" x2="22.0193" y2="27.1869" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#333332"/>
+        <stop offset="0.806" stopColor="#3F3F3F"/>
+        <stop offset="0.294" stopColor="#5B5B5B"/>
+        <stop stopColor="#666666"/>
+      </linearGradient>
+      <linearGradient id="paint2_linear_9_331" x1="7.66431" y1="21.8239" x2="7.66431" y2="21.8239" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#ED9A1E"/>
+        <stop stopColor="#FFCA28"/>
+      </linearGradient>
+      <linearGradient id="paint3_linear_9_331" x1="-1.1688" y1="23.0137" x2="-1.1688" y2="23.07" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="white" stopOpacity="0"/>
+        <stop stopColor="white" stopOpacity="0.501961"/>
+      </linearGradient>
+      <linearGradient id="paint4_linear_9_331" x1="23.1331" y1="21.6409" x2="23.1331" y2="21.6409" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#171714" stopOpacity="0.4"/>
+        <stop stopColor="#171714" stopOpacity="0"/>
+      </linearGradient>
+      <linearGradient id="paint5_linear_9_331" x1="12.8181" y1="-0.47875" x2="12.8181" y2="10.6688" gradientUnits="userSpaceOnUse">
+        <stop offset="0.964" stopColor="#ED9A1E"/>
+        <stop stopColor="#FFCA28"/>
+      </linearGradient>
+      <linearGradient id="paint6_linear_9_331" x1="23.185" y1="7.33688" x2="23.185" y2="5.80625" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#171714" stopOpacity="0.4"/>
+        <stop stopColor="#171714" stopOpacity="0"/>
+      </linearGradient>
+      <linearGradient id="paint7_linear_9_331" x1="12.9443" y1="7.27688" x2="12.9443" y2="5.71125" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#171714" stopOpacity="0.4"/>
+        <stop stopColor="#171714" stopOpacity="0"/>
+      </linearGradient>
+      <linearGradient id="paint8_linear_9_331" x1="13.6994" y1="42.9419" x2="13.6994" y2="17.4044" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#FFCA28"/>
+        <stop stopColor="#ED9A1E"/>
+      </linearGradient>
+      <linearGradient id="paint9_linear_9_331" x1="9.18365" y1="6.44" x2="9.18365" y2="6.44" gradientUnits="userSpaceOnUse">
+        <stop offset="1" stopColor="#ED9B1E"/>
+        <stop stopColor="#FFCA28"/>
+      </linearGradient>
+      <linearGradient id="paint10_linear_9_331" x1="13.0156" y1="-0.168125" x2="13.0156" y2="11.0706" gradientUnits="userSpaceOnUse">
+        <stop offset="0.964" stopColor="#ED9A1E"/>
+        <stop stopColor="#FFCA28"/>
+      </linearGradient>
+    </defs>
+  </svg>
+);
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const { t, i18n } = useTranslation();
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const navItems = [
-    { id: 'home', label: t('home'), icon: '🏠' },
-    { id: 'about', label: t('about'), icon: '👨‍💻' },
-    { id: 'portfolio', label: t('portfolio'), icon: '💼' },
-    { id: 'services', label: t('services'), icon: '⚡' },
-    { id: 'faq', label: t('faq'), icon: '❓' },
-    { id: 'testimonials', label: t('testimonials'), icon: '⭐' },
-    { id: 'contact', label: t('contact'), icon: '📧' },
+    { id: 'home', label: 'Home', type: 'link' },
+    { 
+      id: 'products', 
+      label: 'Products', 
+      type: 'dropdown',
+      items: [
+        { id: 'product-1', label: 'Product 1' },
+        { id: 'product-2', label: 'Product 2' },
+        { id: 'product-3', label: 'Product 3' },
+      ]
+    },
+    { 
+      id: 'services', 
+      label: 'Services', 
+      type: 'dropdown',
+      items: [
+        { id: 'service-1', label: 'Service 1' },
+        { id: 'service-2', label: 'Service 2' },
+        { id: 'service-3', label: 'Service 3' },
+      ]
+    },
+    { 
+      id: 'company', 
+      label: 'Company', 
+      type: 'dropdown',
+      items: [
+        { id: 'about', label: 'About Us' },
+        { id: 'team', label: 'Our Team' },
+        { id: 'careers', label: 'Careers' },
+      ]
+    },
+    { id: 'blog', label: 'Blog', type: 'link' },
+  ];
+
+  const languages = [
+    { code: 'en', label: 'Eng' },
+    { code: 'km', label: 'ខ្មែរ' },
+    { code: 'zh-CN', label: '中文' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 50);
+      setIsScrolled(scrollPosition > 10);
 
-      const sections = navItems.map(item => document.getElementById(item.id));
+      const sections = navItems
+        .filter(item => item.type === 'link')
+        .map(item => document.getElementById(item.id));
       const currentScrollPosition = scrollPosition + 100;
 
       sections.forEach((section, index) => {
@@ -34,7 +137,7 @@ const Navigation: React.FC = () => {
           const sectionHeight = section.offsetHeight;
           
           if (currentScrollPosition >= sectionTop && currentScrollPosition < sectionTop + sectionHeight) {
-            setActiveSection(navItems[index].id);
+            setActiveSection(navItems.filter(item => item.type === 'link')[index].id);
           }
         }
       });
@@ -44,151 +147,282 @@ const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleDropdownEnter = (itemId: string) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setActiveDropdown(itemId);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 200);
+  };
+
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
     setIsOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const getCurrentLanguage = () => {
+    return languages.find(lang => lang.code === i18n.language) || languages[0];
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-200 ${
       isScrolled 
-        ? theme === 'dark'
-          ? 'bg-gray-900/90 backdrop-blur-xl shadow-lg border-b border-gray-700/30'
-          : 'bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-200/30'
-        : theme === 'dark'
-          ? 'bg-gray-900/20 backdrop-blur-md'
-          : 'bg-white/20 backdrop-blur-md'
+        ? 'bg-white shadow-sm border-b border-gray-100'
+        : 'bg-white'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => scrollToSection('home')}>
+          <div 
+            className="flex flex-col cursor-pointer" 
+            onClick={() => scrollToSection('home')}
+          >
             <div className="relative">
-              {/* Main Logo Icon */}
-              <div className="relative w-10 h-10 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
-                <Laptop className="text-white" size={20} />
-                <div className="absolute inset-0 bg-gradient-to-br from-red-400 to-red-600 opacity-0 group-hover:opacity-20 rounded-xl transition-opacity duration-300"></div>
-              </div>
-              {/* Floating Elements */}
-              <Code className="absolute -top-1 -right-1 text-red-500 dark:text-red-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:rotate-12" size={14} />
-              <Zap className="absolute -bottom-1 -left-1 text-yellow-400 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-rotate-12" size={12} />
-              <Sparkles className="absolute top-0 left-0 text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100" size={10} />
+              <span className="font-bold text-2xl text-gold">
+                QıYOU
+              </span>
+              {/* Red dot above the 'i' */}
+              <span 
+                className="absolute w-1.5 h-1.5 rounded-full bg-red-500"
+                style={{ 
+                  top: '3px', 
+                  left: '17.5px' 
+                }}
+              ></span>
             </div>
-            <span className="font-bold text-2xl bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent group-hover:from-red-600 group-hover:to-red-800 dark:group-hover:from-red-400 dark:group-hover:to-red-600 transition-all duration-300">
-              An Sokwin
+            <span className="text-xs text-gray-600 -mt-1">
+              Your Success Partner
             </span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-10">
             {navItems.map((item) => (
-              <button
+              <div
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 group ${
-                  activeSection === item.id 
-                    ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20' 
-                    : 'text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
-                }`}
+                className="relative"
+                onMouseEnter={() => item.type === 'dropdown' && handleDropdownEnter(item.id)}
+                onMouseLeave={() => item.type === 'dropdown' && handleDropdownLeave()}
               >
-                <span className="flex items-center space-x-2">
-                  <span className="text-base">{item.icon}</span>
-                  <span>{item.label}</span>
-                </span>
-                {activeSection === item.id && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-red-500 dark:bg-red-400 rounded-full"></div>
+                {item.type === 'link' ? (
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={`relative text-sm font-normal transition-colors before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-gold before:scale-x-0 before:origin-center before:transition-transform before:duration-300 hover:before:scale-x-100 ${
+                      activeSection === item.id 
+                        ? 'text-gray-900 font-medium' 
+                        : 'text-gray-700 hover:text-gray-900'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      className="relative flex items-center space-x-1 text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-gold before:scale-x-0 before:origin-center before:transition-transform before:duration-300 hover:before:scale-x-100"
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown size={14} strokeWidth={2} />
+                    </button>
+                    
+                    {/* Dropdown Menu */}
+                    <Transition
+                      as={Fragment}
+                      show={activeDropdown === item.id}
+                      enter="transition ease-out duration-200"
+                      enterFrom="opacity-0 translate-y-1"
+                      enterTo="opacity-100 translate-y-0"
+                      leave="transition ease-in duration-150"
+                      leaveFrom="opacity-100 translate-y-0"
+                      leaveTo="opacity-0 translate-y-1"
+                    >
+                      <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1">
+                        {item.items.map((subItem) => (
+                          <button
+                            key={subItem.id}
+                            onClick={() => scrollToSection(subItem.id)}
+                            className="relative w-full text-left px-4 py-2 text-sm text-gray-700 transition-colors before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-gold before:scale-x-0 before:origin-center before:transition-transform before:duration-300 hover:before:scale-x-100 hover:text-gray-900"
+                          >
+                            {subItem.label}
+                          </button>
+                        ))}
+                      </div>
+                    </Transition>
+                  </>
                 )}
-              </button>
+              </div>
             ))}
           </div>
 
-          {/* Theme Toggle, Language & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-3">
             {/* Language Switcher */}
-            <select
-              value={i18n.language || 'en'}
-              onChange={(e) => i18n.changeLanguage(e.target.value)}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors border ${
-                theme === 'dark'
-                  ? 'bg-gray-800/80 text-gray-200 border-gray-600/30 hover:bg-gray-700/80'
-                  : 'bg-white/80 text-gray-700 border-gray-300/30 hover:bg-gray-100/80'
-              }`}
-              aria-label="Select language"
+            <div
+              className="relative hidden lg:block"
+              onMouseEnter={() => handleDropdownEnter('language')}
+              onMouseLeave={() => handleDropdownLeave()}
             >
-              <option value="en">English</option>
-              <option value="km">ខ្មែរ</option>
-              <option value="zh-CN">中文（简体）</option>
-            </select>
+              <button className="flex items-center space-x-1 text-sm font-normal text-gray-700 hover:text-gray-900 transition-colors">
+                <span>{getCurrentLanguage().label}</span>
+                <ChevronDown size={14} strokeWidth={2} />
+              </button>
 
-            {/* Theme Toggle */}
+              <Transition
+                as={Fragment}
+                show={activeDropdown === 'language'}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-150"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <div className="absolute top-full right-0 mt-1 w-32 bg-white rounded-md shadow-lg border border-gray-200 py-1">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        i18n.changeLanguage(lang.code);
+                        setActiveDropdown(null);
+                      }}
+                      className={`relative w-full text-left px-4 py-2 text-sm transition-colors before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-gold before:scale-x-0 before:origin-center before:transition-transform before:duration-300 hover:before:scale-x-100 ${
+                        i18n.language === lang.code 
+                          ? 'text-gray-900 font-medium' 
+                          : 'text-gray-700'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              </Transition>
+            </div>
+
+            {/* Contact Us Button */}
             <button
-              onClick={toggleTheme}
-              className={`relative p-3 rounded-xl transition-all duration-300 group ${
-                theme === 'dark'
-                  ? 'bg-gray-800/80 hover:bg-gray-700/80 border border-gray-600/30'
-                  : 'bg-gray-100/80 hover:bg-gray-200/80 border border-gray-300/30'
-              }`}
-              aria-label="Toggle theme"
+              onClick={() => scrollToSection('contact')}
+              className="hidden lg:flex items-center space-x-2 px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 rounded-button bg-gradient-blue shadow-button"
             >
-              <div className="relative w-6 h-6">
-                <Sun className={`absolute inset-0 text-yellow-500 transition-all duration-300 ${
-                  theme === 'light' ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'
-                }`} size={24} />
-                <Moon className={`absolute inset-0 text-blue-400 transition-all duration-300 ${
-                  theme === 'dark' ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
-                }`} size={24} />
-              </div>
+              <ContactIcon />
+              <span>Contact Us</span>
             </button>
 
             {/* Mobile menu button */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className={`p-3 rounded-xl transition-all duration-300 ${
-                  theme === 'dark'
-                    ? 'bg-gray-800/80 hover:bg-gray-700/80 text-gray-300 border border-gray-600/30'
-                    : 'bg-gray-100/80 hover:bg-gray-200/80 text-gray-700 border border-gray-300/30'
-                }`}
-              >
-                <div className="relative w-6 h-6">
-                  <Menu className={`absolute inset-0 transition-all duration-300 ${
-                    isOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
-                  }`} size={24} />
-                  <X className={`absolute inset-0 transition-all duration-300 ${
-                    isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
-                  }`} size={24} />
-                </div>
-              </button>
-            </div>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden p-2 text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? 'max-h-[600px] opacity-100 pb-4' : 'max-h-0 opacity-0'
         }`}>
-          <div className={`py-4 space-y-2 backdrop-blur-xl rounded-2xl mt-2 border ${
-            theme === 'dark'
-              ? 'bg-gray-900/95 border-gray-700/30'
-              : 'bg-white/95 border-gray-200/30'
-          }`}>
+          <div className="space-y-1 pt-2 border-t border-gray-200">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`w-full flex items-center space-x-3 px-6 py-3 text-left font-medium transition-all duration-300 ${
-                  activeSection === item.id 
-                    ? 'text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-r-4 border-red-500 dark:border-red-400' 
-                    : 'text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800/50'
-                }`}
-              >
-                <span className="text-xl">{item.icon}</span>
-                <span>{item.label}</span>
-              </button>
+              <div key={item.id}>
+                {item.type === 'link' ? (
+                  <button
+                    onClick={() => scrollToSection(item.id)}
+                    className={`w-full text-left px-4 py-3 text-sm font-normal transition-colors ${
+                      activeSection === item.id 
+                        ? 'text-gray-900 bg-gray-50 font-medium' 
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <div>
+                    <button
+                      onClick={() => setActiveDropdown(activeDropdown === item.id ? null : item.id)}
+                      className="w-full flex items-center justify-between px-4 py-3 text-sm font-normal text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown 
+                        size={14}
+                        strokeWidth={2}
+                        className={`transition-transform ${
+                          activeDropdown === item.id ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    {activeDropdown === item.id && item.items && (
+                      <div className="bg-gray-50">
+                        {item.items.map((subItem) => (
+                          <button
+                            key={subItem.id}
+                            onClick={() => scrollToSection(subItem.id)}
+                            className="w-full text-left px-8 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                          >
+                            {subItem.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             ))}
+            
+            {/* Mobile Language Selector */}
+            <div className="pt-2 border-t border-gray-200">
+              <button
+                onClick={() => setActiveDropdown(activeDropdown === 'language-mobile' ? null : 'language-mobile')}
+                className="w-full flex items-center justify-between px-4 py-3 text-sm font-normal text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <span>Language: {getCurrentLanguage().label}</span>
+                <ChevronDown 
+                  size={14}
+                  strokeWidth={2}
+                  className={`transition-transform ${
+                    activeDropdown === 'language-mobile' ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              {activeDropdown === 'language-mobile' && (
+                <div className="bg-gray-50">
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        i18n.changeLanguage(lang.code);
+                        setActiveDropdown(null);
+                      }}
+                      className={`w-full text-left px-8 py-2 text-sm transition-colors ${
+                        i18n.language === lang.code 
+                          ? 'text-gray-900 font-medium bg-gray-100' 
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                    >
+                      {lang.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Contact Button */}
+            <div className="pt-2">
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="w-full flex items-center justify-center space-x-2 px-6 py-3 text-sm font-medium text-white transition-all duration-200 rounded-button bg-gradient-blue shadow-button"
+              >
+                <ContactIcon />
+                <span>Contact Us</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
