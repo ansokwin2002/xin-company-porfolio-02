@@ -7,7 +7,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = () => {
   return (
     // Moved footer JSX here
-    <footer className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 text-white py-16 overflow-hidden">
+    <footer className="relative mt-20 bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 text-white py-16 overflow-hidden">
       {/* Background Pattern/Effects */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>

@@ -132,8 +132,8 @@ const ServicesShowcase: React.FC = () => {
   return (
     <div className="bg-gradient-to-b from-gray-50 to-white">
       {/* How We Help Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -170,7 +170,7 @@ const ServicesShowcase: React.FC = () => {
 
       {/* What We Promise Section */}
       <section className="bg-gradient-to-br from-blue-500 to-blue-600 py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Content */}
             <div className="text-white space-y-8">

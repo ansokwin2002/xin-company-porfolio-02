@@ -39,14 +39,9 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-white">
       {/* Background Image - Smaller size */}
-      <div 
-        className="absolute inset-0 bg-no-repeat"
-        style={{ 
-          backgroundImage: `url(/assets/images/image_hero.png)`,
-          backgroundPosition: 'center 60%',
-          backgroundSize: 'auto 55%', // Made smaller - was 70%, now 55%
-          zIndex: 0
-        }}
+      <div
+        className={`absolute inset-0 bg-no-repeat bg-[url('/assets/images/image_hero.png')] bg-hero-pos-sm sm:bg-hero-pos-md bg-hero-sm sm:bg-hero-md ${showAnimations ? 'animate-zoom-in-out' : ''}`}
+        style={{ zIndex: 0 }}
       />
 
       {/* Main Content Container */}

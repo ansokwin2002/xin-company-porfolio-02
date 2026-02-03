@@ -7,13 +7,9 @@ import { ThemeProvider } from './contexts/ThemeContext';
 
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
-import About from './components/About';
-import Portfolio from './components/Portfolio';
-import Services from './components/Services';
-import FAQ from './components/FAQ';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
 import ServicesShowcase from './components/ServicesShowcase';
+import OurClients from './components/OurClients';
+import StartYourNextBigProject from './components/StartYourNextBigProject';
 import TelegramLink from './components/TelegramLink';
 import Footer from './components/Footer';
 
@@ -33,6 +29,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations, scrollToSection
     <Navigation />
     <Hero showAnimations={showAnimations} />
     <ServicesShowcase />
+    <OurClients/>
+    <StartYourNextBigProject/>
     <TelegramLink />
     <ScrollToTop />
     <Footer />
