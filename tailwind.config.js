@@ -27,6 +27,15 @@ export default {
       },
       backgroundImage: {
         'gradient-blue': 'linear-gradient(90deg, var(--button-gradient-start) 0%, var(--button-gradient-end) 100%)',
+        'gradient-gold': 'linear-gradient(90deg, #FACC15 0%, #D97706 100%)', // from-yellow-400 to-amber-700
+      },
+      backgroundSize: {
+        'hero-sm': 'auto 40%',
+        'hero-md': 'auto 55%',
+      },
+      backgroundPosition: {
+        'hero-pos-sm': 'center 80%',
+        'hero-pos-md': 'center 60%',
       },
       boxShadow: {
         'button': 'var(--button-shadow-offset-x) var(--button-shadow-offset-y) var(--button-shadow-blur-radius) var(--button-shadow-color)',
