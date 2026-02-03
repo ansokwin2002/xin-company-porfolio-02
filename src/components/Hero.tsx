@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
-import { Fade } from 'react-awesome-reveal';
 
 const countries = [
   { code: 'kh', name: 'Cambodia', dial: '+855' },
@@ -22,9 +21,36 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  // --- TYPEWRITER LOGIC ---
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+  const words = ["Digital Products", "Mobile Apps", "AI Automation", "Web Platforms"];
+
+  useEffect(() => {
+    const handleType = () => {
+      const i = loopNum % words.length;
+      const fullText = words[i];
+
+      setText(isDeleting 
+        ? fullText.substring(0, text.length - 1) 
+        : fullText.substring(0, text.length + 1)
+      );
+
+      setTypingSpeed(isDeleting ? 70 : 150);
+
+      if (!isDeleting && text === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+      }
+    };
+
+    const timer = setTimeout(handleType, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed]);
 
   const scrollToWork = () => {
     const section = document.getElementById('portfolio');
@@ -33,9 +59,9 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-white">
-      {/* Background Image - Original */}
+      {/* Background Image - Faster Zoom (8s) */}
       <div
-        className={`absolute inset-0 bg-no-repeat bg-[url('/assets/images/image_hero.png')] bg-hero-pos-sm sm:bg-hero-pos-md bg-hero-sm sm:bg-hero-md ${showAnimations ? 'animate-zoom-in-out' : ''}`}
+        className={`absolute inset-0 bg-no-repeat bg-[url('/assets/images/image_hero.png')] bg-hero-pos-sm sm:bg-hero-pos-md bg-hero-sm sm:bg-hero-md animate-fast-zoom`}
         style={{ zIndex: 0 }}
       />
 
@@ -43,7 +69,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
         <div className="max-w-7xl mx-auto w-full px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             
-            {/* Left Column - Original Style */}
+            {/* Left Column - Your Original Content */}
             <div className="lg:col-span-3 space-y-8">
               <div 
                 className="space-y-8"
@@ -66,8 +92,11 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
 
                 <div className="space-y-4">
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-gray-900">
-                    Turn Your Ideas into Smart, High-Performance{' '}
-                    <span className="text-blue-500">Digital Products</span>
+                    Turn Your Ideas into Smart, High-Performance<br />
+                    <span className="text-blue-500 min-w-[300px] inline-block">
+                      {text}
+                      <span className="ml-1 border-r-4 border-blue-500 animate-blink"></span>
+                    </span>
                   </h1>
                   <p className="text-lg lg:text-xl text-gray-600 max-w-2xl">
                     From mobile apps to AI automation, web platforms, and UX design, we create solutions that scale, engage, and deliver measurable results.
@@ -84,7 +113,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
               </div>
             </div>
 
-            {/* Right Column - Original Form Box */}
+            {/* Right Column - Your Original Form */}
             <div className="lg:col-span-2">
               <div 
                 className="rounded-3xl p-8 shadow-2xl bg-blue-100/80 backdrop-blur-sm"
@@ -100,19 +129,16 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                   </div>
 
                   <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                    {/* Name */}
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-900">Your Name? <span className="text-red-500">*</span></label>
                       <input type="text" name="name" placeholder="Enter your full name" required className="w-full px-4 py-3 rounded-xl border bg-white/90 border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
-                    {/* Email */}
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-900">Your Work Email? <span className="text-red-500">*</span></label>
                       <input type="email" name="email" placeholder="Enter your Work email" required className="w-full px-4 py-3 rounded-xl border bg-white/90 border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
-                    {/* Mobile with Hover Flag Selector */}
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-900">Your Mobile? <span className="text-red-500">*</span></label>
                       <div className="flex gap-2">
@@ -142,7 +168,6 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                       </div>
                     </div>
 
-                    {/* Budget with Hover Selector */}
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-900">Your Budget? <span className="text-red-500">*</span></label>
                       <div className="relative group">
@@ -182,9 +207,23 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
       </div>
 
       <style>{`
+        @keyframes fastZoom {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.15); }
+          100% { transform: scale(1); }
+        }
+        .animate-fast-zoom {
+          animation: fastZoom 8s ease-in-out infinite;
+        }
         @keyframes modernPop {
           0% { opacity: 0; transform: scale(0.8) translateY(50px) rotateX(-10deg); }
           100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); }
+        }
+        @keyframes blink {
+          50% { border-color: transparent; }
+        }
+        .animate-blink {
+          animation: blink 0.8s step-end infinite;
         }
       `}</style>
     </section>
