@@ -41,7 +41,7 @@ const StartYourNextBigProject: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white text-slate-900 overflow-hidden relative">
+    <section ref={sectionRef} className="py-20 bg-white text-slate-900 overflow-hidden relative">
       {/* Optional: Add the same background graphic as hero if desired, 
           currently kept clean white as per original structure */}
       
@@ -50,7 +50,7 @@ const StartYourNextBigProject: React.FC = () => {
         {/* Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">
-            Start Your Next <span className="text-blue-500">Big Project</span>
+            Start Your Next <span className="bg-gradient-blue bg-clip-text text-transparent">Big Project</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
             Got an idea? Tell us about it, and we'll bring it to life.

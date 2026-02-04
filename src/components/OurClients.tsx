@@ -62,10 +62,10 @@ const OurClients: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-white select-none">
+    <section className="pt-20 bg-white">
       <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
         <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
-          OUR <span className="text-blue-500">CLIENTS</span>
+          OUR <span className="bg-gradient-blue bg-clip-text text-transparent">CLIENTS</span>
         </h2>
       </div>
 
