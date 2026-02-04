@@ -17,7 +17,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', budget: '', mobile: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', budget: '', mobile: '', details: '' });
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [isBudgetOpen, setIsBudgetOpen] = useState(false);
   const [isCountryOpen, setIsCountryOpen] = useState(false);
@@ -60,7 +60,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
     toast.success('Your quote request has been sent successfully!');
 
     // Reset form fields
-    setFormData({ name: '', email: '', budget: '', mobile: '' });
+    setFormData({ name: '', email: '', budget: '', mobile: '', details: '' });
   };
 
   return (
@@ -122,34 +122,36 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
 
                   <form className="space-y-8 mt-8" onSubmit={handleSubmit}>
                     
-                    {/* 1. Floating Name */}
-                    <div className="relative group">
-                      <input 
-                        type="text" 
-                        required 
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
-                        placeholder=" " 
-                      />
-                      <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                        Your Name *
-                      </label>
-                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      {/* 1. Floating Name */}
+                      <div className="relative group">
+                        <input 
+                          type="text" 
+                          required 
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
+                          placeholder=" " 
+                        />
+                        <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                          Your Name *
+                        </label>
+                      </div>
 
-                    {/* 2. Floating Email */}
-                    <div className="relative group">
-                      <input 
-                        type="email" 
-                        required 
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
-                        placeholder=" " 
-                      />
-                      <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                        Work Email *
-                      </label>
+                      {/* 2. Floating Email */}
+                      <div className="relative group">
+                        <input 
+                          type="email" 
+                          required 
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
+                          placeholder=" " 
+                        />
+                        <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                          Work Email *
+                        </label>
+                      </div>
                     </div>
 
                     {/* 3. Floating Mobile Number (Redesigned to match Name/Email style) */}
@@ -218,6 +220,20 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                           ))}
                         </div>
                       </div>
+                    </div>
+
+                    {/* 5. Floating Project Details Textarea */}
+                    <div className="relative group">
+                      <textarea
+                        value={formData.details}
+                        onChange={(e) => setFormData({...formData, details: e.target.value})}
+                        className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent resize-y min-h-[60px]"
+                        placeholder=" "
+                        rows={3}
+                      ></textarea>
+                      <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                        Project Details
+                      </label>
                     </div>
 
                     {/* ORIGINAL THEME BUTTON */}

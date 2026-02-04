@@ -239,11 +239,9 @@ const StartYourNextBigProject: React.FC = () => {
               {/* 4. Textarea - Hero Style Adaptation */}
               <div className="relative group">
                 <textarea 
-                  rows={2} 
-                  required
                   value={formData.details}
                   onChange={(e) => setFormData({...formData, details: e.target.value})}
-                  className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent resize-none"
+                  className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent resize-y min-h-[80px] overflow-y-auto"
                   placeholder=" "
                 ></textarea>
                 <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
