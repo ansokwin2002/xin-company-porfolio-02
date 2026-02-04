@@ -92,7 +92,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                 <div className="space-y-4">
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-gray-900">
                     Turn Your Ideas into Smart, High-Performance<br />
-                    <span className="text-blue-500 min-w-[300px] inline-block">
+                    <span className="bg-gradient-blue bg-clip-text text-transparent min-w-[300px] inline-block">
                       {text}<span className="ml-1 border-r-4 border-blue-500 animate-blink"></span>
                     </span>
                   </h1>

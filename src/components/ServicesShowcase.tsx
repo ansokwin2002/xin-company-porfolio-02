@@ -36,12 +36,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ IconComponent, title, descrip
     >
       <div className="relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 h-full border border-gray-100 overflow-hidden group-hover:border-blue-100">
         <div className="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-blue-100 via-blue-50 to-transparent rounded-bl-full z-0 pointer-events-none transition-transform duration-500 ease-out group-hover:scale-110 origin-top-right"></div>
-        <div className="absolute top-6 right-6 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30 z-10 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12">
-          <span className="text-white font-bold text-sm">{number}</span>
+        <div className="absolute top-6 right-6 w-12 h-12 bg-gradient-blue rounded-full flex items-center justify-center shadow-lg shadow-button z-10 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12">
+          <span className="font-bold text-sm text-white">{number}</span>
         </div>
         <div className="relative z-10 mb-6">
-          <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
-            <IconComponent className="w-10 h-10 text-blue-500 group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
+          <div className="w-20 h-20 bg-gray-100 rounded-2xl flex items-center justify-center group-hover:bg-gradient-blue transition-colors duration-300">
+            <IconComponent className="w-10 h-10 group-hover:stroke-white transition-colors duration-300" stroke="url(#blueGradient)" strokeWidth={1.5} />
           </div>
         </div>
         <div className="relative z-10">
@@ -89,7 +89,7 @@ const PromiseCard: React.FC<PromiseCardProps> = ({ IconComponent, title, number,
       style={{ transitionDelay: `${index * 0.1}s` }}
     >
       {/* Icon Wrapper: Now rotates and scales on hover */}
-      <div className="w-14 h-14 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-200 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-blue-500/50">
+      <div className="w-14 h-14 bg-gradient-blue rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-button transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
         <IconComponent className="w-7 h-7 text-white" strokeWidth={2} />
       </div>
 
@@ -97,10 +97,10 @@ const PromiseCard: React.FC<PromiseCardProps> = ({ IconComponent, title, number,
         {/* Number and Line Layout */}
         <div className="flex items-center mb-1">
             {/* Number: Turns blue on hover */}
-            <span className="text-xs font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-600">{number}</span>
+            <span className="text-xs font-bold text-gray-900 transition-colors duration-300 group-hover:bg-gradient-blue group-hover:bg-clip-text group-hover:text-transparent">{number}</span>
             
             {/* Line: Expands thickness and changes color on hover */}
-            <div className="h-[1px] bg-blue-100 flex-1 ml-3 rounded-full transition-all duration-300 group-hover:bg-blue-500 group-hover:h-[2px]"></div>
+            <div className="h-[1px] bg-gray-200 flex-1 ml-3 rounded-full transition-all duration-300 group-hover:bg-gradient-blue group-hover:h-[2px]"></div>
         </div>
         
         {/* Title */}
@@ -139,7 +139,7 @@ const ServicesShowcase: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              How we help <span className="text-blue-500">Businesses Grow?</span>
+              How we help <span className="bg-gradient-blue bg-clip-text text-transparent">Businesses Grow?</span>
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
               Discover our comprehensive suite of services designed to elevate your digital presence.
@@ -153,7 +153,7 @@ const ServicesShowcase: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-blue-600 shadow-lg shadow-blue-500/30 px-8 py-3 text-sm font-bold text-white transition-all duration-200 rounded-full inline-flex items-center gap-2 hover:shadow-xl hover:scale-105 hover:bg-blue-700">
+            <button className="bg-gradient-blue shadow-button text-white px-8 py-3 text-sm font-bold transition-all duration-200 rounded-full inline-flex items-center gap-2 hover:scale-105">
               Let's Discuss Your Project <ArrowRight size={20} />
             </button>
           </div>
@@ -161,7 +161,7 @@ const ServicesShowcase: React.FC = () => {
       </section>
 
       {/* NEW PROMISE SECTION MATCHING IMAGE */}
-      <section className="bg-[#3b82f6] py-20">
+      <section className="bg-gradient-blue py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             
@@ -200,9 +200,9 @@ const ServicesShowcase: React.FC = () => {
               </div>
 
               {/* White Button */}
-              <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-gray-50 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-3 w-full md:w-auto justify-center group">
-                Let's Build Together <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" strokeWidth={3} />
-              </button>
+                            <button className="bg-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-gray-50 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-3 w-full md:w-auto justify-center group">
+                              <span className="bg-gradient-blue bg-clip-text text-transparent">Let's Build Together</span> <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" stroke="url(#blueGradient)" strokeWidth={3} />
+                            </button>
             </div>
 
           </div>
