@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
+import CountingNumber from './CountingNumber';
 
 const countries = [
   { code: 'kh', name: 'Cambodia', dial: '+855' },
@@ -78,13 +79,13 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                 {/* Original Theme Badges */}
                 <div className="flex flex-wrap gap-3">
                   <div className="flex items-center space-x-2 bg-gradient-blue text-white px-4 py-2 rounded-button text-sm font-medium shadow-button">
-                    <span>🏆</span><span>12+ Years</span>
+                    <span>🏆</span><CountingNumber targetValue={12} suffix="+ Years" />
                   </div>
                   <div className="flex items-center space-x-2 bg-gradient-blue text-white px-4 py-2 rounded-button text-sm font-medium shadow-button">
-                    <span>📦</span><span>100+ Projects</span>
+                    <span>📦</span><CountingNumber targetValue={100} suffix="+ Projects" />
                   </div>
                   <div className="flex items-center space-x-2 bg-gradient-blue text-white px-4 py-2 rounded-button text-sm font-medium shadow-button">
-                    <span>⭐</span><span>4.9 Rating</span>
+                    <span>⭐</span><CountingNumber targetValue={4.9} decimalPlaces={1} suffix=" Rating" />
                   </div>
                 </div>
 

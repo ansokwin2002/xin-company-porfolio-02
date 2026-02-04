@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Palette, Smartphone, Monitor, TrendingUp, Lightbulb, Cloud, MessageCircle, Settings, Briefcase, Clock, DollarSign, Handshake, UserCircle, MessageSquare, Target } from 'lucide-react';
+import CountingNumber from './CountingNumber';
 
 // --- Service Card Component (Unchanged) ---
 interface ServiceCardProps {
@@ -177,8 +178,10 @@ const ServicesShowcase: React.FC = () => {
               </div>
               
               <div className="flex gap-16 pt-4">
+
+
                 <div>
-                  <div className="text-5xl font-black text-white mb-1">100%</div>
+                  <CountingNumber targetValue={100} suffix="%" className="text-5xl font-black text-white mb-1" />
                   <p className="text-blue-100 text-xs uppercase tracking-wider font-semibold">Satisfaction Rate</p>
                 </div>
                 <div>
