@@ -160,8 +160,8 @@ const ServicesShowcase: React.FC = () => {
       </section>
 
       {/* NEW PROMISE SECTION MATCHING IMAGE */}
-      <section className="bg-[#3b82f6] py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-[#3b82f6] py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             
             {/* Left Content */}
