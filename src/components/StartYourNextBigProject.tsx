@@ -62,7 +62,7 @@ const StartYourNextBigProject: React.FC = () => {
           {/* Left Column: Info Cards (kept consistent with previous design) */}
           <div className={`lg:col-span-5 space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50">
+            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="flex items-start gap-4 mb-8">
                 <img src="https://flagcdn.com/kh.svg" alt="KH" className="w-10 h-7 object-cover rounded-md shadow-sm" />
                 <div>
@@ -84,7 +84,7 @@ const StartYourNextBigProject: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-gray-900 rounded-3xl p-7 flex items-center justify-between text-white shadow-2xl">
+            <div className="bg-gray-900 rounded-3xl p-7 flex items-center justify-between text-white shadow-sm hover:shadow-xl transition-all duration-300">
               <span className="font-bold uppercase tracking-widest ml-2 text-sm">Follow Us</span>
               <div className="flex gap-3">
                 {[FaFacebookF, FaTiktok, FaYoutube].map((Icon, idx) => (
@@ -96,7 +96,7 @@ const StartYourNextBigProject: React.FC = () => {
             </div>
 
             <a href="https://t.me/yourusername" target="_blank" rel="noreferrer" 
-               className="block bg-gradient-to-r from-blue-500 to-blue-600 rounded-3xl p-7 text-white group shadow-lg shadow-blue-200 transition-transform active:scale-[0.98]">
+               className="block bg-gradient-to-r from-blue-500 to-blue-600 rounded-3xl p-7 text-white group shadow-sm hover:shadow-xl transition-all duration-300 active:scale-[0.98]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
@@ -113,10 +113,9 @@ const StartYourNextBigProject: React.FC = () => {
           </div>
 
           {/* Right Column: Mirror Glass Form (Styled exactly like Hero) */}
-          <div 
-            className={`lg:col-span-7 rounded-3xl p-8 md:p-12 shadow-2xl bg-blue-100/30 backdrop-blur-md border border-white/40 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-          >
-            <div className="text-left mb-10">
+                      <div 
+                        className={`lg:col-span-7 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl transition-all duration-300 bg-blue-100/30 backdrop-blur-md border border-white/40 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                      >            <div className="text-left mb-10">
               <h2 className="text-2xl font-bold text-gray-900">Send Us a Message</h2>
               <p className="text-sm mt-2 text-gray-700">We'll get back to you within 24 hours</p>
             </div>
@@ -199,8 +198,8 @@ const StartYourNextBigProject: React.FC = () => {
               </div>
 
               {/* 5. Button - Exact Match to Hero (Gradient Blue) */}
-              <button type="submit" className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-5 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]">
-                <span>Get Quote</span> <FaArrowRight size={18} />
+              <button type="submit" className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-[#00ba2b] to-[#22c55e] text-white px-6 py-5 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                <span>Send Message</span> <FaArrowRight size={18} />
               </button>
             </form>
           </div>
