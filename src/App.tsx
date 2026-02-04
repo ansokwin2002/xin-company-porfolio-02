@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'sonner'; // Import Toaster
 import LoadingScreen from './components/LoadingScreen';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
@@ -69,6 +70,7 @@ function App() {
 
   return (
     <ThemeProvider>
+      <Toaster richColors position="top-center" /> {/* Add Toaster component from sonner */}
       <div className="relative">
         <BrowserRouter>
           <Routes>

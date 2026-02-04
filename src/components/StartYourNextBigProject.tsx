@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaFacebookF, FaTiktok, FaYoutube, FaTelegramPlane, FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import { MdEmail, MdPhone } from 'react-icons/md';
+import { toast } from 'sonner';
 
 const StartYourNextBigProject: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedBudget, setSelectedBudget] = useState('');
-  const sectionRef = useRef<HTMLDivElement>(null);
+  
+  // Form State
+  const [formData, setFormData] = useState({ name: '', email: '', details: '' });
 
+  const sectionRef = useRef<HTMLDivElement>(null);
   const budgetOptions = ['$1,000 - $5,000', '$5,000 - $10,000', '$10,000 - $50,000', '$50,000+'];
 
   useEffect(() => {
@@ -23,11 +27,27 @@ const StartYourNextBigProject: React.FC = () => {
     setIsDropdownOpen(false);
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate API call or form submission
+    console.log('Form Submitted:', { ...formData, selectedBudget });
+
+    // Show success toast
+    toast.success('Your request has been sent successfully!');
+
+    // Reset form fields
+    setFormData({ name: '', email: '', details: '' });
+    setSelectedBudget('');
+  };
+
   return (
-    <section ref={sectionRef} className="py-24 bg-white text-slate-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section ref={sectionRef} className="py-24 bg-white text-slate-900 overflow-hidden relative">
+      {/* Optional: Add the same background graphic as hero if desired, 
+          currently kept clean white as per original structure */}
+      
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
-        {/* Header - Consistent with Hero Spacing */}
+        {/* Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">
             Start Your Next <span className="text-blue-500">Big Project</span>
@@ -37,9 +57,9 @@ const StartYourNextBigProject: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Column: Info Cards (Using rounded-3xl as per your Hero container) */}
+          {/* Left Column: Info Cards (kept consistent with previous design) */}
           <div className={`lg:col-span-5 space-y-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             
             <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-xl shadow-gray-200/50">
@@ -92,45 +112,70 @@ const StartYourNextBigProject: React.FC = () => {
             </a>
           </div>
 
-          {/* Right Column: Form (Using rounded-3xl and rounded-xl for internal inputs) */}
-          <div className={`lg:col-span-7 bg-white border border-gray-100 rounded-3xl p-8 md:p-12 shadow-2xl shadow-gray-200/40 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h3 className="text-xl font-bold text-gray-900 mb-12">Send Us a Message</h3>
+          {/* Right Column: Mirror Glass Form (Styled exactly like Hero) */}
+          <div 
+            className={`lg:col-span-7 rounded-3xl p-8 md:p-12 shadow-2xl bg-blue-100/30 backdrop-blur-md border border-white/40 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          >
+            <div className="text-left mb-10">
+              <h2 className="text-2xl font-bold text-gray-900">Send Us a Message</h2>
+              <p className="text-sm mt-2 text-gray-700">We'll get back to you within 24 hours</p>
+            </div>
             
-            <form className="space-y-10" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Smooth Floating Input: Name */}
+            <form className="space-y-8" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                {/* 1. Name Input - Hero Style */}
                 <div className="relative group">
-                  <input type="text" required className="w-full bg-transparent border-b-2 border-gray-200 py-3 focus:outline-none focus:border-blue-500 transition-colors peer font-bold text-gray-800 placeholder-transparent" placeholder=" " />
-                  <label className="absolute left-0 top-3 text-gray-400 pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left transform peer-focus:-translate-y-7 peer-focus:scale-[0.85] peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:-translate-y-7 peer-[:not(:placeholder-shown)]:scale-[0.85] uppercase font-black tracking-widest text-[10px]">Your Name *</label>
+                  <input 
+                    type="text" 
+                    required 
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
+                    placeholder=" " 
+                  />
+                  <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                    Your Name *
+                  </label>
                 </div>
 
-                {/* Smooth Floating Input: Email */}
+                {/* 2. Email Input - Hero Style */}
                 <div className="relative group">
-                  <input type="email" required className="w-full bg-transparent border-b-2 border-gray-200 py-3 focus:outline-none focus:border-blue-500 transition-colors peer font-bold text-gray-800 placeholder-transparent" placeholder=" " />
-                  <label className="absolute left-0 top-3 text-gray-400 pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left transform peer-focus:-translate-y-7 peer-focus:scale-[0.85] peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:-translate-y-7 peer-[:not(:placeholder-shown)]:scale-[0.85] uppercase font-black tracking-widest text-[10px]">Work Email *</label>
+                  <input 
+                    type="email" 
+                    required 
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
+                    placeholder=" " 
+                  />
+                  <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                    Work Email *
+                  </label>
                 </div>
               </div>
 
-              {/* STABLE HOVER DROPDOWN (Matching rounded-xl) */}
-              <div className="relative" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
-                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 mb-3 block">Project Budget *</label>
-                
-                <div className={`w-full bg-gray-50 border border-gray-100 rounded-xl px-5 py-4 flex items-center justify-between cursor-pointer transition-all duration-300 ${isDropdownOpen ? 'bg-white border-blue-200 ring-4 ring-blue-500/5 shadow-md' : ''}`}>
-                  <span className={`font-bold transition-none ${selectedBudget === '' ? 'text-gray-300' : 'text-gray-900'}`}>
-                    {selectedBudget || 'Select your budget range'}
+              {/* 3. Budget Dropdown - Hero Style (Border Bottom) */}
+              <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
+                <div className="w-full py-3 flex items-center justify-between cursor-pointer">
+                  <span className={`font-bold transition-colors ${selectedBudget ? 'text-gray-900' : 'text-transparent'}`}>
+                    {selectedBudget || "Placeholder"} 
                   </span>
-                  <FaChevronDown className={`text-blue-500 transition-transform duration-500 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  <FaChevronDown size={14} className={`text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                 </div>
                 
-                {/* Bridge Zone + Dropdown Menu */}
-                <div className={`absolute left-0 w-full pt-1 z-50 transition-all duration-300 ease-out ${isDropdownOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                {/* Floating Label Logic */}
+                <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
+                  ${selectedBudget || isDropdownOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
+                `}>
+                  Project Budget *
+                </label>
+
+                {/* Dropdown Options */}
+                <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isDropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
                   <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
                     {budgetOptions.map((opt) => (
-                      <div 
-                        key={opt} 
-                        onClick={() => handleSelect(opt)}
-                        className="px-6 py-4 hover:bg-blue-500 hover:text-white transition-colors duration-150 cursor-pointer text-sm font-bold text-gray-600"
-                      >
+                      <div key={opt} onClick={() => handleSelect(opt)} className="px-6 py-4 hover:bg-blue-50 cursor-pointer text-sm font-bold text-gray-700">
                         {opt}
                       </div>
                     ))}
@@ -138,18 +183,28 @@ const StartYourNextBigProject: React.FC = () => {
                 </div>
               </div>
 
-              {/* Smooth Floating Textarea */}
+              {/* 4. Textarea - Hero Style Adaptation */}
               <div className="relative group">
-                <textarea rows={2} className="w-full bg-transparent border-b-2 border-gray-200 py-3 focus:outline-none focus:border-blue-500 transition-colors peer resize-none font-bold text-gray-800 placeholder-transparent" placeholder=" "></textarea>
-                <label className="absolute left-0 top-3 text-gray-400 pointer-events-none transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-left transform peer-focus:-translate-y-7 peer-focus:scale-[0.85] peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:-translate-y-7 peer-[:not(:placeholder-shown)]:scale-[0.85] uppercase font-black tracking-widest text-[10px]">Project Details</label>
+                <textarea 
+                  rows={2} 
+                  required
+                  value={formData.details}
+                  onChange={(e) => setFormData({...formData, details: e.target.value})}
+                  className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent resize-none"
+                  placeholder=" "
+                ></textarea>
+                <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                  Project Details
+                </label>
               </div>
 
-              {/* Button matching your Hero rounded-button (xl) and shadow */}
-              <button type="submit" className="w-full group bg-blue-600 text-white py-5 rounded-xl font-bold text-lg tracking-widest flex items-center justify-center gap-3 hover:bg-blue-700 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 active:scale-[0.98] uppercase shadow-lg shadow-blue-500/20">
-                Get Quote <FaArrowRight className="group-hover:translate-x-2 transition-transform duration-300" size={20} />
+              {/* 5. Button - Exact Match to Hero (Gradient Blue) */}
+              <button type="submit" className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-5 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]">
+                <span>Get Quote</span> <FaArrowRight size={18} />
               </button>
             </form>
           </div>
+
         </div>
       </div>
     </section>

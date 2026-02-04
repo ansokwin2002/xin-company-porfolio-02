@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
+import { toast } from 'sonner';
 
 const countries = [
   { code: 'kh', name: 'Cambodia', dial: '+855' },
@@ -47,6 +48,18 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const scrollToWork = () => {
     const section = document.getElementById('portfolio');
     if (section) section.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate API call
+    console.log('Form Submitted from Hero:', { ...formData, country: selectedCountry.dial });
+
+    // Show success toast
+    toast.success('Your quote request has been sent successfully!');
+
+    // Reset form fields
+    setFormData({ name: '', email: '', budget: '', mobile: '' });
   };
 
   return (
@@ -106,7 +119,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                     <p className="text-sm mt-2 text-gray-700">Tell us about your project</p>
                   </div>
 
-                  <form className="space-y-8 mt-8" onSubmit={(e) => e.preventDefault()}>
+                  <form className="space-y-8 mt-8" onSubmit={handleSubmit}>
                     
                     {/* 1. Floating Name */}
                     <div className="relative group">
