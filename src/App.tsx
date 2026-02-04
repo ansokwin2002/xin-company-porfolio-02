@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner'; // Import Toaster
 import LoadingScreen from './components/LoadingScreen';
 import ScrollToTop from './components/ScrollToTop';
+import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
 import CustomCursor from './components/CustomCursor';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -13,6 +14,7 @@ import OurClients from './components/OurClients';
 import StartYourNextBigProject from './components/StartYourNextBigProject';
 import TelegramLink from './components/TelegramLink';
 import Footer from './components/Footer';
+import CreativeDesignsUIUX from './pages/CreativeDesignsUIUX';
 
 // Admin Components
 import Login from './components/admin/Login';
@@ -33,7 +35,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations, scrollToSection
     <OurClients/>
     <StartYourNextBigProject/>
     <TelegramLink />
-    <ScrollToTop />
+    <ScrollToTop /> {/* Keep the button component */}
     <Footer />
   </div>
 );
@@ -73,11 +75,13 @@ function App() {
       <Toaster richColors position="top-center" /> {/* Add Toaster component from sonner */}
       <div className="relative">
         <BrowserRouter>
+          <ScrollToTopOnRouteChange /> {/* New component to handle scroll to top on route change */}
           <Routes>
             <Route path="/" element={<MainLayout showAnimations={showAnimations} scrollToSection={scrollToSection} />} />
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin/register" element={<Register />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/creative-designs-ui-ux" element={<CreativeDesignsUIUX />} />
           </Routes>
         </BrowserRouter>
       </div>

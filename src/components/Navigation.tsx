@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const ContactIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 28 28" fill="none">
@@ -31,6 +32,7 @@ const Navigation: React.FC = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const navItems = [
     { id: 'home', label: 'Home', type: 'link' },
@@ -69,7 +71,7 @@ const Navigation: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           
           {/* Logo */}
-          <div className="flex flex-col cursor-pointer" onClick={() => scrollToSection('home')}>
+          <div className="flex flex-col cursor-pointer" onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); }}>
             <div className="relative">
               <span className="font-bold text-2xl text-gold">QıYOU</span>
               <span className="absolute w-1.5 h-1.5 rounded-full bg-red-500" style={{ top: '3px', left: '17.5px' }}></span>
@@ -82,7 +84,7 @@ const Navigation: React.FC = () => {
             {navItems.map((item) => (
               <div key={item.id} className="relative group h-full flex items-center">
                 {item.type === 'link' ? (
-                  <button onClick={() => scrollToSection(item.id)} className={`text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
+                  <button onClick={() => { if (item.id === 'home') { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); } else { scrollToSection(item.id); } }} className={`text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
                     {item.label}
                   </button>
                 ) : (
@@ -149,7 +151,7 @@ const Navigation: React.FC = () => {
           {navItems.map((item) => (
             <div key={item.id}>
               {item.type === 'link' ? (
-                <button onClick={() => scrollToSection(item.id)} className="block w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium">
+                <button onClick={() => { if (item.id === 'home') { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); } else { scrollToSection(item.id); } }} className="block w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium">
                   {item.label}
                 </button>
               ) : (
