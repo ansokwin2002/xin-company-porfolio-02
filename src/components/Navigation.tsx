@@ -92,8 +92,8 @@ const Navigation: React.FC = () => {
                       <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
                     </button>
                     {/* Dropdown Menu */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all pt-1 z-50">
-                      <div className="bg-white rounded-md shadow-lg border border-gray-200 py-2 min-w-[160px]">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all pt-1 z-50">
+                      <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 w-48">
                         {item.items?.map(sub => (
                           <button key={sub.id} onClick={() => scrollToSection(sub.id)} className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 text-gray-700 hover:text-gold transition-colors">
                             {sub.label}
@@ -117,8 +117,8 @@ const Navigation: React.FC = () => {
                   <span>{getCurrentLanguage().label}</span>
                   <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
                 </button>
-                <div className="absolute top-full right-0 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all pt-1 z-50">
-                  <div className="bg-white rounded-md shadow-lg border border-gray-200 py-2 min-w-[100px]">
+                <div className="absolute top-full right-0 opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all pt-1 z-50">
+                  <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 min-w-[100px]">
                     {languages.map((lang) => (
                       <button key={lang.code} onClick={() => i18n.changeLanguage(lang.code)} className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${i18n.language === lang.code ? 'text-gold font-medium' : 'text-gray-700'}`}>
                         {lang.label}
@@ -144,8 +144,63 @@ const Navigation: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-screen opacity-100 pb-4' : 'max-h-0 opacity-0'}`}>
-         {/* ... (Keeping your mobile logic as is) */}
+      <div className={`lg:hidden transition-all duration-500 overflow-hidden ${isOpen ? 'max-h-screen pb-4' : 'max-h-0'}`}>
+        <div className="px-6 space-y-4">
+          {navItems.map((item) => (
+            <div key={item.id}>
+              {item.type === 'link' ? (
+                <button onClick={() => scrollToSection(item.id)} className="block w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium">
+                  {item.label}
+                </button>
+              ) : (
+                <div>
+                  <button 
+                    onClick={() => setActiveDropdown(activeDropdown === item.id ? null : item.id)}
+                    className="flex items-center justify-between w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium"
+                  >
+                    <span>{item.label}</span>
+                    <ChevronDown size={18} className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`transition-all duration-300 ease-out overflow-hidden ${activeDropdown === item.id ? 'max-h-screen opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}`}>
+                    <div className="pl-4 border-l border-gray-200 ml-2 py-1 space-y-1">
+                      {item.items?.map(sub => (
+                        <button key={sub.id} onClick={() => scrollToSection(sub.id)} className="block w-full text-left py-2 text-sm text-gray-600 hover:text-gold">
+                          {sub.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* Mobile Language Switcher */}
+          <div className="pt-4 border-t border-gray-100">
+            <button 
+              onClick={() => setActiveDropdown(activeDropdown === 'languages' ? null : 'languages')}
+              className="flex items-center justify-between w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium"
+            >
+              <span>{getCurrentLanguage().label}</span>
+              <ChevronDown size={18} className={`transition-transform ${activeDropdown === 'languages' ? 'rotate-180' : ''}`} />
+            </button>
+            <div className={`transition-all duration-300 ease-out overflow-hidden ${activeDropdown === 'languages' ? 'max-h-screen opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}`}>
+              <div className="pl-4 border-l border-gray-200 ml-2 py-1 space-y-1">
+                {languages.map((lang) => (
+                  <button key={lang.code} onClick={() => i18n.changeLanguage(lang.code)} className={`block w-full text-left py-2 text-sm ${i18n.language === lang.code ? 'text-gold font-medium' : 'text-gray-600 hover:text-gold'}`}>
+                    {lang.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Contact Button */}
+          <button onClick={() => scrollToSection('contact')} className="w-full flex items-center justify-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-transform mt-4">
+            <ContactIcon />
+            <span>Contact Us</span>
+          </button>
+        </div>
       </div>
     </nav>
   );
