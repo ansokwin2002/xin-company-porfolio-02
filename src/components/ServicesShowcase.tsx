@@ -1,51 +1,61 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Palette, Smartphone, Monitor, TrendingUp, Lightbulb, Cloud, MessageCircle, Settings, Briefcase, Clock, DollarSign, Handshake, UserCircle, MessageSquare, Target } from 'lucide-react';
 
+// --- Service Card Component (Unchanged) ---
 interface ServiceCardProps {
   IconComponent: React.ElementType;
   title: string;
   description: string;
   number: string;
-  index: number; // Added index for staggered animation
+  index: number;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ IconComponent, title, description, number, index }) => (
-  <div 
-    className="relative group h-full"
-    style={{ 
-      // Staggered animation: each card waits 0.1s longer than the previous one
-      animation: `modernPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s forwards`,
-      opacity: 0 
-    }}
-  >
-    <div className="absolute -top-8 -right-8 w-40 h-40 bg-gradient-to-bl from-blue-300 via-blue-200 to-transparent rounded-full blur-3xl opacity-70 pointer-events-none"></div>
-    
-    <div className="relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 h-full border border-gray-100 overflow-visible">
-      <div className="absolute top-6 right-6 w-16 h-16 bg-gradient-blue rounded-full flex items-center justify-center shadow-lg z-10">
-        <span className="text-white font-bold text-xl">{number}</span>
-      </div>
-      
-      <div className="mb-6">
-        <div className="w-20 h-20 bg-gradient-blue rounded-2xl flex items-center justify-center">
-          <IconComponent className="w-10 h-10 text-white" strokeWidth={2} />
+const ServiceCard: React.FC<ServiceCardProps> = ({ IconComponent, title, description, number, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+    if (cardRef.current) observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={cardRef}
+      className={`relative group h-full transition-all duration-700 ease-out ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+      }`}
+      style={{ transitionDelay: `${(index % 3) * 0.1}s` }}
+    >
+      <div className="relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 h-full border border-gray-100 overflow-hidden group-hover:border-blue-100">
+        <div className="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-blue-100 via-blue-50 to-transparent rounded-bl-full z-0 pointer-events-none transition-transform duration-500 ease-out group-hover:scale-110 origin-top-right"></div>
+        <div className="absolute top-6 right-6 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30 z-10 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12">
+          <span className="text-white font-bold text-sm">{number}</span>
+        </div>
+        <div className="relative z-10 mb-6">
+          <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center group-hover:bg-blue-500 transition-colors duration-300">
+            <IconComponent className="w-10 h-10 text-blue-500 group-hover:text-white transition-colors duration-300" strokeWidth={1.5} />
+          </div>
+        </div>
+        <div className="relative z-10">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 pr-8 leading-tight">{title}</h3>
+            <p className="text-gray-600 text-base leading-relaxed mb-6">{description}</p>
+            <a href="#" className="inline-flex items-center text-blue-500 font-semibold hover:text-blue-600 transition-colors group/link">
+            Learn More <span className="ml-1 transform group-hover/link:translate-x-1 transition-transform">→</span>
+            </a>
         </div>
       </div>
-      
-      <h3 className="text-2xl font-bold text-gray-900 mb-4 pr-12 leading-tight">
-        {title}
-      </h3>
-      <p className="text-gray-600 text-base leading-relaxed mb-6">
-        {description}
-      </p>
-      
-      <a href="#" className="inline-flex items-center text-blue-500 font-semibold hover:text-blue-600 transition-colors group">
-        Learn More 
-        <span className="ml-1 transform group-hover:translate-x-1 transition-transform">→</span>
-      </a>
     </div>
-  </div>
-);
+  );
+};
 
+// --- NEW PROMISE CARD DESIGN WITH MODERN HOVER EFFECTS ---
 interface PromiseCardProps {
   IconComponent: React.ElementType;
   title: string;
@@ -53,23 +63,51 @@ interface PromiseCardProps {
   index: number;
 }
 
-const PromiseCard: React.FC<PromiseCardProps> = ({ IconComponent, title, number, index }) => (
-  <div 
-    className="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 flex items-center gap-4"
-    style={{ 
-      animation: `modernPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.5 + index * 0.1}s forwards`,
-      opacity: 0 
-    }}
-  >
-    <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-      <IconComponent className="w-7 h-7 text-blue-500" strokeWidth={2} />
+const PromiseCard: React.FC<PromiseCardProps> = ({ IconComponent, title, number, index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+    if (cardRef.current) observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={cardRef}
+      // Added 'group' for hover states and hover:translate/shadow logic
+      className={`group bg-white rounded-xl p-4 md:p-5 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-out flex items-center gap-5 cursor-default ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+      }`}
+      style={{ transitionDelay: `${index * 0.1}s` }}
+    >
+      {/* Icon Wrapper: Now rotates and scales on hover */}
+      <div className="w-14 h-14 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-200 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-blue-500/50">
+        <IconComponent className="w-7 h-7 text-white" strokeWidth={2} />
+      </div>
+
+      <div className="flex-1">
+        {/* Number and Line Layout */}
+        <div className="flex items-center mb-1">
+            {/* Number: Turns blue on hover */}
+            <span className="text-xs font-bold text-gray-900 transition-colors duration-300 group-hover:text-blue-600">{number}</span>
+            
+            {/* Line: Expands thickness and changes color on hover */}
+            <div className="h-[1px] bg-blue-100 flex-1 ml-3 rounded-full transition-all duration-300 group-hover:bg-blue-500 group-hover:h-[2px]"></div>
+        </div>
+        
+        {/* Title */}
+        <h4 className="text-base font-extrabold text-gray-900 leading-tight transition-colors duration-300 group-hover:text-black">{title}</h4>
+      </div>
     </div>
-    <div className="flex-1">
-      <p className="text-xs text-gray-500 font-semibold mb-1">{number}</p>
-      <h4 className="text-base font-bold text-gray-900 leading-tight">{title}</h4>
-    </div>
-  </div>
-);
+  );
+};
 
 const ServicesShowcase: React.FC = () => {
   const services = [
@@ -94,15 +132,12 @@ const ServicesShowcase: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-      {/* How We Help Section */}
-      <section className="py-20">
+    <div className="bg-gray-50 overflow-hidden font-sans">
+      {/* Services Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div 
-            className="text-center mb-16"
-            style={{ animation: 'modernPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
               How we help <span className="text-blue-500">Businesses Grow?</span>
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
@@ -110,78 +145,66 @@ const ServicesShowcase: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {services.map((service, index) => (
-              <ServiceCard
-                key={index}
-                index={index}
-                IconComponent={service.IconComponent}
-                title={service.title}
-                description={service.description}
-                number={service.number}
-              />
+              <ServiceCard key={index} index={index} IconComponent={service.IconComponent} title={service.title} description={service.description} number={service.number} />
             ))}
           </div>
 
-          <div className="text-center">
-            <button className="bg-gradient-blue shadow-button px-6 py-2.5 text-sm font-medium text-white transition-all duration-200 rounded-button inline-flex items-center gap-2 hover:shadow-lg hover:scale-105">
-              Let's Discuss Your Project
-              <ArrowRight size={20} />
+          <div className="text-center mt-12">
+            <button className="bg-blue-600 shadow-lg shadow-blue-500/30 px-8 py-3 text-sm font-bold text-white transition-all duration-200 rounded-full inline-flex items-center gap-2 hover:shadow-xl hover:scale-105 hover:bg-blue-700">
+              Let's Discuss Your Project <ArrowRight size={20} />
             </button>
           </div>
         </div>
       </section>
 
-      {/* What We Promise Section */}
-      <section className="bg-gradient-to-br from-blue-500 to-blue-600 py-20 px-6">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white space-y-8">
-              <div style={{ animation: 'modernPop 0.8s ease-out forwards' }}>
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  <span className="text-yellow-300">What we</span>
-                  <br /> Promise You?
+      {/* NEW PROMISE SECTION MATCHING IMAGE */}
+      <section className="bg-[#3b82f6] py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            
+            {/* Left Content */}
+            <div className="space-y-8 lg:sticky lg:top-20">
+              <div>
+                <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight leading-[1.1]">
+                  <span className="text-black block">What we</span>
+                  <span className="text-white block">Promise You?</span>
                 </h2>
-                <p className="text-blue-100 text-lg">
-                  Our commitment to excellence ensures your success and satisfaction.
+                <p className="text-blue-100 text-lg leading-relaxed max-w-md font-medium">
+                  Our commitment to excellence is backed by these core promises that ensure your success and satisfaction
                 </p>
               </div>
-
-              <div className="flex gap-12">
+              
+              <div className="flex gap-16 pt-4">
                 <div>
-                  <div className="text-5xl font-bold text-white mb-2">100%</div>
-                  <p className="text-blue-100 text-sm">Satisfaction Rate</p>
+                  <div className="text-5xl font-black text-white mb-1">100%</div>
+                  <p className="text-blue-100 text-xs uppercase tracking-wider font-semibold">Satisfaction Rate</p>
                 </div>
                 <div>
-                  <div className="text-5xl font-bold text-white mb-2">12/7</div>
-                  <p className="text-blue-100 text-sm">Expert Supports</p>
+                  <div className="text-5xl font-black text-white mb-1">12/7</div>
+                  <p className="text-blue-100 text-xs uppercase tracking-wider font-semibold">Support Available</p>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Right Content - Cards & Button */}
+            <div className="flex flex-col items-center lg:items-end w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full mb-10">
                 {promises.map((promise, index) => (
-                  <PromiseCard
-                    key={index}
-                    index={index}
-                    IconComponent={promise.IconComponent}
-                    title={promise.title}
-                    number={promise.number}
-                  />
+                  <PromiseCard key={index} index={index} IconComponent={promise.IconComponent} title={promise.title} number={promise.number} />
                 ))}
               </div>
+
+              {/* White Button */}
+              <button className="bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-gray-50 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-3 w-full md:w-auto justify-center group">
+                Let's Build Together <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" strokeWidth={3} />
+              </button>
             </div>
+
           </div>
         </div>
       </section>
-
-      <style>{`
-        @keyframes modernPop {
-          0% { opacity: 0; transform: scale(0.8) translateY(30px); }
-          100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-      `}</style>
     </div>
   );
 };

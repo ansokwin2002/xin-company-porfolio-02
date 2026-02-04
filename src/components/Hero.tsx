@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
 
 const countries = [
   { code: 'kh', name: 'Cambodia', dial: '+855' },
@@ -16,10 +15,10 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
-  const { theme } = useTheme();
-  const [formData, setFormData] = useState({ name: '', email: '', mobile: '', budget: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', budget: '', mobile: '' });
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isBudgetOpen, setIsBudgetOpen] = useState(false);
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
 
   // --- TYPEWRITER LOGIC ---
   const [text, setText] = useState('');
@@ -32,14 +31,8 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
     const handleType = () => {
       const i = loopNum % words.length;
       const fullText = words[i];
-
-      setText(isDeleting 
-        ? fullText.substring(0, text.length - 1) 
-        : fullText.substring(0, text.length + 1)
-      );
-
+      setText(isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1));
       setTypingSpeed(isDeleting ? 70 : 150);
-
       if (!isDeleting && text === fullText) {
         setTimeout(() => setIsDeleting(true), 2000);
       } else if (isDeleting && text === '') {
@@ -47,7 +40,6 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
         setLoopNum(loopNum + 1);
       }
     };
-
     const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
   }, [text, isDeleting, loopNum, typingSpeed]);
@@ -59,25 +51,18 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-white">
-      {/* Background Image - Faster Zoom (8s) */}
-      <div
-        className={`absolute inset-0 bg-no-repeat bg-[url('/assets/images/image_hero.png')] bg-hero-pos-sm sm:bg-hero-pos-md bg-hero-sm sm:bg-hero-md animate-fast-zoom`}
-        style={{ zIndex: 0 }}
-      />
+      {/* Background Image */}
+      <div className="absolute inset-0 bg-no-repeat bg-[url('/assets/images/image_hero.png')] bg-hero-pos-sm sm:bg-hero-pos-md bg-hero-sm sm:bg-hero-md animate-fast-zoom" style={{ zIndex: 0 }} />
 
       <div className="relative min-h-screen flex items-center pt-24 pb-12" style={{ zIndex: 10 }}>
         <div className="max-w-7xl mx-auto w-full px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             
-            {/* Left Column - Your Original Content */}
+            {/* Left Column - ORIGINAL COLORS & SIZES */}
             <div className="lg:col-span-3 space-y-8">
-              <div 
-                className="space-y-8"
-                style={{ 
-                  animation: showAnimations ? 'modernPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none',
-                  opacity: showAnimations ? 0 : 1 
-                }}
-              >
+              <div className="space-y-8" style={{ animation: showAnimations ? 'modernPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none', opacity: showAnimations ? 0 : 1 }}>
+                
+                {/* Original Theme Badges */}
                 <div className="flex flex-wrap gap-3">
                   <div className="flex items-center space-x-2 bg-gradient-blue text-white px-4 py-2 rounded-button text-sm font-medium shadow-button">
                     <span>🏆</span><span>12+ Years</span>
@@ -94,33 +79,26 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-gray-900">
                     Turn Your Ideas into Smart, High-Performance<br />
                     <span className="text-blue-500 min-w-[300px] inline-block">
-                      {text}
-                      <span className="ml-1 border-r-4 border-blue-500 animate-blink"></span>
+                      {text}<span className="ml-1 border-r-4 border-blue-500 animate-blink"></span>
                     </span>
                   </h1>
                   <p className="text-lg lg:text-xl text-gray-600 max-w-2xl">
-                    From mobile apps to AI automation, web platforms, and UX design, we create solutions that scale, engage, and deliver measurable results.
+                    From mobile apps to AI automation, web platforms, and UX design, we create solutions that scale.
                   </p>
                 </div>
 
-                <button
-                  onClick={scrollToWork}
-                  className="group flex items-center space-x-2 px-6 py-3 rounded-xl font-medium text-base transition-all duration-300 border-2 bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white"
-                >
+                <button onClick={scrollToWork} className="group flex items-center space-x-2 px-6 py-3 rounded-xl font-medium border-2 bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300">
                   <ArrowDown size={20} />
                   <span>View Our Work</span>
                 </button>
               </div>
             </div>
 
-            {/* Right Column - Your Original Form */}
+            {/* Right Column - Mirror Glass Form with REDESIGNED FLOATING LABELS */}
             <div className="lg:col-span-2">
               <div 
-                className="rounded-3xl p-8 shadow-2xl bg-blue-100/80 backdrop-blur-sm"
-                style={{ 
-                  animation: showAnimations ? 'modernPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards' : 'none',
-                  opacity: showAnimations ? 0 : 1 
-                }}
+                className="rounded-3xl p-8 md:p-10 shadow-2xl bg-blue-100/30 backdrop-blur-md border border-white/40" 
+                style={{ animation: showAnimations ? 'modernPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards' : 'none', opacity: showAnimations ? 0 : 1 }}
               >
                 <div className="space-y-6">
                   <div className="text-center">
@@ -128,75 +106,109 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                     <p className="text-sm mt-2 text-gray-700">Tell us about your project</p>
                   </div>
 
-                  <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-900">Your Name? <span className="text-red-500">*</span></label>
-                      <input type="text" name="name" placeholder="Enter your full name" required className="w-full px-4 py-3 rounded-xl border bg-white/90 border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  <form className="space-y-8 mt-8" onSubmit={(e) => e.preventDefault()}>
+                    
+                    {/* 1. Floating Name */}
+                    <div className="relative group">
+                      <input 
+                        type="text" 
+                        required 
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
+                        placeholder=" " 
+                      />
+                      <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                        Your Name *
+                      </label>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-900">Your Work Email? <span className="text-red-500">*</span></label>
-                      <input type="email" name="email" placeholder="Enter your Work email" required className="w-full px-4 py-3 rounded-xl border bg-white/90 border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    {/* 2. Floating Email */}
+                    <div className="relative group">
+                      <input 
+                        type="email" 
+                        required 
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent" 
+                        placeholder=" " 
+                      />
+                      <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
+                        Work Email *
+                      </label>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-900">Your Mobile? <span className="text-red-500">*</span></label>
-                      <div className="flex gap-2">
-                        <div className="relative group" ref={dropdownRef}>
-                          <button
-                            type="button"
-                            className="flex items-center gap-2 px-3 py-3 rounded-xl border bg-white/90 border-gray-300 text-gray-900 font-bold text-sm min-w-[110px]"
-                          >
-                            <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} alt="flag" className="w-5 h-auto rounded-sm" />
-                            <span>{selectedCountry.dial}</span>
-                            <ChevronDown size={14} className="ml-1 transition-transform group-hover:rotate-180" />
-                          </button>
-                          
-                          <div className="absolute top-full left-0 pt-2 w-48 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div className="bg-white border border-gray-200 rounded-xl shadow-xl max-h-60 overflow-y-auto">
-                              {countries.map((c) => (
-                                <div key={c.code} onClick={() => setSelectedCountry(c)} className="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors">
-                                  <img src={`https://flagcdn.com/w20/${c.code}.png`} alt={c.name} className="w-5 h-auto rounded-sm" />
-                                  <span className="text-sm font-medium text-gray-700">{c.name}</span>
-                                  <span className="text-xs text-gray-400 ml-auto">{c.dial}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        <input type="tel" name="mobile" placeholder="123 456 789" required className="flex-1 px-4 py-3 rounded-xl border bg-white/90 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-900">Your Budget? <span className="text-red-500">*</span></label>
-                      <div className="relative group">
-                        <div className="w-full px-4 py-3 rounded-xl border bg-white/90 border-gray-300 text-gray-900 flex items-center justify-between cursor-pointer">
-                          <span>{formData.budget || "Select your budget range"}</span>
-                          <ChevronDown size={16} className="text-gray-500 transition-transform group-hover:rotate-180" />
-                        </div>
-                        <div className="absolute top-full left-0 pt-2 w-full opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                          <div className="bg-white border border-gray-200 rounded-xl shadow-xl overflow-hidden">
-                            {[
-                              { label: '$1,000 - $5,000', value: '1k-5k' },
-                              { label: '$5,000+', value: '5k+' }
-                            ].map((option) => (
-                              <div 
-                                key={option.value}
-                                onClick={() => setFormData({ ...formData, budget: option.label })}
-                                className="px-4 py-3 hover:bg-blue-50 cursor-pointer text-gray-700 transition-colors"
-                              >
-                                {option.label}
+                    {/* 3. Floating Mobile Number (Redesigned to match Name/Email style) */}
+                    <div className="relative group flex items-end border-b-2 border-gray-300 focus-within:border-gray-900 transition-colors pt-2">
+                      {/* Country Selector */}
+                      <div className="relative" onMouseEnter={() => setIsCountryOpen(true)} onMouseLeave={() => setIsCountryOpen(false)}>
+                        <button type="button" className="flex items-center gap-2 py-3 pr-3 font-bold text-sm text-gray-900 outline-none">
+                          <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} className="w-5 rounded-sm" alt="flag" />
+                          <span>{selectedCountry.dial}</span>
+                          <ChevronDown size={14} className={`transition-transform duration-300 text-gray-500 ${isCountryOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {/* Dropdown List */}
+                        <div className={`absolute top-full left-0 pt-1 z-[60] transition-all duration-300 w-48 ${isCountryOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                          <div className="bg-white border border-gray-100 rounded-xl shadow-2xl max-h-48 overflow-y-auto py-2">
+                            {countries.map((c) => (
+                              <div key={c.code} onClick={() => { setSelectedCountry(c); setIsCountryOpen(false); }} className="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors text-sm font-bold text-gray-700">
+                                <img src={`https://flagcdn.com/w20/${c.code}.png`} className="w-5 rounded-sm" alt={c.name} />
+                                <span>{c.name}</span>
                               </div>
                             ))}
                           </div>
                         </div>
                       </div>
+
+                      {/* Phone Input with Floating Label logic */}
+                      <div className="relative flex-1">
+                        <input 
+                          type="tel" 
+                          required 
+                          value={formData.mobile}
+                          onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                          className="w-full bg-transparent py-3 text-gray-900 font-bold focus:outline-none placeholder-transparent peer" 
+                          placeholder=" " 
+                        />
+                         {/* Note: Translate Y is slightly less (-20px) here because of the flex layout container */}
+                        <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform -z-10 peer-focus:-translate-y-8 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:scale-90">
+                          Mobile Number *
+                        </label>
+                      </div>
                     </div>
 
-                    <button type="submit" className="w-full flex items-center justify-center space-x-2 bg-gradient-blue text-white px-6 py-4 rounded-button font-semibold text-base transition-all duration-300 shadow-button hover:shadow-lg hover:scale-105">
-                      <span>Get Quote</span>
-                      <ArrowRight size={20} />
+                    {/* 4. Floating Budget Dropdown (Redesigned to match Name/Email style) */}
+                    <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsBudgetOpen(true)} onMouseLeave={() => setIsBudgetOpen(false)}>
+                      <div className="w-full py-3 flex items-center justify-between cursor-pointer">
+                        <span className={`font-bold transition-colors ${formData.budget ? 'text-gray-900' : 'text-transparent'}`}>
+                          {formData.budget || "Placeholder"} 
+                        </span>
+                        <ChevronDown size={18} className={`text-gray-500 transition-transform duration-300 ${isBudgetOpen ? 'rotate-180' : ''}`} />
+                      </div>
+                      
+                      {/* Floating Label for Budget (Controlled by state existence) */}
+                      <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
+                        ${formData.budget || isBudgetOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
+                      `}>
+                        Project Budget *
+                      </label>
+
+                      {/* Dropdown Options */}
+                      <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isBudgetOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                        <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
+                          {['$1,000 - $5,000', '$5,000+', 'Custom'].map((opt) => (
+                            <div key={opt} onClick={() => { setFormData({...formData, budget: opt}); setIsBudgetOpen(false); }} className="px-6 py-4 hover:bg-blue-50 cursor-pointer text-sm font-bold text-gray-700">
+                              {opt}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ORIGINAL THEME BUTTON */}
+                    <button type="submit" className="w-full flex items-center justify-center space-x-3 bg-gradient-blue text-white px-6 py-5 rounded-button font-bold uppercase tracking-widest transition-all duration-300 shadow-button hover:shadow-lg hover:scale-[1.03]">
+                      <span>Get Quote</span> <ArrowRight size={20} />
                     </button>
                   </form>
                 </div>
@@ -205,26 +217,12 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
           </div>
         </div>
       </div>
-
       <style>{`
-        @keyframes fastZoom {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.15); }
-          100% { transform: scale(1); }
-        }
-        .animate-fast-zoom {
-          animation: fastZoom 8s ease-in-out infinite;
-        }
-        @keyframes modernPop {
-          0% { opacity: 0; transform: scale(0.8) translateY(50px) rotateX(-10deg); }
-          100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); }
-        }
-        @keyframes blink {
-          50% { border-color: transparent; }
-        }
-        .animate-blink {
-          animation: blink 0.8s step-end infinite;
-        }
+        @keyframes fastZoom { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        .animate-fast-zoom { animation: fastZoom 8s ease-in-out infinite; }
+        @keyframes modernPop { 0% { opacity: 0; transform: scale(0.8) translateY(50px) rotateX(-10deg); } 100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); } }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .animate-blink { animation: blink 0.8s step-end infinite; }
       `}</style>
     </section>
   );

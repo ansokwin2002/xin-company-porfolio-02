@@ -1,167 +1,127 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface FooterProps {
   // Define any props if needed, e.g., for dynamic year
 }
 
 const Footer: React.FC<FooterProps> = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    // Moved footer JSX here
-    <footer className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 text-white py-16 overflow-hidden">
+    <footer 
+      ref={footerRef}
+      className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 text-white py-16 overflow-hidden"
+    >
       {/* Background Pattern/Effects */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
 
-          {/* Company Info - Left Column */}
-          <div className="lg:col-span-1 space-y-4">
+          {/* Company Info - Column 1 */}
+          <div 
+            className={`space-y-4 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '0.1s' }}
+          >
             <div className="relative">
               <span className="font-bold text-2xl text-gold">
                 QıYOU
               </span>
-              {/* Red dot above the 'i' */}
               <span
                 className="absolute w-1.5 h-1.5 rounded-full bg-red-500"
-                style={{
-                  top: '3px',
-                  left: '17.5px'
-                }}
+                style={{ top: '3px', left: '17.5px' }}
               ></span>
             </div>
-            <span className="text-xs text-white/90 -mt-1">
+            <p className="text-xs text-white/90 font-medium uppercase tracking-wider">
               Your Success Partner
-            </span>
+            </p>
             <p className="text-white/90 text-sm leading-relaxed">
               We transform your digital vision into reality through innovative web development, mobile apps, UI/UX design, and digital marketing solutions.
             </p>
           </div>
 
-          {/* Company Links */}
-          <div className="space-y-4">
+          {/* Company Links - Column 2 */}
+          <div 
+            className={`space-y-4 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '0.2s' }}
+          >
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Company</h4>
             <ul className="space-y-3">
-              <li>
-                <a href="#home" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#careers" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#blog" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Blog & News
-                </a>
-              </li>
-              <li>
-                <a href="#case-studies" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Case Studies
-                </a>
-              </li>
+              {['Home', 'About Us', 'Careers', 'Blog & News', 'Case Studies'].map((item) => (
+                <li key={item}>
+                  <a href={`#${item.toLowerCase().replace(/\s/g, '-')}`} className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
+                    <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Services Links */}
-          <div className="space-y-4">
+          {/* Services Links - Column 3 */}
+          <div 
+            className={`space-y-4 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '0.3s' }}
+          >
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Services</h4>
             <ul className="space-y-3">
-              <li>
-                <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  UI/UX Design
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Mobile App Development
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Web App Development
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Digital Marketing
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Hosting & Servers
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  IT Consultancy & DevOps
-                </a>
-              </li>
+              {['UI/UX Design', 'Mobile App Development', 'Web App Development', 'Digital Marketing', 'Hosting & Servers', 'IT Consultancy & DevOps'].map((item) => (
+                <li key={item}>
+                  <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
+                    <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Products Links */}
-          <div className="space-y-4">
+          {/* Products Links - Column 4 */}
+          <div 
+            className={`space-y-4 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '0.4s' }}
+          >
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Products</h4>
             <ul className="space-y-3">
-              <li>
-                <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Event Ticketing App
-                </a>
-              </li>
-              <li>
-                <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  E-Commerce Mobile App
-                </a>
-              </li>
-              <li>
-                <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Solevato
-                </a>
-              </li>
-              <li>
-                <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  Congora
-                </a>
-              </li>
-              <li>
-                <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
-                  CMS Website
-                </a>
-              </li>
+              {['Event Ticketing App', 'E-Commerce Mobile App', 'Solevato', 'Congora', 'CMS Website'].map((item) => (
+                <li key={item}>
+                  <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
+                    <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         {/* Bottom Copyright Section */}
-        <div className="pt-8 border-t border-white/20">
+        <div className={`pt-8 border-t border-white/20 transition-opacity duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <p className="text-white/80 text-sm text-center">
-            © {new Date().getFullYear()} Intcore. All Rights Reserved.
+            © {new Date().getFullYear()} QiYou Tech. All Rights Reserved.
           </p>
         </div>
       </div>
