@@ -22,7 +22,7 @@ const Footer: React.FC<FooterProps> = () => {
   return (
     <footer 
       ref={footerRef}
-      className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-400 text-white py-16 overflow-hidden"
+      className="relative bg-gradient-blue text-white py-16 overflow-hidden"
     >
       {/* Background Pattern/Effects */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">

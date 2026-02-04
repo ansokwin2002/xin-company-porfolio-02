@@ -1,15 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaFacebookF, FaTiktok, FaYoutube, FaTelegramPlane, FaArrowRight, FaChevronDown } from 'react-icons/fa';
+import { FaFacebookF, FaTiktok, FaYoutube, FaTelegramPlane, FaArrowRight } from 'react-icons/fa';
 import { MdEmail, MdPhone } from 'react-icons/md';
+import { ChevronDown } from 'lucide-react'; // Added ChevronDown from lucide-react
 import { toast } from 'sonner';
+
+// Countries data from Hero.tsx
+const countries = [
+  { code: 'kh', name: 'Cambodia', dial: '+855' },
+  { code: 'us', name: 'USA', dial: '+1' },
+  { code: 'gb', name: 'UK', dial: '+44' },
+  { code: 'th', name: 'Thailand', dial: '+66' },
+  { code: 'vn', name: 'Vietnam', dial: '+84' },
+  { code: 'sg', name: 'Singapore', dial: '+65' },
+];
 
 const StartYourNextBigProject: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For budget dropdown
+  const [isCountryOpen, setIsCountryOpen] = useState(false); // For country dropdown
   const [selectedBudget, setSelectedBudget] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Initial country from countries array
   
   // Form State
-  const [formData, setFormData] = useState({ name: '', email: '', details: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', mobile: '', details: '' }); // Added mobile
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const budgetOptions = ['$1,000 - $5,000', '$5,000 - $10,000', '$10,000 - $50,000', '$50,000+'];
@@ -30,14 +43,15 @@ const StartYourNextBigProject: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Simulate API call or form submission
-    console.log('Form Submitted:', { ...formData, selectedBudget });
+    console.log('Form Submitted:', { ...formData, selectedBudget, mobileCountryDial: selectedCountry.dial });
 
     // Show success toast
     toast.success('Your request has been sent successfully!');
 
     // Reset form fields
-    setFormData({ name: '', email: '', details: '' });
+    setFormData({ name: '', email: '', mobile: '', details: '' }); // Reset mobile as well
     setSelectedBudget('');
+    setSelectedCountry(countries[0]); // Reset country as well
   };
 
   return (
@@ -73,13 +87,13 @@ const StartYourNextBigProject: React.FC = () => {
                 </div>
               </div>
               <div className="space-y-4 font-bold text-gray-800">
-                <div className="flex items-center gap-4 hover:text-blue-500 transition-colors cursor-pointer">
-                  <div className="text-blue-500 text-xl"><MdPhone /></div>
-                  <span>(+855) 86 68 2000</span>
+                <div className="flex items-center gap-4 transition-colors cursor-pointer group">
+                  <div className="text-xl text-black-600"><MdPhone /></div>
+                  <span className="text-gray-900 group-hover:bg-gradient-blue group-hover:bg-clip-text group-hover:text-transparent">(+855) 86 68 2000</span>
                 </div>
-                <div className="flex items-center gap-4 hover:text-blue-500 transition-colors cursor-pointer">
-                  <div className="text-blue-500 text-xl"><MdEmail /></div>
-                  <span>info@qiyou-kh.com</span>
+                <div className="flex items-center gap-4 transition-colors cursor-pointer group">
+                  <div className="text-xl text-black-600"><MdEmail /></div>
+                  <span className="text-gray-900 group-hover:bg-gradient-blue group-hover:bg-clip-text group-hover:text-transparent">info@qiyou-kh.com</span>
                 </div>
               </div>
             </div>
@@ -88,7 +102,7 @@ const StartYourNextBigProject: React.FC = () => {
               <span className="font-bold uppercase tracking-widest ml-2 text-sm">Follow Us</span>
               <div className="flex gap-3">
                 {[FaFacebookF, FaTiktok, FaYoutube].map((Icon, idx) => (
-                  <a key={idx} href="#" className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-all hover:-translate-y-1">
+                  <a key={idx} href="#" className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-gradient-blue transition-all hover:-translate-y-1">
                     <Icon size={idx === 2 ? 20 : 18} />
                   </a>
                 ))}
@@ -96,7 +110,7 @@ const StartYourNextBigProject: React.FC = () => {
             </div>
 
             <a href="https://t.me/yourusername" target="_blank" rel="noreferrer" 
-               className="block bg-gradient-to-r from-blue-500 to-blue-600 rounded-3xl p-7 text-white group shadow-sm hover:shadow-xl transition-all duration-300 active:scale-[0.98]">
+               className="block bg-gradient-blue rounded-3xl p-7 text-white group shadow-sm hover:shadow-xl transition-all duration-300 active:scale-[0.98]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
@@ -154,13 +168,53 @@ const StartYourNextBigProject: React.FC = () => {
                 </div>
               </div>
 
+              {/* 3. Floating Mobile Number (Redesigned to match Name/Email style) */}
+              <div className="relative group flex items-end border-b-2 border-gray-300 focus-within:border-gray-900 transition-colors pt-2">
+                {/* Country Selector */}
+                <div className="relative" onMouseEnter={() => setIsCountryOpen(true)} onMouseLeave={() => setIsCountryOpen(false)}>
+                  <button type="button" className="flex items-center gap-2 py-3 pr-3 font-bold text-sm text-gray-900 outline-none">
+                    <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} className="w-5 rounded-sm" alt="flag" />
+                    <span>{selectedCountry.dial}</span>
+                    <ChevronDown size={14} className={`transition-transform duration-300 text-gray-500 ${isCountryOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {/* Dropdown List */}
+                  <div className={`absolute top-full left-0 pt-1 z-[60] transition-all duration-300 w-48 ${isCountryOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                    <div className="bg-white border border-gray-100 rounded-xl shadow-2xl max-h-48 overflow-y-auto py-2">
+                      {countries.map((c) => (
+                        <div key={c.code} onClick={() => { setSelectedCountry(c); setIsCountryOpen(false); }} className="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors text-sm font-bold text-gray-700">
+                          <img src={`https://flagcdn.com/w20/${c.code}.png`} className="w-5 rounded-sm" alt={c.name} />
+                          <span>{c.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Phone Input with Floating Label logic */}
+                <div className="relative flex-1">
+                  <input 
+                    type="tel" 
+                    required 
+                    value={formData.mobile}
+                    onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                    className="w-full bg-transparent py-3 text-gray-900 font-bold focus:outline-none placeholder-transparent peer" 
+                    placeholder=" " 
+                  />
+                    {/* Note: Translate Y is slightly less (-20px) here because of the flex layout container */}
+                  <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform -z-10 peer-focus:-translate-y-8 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:scale-90">
+                    Mobile Number *
+                  </label>
+                </div>
+              </div>
+
               {/* 3. Budget Dropdown - Hero Style (Border Bottom) */}
               <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
                 <div className="w-full py-3 flex items-center justify-between cursor-pointer">
                   <span className={`font-bold transition-colors ${selectedBudget ? 'text-gray-900' : 'text-transparent'}`}>
                     {selectedBudget || "Placeholder"} 
                   </span>
-                  <FaChevronDown size={14} className={`text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown size={14} className={`text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                 </div>
                 
                 {/* Floating Label Logic */}
