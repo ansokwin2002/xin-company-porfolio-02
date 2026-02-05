@@ -3,6 +3,7 @@ import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import Footer from '../components/layout/Footer';
 import { Rocket, Hand, ArrowRight, Lock, BarChart3, Mail, Activity, Layout, Clock, TrendingUp, Layers } from 'lucide-react';
+import DevelopmentLifecycle from '../components/sections/DevelopmentLifecycle';
 
 const MobileAppDevelopment: React.FC = () => {
   
@@ -148,7 +149,7 @@ const MobileAppDevelopment: React.FC = () => {
           </div>
         </div>
       </main>
-
+      <DevelopmentLifecycle />
       <StartYourNextBigProject />
       <Footer />
     </div>
