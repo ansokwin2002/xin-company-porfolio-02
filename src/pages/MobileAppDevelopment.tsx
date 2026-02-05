@@ -59,27 +59,14 @@ const MobileAppDevelopment: React.FC = () => {
         </div>
 
         {/* --- MAIN CONTENT SECTION --- */}
-        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 md:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             
             {/* LEFT COLUMN: Graphic + Good News + CTA */}
             <div className="flex flex-col gap-8">
               {/* Phone Graphic Placeholder */}
               <div className="relative bg-white border border-gray-100 rounded-3xl shadow-xl p-8 flex items-center justify-center min-h-[400px]">
-                <div className="relative w-48 h-80 bg-gray-800 rounded-[2rem] shadow-2xl flex flex-col items-center justify-center border-4 border-gray-700">
-                  <div className="absolute top-0 w-24 h-6 bg-gray-800 rounded-b-xl"></div>
-                  <div className="absolute -left-12 top-20 bg-blue-100 p-3 rounded-xl shadow-lg animate-pulse">
-                     <Mail className="text-blue-500" />
-                  </div>
-                  <div className="absolute -right-8 top-32 bg-blue-500 p-3 rounded-xl shadow-lg">
-                     <Lock className="text-white" />
-                  </div>
-                  <div className="absolute -left-8 bottom-20 bg-blue-500 p-3 rounded-xl shadow-lg z-10">
-                     <BarChart3 className="text-white" />
-                  </div>
-                  <div className="text-gray-600 font-bold text-center mt-4">App Interface</div>
-                </div>
-                <div className="absolute inset-0 border-2 border-dashed border-gray-200 rounded-full w-[90%] h-[90%] m-auto -z-10"></div>
+                <img src="/assets/images/p2.png" alt="Mobile App Development" className="w-full h-auto rounded-3xl" />
               </div>
 
               {/* Good News Card */}
