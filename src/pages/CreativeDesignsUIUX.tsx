@@ -242,74 +242,138 @@ const CreativeDesignsUIUX: React.FC = () => {
           </div>
         </section>
 
-        {/* --- UI/UX Design Services Section (NEW) --- */}
-        <section ref={uiUxSectionRef} className="py-20 bg-gray-50 overflow-hidden border-t border-gray-100">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+       {/* ======================================================= */}
+        {/* --- NEW BLUE UI/UX SECTION (Matches Image Layout) --- */}
+        {/* ======================================================= */}
+        <section 
+          ref={uiUxSectionRef} 
+          className="py-20 relative overflow-hidden"
+          // This gradient creates the Blue Background from the photo
+          style={{ background: 'linear-gradient(135deg, #0070F3 0%, #00C6FF 100%)' }}
+        >
+          {/* Background Wireframe Decor (Optional, simulating image background lines) */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+             <div className="absolute top-0 left-0 w-full h-full border-[0.5px] border-white/20 transform -skew-y-12 scale-150"></div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className={`transition-all duration-1000 ease-out ${
                 isUiUxVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}>
               
-              <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                {/* Left Side: Text Content */}
-                <div className="text-left">
-                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    Leading UI/UX <br />
-                    <span className="bg-gradient-blue bg-clip-text text-transparent">Design Services</span>
-                  </h2>
-                  <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-                    Crafting exceptional digital experiences that captivate users and drive measurable business growth. 
-                    Our experienced team follows a user-centered design process, conducting thorough research and 
-                    iterative testing to ensure the highest quality.
-                  </p>
+              <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+                
+                {/* --- LEFT COLUMN (Title + Phone Image + Team) --- */}
+                <div className="lg:col-span-5 flex flex-col gap-6">
                   
-                  {/* Expert Team Badge */}
-                  <div className="inline-flex items-center gap-4 bg-white p-3 rounded-2xl shadow-sm border border-gray-100">
-                    <div className="flex -space-x-3">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="w-10 h-10 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs overflow-hidden">
-                          <span className="bg-gradient-blue w-full h-full opacity-50"></span>
+                  {/* Title */}
+                  <div>
+                    <h2 className="text-5xl md:text-6xl font-extrabold text-white leading-tight">
+                      Leading UI/UX <br />
+                      {/* Gradient Text for "Design Services" similar to image */}
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-500">
+                        Design Services
+                      </span>
+                    </h2>
+                    <p className="mt-4 text-white/80 text-lg">
+                      Crafting exceptional digital experiences that captivate users and drive measurable business growth.
+                    </p>
+                  </div>
+
+                  {/* Main Glass Card (Isometric Phone Placeholder) */}
+                  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 relative min-h-[300px] flex items-center justify-center overflow-hidden">
+                    {/* Inner glowing effect */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-blue-400 rounded-full blur-[80px] opacity-40"></div>
+                    
+                    {/* Placeholder for the 3D Phone Illustration */}
+                    <div className="relative z-10 transform rotate-[-10deg] skew-x-[-5deg]">
+                       <div className="w-40 h-72 bg-gradient-to-br from-red-400 to-pink-500 rounded-[2rem] shadow-2xl border-4 border-white/30 flex flex-col p-3">
+                          {/* Screen UI simulation */}
+                          <div className="flex-1 bg-white/90 rounded-xl w-full p-2 space-y-2">
+                             <div className="w-1/2 h-2 bg-gray-200 rounded-full"></div>
+                             <div className="w-full h-16 bg-blue-100 rounded-lg"></div>
+                             <div className="grid grid-cols-2 gap-2">
+                                <div className="h-10 bg-orange-100 rounded"></div>
+                                <div className="h-10 bg-purple-100 rounded"></div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                    
+                    {/* Floating elements */}
+                    <div className="absolute top-10 right-10 bg-white p-2 rounded-lg shadow-lg animate-bounce delay-700">📊</div>
+                    <div className="absolute bottom-10 left-10 bg-white p-2 rounded-lg shadow-lg animate-bounce delay-1000">🎨</div>
+                    
+                    {/* 100% Badge */}
+                    <div className="absolute bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
+                      ✓ 100% Satisfaction
+                    </div>
+                  </div>
+
+                  {/* Expert Team Section */}
+                  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex items-center justify-between">
+                    <div className="flex flex-col">
+                        <span className="text-white font-bold text-sm">Expert Team</span>
+                        <div className="flex -space-x-2 mt-2">
+                            {[1,2,3,4,5].map(i => (
+                                <div key={i} className="w-8 h-8 rounded-full bg-gray-300 border-2 border-blue-500"></div>
+                            ))}
+                            <div className="w-8 h-8 rounded-full bg-blue-600 border-2 border-blue-500 flex items-center justify-center text-xs text-white font-bold">+20</div>
                         </div>
-                      ))}
-                      <div className="w-10 h-10 rounded-full bg-blue-600 border-2 border-white flex items-center justify-center text-xs text-white font-bold">
-                        +20
+                    </div>
+                    <div className="text-right">
+                        <span className="block text-2xl font-bold text-white">10+</span>
+                        <span className="text-xs text-white/70">Years Exp.</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* --- RIGHT COLUMN (Stats + Text + Features) --- */}
+                <div className="lg:col-span-7 flex flex-col gap-6">
+                  
+                  {/* Stats Grid (2x2) */}
+                  <div className="grid grid-cols-2 gap-4">
+                    {uiUxStats.map((stat, idx) => (
+                      <div key={idx} className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl">
+                         <div className="text-2xl mb-2">{stat.icon}</div>
+                         <div className="text-3xl font-bold text-white">{stat.value}</div>
+                         <div className="text-sm text-white/70 font-medium">{stat.label}</div>
                       </div>
-                    </div>
-                    <div className="text-sm font-semibold text-gray-800">
-                      Expert Team <br/>
-                      <span className="text-gray-500 font-normal">10+ Years Exp.</span>
-                    </div>
+                    ))}
                   </div>
+
+                  {/* Description Box */}
+                  <div className="bg-white/10 backdrop-blur-sm border border-white/10 p-6 rounded-2xl">
+                    <p className="text-white/90 leading-relaxed text-sm md:text-base">
+                      Our experienced team follows a user-centered design process, conducting
+                      thorough research and iterative testing to ensure the highest quality.
+                      We align our work with your business goals and maintain clear communication throughout.
+                    </p>
+                  </div>
+
+                  {/* Features Grid (2x2) */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                     {uiUxFeatures.map((feat, idx) => (
+                        <div key={idx} className={`bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl relative overflow-hidden group hover:bg-white/20 transition-colors`}>
+                           {/* Colorful left border indicator */}
+                           
+                           {/* Icon Box */}
+                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl mb-3 shadow-inner bg-gradient-to-br from-white/20 to-transparent`}>
+                              {feat.icon}
+                           </div>
+                           
+                           <h3 className="text-white font-bold text-lg mb-1">{feat.title}</h3>
+                           <p className="text-white/70 text-xs leading-relaxed">{feat.desc}</p>
+                        </div>
+                     ))}
+                  </div>
+
                 </div>
 
-                {/* Right Side: Stats Grid */}
-                <div className="grid grid-cols-2 gap-4">
-                  {uiUxStats.map((stat, idx) => (
-                    <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                      <div className="text-2xl mb-2">{stat.icon}</div>
-                      <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                      <div className="text-sm text-gray-500 font-medium uppercase tracking-wide">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
-
-              {/* Bottom: 4 Process Features */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {uiUxFeatures.map((feat, idx) => (
-                  <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 transition-colors group">
-                    <div className={`w-12 h-12 ${feat.color} rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform`}>
-                      {feat.icon}
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{feat.title}</h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">{feat.desc}</p>
-                  </div>
-                ))}
-              </div>
-
             </div>
           </div>
         </section>
-
       </main>
 
       <StartYourNextBigProject />
