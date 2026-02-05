@@ -134,7 +134,7 @@ const Navigation: React.FC = () => {
             {/* Contact Button */}
             <button onClick={() => scrollToSection('contact')} className="hidden lg:flex items-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-transform">
               <ContactIcon />
-              <span>Contact Uss</span>
+              <span>Contact Us</span>
             </button>
 
             {/* Mobile menu toggle */}
