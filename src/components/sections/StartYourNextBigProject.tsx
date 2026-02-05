@@ -20,6 +20,7 @@ const StartYourNextBigProject: React.FC = () => {
   const [isCountryOpen, setIsCountryOpen] = useState(false); // For country dropdown
   const [selectedBudget, setSelectedBudget] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Initial country from countries array
+  const [isSubmitting, setIsSubmitting] = useState(false); // Added isSubmitting state
   
   // Form State
   const [formData, setFormData] = useState({ name: '', email: '', mobile: '', details: '' }); // Added mobile
@@ -42,16 +43,20 @@ const StartYourNextBigProject: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true); // Set isSubmitting to true
     // Simulate API call or form submission
-    console.log('Form Submitted:', { ...formData, selectedBudget, mobileCountryDial: selectedCountry.dial });
+    setTimeout(() => {
+      console.log('Form Submitted:', { ...formData, selectedBudget, mobileCountryDial: selectedCountry.dial });
 
-    // Show success toast
-    toast.success('Your request has been sent successfully!');
+      // Show success toast
+      toast.success('Your request has been sent successfully!');
 
-    // Reset form fields
-    setFormData({ name: '', email: '', mobile: '', details: '' }); // Reset mobile as well
-    setSelectedBudget('');
-    setSelectedCountry(countries[0]); // Reset country as well
+      // Reset form fields
+      setFormData({ name: '', email: '', mobile: '', details: '' }); // Reset mobile as well
+      setSelectedBudget('');
+      setSelectedCountry(countries[0]); // Reset country as well
+      setIsSubmitting(false); // Set isSubmitting to false after submission
+    }, 2000); // Simulate a 2-second delay for submission
   };
 
   return (
@@ -250,8 +255,21 @@ const StartYourNextBigProject: React.FC = () => {
               </div>
 
               {/* 5. Button - Exact Match to Hero (Gradient Blue) */}
-              <button type="submit" className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-[#00ba2b] to-[#22c55e] text-white px-6 py-5 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02]">
-                <span>Send Message</span> <FaArrowRight size={18} />
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-[#00ba2b] to-[#22c55e] text-white px-6 py-5 rounded-xl font-bold uppercase tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Send Message</span> <FaArrowRight size={18} />
+                  </>
+                )}
               </button>
             </form>
           </div>

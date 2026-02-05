@@ -21,6 +21,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [isBudgetOpen, setIsBudgetOpen] = useState(false);
   const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Added isSubmitting state
 
   // --- TYPEWRITER LOGIC ---
   const [text, setText] = useState('');
@@ -53,14 +54,18 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true); // Set isSubmitting to true
     // Simulate API call
-    console.log('Form Submitted from Hero:', { ...formData, country: selectedCountry.dial });
+    setTimeout(() => {
+      console.log('Form Submitted from Hero:', { ...formData, country: selectedCountry.dial });
 
-    // Show success toast
-    toast.success('Your quote request has been sent successfully!');
+      // Show success toast
+      toast.success('Your quote request has been sent successfully!');
 
-    // Reset form fields
-    setFormData({ name: '', email: '', budget: '', mobile: '', details: '' });
+      // Reset form fields
+      setFormData({ name: '', email: '', budget: '', mobile: '', details: '' });
+      setIsSubmitting(false); // Set isSubmitting to false after submission
+    }, 2000); // Simulate a 2-second delay
   };
 
   return (
@@ -237,8 +242,21 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                     </div>
 
                     {/* ORIGINAL THEME BUTTON */}
-                    <button type="submit" className="w-full flex items-center justify-center space-x-3 bg-gradient-blue text-white px-6 py-5 rounded-button font-bold uppercase tracking-widest transition-all duration-300 shadow-button hover:shadow-lg hover:scale-[1.03]">
-                      <span>Get Quote</span> <ArrowRight size={20} />
+                    <button 
+                      type="submit" 
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center space-x-3 bg-gradient-blue text-white px-6 py-5 rounded-button font-bold uppercase tracking-widest transition-all duration-300 shadow-button hover:shadow-lg hover:scale-[1.03] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          <span>SENDING...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Get Quote</span> <ArrowRight size={20} />
+                        </>
+                      )}
                     </button>
                   </form>
                 </div>
