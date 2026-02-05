@@ -31,10 +31,10 @@ const ScrollToTop: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-8 left-8 z-40 group">
+    <div className="fixed bottom-6 left-6 z-40 group">
       {/* Progress Ring */}
       <div className="relative">
-        <svg className="w-14 h-14 transform -rotate-90" viewBox="0 0 36 36">
+        <svg className="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
           <path
             className={theme === 'dark' ? 'text-white/20' : 'text-gray-300'}
             stroke="currentColor"
@@ -56,7 +56,7 @@ const ScrollToTop: React.FC = () => {
         {/* Button */}
         <button
           onClick={scrollToTop}
-          className={`absolute inset-0 w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 backdrop-blur-md border ${
+          className={`absolute inset-0 w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 backdrop-blur-md border ${
             theme === 'dark'
               ? 'bg-white/10 hover:bg-white/20 text-white border-white/20'
               : 'bg-white/80 hover:bg-white text-gray-700 border-gray-200/50'
