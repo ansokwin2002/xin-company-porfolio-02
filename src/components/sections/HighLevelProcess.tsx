@@ -244,28 +244,6 @@ const HighLevelProcess: React.FC = () => {
         </div>
       </section>
 
-      {/* Love Section */}
-      <section className="bg-black py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative overflow-hidden bg-[#1a1a1a] rounded-[40px] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 border border-white/5 shadow-2xl">
-            <div className="relative flex-shrink-0">
-              <div className="w-48 h-48 md:w-60 md:h-60 bg-black rounded-[32px] flex items-center justify-center relative overflow-hidden border border-white/10 shadow-2xl">
-                <div className="absolute inset-0 flex items-center justify-center">
-                   <div className="absolute w-32 h-32 bg-red-600/20 rounded-full blur-3xl animate-pulse"></div>
-                   <Heart size={90} className="text-red-500 fill-red-600 z-10 drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]" />
-                </div>
-              </div>
-            </div>
-            <div className="flex-1 text-center md:text-left text-white">
-              <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">Let's make people <br/><span className="text-blue-500">fall in love</span></h2>
-              <p className="text-gray-400 text-lg mb-10 max-w-2xl">Tell us about your app idea, and our team will work with you to create something amazing that your users will absolutely love.</p>
-              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-2xl flex items-center gap-2 mx-auto md:mx-0 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-900/20">
-                <span className="text-xl">Let's Talk</span> <ArrowRight />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <style>{`
         @keyframes stepEnter {
