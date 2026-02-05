@@ -245,13 +245,11 @@ const CreativeDesignsUIUX: React.FC = () => {
        {/* ======================================================= */}
         {/* --- NEW BLUE UI/UX SECTION (Matches Image Layout) --- */}
         {/* ======================================================= */}
-        <section 
-          ref={uiUxSectionRef} 
-          className="py-20 relative overflow-hidden"
-          // This gradient creates the Blue Background from the photo
-          style={{ background: 'linear-gradient(135deg, #0070F3 0%, #00C6FF 100%)' }}
-        >
-          {/* Background Wireframe Decor (Optional, simulating image background lines) */}
+                <section
+                  ref={uiUxSectionRef}
+                  className="py-20 relative overflow-hidden bg-cover bg-center"
+                  style={{ backgroundImage: `url('/assets/images/bg-ui-ux.png')` }}
+                >          {/* Background Wireframe Decor (Optional, simulating image background lines) */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
              <div className="absolute top-0 left-0 w-full h-full border-[0.5px] border-white/20 transform -skew-y-12 scale-150"></div>
           </div>
@@ -275,7 +273,7 @@ const CreativeDesignsUIUX: React.FC = () => {
                         Design Services
                       </span>
                     </h2>
-                    <p className="mt-4 text-white/80 text-lg">
+                    <p className="mt-4 text-black text-lg">
                       Crafting exceptional digital experiences that captivate users and drive measurable business growth.
                     </p>
                   </div>
@@ -344,7 +342,7 @@ const CreativeDesignsUIUX: React.FC = () => {
 
                   {/* Description Box */}
                   <div className="bg-white/10 backdrop-blur-sm border border-white/10 p-6 rounded-2xl">
-                    <p className="text-white/90 leading-relaxed text-sm md:text-base">
+                    <p className="text-black leading-relaxed text-sm md:text-base">
                       Our experienced team follows a user-centered design process, conducting
                       thorough research and iterative testing to ensure the highest quality.
                       We align our work with your business goals and maintain clear communication throughout.
@@ -362,8 +360,8 @@ const CreativeDesignsUIUX: React.FC = () => {
                               {feat.icon}
                            </div>
                            
-                           <h3 className="text-white font-bold text-lg mb-1">{feat.title}</h3>
-                           <p className="text-white/70 text-xs leading-relaxed">{feat.desc}</p>
+                           <h3 className="text-black font-bold text-lg mb-1">{feat.title}</h3>
+                           <p className="text-black text-xs leading-relaxed">{feat.desc}</p>
                         </div>
                      ))}
                   </div>
