@@ -193,8 +193,7 @@ const DevelopmentLifecycle: React.FC = () => {
       </section>
 
      {/* --- CTA Love Section --- */}
-      <section className="bg-black py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+                       <section className="bg-black py-20 px-6">        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Main Card: Dark Gray/Charcoal background */}
           <div className="relative overflow-hidden bg-[#2a2a2a] rounded-[40px] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 shadow-2xl border border-white/5">
             
