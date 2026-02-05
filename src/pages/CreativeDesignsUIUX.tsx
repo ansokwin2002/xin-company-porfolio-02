@@ -280,32 +280,7 @@ const CreativeDesignsUIUX: React.FC = () => {
 
                   {/* Main Glass Card (Isometric Phone Placeholder) */}
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 relative min-h-[300px] flex items-center justify-center overflow-hidden">
-                    {/* Inner glowing effect */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-blue-400 rounded-full blur-[80px] opacity-40"></div>
-                    
-                    {/* Placeholder for the 3D Phone Illustration */}
-                    <div className="relative z-10 transform rotate-[-10deg] skew-x-[-5deg]">
-                       <div className="w-40 h-72 bg-gradient-to-br from-red-400 to-pink-500 rounded-[2rem] shadow-2xl border-4 border-white/30 flex flex-col p-3">
-                          {/* Screen UI simulation */}
-                          <div className="flex-1 bg-white/90 rounded-xl w-full p-2 space-y-2">
-                             <div className="w-1/2 h-2 bg-gray-200 rounded-full"></div>
-                             <div className="w-full h-16 bg-blue-100 rounded-lg"></div>
-                             <div className="grid grid-cols-2 gap-2">
-                                <div className="h-10 bg-orange-100 rounded"></div>
-                                <div className="h-10 bg-purple-100 rounded"></div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                    
-                    {/* Floating elements */}
-                    <div className="absolute top-10 right-10 bg-white p-2 rounded-lg shadow-lg animate-bounce delay-700">📊</div>
-                    <div className="absolute bottom-10 left-10 bg-white p-2 rounded-lg shadow-lg animate-bounce delay-1000">🎨</div>
-                    
-                    {/* 100% Badge */}
-                    <div className="absolute bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-                      ✓ 100% Satisfaction
-                    </div>
+                    <img src="/assets/images/p1.png" alt="UI/UX Design" className="w-full h-auto rounded-3xl" />
                   </div>
 
                   {/* Expert Team Section */}
