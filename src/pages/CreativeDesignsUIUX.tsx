@@ -3,6 +3,7 @@ import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import Footer from '../components/layout/Footer';
 import HighLevelProcess from '../components/sections/HighLevelProcess';
+import ScrollToTop from '../components/specific/ScrollToTop';
 
 const CreativeDesignsUIUX: React.FC = () => {
   // --- Data Arrays ---
@@ -352,6 +353,7 @@ const CreativeDesignsUIUX: React.FC = () => {
 
       <HighLevelProcess />
       <StartYourNextBigProject />
+      <ScrollToTop />
       <Footer />
     </div>
   );

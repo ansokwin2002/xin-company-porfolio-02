@@ -4,6 +4,7 @@ import StartYourNextBigProject from '../components/sections/StartYourNextBigProj
 import Footer from '../components/layout/Footer';
 import { Rocket, Hand, ArrowRight, Lock, BarChart3, Mail, Activity, Layout, Clock, TrendingUp, Layers } from 'lucide-react';
 import DevelopmentLifecycle from '../components/sections/DevelopmentLifecycle';
+import ScrollToTop from '../components/specific/ScrollToTop';
 
 const MobileAppDevelopment: React.FC = () => {
   
@@ -50,7 +51,7 @@ const MobileAppDevelopment: React.FC = () => {
         <div className="bg-gradient-to-b from-[#2b9aff] to-[#4facfe] text-white py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
-              Build... Launch ... <span className="opacity-90">Grow</span>
+              <span className="text-black">Build... Launch ... </span><span className="opacity-90">Grow</span>
             </h1>
             <p className="text-base md:text-lg opacity-90 leading-relaxed max-w-2xl mx-auto">
               Got an idea? Partner with a leading app development team to build a high-quality 
@@ -82,12 +83,12 @@ const MobileAppDevelopment: React.FC = () => {
                   Our experienced team has successfully delivered 500+ mobile applications for businesses worldwide. We handle all the technical complexity so you can focus on your business growth.
                 </p>
                 <p className="text-sm text-gray-800">
-                  Let us handle the <span className="bg-gray-900 text-white px-1 py-0.5 rounded text-xs font-medium">technical hassle</span> so you can focus on <span className="bg-blue-500 text-white px-1 py-0.5 rounded text-xs font-medium">your success</span>
+                  Let us handle the <span className="bg-gray-900 text-white px-1 py-0.5 rounded text-xs font-medium">technical hassle</span> so you can focus on <span className="bg-gradient-blue text-white px-1 py-0.5 rounded text-xs font-medium">your success</span>
                 </p>
               </div>
 
               {/* CTA Button */}
-              <button className="group w-full bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white rounded-xl py-5 px-6 flex items-center justify-between shadow-lg shadow-blue-200 transition-all transform hover:-translate-y-1">
+              <button className="group w-full bg-gradient-blue text-white rounded-xl py-5 px-6 flex items-center justify-between shadow-lg shadow-blue-200 transition-all transform hover:-translate-y-1">
                 <div className="flex items-center gap-3">
                   <div className="bg-white/20 p-2 rounded-full">
                     <Rocket size={24} className="fill-current" />
@@ -102,7 +103,7 @@ const MobileAppDevelopment: React.FC = () => {
             <div className="pt-4">
               <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-2">
                 Building Mobile Apps is <br />
-                <span className="text-blue-500">Challenging</span>
+                <span className="bg-gradient-blue bg-clip-text text-transparent">Challenging</span>
               </h2>
               <h3 className="text-xl font-bold text-gray-800 mb-6">But we're here to help</h3>
               
@@ -151,6 +152,7 @@ const MobileAppDevelopment: React.FC = () => {
       </main>
       <DevelopmentLifecycle />
       <StartYourNextBigProject />
+      <ScrollToTop />
       <Footer />
     </div>
   );
