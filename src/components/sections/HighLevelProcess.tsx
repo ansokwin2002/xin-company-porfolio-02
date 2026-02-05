@@ -120,7 +120,7 @@ const HighLevelProcess: React.FC = () => {
     <div className="flex flex-col">
       <section 
         ref={lifecycleRef}
-        className={`py-20 bg-white font-sans overflow-hidden transition-all duration-1000 ease-out ${
+        className={`py-20 font-sans overflow-hidden transition-all duration-1000 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
@@ -128,7 +128,7 @@ const HighLevelProcess: React.FC = () => {
           
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              What is our <span className="text-blue-600">High-level Process?</span>
+              What is our <span className="bg-gradient-blue bg-clip-text text-transparent">High-level Process?</span>
             </h2>
           </div>
 
