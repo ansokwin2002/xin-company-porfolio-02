@@ -227,12 +227,16 @@ const HighLevelProcess: React.FC = () => {
                       {/* Icon Container */}
                       <div className={`
                         w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300
+                        /* 1. Always apply the specific step background color */
+                        ${step.styles.iconBg} 
+                        
+                        /* 2. Adjust opacity/state: Solid if active, slightly transparent if not */
                         ${isActive 
-                          ? `${step.styles.iconBg} text-white shadow-lg` 
-                          : `bg-gray-100 text-gray-400 group-hover:${step.styles.text}`
+                          ? 'text-white shadow-lg opacity-100' 
+                          : 'text-white opacity-40 group-hover:opacity-100 group-hover:shadow-md'
                         }
                       `}>
-                        <step.icon size={20} strokeWidth={isActive ? 2 : 1.5} />
+                        <step.icon size={20} strokeWidth={isActive ? 2.5 : 2} />
                       </div>
                       
                       {/* Text */}

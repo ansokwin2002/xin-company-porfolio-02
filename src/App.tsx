@@ -15,6 +15,7 @@ import StartYourNextBigProject from './components/sections/StartYourNextBigProje
 import TelegramLink from './components/specific/TelegramLink';
 import Footer from './components/layout/Footer';
 import CreativeDesignsUIUX from './pages/CreativeDesignsUIUX';
+import MobileAppDevelopment from './pages/MobileAppDevelopment';
 
 // Admin Components
 import Login from './pages/admin/Login';
@@ -82,6 +83,7 @@ function App() {
             <Route path="/admin/register" element={<Register />} />
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/creative-designs-ui-ux" element={<CreativeDesignsUIUX />} />
+            <Route path="/mobile-app-development" element={<MobileAppDevelopment />} />
           </Routes>
         </BrowserRouter>
       </div>
