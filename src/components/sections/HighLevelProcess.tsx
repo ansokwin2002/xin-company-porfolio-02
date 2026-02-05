@@ -25,6 +25,9 @@ const HighLevelProcess: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(1);
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(false);
 
+  const highLevelProcessRef = React.useRef<HTMLElement>(null);
+  const [isHighLevelProcessVisible, setIsHighLevelProcessVisible] = React.useState(false);
+
   // DATA: Explicitly defining classes so Tailwind renders them correctly
   const steps: ProcessStep[] = [
     {
@@ -119,8 +122,36 @@ const HighLevelProcess: React.FC = () => {
     return () => clearInterval(interval);
   }, [isAutoPlaying, steps.length]);
 
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsHighLevelProcessVisible(true);
+        } else {
+          setIsHighLevelProcessVisible(false); // Optional: reset visibility if scrolled away
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (highLevelProcessRef.current) {
+      observer.observe(highLevelProcessRef.current);
+    }
+
+    return () => {
+      if (highLevelProcessRef.current) {
+        observer.unobserve(highLevelProcessRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section className="py-20 bg-white font-sans overflow-hidden">
+    <section 
+      ref={highLevelProcessRef}
+      className={`py-20 bg-white font-sans overflow-hidden transition-all duration-1000 ease-out ${
+        isHighLevelProcessVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
         {/* Header */}
