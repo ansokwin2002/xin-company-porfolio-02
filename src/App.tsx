@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner'; // Import Toaster
-import LoadingScreen from './components/LoadingScreen';
-import ScrollToTop from './components/ScrollToTop';
-import ScrollToTopOnRouteChange from './components/ScrollToTopOnRouteChange';
-import CustomCursor from './components/CustomCursor';
+import LoadingScreen from './components/specific/LoadingScreen';
+import ScrollToTop from './components/specific/ScrollToTop';
+import ScrollToTopOnRouteChange from './components/specific/ScrollToTopOnRouteChange';
+import CustomCursor from './components/specific/CustomCursor';
 import { ThemeProvider } from './contexts/ThemeContext';
 
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import ServicesShowcase from './components/ServicesShowcase';
-import OurClients from './components/OurClients';
-import StartYourNextBigProject from './components/StartYourNextBigProject';
-import TelegramLink from './components/TelegramLink';
-import Footer from './components/Footer';
+import Navigation from './components/layout/Navigation';
+import Hero from './components/sections/Hero';
+import ServicesShowcase from './components/sections/ServicesShowcase';
+import OurClients from './components/sections/OurClients';
+import StartYourNextBigProject from './components/sections/StartYourNextBigProject';
+import TelegramLink from './components/specific/TelegramLink';
+import Footer from './components/layout/Footer';
 import CreativeDesignsUIUX from './pages/CreativeDesignsUIUX';
 
 // Admin Components
-import Login from './components/admin/Login';
-import Register from './components/admin/Register';
-import Dashboard from './components/admin/Dashboard';
+import Login from './pages/admin/Login';
+import Register from './pages/admin/Register';
+import Dashboard from './pages/admin/Dashboard';
 
 interface MainLayoutProps {
   showAnimations: boolean;

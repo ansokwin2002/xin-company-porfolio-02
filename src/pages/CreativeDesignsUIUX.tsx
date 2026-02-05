@@ -1,7 +1,7 @@
 import React from 'react';
-import Navigation from '../components/Navigation';
-import StartYourNextBigProject from '../components/StartYourNextBigProject';
-import Footer from '../components/Footer';
+import Navigation from '../components/layout/Navigation';
+import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
+import Footer from '../components/layout/Footer';
 
 const CreativeDesignsUIUX: React.FC = () => {
   // --- Data Arrays ---
@@ -356,3 +356,4 @@ const CreativeDesignsUIUX: React.FC = () => {
 };
 
 export default CreativeDesignsUIUX;
+

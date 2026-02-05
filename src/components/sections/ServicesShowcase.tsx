@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Palette, Smartphone, Monitor, TrendingUp, Lightbulb, Cloud, MessageCircle, Settings, Briefcase, Clock, DollarSign, Handshake, UserCircle, MessageSquare, Target } from 'lucide-react';
-import CountingNumber from './CountingNumber';
+import CountingNumber from '../specific/CountingNumber';
 import { Link } from 'react-router-dom';
 
 // --- Service Card Component (Unchanged) ---

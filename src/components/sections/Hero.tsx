@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
-import CountingNumber from './CountingNumber';
+import CountingNumber from '../specific/CountingNumber';
 
 const countries = [
   { code: 'kh', name: 'Cambodia', dial: '+855' },

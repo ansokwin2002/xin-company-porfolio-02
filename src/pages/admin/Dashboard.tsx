@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminNavigation from './AdminNavigation';
+import AdminNavigation from '../../components/layout/AdminNavigation';
 
 const Dashboard: React.FC = () => {
   return (
@@ -40,3 +40,4 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
