@@ -31,7 +31,7 @@ const ScrollToTop: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-40 group">
+    <div className="fixed bottom-24 right-6 z-40 group">
       {/* Progress Ring */}
       <div className="relative">
         <svg className="w-12 h-12 transform -rotate-90" viewBox="0 0 36 36">
