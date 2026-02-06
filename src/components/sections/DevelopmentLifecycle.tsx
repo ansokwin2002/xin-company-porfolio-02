@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Search, Layers, Palette, ArrowRight, Heart, Rocket, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Search, Layers, ArrowRight, Rocket, CheckCircle2 } from 'lucide-react';
 
 interface StepStyles {
   listActiveBg: string;
@@ -20,14 +20,14 @@ interface ProcessStep {
   headerTitle: string;
   icon: React.ElementType;
   description: string;
-  points: string[]; // Added for the bullet points from your photo
+  points: string[];
   styles: StepStyles;
 }
 
 const DevelopmentLifecycle: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number>(1);
-  const lifecycleRef = React.useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = React.useState(false);
+  const lifecycleRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   const steps: ProcessStep[] = [
     {
@@ -36,7 +36,7 @@ const DevelopmentLifecycle: React.FC = () => {
       title: 'Research & Development',
       headerTitle: 'Research & Development',
       icon: Search,
-      description: 'We carry out a thorough research and development process to deliver an app that not only meets your goals but gives you a competitive edge.',
+      description: 'We carry out a thorough research and development process to deliver an app that not only meets your goals but gives you a competitive edge. Our expert team takes the time to deeply understand your business, ensuring every feature is aligned with your market, your users, and your growth.',
       points: [
         'Market & competitor analysis',
         'Technical feasibility study',
@@ -61,7 +61,7 @@ const DevelopmentLifecycle: React.FC = () => {
       title: 'Design & Validation',
       headerTitle: 'Design & Validation',
       icon: Layers,
-      description: 'We begin with a full UX analysis, then move into structured UX design. Once mapped out, we validate it with real users to gather insights.',
+      description: 'We begin with a full UX analysis, then move into structured UX design. Once the experience is mapped out, we validate it with real users to gather insights and identify improvements. After that, we create the UI design and conduct another round of user validation to ensure the final interface is intuitive, engaging, and aligned with user expectations.',
       points: [
         'UX wireframing & prototyping',
         'User testing & feedback',
@@ -86,7 +86,7 @@ const DevelopmentLifecycle: React.FC = () => {
       title: 'Development & Launch',
       headerTitle: 'Development & Launch',
       icon: Rocket,
-      description: 'We follow a professional, agile Scrum-based process and keep you updated every week to ensure full alignment and product success.',
+      description: 'We follow a professional, agile Scrum-based process and keep you updated every week to ensure full alignment and product success. Before launch, we conduct a complete testing cycle to guarantee performance, stability, and a seamless user experience.',
       points: [
         'Agile development sprints',
         'Weekly progress updates',
@@ -109,10 +109,18 @@ const DevelopmentLifecycle: React.FC = () => {
 
   const activeTheme = steps[activeStep - 1].styles;
 
+  // FIXED LOGIC: Animation triggers ONLY ONCE
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        // Stop observing once it has become visible
+        if (lifecycleRef.current) observer.unobserve(lifecycleRef.current);
+      }
+    }, { threshold: 0.1 });
+
     if (lifecycleRef.current) observer.observe(lifecycleRef.current);
-    return () => { if (lifecycleRef.current) observer.unobserve(lifecycleRef.current); };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -190,7 +198,6 @@ const DevelopmentLifecycle: React.FC = () => {
                     {steps[activeStep - 1].description}
                   </p>
 
-                  {/* Bullet Points Section - MATCHES PHOTO */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 border-t border-white/20 pt-8 mt-8">
                     {steps[activeStep - 1].points.map((point, index) => (
                       <div key={index} className="flex items-center gap-3">
@@ -207,8 +214,6 @@ const DevelopmentLifecycle: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Love Section code remains the same as previous... */}
     </div>
   );
 };

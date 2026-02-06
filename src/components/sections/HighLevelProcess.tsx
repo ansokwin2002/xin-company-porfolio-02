@@ -48,7 +48,7 @@ const HighLevelProcess: React.FC = () => {
       title: 'UX Prototype',
       headerTitle: 'UX Prototype',
       icon: Layers,
-      description: 'Creating interactive representations of the product to test and refine design concepts and user flow. By incorporating user feedback, prototypes help validate design decisions.',
+      description: 'Creating interactive representations of the product to test and refine design concepts and user flow. By incorporating user feedback, prototypes help validate design decisions and identify potential issues early in the process.',
       styles: {
         activeBg: 'bg-purple-50',
         activeBorder: 'border-purple-200',
@@ -80,7 +80,7 @@ const HighLevelProcess: React.FC = () => {
       title: 'Validation & Testing',
       headerTitle: 'Validation & Testing',
       icon: FlaskConical,
-      description: 'Analyzing design solutions via usability testing, A/B testing, and heuristic evaluations to ensure the product meets quality standards and user expectations.',
+      description: 'We analyze design solutions using various techniques to determine their efficacy. This involves usability testing, A/B testing, and heuristic evaluations to gather user feedback and identify areas for improvement.',
       styles: {
         activeBg: 'bg-orange-50',
         activeBorder: 'border-orange-200',
@@ -96,7 +96,7 @@ const HighLevelProcess: React.FC = () => {
       title: 'Launch',
       headerTitle: 'Launch',
       icon: Rocket,
-      description: 'Implementing the completed concept into practice and monitoring performance post-launch to ensure a smooth transition and long-term success.',
+      description: 'Implementing the completed concept into practice and keeping an eye on its performance after launch. This entails managing the development process to guarantee design integrity.',
       styles: {
         activeBg: 'bg-green-50',
         activeBorder: 'border-green-200',
@@ -110,8 +110,19 @@ const HighLevelProcess: React.FC = () => {
 
   const activeTheme = steps[activeStep - 1].styles;
 
+  // --- LOGIC: TRIGGER ONLY ONCE ---
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Unobserve ensures it doesn't pop up again when scrolling back
+          if (lifecycleRef.current) observer.unobserve(lifecycleRef.current);
+        }
+      }, 
+      { threshold: 0.1 }
+    );
+
     if (lifecycleRef.current) observer.observe(lifecycleRef.current);
     return () => observer.disconnect();
   }, []);
@@ -153,7 +164,7 @@ const HighLevelProcess: React.FC = () => {
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-            {/* Left Selection - Fixed Colors */}
+            {/* Left Selection */}
             <div className="lg:col-span-5 flex flex-col gap-4">
               {steps.map((step) => {
                 const isActive = activeStep === step.id;
@@ -171,8 +182,6 @@ const HighLevelProcess: React.FC = () => {
                   >
                     <div className="flex items-center justify-between relative z-10">
                       <div className="flex items-center gap-4">
-                        
-                        {/* ICON BOX: Always colored, opacity changes on hover/active */}
                         <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300
                           ${step.styles.iconBg} 
                           ${isActive 
@@ -209,9 +218,7 @@ const HighLevelProcess: React.FC = () => {
             {/* Right Detail Box */}
             <div className="lg:col-span-7">
               <div className={`h-full bg-white rounded-3xl border p-8 md:p-12 relative overflow-hidden transition-all duration-500 ${activeTheme.activeBorder}`}>
-                
                 <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl ${activeTheme.lightGradient} to-transparent rounded-bl-full -z-0 opacity-50 pointer-events-none`}></div>
-                
                 <div className="absolute top-10 right-10 text-9xl font-black text-gray-100 select-none pointer-events-none opacity-40">
                   0{activeStep}
                 </div>
@@ -243,7 +250,6 @@ const HighLevelProcess: React.FC = () => {
           </div>
         </div>
       </section>
-
 
       <style>{`
         @keyframes stepEnter {
