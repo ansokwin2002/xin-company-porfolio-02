@@ -19,43 +19,51 @@ import CustomCursor from './components/specific/CustomCursor';
 import ScrollToTop from './components/specific/ScrollToTop';
 
 interface AppRoutesProps {
-  setProgress: React.Dispatch<React.SetStateAction<number>>;
+
   showAnimations: boolean; // Passed from App
+
   scrollToSection: (sectionId: string) => void; // Passed from App
+
 }
 
 // MainLayout definition (copied from App.tsx)
+
 interface MainLayoutProps {
+
   showAnimations: boolean;
+
   scrollToSection: (sectionId: string) => void;
+
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations, scrollToSection }) => (
+
   <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
+
     <CustomCursor />
+
     <Navigation />
+
     <Hero showAnimations={showAnimations} />
+
     <ServicesShowcase />
+
     <OurClients/>
+
     <StartYourNextBigProject/>
+
     <TelegramLink />
+
     <ScrollToTop />
+
     <Footer />
+
   </div>
+
 );
 
-
-const AppRoutes: React.FC<AppRoutesProps> = ({ setProgress, showAnimations, scrollToSection }) => {
+const AppRoutes: React.FC<AppRoutesProps> = ({ showAnimations, scrollToSection }) => {
   const location = useLocation();
-
-  useEffect(() => {
-    setProgress(70); // Start progress bar on route change
-    const timer = setTimeout(() => {
-      setProgress(100); // Complete progress after a short delay
-    }, 300); // Simulate page load in 300ms
-
-    return () => clearTimeout(timer);
-  }, [location, setProgress]);
 
   return (
     <>

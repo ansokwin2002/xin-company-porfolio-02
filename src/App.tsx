@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BrowserRouter } from 'react-router-dom'; // Removed useLocation
+import { useLocation } from 'react-router-dom'; // Removed BrowserRouter import
 import { Toaster } from 'sonner';
 import LoadingBar from 'react-top-loading-bar';
 import LoadingScreen from './components/specific/LoadingScreen';
@@ -22,8 +22,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations, scrollToSection
 function App() {
   const [showAnimations, setShowAnimations] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0); // State for loading bar progress
-  const loadingBarRef = useRef(null); // Ref for LoadingBar
+  const loadingBarRef = useRef<any>(null); // Ref for LoadingBar
+  const location = useLocation(); // Moved useLocation here
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -42,6 +42,40 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    // Effect for LoadingBar on initial mount/refresh
+    if (loadingBarRef.current) {
+      loadingBarRef.current.continuousStart();
+    }
+
+    const timer = setTimeout(() => {
+      if (loadingBarRef.current) {
+        loadingBarRef.current.complete();
+      }
+    }, 800); // Simulate initial page load time
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []); // Empty dependency array means it runs once on mount
+
+  // Effect for LoadingBar on route change
+  useEffect(() => {
+    if (loadingBarRef.current) {
+      loadingBarRef.current.continuousStart(); // Start the loading bar
+    }
+
+    const timer = setTimeout(() => {
+      if (loadingBarRef.current) {
+        loadingBarRef.current.complete(); // Complete the loading bar
+      }
+    }, 500); // Simulate load time
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [location]); // Trigger when location changes
+
   // Show loading screen
   if (isLoading) {
     return (
@@ -55,14 +89,14 @@ function App() {
     <ThemeProvider>
       <Toaster richColors position="top-center" />
       <div className="relative">
-        <BrowserRouter>
-          <LoadingBar color="#2998ff" height={3} progress={progress} onLoaderFinished={() => setProgress(0)} ref={loadingBarRef} />
+        {/* BrowserRouter is now in main.tsx or higher */}
+          <LoadingBar color="#1E88E5" height={3} ref={loadingBarRef} />
           <CursorEffect />
-          <AppRoutes setProgress={setProgress} showAnimations={showAnimations} scrollToSection={scrollToSection} />
-        </BrowserRouter>
+          <AppRoutes showAnimations={showAnimations} scrollToSection={scrollToSection} />
       </div>
     </ThemeProvider>
   );
 }
 
 export default App;
+
