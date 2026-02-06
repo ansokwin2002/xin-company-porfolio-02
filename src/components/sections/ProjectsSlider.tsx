@@ -39,7 +39,7 @@ const ProjectsSlider: React.FC = () => {
         {/* Header Section */}
         <div className="mb-10">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-3">
-            Our featured <span className="text-blue-500">Projects</span>
+            Our featured <span className="bg-gradient-blue bg-clip-text text-transparent">Projects</span>
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
             Explore our showcase of successful mobile applications that have transformed businesses
@@ -100,7 +100,7 @@ const ProjectsSlider: React.FC = () => {
 
         {/* Bottom CTA Button */}
         <div className="mt-8">
-          <button className="bg-gradient-to-r from-blue-600 to-blue-400 text-white px-8 py-3.5 rounded-xl font-bold text-md shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 transition-transform flex items-center gap-2 mx-auto group">
+          <button className="bg-gradient-blue text-white px-8 py-3.5 rounded-xl font-bold text-md shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 transition-transform flex items-center gap-2 mx-auto group">
             Let's Build Your App <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
