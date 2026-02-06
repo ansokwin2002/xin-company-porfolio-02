@@ -4,6 +4,7 @@ import StartYourNextBigProject from '../components/sections/StartYourNextBigProj
 import Footer from '../components/layout/Footer';
 import { Rocket, Hand, ArrowRight, Activity, Layout, Clock, TrendingUp, Layers } from 'lucide-react';
 import DevelopmentLifecycle from '../components/sections/DevelopmentLifecycle';
+import ProjectsSlider from '../components/sections/ProjectsSlider';
 import ScrollToTop from '../components/specific/ScrollToTop';
 
 const MobileAppDevelopment: React.FC = () => {
@@ -184,6 +185,7 @@ const MobileAppDevelopment: React.FC = () => {
       </main>
 
       <DevelopmentLifecycle />
+      <ProjectsSlider/>
       <StartYourNextBigProject />
       <ScrollToTop />
       <Footer />
