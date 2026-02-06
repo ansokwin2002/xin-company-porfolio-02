@@ -1,0 +1,75 @@
+// src/AppRoutes.tsx
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
+import ScrollToTopOnRouteChange from './components/specific/ScrollToTopOnRouteChange';
+import CreativeDesignsUIUX from './pages/CreativeDesignsUIUX';
+import MobileAppDevelopment from './pages/MobileAppDevelopment';
+import Login from './pages/admin/Login';
+import Register from './pages/admin/Register';
+import Dashboard from './pages/admin/Dashboard';
+import Navigation from './components/layout/Navigation';
+import Hero from './components/sections/Hero';
+import ServicesShowcase from './components/sections/ServicesShowcase';
+import OurClients from './components/sections/OurClients';
+import StartYourNextBigProject from './components/sections/StartYourNextBigProject';
+import TelegramLink from './components/specific/TelegramLink';
+import Footer from './components/layout/Footer';
+import CustomCursor from './components/specific/CustomCursor';
+import ScrollToTop from './components/specific/ScrollToTop';
+
+interface AppRoutesProps {
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
+  showAnimations: boolean; // Passed from App
+  scrollToSection: (sectionId: string) => void; // Passed from App
+}
+
+// MainLayout definition (copied from App.tsx)
+interface MainLayoutProps {
+  showAnimations: boolean;
+  scrollToSection: (sectionId: string) => void;
+}
+
+const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations, scrollToSection }) => (
+  <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
+    <CustomCursor />
+    <Navigation />
+    <Hero showAnimations={showAnimations} />
+    <ServicesShowcase />
+    <OurClients/>
+    <StartYourNextBigProject/>
+    <TelegramLink />
+    <ScrollToTop />
+    <Footer />
+  </div>
+);
+
+
+const AppRoutes: React.FC<AppRoutesProps> = ({ setProgress, showAnimations, scrollToSection }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    setProgress(70); // Start progress bar on route change
+    const timer = setTimeout(() => {
+      setProgress(100); // Complete progress after a short delay
+    }, 300); // Simulate page load in 300ms
+
+    return () => clearTimeout(timer);
+  }, [location, setProgress]);
+
+  return (
+    <>
+      <ScrollToTopOnRouteChange />
+      <Routes>
+        <Route path="/" element={<MainLayout showAnimations={showAnimations} scrollToSection={scrollToSection} />} />
+        <Route path="/admin/login" element={<Login />} />
+        <Route path="/admin/register" element={<Register />} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/creative-designs-ui-ux" element={<CreativeDesignsUIUX />} />
+        <Route path="/mobile-app-development" element={<MobileAppDevelopment />} />
+      </Routes>
+    </>
+  );
+};
+
+export default AppRoutes;

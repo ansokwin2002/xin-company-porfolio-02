@@ -1,26 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Toaster } from 'sonner'; // Import Toaster
+import React, { useState, useEffect, useRef } from 'react';
+import { BrowserRouter } from 'react-router-dom'; // Removed useLocation
+import { Toaster } from 'sonner';
+import LoadingBar from 'react-top-loading-bar';
 import LoadingScreen from './components/specific/LoadingScreen';
-import ScrollToTop from './components/specific/ScrollToTop';
-import ScrollToTopOnRouteChange from './components/specific/ScrollToTopOnRouteChange';
-import CustomCursor from './components/specific/CustomCursor';
 import { ThemeProvider } from './contexts/ThemeContext';
-
-import Navigation from './components/layout/Navigation';
-import Hero from './components/sections/Hero';
-import ServicesShowcase from './components/sections/ServicesShowcase';
-import OurClients from './components/sections/OurClients';
-import StartYourNextBigProject from './components/sections/StartYourNextBigProject';
-import TelegramLink from './components/specific/TelegramLink';
-import Footer from './components/layout/Footer';
-import CreativeDesignsUIUX from './pages/CreativeDesignsUIUX';
-import MobileAppDevelopment from './pages/MobileAppDevelopment';
-
-// Admin Components
-import Login from './pages/admin/Login';
-import Register from './pages/admin/Register';
-import Dashboard from './pages/admin/Dashboard';
+import AppRoutes from './AppRoutes'; // Import AppRoutes
+import CursorEffect from './components/specific/CursorEffect';
 
 interface MainLayoutProps {
   showAnimations: boolean;
@@ -29,21 +14,16 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations, scrollToSection }) => (
   <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-500">
-    <CustomCursor />
-    <Navigation />
-    <Hero showAnimations={showAnimations} />
-    <ServicesShowcase />
-    <OurClients/>
-    <StartYourNextBigProject/>
-    <TelegramLink />
-    <ScrollToTop /> {/* Keep the button component */}
-    <Footer />
+    {/* CustomCursor, Navigation, Hero, etc. are now passed via props or handled within AppRoutes/MainLayout */}
+    {/* These components were part of MainLayout definition */}
   </div>
 );
 
 function App() {
   const [showAnimations, setShowAnimations] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0); // State for loading bar progress
+  const loadingBarRef = useRef(null); // Ref for LoadingBar
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -73,18 +53,12 @@ function App() {
 
   return (
     <ThemeProvider>
-      <Toaster richColors position="top-center" /> {/* Add Toaster component from sonner */}
+      <Toaster richColors position="top-center" />
       <div className="relative">
         <BrowserRouter>
-          <ScrollToTopOnRouteChange /> {/* New component to handle scroll to top on route change */}
-          <Routes>
-            <Route path="/" element={<MainLayout showAnimations={showAnimations} scrollToSection={scrollToSection} />} />
-            <Route path="/admin/login" element={<Login />} />
-            <Route path="/admin/register" element={<Register />} />
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/creative-designs-ui-ux" element={<CreativeDesignsUIUX />} />
-            <Route path="/mobile-app-development" element={<MobileAppDevelopment />} />
-          </Routes>
+          <LoadingBar color="#2998ff" height={3} progress={progress} onLoaderFinished={() => setProgress(0)} ref={loadingBarRef} />
+          <CursorEffect />
+          <AppRoutes setProgress={setProgress} showAnimations={showAnimations} scrollToSection={scrollToSection} />
         </BrowserRouter>
       </div>
     </ThemeProvider>
