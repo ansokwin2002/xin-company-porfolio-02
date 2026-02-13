@@ -181,6 +181,10 @@ const ServicesShowcase: React.FC = () => {
                   <CountingNumber targetValue={100} suffix="%" className="text-4xl font-black text-white mb-1" />
                   <p className="text-blue-100 text-xs uppercase tracking-wider font-bold">Satisfaction Rate</p>
                 </div>
+                <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20">
+                  <p className='text-4xl font-black text-white mb-1'>12/7</p>
+                  <p className="text-blue-100 text-xs uppercase tracking-wider font-bold">Support Available</p>
+                </div>
               </div>
             </div>
 
