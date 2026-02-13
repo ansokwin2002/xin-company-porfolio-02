@@ -35,11 +35,22 @@ const Navigation: React.FC = () => {
   const navigate = useNavigate();
 
   const navItems = [
-    { id: 'home', label: 'nav.home', type: 'link' },
-    { id: 'products', label: 'nav.products', type: 'dropdown', items: [{ id: 'p1', label: 'nav.products.p1' }, { id: 'p2', label: 'nav.products.p2' }] },
-    { id: 'services', label: 'nav.services', type: 'dropdown', items: [{ id: 's1', label: 'nav.services.s1' }, { id: 's2', label: 'nav.services.s2' }] },
+    { id: 'home', label: 'nav.home', type: 'link', path: '/' },
+    {
+      id: 'services',
+      label: 'nav.services',
+      type: 'dropdown',
+      items: [
+        { id: 'creative-designs-ui-ux', label: 'nav.services.creative_designs_ui_ux', path: '/creative-designs-ui-ux' },
+        { id: 'mobile-app-development', label: 'nav.services.mobile_app_development', path: '/mobile-app-development' },
+        { id: 'web-app-development', label: 'nav.services.web_app_development', path: '/web-app-development' },
+        { id: 'digital-marketing', label: 'nav.services.digital_marketing', path: '/digital-marketing' },
+        { id: 'it-consultancy-devops', label: 'nav.services.it_consultancy_devops', path: '#it-consultancy-devops' },
+        { id: 'hosting-server', label: 'nav.services.hosting_server', path: '#hosting-server' },
+      ]
+    },
     { id: 'company', label: 'nav.company', type: 'dropdown', items: [{ id: 'about', label: 'nav.company.about' }, { id: 'careers', label: 'nav.company.careers' }] },
-    { id: 'blog', label: 'nav.blog', type: 'link' },
+    { id: 'blog', label: 'nav.blog', type: 'link', path: '/blog' },
   ];
 
   const languages = [
@@ -85,7 +96,7 @@ const Navigation: React.FC = () => {
             {navItems.map((item) => (
               <div key={item.id} className="relative group h-full flex items-center">
                 {item.type === 'link' ? (
-                  <button onClick={() => { if (item.id === 'home') { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); } else { scrollToSection(item.id); } }} className={`text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
+                  <button onClick={() => { navigate(item.path); setIsOpen(false); }} className={`text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
                     {t(item.label)}
                   </button>
                 ) : (
@@ -96,9 +107,20 @@ const Navigation: React.FC = () => {
                     </button>
                     {/* Dropdown Menu */}
                     <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all pt-1 z-50">
-                      <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 w-48">
+                      <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 w-72">
                         {item.items?.map(sub => (
-                          <button key={sub.id} onClick={() => scrollToSection(sub.id)} className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 text-gray-700 hover:text-gold transition-colors">
+                          <button 
+                            key={sub.id} 
+                            onClick={() => { 
+                              if (sub.path && sub.path.startsWith('/')) {
+                                navigate(sub.path); 
+                              } else {
+                                scrollToSection(sub.id);
+                              }
+                              setIsOpen(false);
+                            }} 
+                            className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 text-gray-700 hover:text-gold transition-colors"
+                          >
                             {t(sub.label)}
                           </button>
                         ))}
@@ -152,7 +174,7 @@ const Navigation: React.FC = () => {
           {navItems.map((item) => (
             <div key={item.id}>
               {item.type === 'link' ? (
-                <button onClick={() => { if (item.id === 'home') { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); } else { scrollToSection(item.id); } }} className="block w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium">
+                <button onClick={() => { navigate(item.path); setIsOpen(false); }} className="block w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium">
                   {t(item.label)}
                 </button>
               ) : (
@@ -167,7 +189,18 @@ const Navigation: React.FC = () => {
                   <div className={`transition-all duration-300 ease-out overflow-hidden ${activeDropdown === item.id ? 'max-h-screen opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}`}>
                     <div className="pl-4 border-l border-gray-200 ml-2 py-1 space-y-1">
                       {item.items?.map(sub => (
-                        <button key={sub.id} onClick={() => scrollToSection(sub.id)} className="block w-full text-left py-2 text-sm text-gray-600 hover:text-gold">
+                        <button 
+                          key={sub.id} 
+                          onClick={() => { 
+                            if (sub.path && sub.path.startsWith('/')) {
+                              navigate(sub.path); 
+                            } else {
+                              scrollToSection(sub.id);
+                            }
+                            setIsOpen(false);
+                          }} 
+                          className="block w-full text-left py-2 text-sm text-gray-600 hover:text-gold"
+                        >
                           {t(sub.label)}
                         </button>
                       ))}
