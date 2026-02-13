@@ -5,5 +5,55 @@
   "services": "Services",
   "testimonials": "Testimonials",
   "faq": "FAQ",
-  "contact": "Contact"
+  "contact": "Contact",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "products.p1": "Product 1",
+    "products.p2": "Product 2",
+    "services": "Services",
+    "services.s1": "Service 1",
+    "services.s2": "Service 2",
+    "company": "Company",
+    "company.about": "About Us",
+    "company.careers": "Careers",
+    "blog": "Blog",
+    "contact": "Contact Us"
+  },
+  "hero": {
+    "badges": {
+      "years": "+ Years",
+      "projects": "+ Projects",
+      "rating": " Rating"
+    },
+    "headline": "Turn Your Ideas into Smart, High-Performance",
+    "typewriter": {
+      "words": [
+        "Digital Products",
+        "Mobile Apps",
+        "AI Automation",
+        "Web Platforms"
+      ]
+    },
+    "subheadline": "From mobile apps to AI automation, web platforms, and UX design, we create solutions that scale.",
+    "viewWork": "View Our Work",
+    "form": {
+      "title": "Get a Free Quote",
+      "subtitle": "Tell us about your project",
+      "name": "Your Name",
+      "email": "Work Email",
+      "mobile": "Mobile Number",
+      "budget": {
+        "label": "Project Budget",
+        "options": [
+          "$1,000 - $5,000",
+          "$5,000+",
+          "Custom"
+        ]
+      },
+      "details": "Project Details",
+      "submit": "Get Quote",
+      "sending": "SENDING..."
+    }
+  }
 }

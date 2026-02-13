@@ -11,8 +11,7 @@ i18n
   .init({
     debug: false,
     fallbackLng: 'en',
-    supportedLngs: ['en', 'km', 'zh-CN'],
-    load: 'languageOnly',
+    supportedLngs: ['en', 'km', 'zh-CN', 'tw'],
     interpolation: {
       escapeValue: false,
     },

@@ -31,21 +31,22 @@ const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
 
   const navItems = [
-    { id: 'home', label: 'Home', type: 'link' },
-    { id: 'products', label: 'Products', type: 'dropdown', items: [{ id: 'p1', label: 'Product 1' }, { id: 'p2', label: 'Product 2' }] },
-    { id: 'services', label: 'Services', type: 'dropdown', items: [{ id: 's1', label: 'Service 1' }, { id: 's2', label: 'Service 2' }] },
-    { id: 'company', label: 'Company', type: 'dropdown', items: [{ id: 'about', label: 'About Us' }, { id: 'careers', label: 'Careers' }] },
-    { id: 'blog', label: 'Blog', type: 'link' },
+    { id: 'home', label: 'nav.home', type: 'link' },
+    { id: 'products', label: 'nav.products', type: 'dropdown', items: [{ id: 'p1', label: 'nav.products.p1' }, { id: 'p2', label: 'nav.products.p2' }] },
+    { id: 'services', label: 'nav.services', type: 'dropdown', items: [{ id: 's1', label: 'nav.services.s1' }, { id: 's2', label: 'nav.services.s2' }] },
+    { id: 'company', label: 'nav.company', type: 'dropdown', items: [{ id: 'about', label: 'nav.company.about' }, { id: 'careers', label: 'nav.company.careers' }] },
+    { id: 'blog', label: 'nav.blog', type: 'link' },
   ];
 
   const languages = [
     { code: 'en', label: 'Eng' },
     { code: 'km', label: 'ខ្មែរ' },
     { code: 'zh-CN', label: '中文' },
+    { code: 'tw', label: '臺灣' },
   ];
 
   useEffect(() => {
@@ -66,7 +67,7 @@ const Navigation: React.FC = () => {
   const goldLineClass = "relative transition-colors before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-gold before:scale-x-0 before:origin-center before:transition-transform before:duration-300 group-hover:before:scale-x-100 hover:before:scale-x-100";
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-200 ${isScrolled ? 'bg-white shadow-sm border-b border-gray-100' : 'bg-white'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-200 ${isScrolled ? 'bg-white shadow-sm border-b border-gray-100' : 'bg-white'} ${i18n.language === 'km' ? 'font-siemreap' : ''}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
@@ -85,12 +86,12 @@ const Navigation: React.FC = () => {
               <div key={item.id} className="relative group h-full flex items-center">
                 {item.type === 'link' ? (
                   <button onClick={() => { if (item.id === 'home') { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); } else { scrollToSection(item.id); } }} className={`text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
-                    {item.label}
+                    {t(item.label)}
                   </button>
                 ) : (
                   <>
                     <button className={`flex items-center space-x-1 text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
-                      <span>{item.label}</span>
+                      <span>{t(item.label)}</span>
                       <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
                     </button>
                     {/* Dropdown Menu */}
@@ -98,7 +99,7 @@ const Navigation: React.FC = () => {
                       <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 w-48">
                         {item.items?.map(sub => (
                           <button key={sub.id} onClick={() => scrollToSection(sub.id)} className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 text-gray-700 hover:text-gold transition-colors">
-                            {sub.label}
+                            {t(sub.label)}
                           </button>
                         ))}
                       </div>
@@ -134,7 +135,7 @@ const Navigation: React.FC = () => {
             {/* Contact Button */}
             <button onClick={() => scrollToSection('contact')} className="hidden lg:flex items-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-transform">
               <ContactIcon />
-              <span>Contact Us</span>
+              <span>{t('nav.contact')}</span>
             </button>
 
             {/* Mobile menu toggle */}
@@ -152,7 +153,7 @@ const Navigation: React.FC = () => {
             <div key={item.id}>
               {item.type === 'link' ? (
                 <button onClick={() => { if (item.id === 'home') { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); } else { scrollToSection(item.id); } }} className="block w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium">
-                  {item.label}
+                  {t(item.label)}
                 </button>
               ) : (
                 <div>
@@ -160,14 +161,14 @@ const Navigation: React.FC = () => {
                     onClick={() => setActiveDropdown(activeDropdown === item.id ? null : item.id)}
                     className="flex items-center justify-between w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium"
                   >
-                    <span>{item.label}</span>
+                    <span>{t(item.label)}</span>
                     <ChevronDown size={18} className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`} />
                   </button>
                   <div className={`transition-all duration-300 ease-out overflow-hidden ${activeDropdown === item.id ? 'max-h-screen opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}`}>
                     <div className="pl-4 border-l border-gray-200 ml-2 py-1 space-y-1">
                       {item.items?.map(sub => (
                         <button key={sub.id} onClick={() => scrollToSection(sub.id)} className="block w-full text-left py-2 text-sm text-gray-600 hover:text-gold">
-                          {sub.label}
+                          {t(sub.label)}
                         </button>
                       ))}
                     </div>
@@ -200,7 +201,7 @@ const Navigation: React.FC = () => {
           {/* Mobile Contact Button */}
           <button onClick={() => scrollToSection('contact')} className="w-full flex items-center justify-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-transform mt-4">
             <ContactIcon />
-            <span>Contact Us</span>
+            <span>{t('nav.contact')}</span>
           </button>
         </div>
       </div>

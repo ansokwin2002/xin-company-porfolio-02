@@ -5,6 +5,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import ScrollToTopOnRouteChange from './components/specific/ScrollToTopOnRouteChange';
 import CreativeDesignsUIUX from './pages/CreativeDesignsUIUX';
 import MobileAppDevelopment from './pages/MobileAppDevelopment';
+import WebAppDevelopment from './pages/WebAppDevelopment'; // Import the new component
 import Login from './pages/admin/Login';
 import Register from './pages/admin/Register';
 import Dashboard from './pages/admin/Dashboard';
@@ -75,6 +76,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ showAnimations, scrollToSection }
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/creative-designs-ui-ux" element={<CreativeDesignsUIUX />} />
         <Route path="/mobile-app-development" element={<MobileAppDevelopment />} />
+        <Route path="/web-app-development" element={<WebAppDevelopment />} />
       </Routes>
     </>
   );

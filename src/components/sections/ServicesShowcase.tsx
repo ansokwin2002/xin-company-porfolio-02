@@ -48,7 +48,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ IconComponent, title, descrip
         <div className="relative z-10">
             <h3 className="text-2xl font-bold text-gray-900 mb-4 pr-8 leading-tight">{title}</h3>
             <p className="text-gray-600 text-base leading-relaxed mb-6">{description}</p>
-            <Link to={title === 'Creative designs and UI/UX designs' ? '/creative-designs-ui-ux' : title === 'Mobile App Development' ? '/mobile-app-development' : '#'} className="inline-flex items-center font-semibold group/link group-hover/link:brightness-125">
+            <Link to={title === 'Creative designs and UI/UX designs' ? '/creative-designs-ui-ux' : title === 'Mobile App Development' ? '/mobile-app-development' : title === 'Web App Development' ? '/web-app-development' : '#'} className="inline-flex items-center font-semibold group/link group-hover/link:brightness-125">
               <span className="bg-gradient-blue bg-clip-text text-transparent">Learn More </span>
               <span className="ml-1 transform group-hover/link:translate-x-1 transition-transform bg-gradient-blue bg-clip-text text-transparent">→</span>
             </Link>

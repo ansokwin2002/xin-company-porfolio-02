@@ -6,10 +6,10 @@ const TelegramLink: React.FC = () => {
       href="https://t.me/your_username" // <-- Replace with your Telegram link
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 bg-transparent hover:opacity-80 transition-all duration-300 z-40"
+      className="fixed bottom-4 right-2 bg-transparent hover:opacity-80 transition-all duration-300 z-40"
       aria-label="Contact on Telegram"
     >
-      <img src="/assets/images/telegram-logo.png" alt="Telegram" className="w-12 h-12" />
+      <img src="/assets/images/Telegram.gif" alt="Telegram" className="w-20 h-20" />
     </a>
   );
 };

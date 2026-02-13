@@ -4,6 +4,7 @@ import StartYourNextBigProject from '../components/sections/StartYourNextBigProj
 import Footer from '../components/layout/Footer';
 import HighLevelProcess from '../components/sections/HighLevelProcess';
 import ScrollToTop from '../components/specific/ScrollToTop';
+import TelegramLink from '../components/specific/TelegramLink';
 
 const CreativeDesignsUIUX: React.FC = () => {
   // --- Data Arrays ---
@@ -355,6 +356,7 @@ const CreativeDesignsUIUX: React.FC = () => {
       <StartYourNextBigProject />
       <ScrollToTop />
       <Footer />
+      <TelegramLink />
     </div>
   );
 };

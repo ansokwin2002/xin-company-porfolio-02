@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
 import CountingNumber from '../specific/CountingNumber';
@@ -17,6 +18,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({ name: '', email: '', budget: '', mobile: '', details: '' });
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [isBudgetOpen, setIsBudgetOpen] = useState(false);
@@ -28,7 +30,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
-  const words = ["Digital Products", "Mobile Apps", "AI Automation", "Web Platforms"];
+  const words = [t('hero.typewriter.words.0'), t('hero.typewriter.words.1'), t('hero.typewriter.words.2'), t('hero.typewriter.words.3')];
 
   useEffect(() => {
     const handleType = () => {
@@ -84,31 +86,32 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                 {/* Original Theme Badges */}
                 <div className="flex flex-wrap gap-3">
                   <div className="flex items-center space-x-2 bg-gradient-blue text-white px-4 py-2 rounded-button text-sm font-medium shadow-button">
-                    <span>🏆</span><CountingNumber targetValue={12} suffix="+ Years" />
+                    <span>🏆</span><CountingNumber targetValue={12} suffix={t('hero.badges.years')} />
                   </div>
                   <div className="flex items-center space-x-2 bg-gradient-blue text-white px-4 py-2 rounded-button text-sm font-medium shadow-button">
-                    <span>📦</span><CountingNumber targetValue={100} suffix="+ Projects" />
+                    <span>📦</span><CountingNumber targetValue={100} suffix={t('hero.badges.projects')} />
                   </div>
                   <div className="flex items-center space-x-2 bg-gradient-blue text-white px-4 py-2 rounded-button text-sm font-medium shadow-button">
-                    <span>⭐</span><CountingNumber targetValue={4.9} decimalPlaces={1} suffix=" Rating" />
+                    <span>⭐</span><CountingNumber targetValue={4.9} decimalPlaces={1} suffix={t('hero.badges.rating')} />
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-gray-900">
-                    Turn Your Ideas into Smart, High-Performance<br />
+                    {t('hero.headline')}
+                    <br />
                     <span className="bg-gradient-blue bg-clip-text text-transparent min-w-[300px] inline-block">
                       {text}<span className="ml-1 border-r-4 border-blue-500 animate-blink"></span>
                     </span>
                   </h1>
                   <p className="text-lg lg:text-xl text-gray-600 max-w-2xl">
-                    From mobile apps to AI automation, web platforms, and UX design, we create solutions that scale.
+                    {t('hero.subheadline')}
                   </p>
                 </div>
 
                 <button onClick={scrollToWork} className="group flex items-center space-x-2 px-6 py-3 rounded-xl font-medium border-2 bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300">
                   <ArrowDown size={20} />
-                  <span>View Our Work</span>
+                  <span>{t('hero.viewWork')}</span>
                 </button>
               </div>
             </div>
@@ -121,8 +124,8 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
               >
                 <div className="space-y-6">
                   <div className="text-center">
-                    <h2 className="text-2xl font-bold text-gray-900">Get a Free Quote</h2>
-                    <p className="text-sm mt-2 text-gray-700">Tell us about your project</p>
+                    <h2 className="text-2xl font-bold text-gray-900">{t('hero.form.title')}</h2>
+                    <p className="text-sm mt-2 text-gray-700">{t('hero.form.subtitle')}</p>
                   </div>
 
                   <form className="space-y-8 mt-8" onSubmit={handleSubmit}>
@@ -139,7 +142,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                           placeholder=" " 
                         />
                         <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                          Your Name *
+                          {t('hero.form.name')} *
                         </label>
                       </div>
 
@@ -154,7 +157,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                           placeholder=" " 
                         />
                         <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                          Work Email *
+                          {t('hero.form.email')} *
                         </label>
                       </div>
                     </div>
@@ -194,7 +197,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                         />
                          {/* Note: Translate Y is slightly less (-20px) here because of the flex layout container */}
                         <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform -z-10 peer-focus:-translate-y-8 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:scale-90">
-                          Mobile Number *
+                          {t('hero.form.mobile')} *
                         </label>
                       </div>
                     </div>
@@ -212,13 +215,13 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                       <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
                         ${formData.budget || isBudgetOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
                       `}>
-                        Project Budget *
+                        {t('hero.form.budget.label')} *
                       </label>
 
                       {/* Dropdown Options */}
                       <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isBudgetOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
                         <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
-                          {['$1,000 - $5,000', '$5,000+', 'Custom'].map((opt) => (
+                          {[t('hero.form.budget.options.0'), t('hero.form.budget.options.1'), t('hero.form.budget.options.2')].map((opt) => (
                             <div key={opt} onClick={() => { setFormData({...formData, budget: opt}); setIsBudgetOpen(false); }} className="px-6 py-4 hover:bg-blue-50 cursor-pointer text-sm font-bold text-gray-700">
                               {opt}
                             </div>
@@ -237,7 +240,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                         rows={3}
                       ></textarea>
                       <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                        Project Details
+                        {t('hero.form.details')}
                       </label>
                     </div>
 
@@ -250,11 +253,11 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                       {isSubmitting ? (
                         <>
                           <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          <span>SENDING...</span>
+                          <span>{t('hero.form.sending')}</span>
                         </>
                       ) : (
                         <>
-                          <span>Get Quote</span> <ArrowRight size={20} />
+                          <span>{t('hero.form.submit')}</span> <ArrowRight size={20} />
                         </>
                       )}
                     </button>

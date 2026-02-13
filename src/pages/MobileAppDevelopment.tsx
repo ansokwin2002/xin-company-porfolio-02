@@ -2,10 +2,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import Footer from '../components/layout/Footer';
-import { Rocket, Hand, ArrowRight, Activity, Layout, Clock, TrendingUp, Layers } from 'lucide-react';
+import { Rocket, Hand, ArrowRight, Activity, Layout, Clock, TrendingUp, Layers, Tag, Headphones, Trophy, Star} from 'lucide-react';
 import DevelopmentLifecycle from '../components/sections/DevelopmentLifecycle';
 import ProjectsSlider from '../components/sections/ProjectsSlider';
+import AppValueSection from '../components/sections/AppValueSection';
 import ScrollToTop from '../components/specific/ScrollToTop';
+import TelegramLink from '../components/specific/TelegramLink';
 
 const MobileAppDevelopment: React.FC = () => {
   // Animation states
@@ -186,9 +188,11 @@ const MobileAppDevelopment: React.FC = () => {
 
       <DevelopmentLifecycle />
       <ProjectsSlider/>
+      <AppValueSection/>
       <StartYourNextBigProject />
       <ScrollToTop />
       <Footer />
+      <TelegramLink />
     </div>
   );
 };

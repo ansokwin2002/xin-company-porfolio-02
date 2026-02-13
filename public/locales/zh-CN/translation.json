@@ -5,5 +5,55 @@
   "services": "服务",
   "testimonials": "感言",
   "faq": "常见问题",
-  "contact": "联系"
+  "contact": "联系",
+  "nav": {
+    "home": "主页",
+    "products": "产品",
+    "products.p1": "产品 1",
+    "products.p2": "产品 2",
+    "services": "服务",
+    "services.s1": "服务 1",
+    "services.s2": "服务 2",
+    "company": "公司",
+    "company.about": "关于我们",
+    "company.careers": "招聘",
+    "blog": "博客",
+    "contact": "联系我们"
+  },
+  "hero": {
+    "badges": {
+      "years": "+ 年",
+      "projects": "+ 项目",
+      "rating": " 评级"
+    },
+    "headline": "将您的想法转化为智能、高性能的",
+    "typewriter": {
+      "words": [
+        "数字产品",
+        "移动应用",
+        "人工智能自动化",
+        "网络平台"
+      ]
+    },
+    "subheadline": "从移动应用到人工智能自动化、网络平台和用户体验设计，我们创造可扩展的解决方案。",
+    "viewWork": "查看我们的工作",
+    "form": {
+      "title": "获取免费报价",
+      "subtitle": "告诉我们您的项目",
+      "name": "你的名字",
+      "email": "工作邮箱",
+      "mobile": "手机号码",
+      "budget": {
+        "label": "项目预算",
+        "options": [
+          "1,000 - 5,000 美元",
+          "5,000 美元+",
+          "自定义"
+        ]
+      },
+      "details": "项目详情",
+      "submit": "获取报价",
+      "sending": "发送中..."
+    }
+  }
 }

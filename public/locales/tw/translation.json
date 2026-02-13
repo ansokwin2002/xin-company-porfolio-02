@@ -1,0 +1,59 @@
+{
+  "home": "Home",
+  "about": "About",
+  "portfolio": "Portfolio",
+  "services": "Services",
+  "testimonials": "Testimonials",
+  "faq": "FAQ",
+  "contact": "Contact",
+  "nav": {
+    "home": "首頁",
+    "products": "產品",
+    "products.p1": "產品 1",
+    "products.p2": "產品 2",
+    "services": "服務",
+    "services.s1": "服務 1",
+    "services.s2": "服務 2",
+    "company": "公司",
+    "company.about": "關於我們",
+    "company.careers": "職位",
+    "blog": "部落格",
+    "contact": "聯繫我們"
+  },
+  "hero": {
+    "badges": {
+      "years": "+ 年",
+      "projects": "+ 專案",
+      "rating": " 評級"
+    },
+    "headline": "將您的想法轉化為智能、高效能的",
+    "typewriter": {
+      "words": [
+        "數位產品",
+        "行動應用",
+        "人工智慧自動化",
+        "網路平台"
+      ]
+    },
+    "subheadline": "從行動應用到人工智慧自動化、網路平台和使用者體驗設計，我們創造可擴展的解決方案。",
+    "viewWork": "查看我們的工作",
+    "form": {
+      "title": "取得免費報價",
+      "subtitle": "告訴我們您的專案",
+      "name": "你的名字",
+      "email": "工作郵箱",
+      "mobile": "手機號碼",
+      "budget": {
+        "label": "專案預算",
+        "options": [
+          "1,000 - 5,000 美元",
+          "5,000 美元+",
+          "自訂"
+        ]
+      },
+      "details": "專案詳情",
+      "submit": "取得報價",
+      "sending": "傳送中..."
+    }
+  }
+}
