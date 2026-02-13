@@ -6,6 +6,7 @@ import ScrollToTopOnRouteChange from './components/specific/ScrollToTopOnRouteCh
 import CreativeDesignsUIUX from './pages/CreativeDesignsUIUX';
 import MobileAppDevelopment from './pages/MobileAppDevelopment';
 import WebAppDevelopment from './pages/WebAppDevelopment'; // Import the new component
+import DigitalMarketing from './pages/DigitalMarketing'; // Import the new component
 import Login from './pages/admin/Login';
 import Register from './pages/admin/Register';
 import Dashboard from './pages/admin/Dashboard';
@@ -77,6 +78,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ showAnimations, scrollToSection }
         <Route path="/creative-designs-ui-ux" element={<CreativeDesignsUIUX />} />
         <Route path="/mobile-app-development" element={<MobileAppDevelopment />} />
         <Route path="/web-app-development" element={<WebAppDevelopment />} />
+        <Route path="/digital-marketing" element={<DigitalMarketing />} />
       </Routes>
     </>
   );

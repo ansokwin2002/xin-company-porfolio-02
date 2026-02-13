@@ -56,7 +56,7 @@ const ProcessStep = ({ number, icon: Icon, title, desc, index }: any) => {
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="absolute -top-4 -left-2 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+      <div className="absolute -top-4 -left-2 w-10 h-10 bg-gradient-blue rounded-full flex items-center justify-center text-white font-bold shadow-lg">
         {number}
       </div>
       <div className="w-14 h-14 bg-blue-200/50 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
@@ -122,9 +122,10 @@ const WebAgencyShowcase: React.FC = () => {
 
           {/* CTA */}
           <div className="flex justify-center">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-10 rounded-xl transition-all flex items-center gap-3 shadow-lg shadow-blue-500/20">
-              Discuss Your Web Project <ArrowRight size={20} />
-            </button>
+             <button className="group relative bg-gradient-blue hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl flex items-center gap-3 overflow-hidden">
+                <span className="relative z-10">Discuss Your Web Project</span>
+                <ArrowRight size={20} className="relative z-10 group-hover:translate-x-2 transition-transform" />
+              </button>
           </div>
         </div>
       </section>
@@ -133,7 +134,7 @@ const WebAgencyShowcase: React.FC = () => {
       <section className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-20">
-            How We <span className="text-blue-500">Deliver Results</span>
+            How We <span className="bg-gradient-blue bg-clip-text text-transparent">Deliver Results</span>
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

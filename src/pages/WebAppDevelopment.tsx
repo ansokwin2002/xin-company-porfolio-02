@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
+import AppValueSection from '../components/sections/AppValueSection';
 import WebAgencyShowcase from '../components/sections/WebAgencyShowcase';
 import Footer from '../components/layout/Footer';
 import { 
@@ -222,6 +223,7 @@ const WebAppDevelopment: React.FC = () => {
       </main>
       
       <WebAgencyShowcase/>
+      <AppValueSection/>
       <StartYourNextBigProject />
       <Footer />
       <ScrollToTop/>
