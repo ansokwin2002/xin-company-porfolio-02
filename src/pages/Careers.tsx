@@ -27,7 +27,7 @@ const Careers: React.FC = () => {
             
             {/* Colorful Icon - Matches your Service Card style */}
             <div className="relative inline-block mb-10">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] flex items-center justify-center text-white bg-gradient-to-br from-blue-500 to-indigo-600 shadow-2xl shadow-blue-200 rotate-6 hover:rotate-0 transition-transform duration-500">
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] flex items-center justify-center text-white bg-gradient-blue shadow-2xl shadow-blue-200 rotate-6 hover:rotate-0 transition-transform duration-500">
                 <Briefcase size={48} strokeWidth={1.5} />
               </div>
               {/* Floating accent icons */}
@@ -44,7 +44,7 @@ const Careers: React.FC = () => {
             {/* Status Badge */}
             <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-blue-50 border border-blue-100 mb-8">
               <Clock size={18} className="text-blue-600 animate-pulse" />
-              <span className="text-blue-700 font-bold text-sm uppercase tracking-wider">Coming Soon</span>
+              <span className="bg-gradient-blue bg-clip-text text-transparent font-bold text-sm uppercase tracking-wider">Coming Soon</span>
             </div>
 
             <p className="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
