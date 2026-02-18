@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Tag, Rocket, Headphones, Star, Trophy } from 'lucide-react';
+import { Tag, Rocket, Headphones } from 'lucide-react';
 
 const ValuePropositionSection: React.FC = () => {
   const sectionRef1 = useRef<HTMLElement>(null);
@@ -8,32 +8,25 @@ const ValuePropositionSection: React.FC = () => {
   useEffect(() => {
     const observer1 = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible1(true);
-        }
+        if (entry.isIntersecting) setIsVisible1(true);
       },
-      { threshold: 0.1 } // Trigger when 10% of the section is visible
+      { threshold: 0.1 }
     );
 
-    if (sectionRef1.current) {
-      observer1.observe(sectionRef1.current);
-    }
-
-    return () => {
-      if (sectionRef1.current) {
-        observer1.unobserve(sectionRef1.current);
-      }
-    };
+    if (sectionRef1.current) observer1.observe(sectionRef1.current);
+    return () => observer1.disconnect();
   }, []);
 
   return (
     <section
       ref={sectionRef1}
-      className={`bg-white py-20 lg:py-28 overflow-hidden transition-all duration-1000 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`bg-white py-20 lg:py-28 overflow-hidden transition-all duration-1000 ${
+        isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-
+          
           {/* Left Column: Text Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-6">
@@ -51,60 +44,48 @@ const ValuePropositionSection: React.FC = () => {
               </h3>
             </div>
 
-            {/* Stats Grid */}
+            {/* Stats Grid - Colorful Style */}
             <div className="grid grid-cols-3 gap-6">
               {/* Stat 1 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center text-blue-500 mb-3 shadow-sm">
-                  <Tag size={28} className="transform -rotate-45" />
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-white mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                  <Tag size={30} className="transform -rotate-45" strokeWidth={1.5} />
                 </div>
                 <span className="text-2xl font-black text-gray-900">35%</span>
-                <span className="text-sm text-gray-600 font-medium">Cost Savings</span>
+                <span className="text-sm text-gray-500 font-medium">Cost Savings</span>
               </div>
 
               {/* Stat 2 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center text-blue-500 mb-3 shadow-sm">
-                  <Rocket size={28} />
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-400 rounded-2xl flex items-center justify-center text-white mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                  <Rocket size={30} strokeWidth={1.5} />
                 </div>
                 <span className="text-2xl font-black text-gray-900">2x</span>
-                <span className="text-sm text-gray-600 font-medium">Faster Delivery</span>
+                <span className="text-sm text-gray-500 font-medium">Faster Delivery</span>
               </div>
 
               {/* Stat 3 */}
-              <div className="flex flex-col items-center text-center">
-                <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center text-blue-500 mb-3 shadow-sm">
-                  <Headphones size={28} />
+              <div className="flex flex-col items-center text-center group">
+                <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-green-500 rounded-2xl flex items-center justify-center text-white mb-4 shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                  <Headphones size={30} strokeWidth={1.5} />
                 </div>
                 <span className="text-2xl font-black text-gray-900">24/7</span>
-                <span className="text-sm text-gray-600 font-medium">Support</span>
+                <span className="text-sm text-gray-500 font-medium">Support</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Illustration (Recreated with Code/Icons) */}
+          {/* Right Column: Image Asset */}
           <div className="relative flex justify-center lg:justify-end">
-            {/* Decorative Background Blob */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/3 w-96 h-96 bg-blue-50 rounded-full blur-3xl -z-10"></div>
-
-            {/* Trophy Visual Composition */}
-            <div className="relative z-10 text-center">
-              {/* Confetti Particles (Decoration) */}
-              <div className="absolute -top-10 left-10 text-yellow-400 animate-bounce delay-75"><Star size={16} fill="currentColor" /></div>
-              <div className="absolute top-0 right-20 text-blue-400 animate-pulse"><div className="w-3 h-3 rounded-full bg-blue-400"></div></div>
-              <div className="absolute top-20 -right-5 text-red-400 animate-bounce"><div className="w-2 h-6 bg-red-400 transform rotate-45"></div></div>
-
-              {/* Trophy Icon Placeholder */}
-              <div className="relative">
-                 <div className="w-64 h-64 mx-auto bg-gradient-to-b from-red-100 to-white rounded-full flex items-center justify-center shadow-xl border border-red-50">
-                    <Trophy size={120} className="text-red-400 drop-shadow-lg" strokeWidth={1.5} />
-                 </div>
-                 {/* Podium steps */}
-                 <div className="w-48 h-12 bg-gray-900 mx-auto -mt-6 rounded-t-lg relative z-20 flex items-center justify-center">
-                    <div className="w-32 h-8 bg-gray-800 rounded-t-lg -mt-8"></div>
-                 </div>
-                 <div className="w-full h-1 bg-gray-200 mt-0"></div>
-              </div>
+            {/* Soft background glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full blur-3xl -z-10 opacity-60"></div>
+            
+            <div className={`transition-all duration-1000 delay-500 transform ${isVisible1 ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+              <img 
+                src="/assets/images/p11.png" 
+                alt="Value Proposition Illustration" 
+                className="w-full max-w-lg h-auto drop-shadow-2xl hover:translate-y-[-10px] transition-transform duration-500"
+              />
             </div>
           </div>
 
