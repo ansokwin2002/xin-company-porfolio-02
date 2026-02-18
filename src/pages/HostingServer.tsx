@@ -8,7 +8,7 @@ import {
   ShieldCheck, RefreshCw, Eye, ShieldAlert, ChevronRight 
 } from 'lucide-react';
 
-// --- 1. UPDATED DARK SERVICE CARD (Screenshot Style) ---
+// --- 1. UPDATED DARK SERVICE CARD ---
 interface DarkServiceCardProps {
   title: string;
   desc: string;
@@ -38,7 +38,6 @@ const DarkServiceCard: React.FC<DarkServiceCardProps> = ({ title, desc, imageSrc
       style={{ transitionDelay: `${index * 150}ms` }}
     >
       <div className="flex flex-col h-full text-left">
-        {/* Large 3D Image - Centered and slightly pulling up */}
         <div className="flex justify-center -mt-12 mb-6">
           <img 
             src={imageSrc} 
@@ -46,7 +45,6 @@ const DarkServiceCard: React.FC<DarkServiceCardProps> = ({ title, desc, imageSrc
             className="w-48 h-48 object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-110"
           />
         </div>
-
         <h3 className="text-white text-xl font-bold mb-4">{title}</h3>
         <p className="text-gray-400 text-sm leading-relaxed flex-grow">
           {desc}
@@ -56,7 +54,7 @@ const DarkServiceCard: React.FC<DarkServiceCardProps> = ({ title, desc, imageSrc
   );
 };
 
-// --- 2. HOSTING FEATURE ITEM (White Section) ---
+// --- 2. HOSTING FEATURE ITEM ---
 interface HostingFeatureItemProps {
   Icon: React.ElementType;
   title: string;
@@ -96,15 +94,38 @@ const HostingFeatureItem: React.FC<HostingFeatureItemProps> = ({ Icon, title, in
 };
 
 const HostingServer: React.FC = () => {
+  // --- Animation States ---
+  const h1Ref = useRef<HTMLHeadingElement>(null);
+  const pRef = useRef<HTMLParagraphElement>(null);
+  const [isH1Visible, setIsH1Visible] = useState(false);
+  const [isPVisible, setIsPVisible] = useState(false);
+
   const [sectionVisible, setSectionVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const observerOptions = { threshold: 0.1 };
+
+    const h1Observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsH1Visible(true);
+    }, observerOptions);
+    if (h1Ref.current) h1Observer.observe(h1Ref.current);
+
+    const pObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setIsPVisible(true);
+    }, observerOptions);
+    if (pRef.current) pObserver.observe(pRef.current);
+
     const sectionObserver = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) setSectionVisible(true);
-    }, { threshold: 0.1 });
+    }, observerOptions);
     if (sectionRef.current) sectionObserver.observe(sectionRef.current);
-    return () => sectionObserver.disconnect();
+
+    return () => {
+      h1Observer.disconnect();
+      pObserver.disconnect();
+      sectionObserver.disconnect();
+    };
   }, []);
 
   const whiteSectionFeatures = [
@@ -115,41 +136,34 @@ const HostingServer: React.FC = () => {
   ];
 
   const darkSectionCards = [
-    { 
-      title: "Websites hosting", 
-      image: "/assets/images/p12.png", // replace with your 3D monitor image
-      desc: "Our technical & software engineering team will publish your website after creating it on the internet using your domain if you have one, or will help you find the suitable domain for your business if you don't have one." 
-    },
-    { 
-      title: "Mobile App hosting", 
-      image: "/assets/images/p13.png", // replace with your 3D mobile image
-      desc: "Whether you already know where you want your mobile application to be hosted or still haven't decided yet, we will help you with the process so the application would get the greatest reach and number of downloads."
-    },
-    { 
-      title: "VPS Servers", 
-      image: "/assets/images/p15.png", // replace with your 3D vps image
-      desc: "We admire privacy so much at Xin QiYou Tech, so we help you get your virtual private server so you can get the chance of sharing the physical resources while you're absolutely sure you're privately secured." 
-    },
-    { 
-      title: "Dedicated Servers", 
-      image: "/assets/images/p14.png", // replace with your 3D server image
-      desc: "Dedicated servers should be used by bigger organizations, they are usually used by organizations that hit a lot of traffic each day. A dedicated server is usually used for a set of related company sites." 
-    }
+    { title: "Websites hosting", image: "/assets/images/p12.png", desc: "Our technical & software engineering team will publish your website after creating it on the internet using your domain if you have one, or will help you find the suitable domain for your business if you don't have one." },
+    { title: "Mobile App hosting", image: "/assets/images/p13.png", desc: "Whether you already know where you want your mobile application to be hosted or still haven't decided yet, we will help you with the process so the application would get the greatest reach and number of downloads." },
+    { title: "VPS Servers", image: "/assets/images/p15.png", desc: "We admire privacy so much at Xin QiYou Tech, so we help you get your virtual private server so you can get the chance of sharing the physical resources while you're absolutely sure you're privately secured." },
+    { title: "Dedicated Servers", image: "/assets/images/p14.png", desc: "Dedicated servers should be used by bigger organizations, they are usually used by organizations that hit a lot of traffic each day. A dedicated server is usually used for a set of related company sites." }
   ];
 
   return (
     <div className="min-h-screen bg-white font-sans overflow-x-hidden">
       <Navigation />
       <main>
-        {/* --- HERO SECTION --- */}
+        {/* --- HERO SECTION (Updated with Animation) --- */}
         <section className="bg-gradient-blue pt-32 pb-24 text-center">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <h1 className="text-5xl md:text-6xl font-extrabold mb-6">
+            <h1 
+              ref={h1Ref}
+              className={`text-5xl md:text-6xl font-extrabold mb-6 transition-all duration-700 ease-out ${
+                isH1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+            >
               <span className="text-black">Hosting and</span> <span className="text-white">Servers</span>
             </h1>
-            <p className="text-lg text-white opacity-90 max-w-3xl mx-auto leading-relaxed">
-              Xin QiYou Tech provides website and mobile application hosting for SMEs, as well as 
-              enhanced services for larger projects through AWS.
+            <p 
+              ref={pRef}
+              className={`text-lg text-white opacity-90 max-w-3xl mx-auto leading-relaxed transition-all duration-700 ease-out delay-200 ${
+                isPVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+            >
+              Xin QiYou Tech provides website and mobile application hosting for SMEs, as well as enhanced services for larger projects through AWS. Our team will manage the servers and implement high-security standards, along with disaster recovery solutions.
             </p>
           </div>
         </section>
@@ -166,8 +180,8 @@ const HostingServer: React.FC = () => {
                   What's the <span className="bg-gradient-blue bg-clip-text text-transparent">Web Hosting</span> and <span className="bg-gradient-blue bg-clip-text text-transparent">Mobile App</span> hosting
                 </h2>
                 <div className="space-y-6 text-gray-600 mb-12">
-                  <p>Web hosting is a specific service provided by an expert team from Xin QiYou Tech, who will be responsible for keeping your website up and running 24/7.</p>
-                  <p>Mobile App hosting is a specific service to support the mobile app owners making their backend live 24/7 which makes the applications run smoothly.</p>
+                  <p>Web hosting is a specific service provided by an expert team from Xin QiYou Tech, who will be responsible for keeping your website up and running 24/7. Web hosting can be provided for individuals, companies, and mega projects through specific servers through advanced technology services.</p>
+                  <p>Mobile App hosting is a specific service to support the mobile app owners making their backend live 24/7 which makes the applications run smoothly and interact with cloud-based services. Xin QiYou Tech can provide you with shared hosting, VPS, or a dedicated server to fit your project size and budget.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10">
                   {whiteSectionFeatures.map((item, idx) => (
