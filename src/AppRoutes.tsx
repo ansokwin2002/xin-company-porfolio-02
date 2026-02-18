@@ -8,6 +8,10 @@ import MobileAppDevelopment from './pages/MobileAppDevelopment';
 import WebAppDevelopment from './pages/WebAppDevelopment'; // Import the new component
 import DigitalMarketing from './pages/DigitalMarketing'; // Import the new component
 import ITConsultancyDevOpsService from './pages/ITConsultancy&DevOpsService'; // Import the new component
+import HostingServer from './pages/HostingServer';
+import About from './pages/About';
+import Blog from './pages/Blog';
+import Careers from './pages/Careers';
 import Login from './pages/admin/Login';
 import Register from './pages/admin/Register';
 import Dashboard from './pages/admin/Dashboard';
@@ -81,6 +85,10 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ showAnimations, scrollToSection }
         <Route path="/web-app-development" element={<WebAppDevelopment />} />
         <Route path="/digital-marketing" element={<DigitalMarketing />} />
         <Route path="/it-consultancy-devops" element={<ITConsultancyDevOpsService />} />
+        <Route path="/hosting-server" element={<HostingServer />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/careers" element={<Careers />} />
       </Routes>
     </>
   );

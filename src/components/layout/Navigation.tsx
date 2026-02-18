@@ -46,10 +46,10 @@ const Navigation: React.FC = () => {
         { id: 'web-app-development', label: 'nav.services.web_app_development', path: '/web-app-development' },
         { id: 'digital-marketing', label: 'nav.services.digital_marketing', path: '/digital-marketing' },
         { id: 'it-consultancy-devops', label: 'nav.services.it_consultancy_devops', path: '/it-consultancy-devops' },
-        { id: 'hosting-server', label: 'nav.services.hosting_server', path: '#hosting-server' },
+        { id: 'hosting-server', label: 'nav.services.hosting_server', path: '/hosting-server' },
       ]
     },
-    { id: 'company', label: 'nav.company', type: 'dropdown', items: [{ id: 'about', label: 'nav.company.about' }, { id: 'careers', label: 'nav.company.careers' }] },
+    { id: 'company', label: 'nav.company', type: 'dropdown', items: [{ id: 'about', label: 'nav.company.about', path: '/about' }, { id: 'careers', label: 'nav.company.careers', path: '/careers' }] },
     { id: 'blog', label: 'nav.blog', type: 'link', path: '/blog' },
   ];
 
