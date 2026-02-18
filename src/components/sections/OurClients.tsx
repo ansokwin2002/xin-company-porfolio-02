@@ -1,120 +1,101 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface Client {
   name: string;
   subName?: string;
-  imageName: string; // Updated to use image file names
+  imageName: string;
 }
 
 const OurClients: React.FC = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Updated client list with image names b1.png through b10.png
   const clients: Client[] = [
-    { name: 'WINGO LOTTO', imageName: 'b1.png' },
-    { name: 'WINGO', subName: 'SCRATCHER TICKET', imageName: 'b2.png' },
-    { name: 'NATIONAL', subName: 'SPORT LOTTERY', imageName: 'b3.png' },
-    { name: 'HSIN NIU', subName: 'LOTTERY', imageName: 'b4.png' },
-    { name: 'I BINGO', subName: 'LOTTO', imageName: 'b5.png' },
-    { name: 'MEI YAUN', subName: 'ENTERTAINMENT', imageName: 'b6.png' },
-    { name: 'WIN TAKE', subName: 'GLOBAL', imageName: 'b7.png' },
-    { name: 'JINBIE HOTEL', imageName: 'b8.png' },
-    { name: 'ORANGE SHOP', imageName: 'b9.png' },
-    { name: 'LELOT', subName: '(CAMBODIA)', imageName: 'b10.png' },
+    { name: 'FINCORP', subName: 'INSURANCE BROKER', imageName: 'p1.png' },
+    { name: 'TITAN STONE', subName: 'LIFE INSURANCE', imageName: 'p2.png' },
+    { name: 'C21 REAL', subName: 'ESTATE', imageName: 'p3.png' },
+    { name: 'JINBIE2 HOTEL', imageName: 'p4.png' },
+    { name: 'TAIWANESE FOOD', imageName: 'p5.png' },
+    { name: 'ORANGE SHOP', imageName: 'p6.png' },
+    { name: 'KITCHEN', subName: 'CAFE & RESTO', imageName: 'p7.png' },
+    { name: 'LAUNDRY', subName: 'SERVICE', imageName: 'p8.png' },
+    { name: 'WIN TAKE', subName: 'GLOBAL', imageName: 'p9.png' },
+    { name: 'BIT MART', imageName: 'p10.png' },
+    { name: 'COINEX', subName: 'GLOBAL', imageName: 'p11.png' },
+    { name: 'FEIGE IM', imageName: 'p12.png' },
+    { name: 'FC SHOP', imageName: 'p13.png' },
+    { name: 'WINGO LOTTO', imageName: 'p14.png' },
+    { name: 'LELOT', subName: '(CAMBODIA)', imageName: 'p15.png' },
+    { name: 'NATIONAL', subName: 'SPORT LOTTERY', imageName: 'p16.png' },
+    { name: 'HSIN NIU', subName: 'LOTTERY', imageName: 'p17.png' },
+    { name: 'MEI YAUN', subName: 'ENTERTAINMENT', imageName: 'p18.png' },
   ];
 
-  // 1. Auto-scroll Logic
   useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-    let animationFrameId: number;
-    const scroll = () => {
-      if (!isPaused && !isDragging && scrollContainer) {
-        scrollContainer.scrollLeft += 0.8; 
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 3) {
-          scrollContainer.scrollLeft = 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
         }
-      }
-      animationFrameId = requestAnimationFrame(scroll);
-    };
-    animationFrameId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isPaused, isDragging]);
+      },
+      { threshold: 0.1 } // Starts animating when 10% of the section is visible
+    );
 
-  // 2. Drag Handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollRef.current) return;
-    setIsDragging(true);
-    setStartX(e.pageX - scrollRef.current.offsetLeft);
-    setScrollLeftState(scrollRef.current.scrollLeft);
-  };
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5; 
-    scrollRef.current.scrollLeft = scrollLeftState - walk;
-  };
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="pt-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
+    <section className="py-24 bg-white overflow-hidden" ref={sectionRef}>
+      <div className="max-w-7xl mx-auto px-6 text-center">
+        {/* Header - Slides up slightly faster */}
+        <h2 className={`text-3xl md:text-4xl font-black uppercase tracking-widest mb-20 text-gray-900 transition-all duration-1000 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
           OUR <span className="bg-gradient-blue bg-clip-text text-transparent">CLIENTS</span>
         </h2>
-      </div>
 
-      <div 
-        className={`relative w-full py-10 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => { setIsPaused(false); setIsDragging(false); }}
-        onMouseDown={handleMouseDown}
-        onMouseUp={() => setIsDragging(false)}
-        onMouseMove={handleMouseMove}
-      >
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
-        <div 
-          ref={scrollRef} 
-          className="flex overflow-x-hidden"
-        >
-          {[...clients, ...clients, ...clients].map((client, index) => (
+        {/* Grid Layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-12 gap-y-16">
+          {clients.map((client, index) => (
             <div 
               key={index} 
-              className="flex flex-col items-center w-[180px] mx-4 flex-shrink-0 pointer-events-none"
+              className={`flex flex-col items-center justify-start group transition-all duration-700 transform ${
+                isVisible 
+                  ? 'opacity-100 translate-y-0 scale-100' 
+                  : 'opacity-0 translate-y-16 scale-90'
+              }`}
+              // Staggered delay: each logo pops up 50ms after the previous one
+              style={{ transitionDelay: `${index * 50}ms` }}
             >
-              {/* Image Logo Container */}
-              <div className="w-28 h-28 rounded-full shadow-lg flex items-center justify-center mb-5 border border-gray-100 bg-white overflow-hidden">
+              
+              {/* Logo Container */}
+              <div className="h-20 w-full flex items-center justify-center mb-6">
                 <img 
-                  src={`/assets/brand-clients/${client.imageName}`} 
+                  src={`/assets/images/brand-clients/${client.imageName}`} 
                   alt={client.name}
-                  className="w-full h-full object-contain p-4" // p-4 adds a little breathing room inside the circle
+                  className="max-h-full max-w-[130px] object-contain transition-transform duration-300 group-hover:scale-110"
                 />
               </div>
               
-              <div className="text-center px-2">
-                <h3 className="font-extrabold text-gray-900 text-xs md:text-sm uppercase tracking-tight">
+              {/* Client Branding Text */}
+              <div className="text-center">
+                <h3 className="font-bold text-gray-900 text-[10px] md:text-[11px] leading-tight uppercase tracking-widest">
                   {client.name}
                 </h3>
                 {client.subName && (
-                   <p className="font-extrabold text-gray-900 text-xs md:text-sm uppercase tracking-tight">{client.subName}</p>
+                  <p className="font-bold text-gray-900 text-[10px] md:text-[11px] leading-tight uppercase tracking-widest mt-1 opacity-60">
+                    {client.subName}
+                  </p>
                 )}
               </div>
             </div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        div { -ms-overflow-style: none; scrollbar-width: none; }
-        div::-webkit-scrollbar { display: none; }
-      `}</style>
     </section>
   );
 };
