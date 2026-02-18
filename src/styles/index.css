@@ -185,3 +185,23 @@ html {
 .animate-zoom-in-out {
   animation: zoomInOut 15s ease-in-out infinite; /* Increased duration for smoother effect */
 }
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px; /* Smaller width */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--button-gradient-start) 0%, var(--button-gradient-end) 100%); /* Blue gradient for the thumb */
+  border-radius: 4px; /* Rounded corners for the thumb */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: var(--button-gradient-start) #f1f1f1; /* thumb and track color */
+}
