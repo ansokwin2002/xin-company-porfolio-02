@@ -7,7 +7,7 @@ import TelegramLink from '../components/specific/TelegramLink';
 import { 
   ShieldCheck, ChevronRight, Clock, MessageSquare, 
   Users, RefreshCw, Target, Search, ClipboardCheck, 
-  Map, Play, Calendar
+  Map, Play, Calendar, Activity
 } from 'lucide-react';
 
 // --- 1. FEATURE CARD COMPONENT (Promising You Section) ---
@@ -121,9 +121,9 @@ const ITConsultancyDevOpsService: React.FC = () => {
   }, []);
 
   const serviceList = [
-    { id: 1, title: "IT Auditing", desc: "Your IT systems are the foundation of your company in the modern digital environment. Our professional IT auditing services ensure they're secure and operating at peak efficiency." },
-    { id: 2, title: "Digital Transformation", desc: "Transform how you work with seamless digital experiences. We streamline operations, integrate modern technologies, and create a plan that fits your objectives." },
-    { id: 3, title: "DevOps as a Service", desc: "Streamline development and deployment by merging Dev and Ops. We automate workflows, optimize infrastructure for performance and security." }
+    { id: 1, title: "IT Auditing", desc: "Your IT systems are the foundation of your company in the modern digital environment. Our professional IT auditing services ensure they're secure and operating at peak efficiency. We examine every part of your infrastructure, identifying potential threats, ensuring compliance, and highlighting efficiency gains." },
+    { id: 2, title: "Digital Transformation", desc: "Transform how you work with seamless digital experiences. We streamline operations, integrate modern technologies, and create a plan that fits your objectives—whether cloud migration, automation, or leveraging data—to keep you agile and future-proof." },
+    { id: 3, title: "DevOps as a Service", desc: "Streamline development and deployment by merging Dev and Ops. We automate workflows, optimize infrastructure for performance and security, and enable faster, more reliable releases so you can innovate and scale with confidence." }
   ];
 
   const promises = [
@@ -177,7 +177,7 @@ const ITConsultancyDevOpsService: React.FC = () => {
                   <span className="bg-gradient-blue bg-clip-text text-transparent">support your technological growth?</span>
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed mb-10">
-                  Advisory services that support our customers in evaluating approaches and technologies to match network strategy with business objectives.
+                  Advisory services that support our customers in evaluating approaches and technologies to match network strategy with business objectives. We enhance performance, security, and profitability with expert consulting that fills the gaps where you need it most.
                 </p>
 
                 <div className="space-y-0 border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
@@ -226,7 +226,10 @@ const ITConsultancyDevOpsService: React.FC = () => {
         {/* --- PROMISING SECTION --- */}
         <section className="py-24 bg-black overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-16">What we are <span className="bg-gradient-blue bg-clip-text text-transparent">Promising You?</span></h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What we are <span className="bg-gradient-blue bg-clip-text text-transparent">Promising You?</span></h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-16">
+              Our commitment to excellence is backed by these core promises that ensure your success
+            </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {promises.map((service, idx) => (
                 <FeatureCard key={idx} index={idx} IconComponent={service.icon} title={service.title} description={service.desc} color={service.color} />
@@ -240,10 +243,11 @@ const ITConsultancyDevOpsService: React.FC = () => {
           <div className="max-w-6xl mx-auto px-6 text-center">
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-20">What is our <span className="bg-gradient-blue bg-clip-text text-transparent">High-level Process?</span></h2>
             <div className="relative">
-              <ProcessStep number="1.0" title="Gap analysis" description="We conduct analysis with stakeholders to understand the current situation and future goals." Icon={Search} isReversed={false} />
-              <ProcessStep number="2.0" title="Auditing & Assessment" description="Our expert team audits the current situation and provides a plan for the IT department." Icon={ClipboardCheck} isReversed={true} />
-              <ProcessStep number="3.0" title="Strategy & Planning" description="We build a strategic plan with an action roadmap and SMART objectives." Icon={Map} isReversed={false} />
-              <ProcessStep number="4.0" title="Plan Execution" description="We mentor execution, track progress, and take corrective actions quickly." Icon={Play} isReversed={true} />
+              <ProcessStep number="1.0" title="Gap analysis" description="We conduct analysis with stakeholders to understand the current situation and future goals using SWOT and TOWS techniques." Icon={Search} isReversed={false} />
+              <ProcessStep number="2.0" title="Auditing & Assessment" description="Our expert team audits the current situation and provides a plan for the IT department aligned with market trends." Icon={ClipboardCheck} isReversed={true} />
+              <ProcessStep number="3.0" title="Strategy & Planning" description="We build a strategic plan with an action roadmap and SMART objectives to strengthen IT capabilities." Icon={Map} isReversed={false} />
+              <ProcessStep number="4.0" title="Plan Execution" description="We mentor execution, track progress, and take corrective actions quickly to ensure the plan succeeds." Icon={Play} isReversed={true} />
+              <ProcessStep number="5.0" title="Continuous Auditing" description="After success, we continue auditing and measuring performance to keep the company on track." Icon={Activity} isReversed={false} />
             </div>
           </div>
         </section>

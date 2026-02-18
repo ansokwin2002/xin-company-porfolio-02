@@ -13,28 +13,28 @@ const CreativeDesignsUIUX: React.FC = () => {
   const brandingServices = [
     {
       title: "New Branding With Strategy",
-      description: "We will create a structured process to build or revitalize your brand identity using a strategic approach. This ensures it aligns with your business goals and vision.",
+      description: "We will create a structured process to build or revitalize your brand identity using a strategic approach. This ensures it aligns with your business goals and vision, resonates with your target audience, and stands out in the market.",
       IconComponent: Wand2,
       color: "from-purple-500 to-indigo-500",
       number: '01',
     },
     {
       title: "Brand Re-innovation",
-      description: "QiYOU will enhance your marketing by revitalizing your brand's visual designs, leading to improved recognition and consistency.",
+      description: "QiYOU will enhance your marketing by revitalizing your brand's visual designs, leading to improved recognition and consistency. We will modernize the brand to increase its credibility and appeal to target audiences, ensuring a clear vision and strong identity.",
       IconComponent: RefreshCw,
       color: "from-blue-500 to-cyan-400",
       number: '02',
     },
     {
       title: "Corporate Identity",
-      description: "By building or enhancing your corporate identity, we will create a competitive edge for your brand presence and increase marketing effectiveness.",
+      description: "By building or enhancing your corporate identity, we will create a competitive edge for your brand presence, increase the effectiveness of your marketing activities, and align your brand's vision with both your customers and employees.",
       IconComponent: Building2,
       color: "from-emerald-400 to-teal-500",
       number: '03',
     },
     {
       title: "Brand Consultancy",
-      description: "This service specializes in brand consultancy, helping companies develop their brand identity and strategy by analyzing current branding.",
+      description: "This service specializes in brand consultancy, helping companies develop their brand identity and strategy. We analyze the current branding to provide creative solutions that align with the brand's values and vision. Our main goal is to differentiate the brand, enhance its perception, and support long-term growth.",
       IconComponent: MessagesSquare,
       color: "from-orange-400 to-pink-500",
       number: '04',
@@ -158,8 +158,9 @@ const CreativeDesignsUIUX: React.FC = () => {
                 isPVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              Create a high-performing website or mobile app with QiYou Tech's expert design and development team. 
-              If you already have a live platform, our specialists can refine and optimize your digital presence.
+              Create a high-performing website or mobile app with QiYou Tech’s expert design and 
+              development team. If you already have a live platform, our specialists can refine, 
+              enhance, and optimize your digital presence to support your business growth.
             </p>
           </div>
         </section>
@@ -190,8 +191,9 @@ const CreativeDesignsUIUX: React.FC = () => {
                 isPBrandingVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              Our expert team elevates your brand across all categories, from visual identity to full brand systems. 
-              With experience supporting global companies, we deliver impactful branding solutions.
+              Our expert team elevates your brand across all categories, from visual identity to full brand 
+              systems. With experience supporting global companies, we deliver some of the most impactful 
+              branding solutions in the UAE.
             </p>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">

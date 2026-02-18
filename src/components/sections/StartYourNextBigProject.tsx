@@ -72,7 +72,7 @@ const StartYourNextBigProject: React.FC = () => {
             Start Your Next <span className="bg-gradient-blue bg-clip-text text-transparent">Big Project</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-            Got an idea? Tell us about it, and we'll bring it to life.
+            Got an idea? Tell us about it, and we’ll bring it to life with world-class execution.
           </p>
         </div>
 

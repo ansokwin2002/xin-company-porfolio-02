@@ -116,12 +116,12 @@ const PromiseCard: React.FC<PromiseCardProps> = ({ IconComponent, title, number,
 
 const ServicesShowcase: React.FC = () => {
   const services = [
-    { IconComponent: Palette, title: 'Creative designs and UI/UX designs', description: 'By combining creative design with effective UI/UX strategies...', number: '01', color: "from-purple-500 to-indigo-500" },
-    { IconComponent: Smartphone, title: 'Mobile App Development', description: 'We help enterprises and startups innovate and develop outstanding mobile...', number: '02', color: "from-blue-500 to-cyan-400" },
-    { IconComponent: Monitor, title: 'Web App Development', description: 'We have an expert team ready to digitize simple websites and/or implement...', number: '03', color: "from-emerald-400 to-teal-500" },
-    { IconComponent: TrendingUp, title: 'Digital Marketing', description: 'Using top digital marketing and advertising services, we conduct in-depth...', number: '04', color: "from-orange-400 to-pink-500" },
-    { IconComponent: Zap, title: 'IT Consultancy & DevOps Service', description: "If you're searching for a technical partner to be your software strategic...", number: '05', color: "from-yellow-400 to-orange-500" },
-    { IconComponent: ShieldCheck, title: 'Hosting Server', description: 'We enhance security with advanced measures and regular backups...', number: '06', color: "from-blue-600 to-indigo-700" },
+    { IconComponent: Palette, title: 'Creative designs and UI/UX designs', description: 'By combining creative design with effective UI/UX strategies, we gain a competitive edge in digital presence, enhance customer satisfaction, and...', number: '01', color: "from-purple-500 to-indigo-500" },
+    { IconComponent: Smartphone, title: 'Mobile App Development', description: 'We help enterprises and startups innovate and develop outstanding mobile applications (iOS & Android), turning ideas into reality while...', number: '02', color: "from-blue-500 to-cyan-400" },
+    { IconComponent: Monitor, title: 'Web App Development', description: 'We have an expert team ready to digitize simple websites and/or implement a full digital transformation, providing a holistic overhaul of...', number: '03', color: "from-emerald-400 to-teal-500" },
+    { IconComponent: TrendingUp, title: 'Digital Marketing', description: 'Using top digital marketing and advertising services, we conduct in-depth audience needs analysis to identify the best ways to align...', number: '04', color: "from-orange-400 to-pink-500" },
+    { IconComponent: Zap, title: 'IT Consultancy & DevOps Service', description: "If you're searching for a technical partner to be your software strategic partner and help grow your business, these services are designed to...", number: '05', color: "from-yellow-400 to-orange-500" },
+    { IconComponent: ShieldCheck, title: 'Hosting Server', description: 'We enhance security with advanced measures and regular backups to protect your data. These services optimize performance for faster load...', number: '06', color: "from-blue-600 to-indigo-700" },
   ];
 
   const promises = [
@@ -138,9 +138,6 @@ const ServicesShowcase: React.FC = () => {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-6 py-2 rounded-full bg-blue-50 font-semibold text-sm mb-6 border border-blue-100">
-               ✨ <span className="ml-2 uppercase tracking-wide bg-gradient-blue bg-clip-text text-transparent">Our Capabilities</span>
-            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
               How we help <span className="bg-gradient-blue bg-clip-text text-transparent">Businesses Grow?</span>
             </h2>

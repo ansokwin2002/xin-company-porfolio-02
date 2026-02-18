@@ -111,7 +111,7 @@ const WebAppDevelopment: React.FC = () => {
   const features = [
     {
       title: 'Localization & RTL Support',
-      desc: 'Multi-language websites with full RTL support for Arabic and other languages.',
+      desc: 'Multi-language websites with full RTL support for Arabic and other languages to reach global audiences.',
       icon: Languages, 
       color: "from-blue-400 to-indigo-500"
     },
@@ -166,9 +166,7 @@ const WebAppDevelopment: React.FC = () => {
                 <span className="text-white">Application With Expert Team</span>
               </h1>
               <p className="text-lg opacity-90 max-w-3xl mx-auto text-white leading-relaxed">
-                Design the right website & web app, in the right way, at the right time with the 
-                QiYou Tech development team.
-              </p>
+               Design the right website & web app, in the right way, at the right time with the Xin QiYou Tech web development team. And if your website is already live, ask our software engineers experts to improve your presence and support your business.              </p>
             </div>
           </div>
         </section>
@@ -180,12 +178,12 @@ const WebAppDevelopment: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div ref={sectionTitleRef}>
               <div className={`text-center mb-16 transition-all duration-700 ${isTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                <div className="inline-flex items-center px-6 py-2 rounded-full bg-blue-100 font-semibold text-sm mb-6 border border-blue-200">
-                  🚀 <span className="ml-2 uppercase tracking-wide bg-gradient-blue bg-clip-text text-transparent">Our Expertise</span>
-                </div>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                   What We <span className="bg-gradient-blue bg-clip-text text-transparent">Develop?</span>
                 </h2>
+                <p className="text-gray-600 text-lg max-w-3xl mx-auto mb-8">
+                  We provide comprehensive web development solutions tailored to your business needs, from corporate websites to complex web applications.
+                </p>
               </div>
 
               <div className={`flex flex-wrap justify-center gap-4 mb-16 transition-all duration-700 ${isTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: '200ms' }}>
