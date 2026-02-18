@@ -5,19 +5,19 @@ const projects = [
   {
     id: 1,
     title: "Al-Ahly Club App",
-    image: "https://placehold.co/400x800/4a0e0e/white?text=Al-Ahly+App",
+    video: "/assets/videos/v1.mp4",
     color: "bg-[#4a0e0e]"
   },
   {
     id: 2,
     title: "Project Two",
-    image: "https://placehold.co/400x800/7a1111/white?text=Main+Project",
+    video: "/assets/videos/v2.mp4",
     color: "bg-[#7a1111]"
   },
   {
     id: 3,
     title: "Al-Mahatta App",
-    image: "https://placehold.co/400x800/f5f5f5/black?text=Al-Mahatta",
+    video: "/assets/videos/v3.mp4",
     color: "bg-gray-100"
   }
 ];
@@ -46,7 +46,7 @@ const ProjectsSlider: React.FC = () => {
           </p>
         </div>
 
-        {/* Slider View - HEIGHT REDUCED HERE */}
+        {/* Slider View */}
         <div className="relative flex items-center justify-center h-[400px] md:h-[520px]">
           
           {/* Navigation Buttons */}
@@ -76,13 +76,18 @@ const ProjectsSlider: React.FC = () => {
               return (
                 <div
                   key={project.id}
-                  // REDUCED WIDTH/HEIGHT RATIO
-                  className={`absolute transition-all duration-700 ease-in-out transform w-[180px] md:w-[240px] h-[360px] md:h-[480px] rounded-[32px] border-[5px] border-[#222] shadow-2xl overflow-hidden ${project.color} ${positionClasses}`}
+                  className={`absolute transition-all duration-700 ease-in-out transform w-[180px] md:w-[240px] h-[360px] md:h-[480px] rounded-[32px] border-[8px] border-[#1a1a1a] shadow-2xl overflow-hidden ${project.color} ${positionClasses}`}
                 >
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
+                  {/* Dynamic Island / Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-[#1a1a1a] rounded-b-xl z-30" />
+                  
+                  <video 
+                    src={project.video} 
                     className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
                 </div>
