@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaFacebookF, FaTiktok, FaYoutube, FaTelegramPlane, FaArrowRight } from 'react-icons/fa';
 import { MdEmail, MdPhone } from 'react-icons/md';
-import { ChevronDown } from 'lucide-react'; // Added ChevronDown from lucide-react
+import { ChevronDown, X } from 'lucide-react'; // Added ChevronDown and X from lucide-react
 import { toast } from 'sonner';
 
 // Countries data from Hero.tsx
@@ -19,6 +19,7 @@ const StartYourNextBigProject: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For budget dropdown
   const [isCountryOpen, setIsCountryOpen] = useState(false); // For country dropdown
   const [selectedBudget, setSelectedBudget] = useState('');
+  const [showCustomInput, setShowCustomInput] = useState(false); // For custom budget input
   const [selectedCountry, setSelectedCountry] = useState(countries[0]); // Initial country from countries array
   const [isSubmitting, setIsSubmitting] = useState(false); // Added isSubmitting state
   
@@ -26,7 +27,7 @@ const StartYourNextBigProject: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', mobile: '', details: '' }); // Added mobile
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const budgetOptions = ['$1,000 - $5,000', '$5,000 - $10,000', '$10,000 - $50,000', '$50,000+'];
+  const budgetOptions = ['$1,000 - $5,000', '$5,000 - $10,000', '$10,000 - $50,000', '$50,000+', 'Custom'];
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -37,7 +38,13 @@ const StartYourNextBigProject: React.FC = () => {
   }, []);
 
   const handleSelect = (option: string) => {
-    setSelectedBudget(option);
+    if (option === 'Custom') {
+      setShowCustomInput(true);
+      setSelectedBudget('');
+    } else {
+      setSelectedBudget(option);
+      setShowCustomInput(false);
+    }
     setIsDropdownOpen(false);
   };
 
@@ -54,6 +61,7 @@ const StartYourNextBigProject: React.FC = () => {
       // Reset form fields
       setFormData({ name: '', email: '', mobile: '', details: '' }); // Reset mobile as well
       setSelectedBudget('');
+      setShowCustomInput(false); // Reset custom input state
       setSelectedCountry(countries[0]); // Reset country as well
       setIsSubmitting(false); // Set isSubmitting to false after submission
     }, 2000); // Simulate a 2-second delay for submission
@@ -213,33 +221,57 @@ const StartYourNextBigProject: React.FC = () => {
                 </div>
               </div>
 
-              {/* 3. Budget Dropdown - Hero Style (Border Bottom) */}
-              <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
-                <div className="w-full py-3 flex items-center justify-between cursor-pointer">
-                  <span className={`font-bold transition-colors ${selectedBudget ? 'text-gray-900' : 'text-transparent'}`}>
-                    {selectedBudget || "Placeholder"} 
-                  </span>
-                  <ChevronDown size={14} className={`text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+              {/* 3. Budget Dropdown or Custom Input */}
+              {showCustomInput ? (
+                <div className="relative group border-b-2 border-gray-300 focus-within:border-gray-900 transition-colors">
+                  <input 
+                    type="text" 
+                    required 
+                    autoFocus
+                    value={selectedBudget}
+                    onChange={(e) => setSelectedBudget(e.target.value)}
+                    className="w-full bg-transparent py-3 text-gray-900 font-bold focus:outline-none placeholder-transparent peer" 
+                    placeholder=" " 
+                  />
+                  <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform -translate-y-6 scale-90 text-gray-700">
+                    Project Budget (Custom) *
+                  </label>
+                  <button 
+                    type="button"
+                    onClick={() => { setShowCustomInput(false); setSelectedBudget(''); }}
+                    className="absolute right-0 top-3 text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X size={18} />
+                  </button>
                 </div>
-                
-                {/* Floating Label Logic */}
-                <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
-                  ${selectedBudget || isDropdownOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
-                `}>
-                  Project Budget *
-                </label>
+              ) : (
+                <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
+                  <div className="w-full py-3 flex items-center justify-between cursor-pointer">
+                    <span className={`font-bold transition-colors ${selectedBudget ? 'text-gray-900' : 'text-transparent'}`}>
+                      {selectedBudget || "Placeholder"} 
+                    </span>
+                    <ChevronDown size={14} className={`text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  </div>
+                  
+                  {/* Floating Label Logic */}
+                  <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
+                    ${selectedBudget || isDropdownOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
+                  `}>
+                    Project Budget *
+                  </label>
 
-                {/* Dropdown Options */}
-                <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isDropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
-                  <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
-                    {budgetOptions.map((opt) => (
-                      <div key={opt} onClick={() => handleSelect(opt)} className="px-6 py-4 hover:bg-blue-50 cursor-pointer text-sm font-bold text-gray-700">
-                        {opt}
-                      </div>
-                    ))}
+                  {/* Dropdown Options */}
+                  <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isDropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                    <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
+                      {budgetOptions.map((opt) => (
+                        <div key={opt} onClick={() => handleSelect(opt)} className="px-6 py-4 hover:bg-blue-50 cursor-pointer text-sm font-bold text-gray-700">
+                          {opt}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* 4. Textarea - Hero Style Adaptation */}
               <div className="relative group">

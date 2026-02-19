@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowDown, ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowDown, ArrowRight, ChevronDown, X } from 'lucide-react';
 import { toast } from 'sonner';
 import CountingNumber from '../specific/CountingNumber';
 
@@ -22,6 +22,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const [formData, setFormData] = useState({ name: '', email: '', budget: '', mobile: '', details: '' });
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [isBudgetOpen, setIsBudgetOpen] = useState(false);
+  const [showCustomBudget, setShowCustomBudget] = useState(false);
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false); // Added isSubmitting state
 
@@ -66,6 +67,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
 
       // Reset form fields
       setFormData({ name: '', email: '', budget: '', mobile: '', details: '' });
+      setShowCustomBudget(false);
       setIsSubmitting(false); // Set isSubmitting to false after submission
     }, 2000); // Simulate a 2-second delay
   };
@@ -202,33 +204,70 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                       </div>
                     </div>
 
-                    {/* 4. Floating Budget Dropdown (Redesigned to match Name/Email style) */}
-                    <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsBudgetOpen(true)} onMouseLeave={() => setIsBudgetOpen(false)}>
-                      <div className="w-full py-3 flex items-center justify-between cursor-pointer">
-                        <span className={`font-bold transition-colors ${formData.budget ? 'text-gray-900' : 'text-transparent'}`}>
-                          {formData.budget || "Placeholder"} 
-                        </span>
-                        <ChevronDown size={18} className={`text-gray-500 transition-transform duration-300 ${isBudgetOpen ? 'rotate-180' : ''}`} />
+                    {/* 4. Floating Budget Dropdown or Custom Input */}
+                    {showCustomBudget ? (
+                      <div className="relative group border-b-2 border-gray-300 focus-within:border-gray-900 transition-colors">
+                        <input 
+                          type="text" 
+                          required 
+                          autoFocus
+                          value={formData.budget}
+                          onChange={(e) => setFormData({...formData, budget: e.target.value})}
+                          className="w-full bg-transparent py-3 text-gray-900 font-bold focus:outline-none placeholder-transparent peer" 
+                          placeholder=" " 
+                        />
+                        <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform -translate-y-6 scale-90 text-gray-700">
+                          {t('hero.form.budget.label')} (Custom) *
+                        </label>
+                        <button 
+                          type="button"
+                          onClick={() => { setShowCustomBudget(false); setFormData({...formData, budget: ''}); }}
+                          className="absolute right-0 top-3 text-gray-400 hover:text-gray-600 transition-colors"
+                        >
+                          <X size={18} />
+                        </button>
                       </div>
-                      
-                      {/* Floating Label for Budget (Controlled by state existence) */}
-                      <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
-                        ${formData.budget || isBudgetOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
-                      `}>
-                        {t('hero.form.budget.label')} *
-                      </label>
+                    ) : (
+                      <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsBudgetOpen(true)} onMouseLeave={() => setIsBudgetOpen(false)}>
+                        <div className="w-full py-3 flex items-center justify-between cursor-pointer">
+                          <span className={`font-bold transition-colors ${formData.budget ? 'text-gray-900' : 'text-transparent'}`}>
+                            {formData.budget || "Placeholder"} 
+                          </span>
+                          <ChevronDown size={18} className={`text-gray-500 transition-transform duration-300 ${isBudgetOpen ? 'rotate-180' : ''}`} />
+                        </div>
+                        
+                        {/* Floating Label for Budget (Controlled by state existence) */}
+                        <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
+                          ${formData.budget || isBudgetOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
+                        `}>
+                          {t('hero.form.budget.label')} *
+                        </label>
 
-                      {/* Dropdown Options */}
-                      <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isBudgetOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
-                        <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
-                          {[t('hero.form.budget.options.0'), t('hero.form.budget.options.1'), t('hero.form.budget.options.2')].map((opt) => (
-                            <div key={opt} onClick={() => { setFormData({...formData, budget: opt}); setIsBudgetOpen(false); }} className="px-6 py-4 hover:bg-blue-50 cursor-pointer text-sm font-bold text-gray-700">
-                              {opt}
-                            </div>
-                          ))}
+                        {/* Dropdown Options */}
+                        <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isBudgetOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                          <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
+                            {[t('hero.form.budget.options.0'), t('hero.form.budget.options.1'), t('hero.form.budget.options.2')].map((opt) => (
+                              <div 
+                                key={opt} 
+                                onClick={() => { 
+                                  if (opt === t('hero.form.budget.options.2')) {
+                                    setShowCustomBudget(true);
+                                    setFormData({...formData, budget: ''});
+                                  } else {
+                                    setFormData({...formData, budget: opt});
+                                    setShowCustomBudget(false);
+                                  }
+                                  setIsBudgetOpen(false); 
+                                }} 
+                                className="px-6 py-4 hover:bg-blue-50 cursor-pointer text-sm font-bold text-gray-700"
+                              >
+                                {opt}
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
 
                     {/* 5. Floating Project Details Textarea */}
                     <div className="relative group">
