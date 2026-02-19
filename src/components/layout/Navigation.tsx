@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const ContactIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 28 28" fill="none">
@@ -33,6 +33,7 @@ const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
     { id: 'home', label: 'nav.home', type: 'link', path: '/' },
@@ -74,8 +75,19 @@ const Navigation: React.FC = () => {
 
   const getCurrentLanguage = () => languages.find(l => l.code === i18n.language) || languages[0];
 
+  const isItemActive = (item: any) => {
+    if (item.type === 'link') {
+      return location.pathname === item.path;
+    }
+    if (item.type === 'dropdown') {
+      return item.items?.some((sub: any) => location.pathname === sub.path);
+    }
+    return false;
+  };
+
   // Common styles for the gold line effect
   const goldLineClass = "relative transition-colors before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-gold before:scale-x-0 before:origin-center before:transition-transform before:duration-300 group-hover:before:scale-x-100 hover:before:scale-x-100";
+  const activeGoldLineClass = "before:scale-x-100 text-gold";
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-200 ${isScrolled ? 'bg-white shadow-sm border-b border-gray-100' : 'bg-white'} ${i18n.language === 'km' ? 'font-siemreap' : ''}`}>
@@ -93,43 +105,49 @@ const Navigation: React.FC = () => {
 
           {/* Desktop Nav Items */}
           <div className="hidden lg:flex items-center space-x-10 h-full">
-            {navItems.map((item) => (
-              <div key={item.id} className="relative group h-full flex items-center">
-                {item.type === 'link' ? (
-                  <button onClick={() => { navigate(item.path); setIsOpen(false); }} className={`text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
-                    {t(item.label)}
-                  </button>
-                ) : (
-                  <>
-                    <button className={`flex items-center space-x-1 text-sm text-gray-700 hover:text-gray-900 py-1 ${goldLineClass}`}>
-                      <span>{t(item.label)}</span>
-                      <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
+            {navItems.map((item) => {
+              const active = isItemActive(item);
+              return (
+                <div key={item.id} className="relative group h-full flex items-center">
+                  {item.type === 'link' ? (
+                    <button onClick={() => { navigate(item.path); setIsOpen(false); }} className={`text-sm py-1 ${goldLineClass} ${active ? activeGoldLineClass : 'text-gray-700 hover:text-gray-900'}`}>
+                      {t(item.label)}
                     </button>
-                    {/* Dropdown Menu */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all pt-1 z-50">
-                      <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 w-72">
-                        {item.items?.map(sub => (
-                          <button 
-                            key={sub.id} 
-                            onClick={() => { 
-                              if (sub.path && sub.path.startsWith('/')) {
-                                navigate(sub.path); 
-                              } else {
-                                scrollToSection(sub.id);
-                              }
-                              setIsOpen(false);
-                            }} 
-                            className="w-full text-left px-4 py-2 text-sm hover:bg-gray-50 text-gray-700 hover:text-gold transition-colors"
-                          >
-                            {t(sub.label)}
-                          </button>
-                        ))}
+                  ) : (
+                    <>
+                      <button className={`flex items-center space-x-1 text-sm py-1 ${goldLineClass} ${active ? activeGoldLineClass : 'text-gray-700 hover:text-gray-900'}`}>
+                        <span>{t(item.label)}</span>
+                        <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
+                      </button>
+                      {/* Dropdown Menu */}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all pt-1 z-50">
+                        <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 w-72">
+                          {item.items?.map(sub => {
+                            const subActive = location.pathname === sub.path;
+                            return (
+                              <button 
+                                key={sub.id} 
+                                onClick={() => { 
+                                  if (sub.path && sub.path.startsWith('/')) {
+                                    navigate(sub.path); 
+                                  } else {
+                                    scrollToSection(sub.id);
+                                  }
+                                  setIsOpen(false);
+                                }} 
+                                className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${subActive ? 'text-gold font-medium bg-gray-50' : 'text-gray-700 hover:text-gold'}`}
+                              >
+                                {t(sub.label)}
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
+                    </>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           {/* RIGHT SIDE ACTIONS */}
@@ -171,45 +189,51 @@ const Navigation: React.FC = () => {
       {/* Mobile Menu */}
       <div className={`lg:hidden transition-all duration-500 overflow-hidden ${isOpen ? 'max-h-screen pb-4' : 'max-h-0'}`}>
         <div className="px-6 space-y-4">
-          {navItems.map((item) => (
-            <div key={item.id}>
-              {item.type === 'link' ? (
-                <button onClick={() => { navigate(item.path); setIsOpen(false); }} className="block w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium">
-                  {t(item.label)}
-                </button>
-              ) : (
-                <div>
-                  <button 
-                    onClick={() => setActiveDropdown(activeDropdown === item.id ? null : item.id)}
-                    className="flex items-center justify-between w-full text-left py-2 text-base text-gray-700 hover:text-gold font-medium"
-                  >
-                    <span>{t(item.label)}</span>
-                    <ChevronDown size={18} className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`} />
+          {navItems.map((item) => {
+            const active = isItemActive(item);
+            return (
+              <div key={item.id}>
+                {item.type === 'link' ? (
+                  <button onClick={() => { navigate(item.path); setIsOpen(false); }} className={`block w-full text-left py-2 text-base font-medium transition-colors ${active ? 'text-gold' : 'text-gray-700 hover:text-gold'}`}>
+                    {t(item.label)}
                   </button>
-                  <div className={`transition-all duration-300 ease-out overflow-hidden ${activeDropdown === item.id ? 'max-h-screen opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}`}>
-                    <div className="pl-4 border-l border-gray-200 ml-2 py-1 space-y-1">
-                      {item.items?.map(sub => (
-                        <button 
-                          key={sub.id} 
-                          onClick={() => { 
-                            if (sub.path && sub.path.startsWith('/')) {
-                              navigate(sub.path); 
-                            } else {
-                              scrollToSection(sub.id);
-                            }
-                            setIsOpen(false);
-                          }} 
-                          className="block w-full text-left py-2 text-sm text-gray-600 hover:text-gold"
-                        >
-                          {t(sub.label)}
-                        </button>
-                      ))}
+                ) : (
+                  <div>
+                    <button 
+                      onClick={() => setActiveDropdown(activeDropdown === item.id ? null : item.id)}
+                      className={`flex items-center justify-between w-full text-left py-2 text-base font-medium transition-colors ${active ? 'text-gold' : 'text-gray-700 hover:text-gold'}`}
+                    >
+                      <span>{t(item.label)}</span>
+                      <ChevronDown size={18} className={`transition-transform ${activeDropdown === item.id ? 'rotate-180' : ''}`} />
+                    </button>
+                    <div className={`transition-all duration-300 ease-out overflow-hidden ${activeDropdown === item.id ? 'max-h-screen opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'}`}>
+                      <div className="pl-4 border-l border-gray-200 ml-2 py-1 space-y-1">
+                        {item.items?.map(sub => {
+                          const subActive = location.pathname === sub.path;
+                          return (
+                            <button 
+                              key={sub.id} 
+                              onClick={() => { 
+                                if (sub.path && sub.path.startsWith('/')) {
+                                  navigate(sub.path); 
+                                } else {
+                                  scrollToSection(sub.id);
+                                }
+                                setIsOpen(false);
+                              }} 
+                              className={`block w-full text-left py-2 text-sm transition-colors ${subActive ? 'text-gold font-medium' : 'text-gray-600 hover:text-gold'}`}
+                            >
+                              {t(sub.label)}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            );
+          })}
 
           {/* Mobile Language Switcher */}
           <div className="pt-4 border-t border-gray-100">
