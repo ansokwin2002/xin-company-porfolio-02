@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navigation from '../components/layout/Navigation';
 import Footer from '../components/layout/Footer';
 import ScrollToTop from '../components/specific/ScrollToTop';
@@ -141,7 +142,7 @@ const productsData = [
   }
 ];
 
-const ProductRow: React.FC<{ product: any, index: number }> = ({ product, index }) => {
+const ProductRow: React.FC<{ product: any, index: number, isActive: boolean }> = ({ product, index, isActive }) => {
   const [isVisible, setIsVisible] = useState(false);
   const rowRef = useRef<HTMLDivElement>(null);
   const isImageLeft = index % 2 === 0;
@@ -171,8 +172,19 @@ const ProductRow: React.FC<{ product: any, index: number }> = ({ product, index 
   };
 
   return (
-    <section ref={rowRef} className={`py-24 px-6 ${product.bgColor}`}>
-      <div className={`max-w-7xl mx-auto flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-start gap-16 lg:gap-24`}>
+    <section 
+      id={`product-${product.id}`}
+      ref={rowRef} 
+      className={`py-24 px-6 transition-all duration-700 relative ${
+        isActive 
+          ? 'bg-blue-100/50 ring-4 ring-blue-400 ring-inset' 
+          : product.bgColor
+      }`}
+    >
+      {isActive && (
+        <div className="absolute inset-0 bg-blue-400/10 animate-pulse pointer-events-none"></div>
+      )}
+      <div className={`max-w-7xl mx-auto flex flex-col ${isImageLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-start gap-16 lg:gap-24 relative z-10`}>
         
         {/* Image/Link Side */}
         <div className={`w-full lg:w-1/2 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}>
@@ -241,6 +253,8 @@ const Products: React.FC = () => {
   const pRef = useRef<HTMLParagraphElement>(null);
   const [isH1Visible, setIsH1Visible] = useState(false);
   const [isPVisible, setIsPVisible] = useState(false);
+  const [activeProductId, setActiveProductId] = useState<number | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     const observerOptions = { threshold: 0.1 };
@@ -252,6 +266,31 @@ const Products: React.FC = () => {
     
     return () => { h1Obs.disconnect(); pObs.disconnect(); };
   }, []);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#product-', '');
+      const productId = parseInt(id);
+      if (!isNaN(productId)) {
+        setActiveProductId(productId);
+        
+        // Scroll to the element after a short delay to ensure it's rendered and observer is ready
+        setTimeout(() => {
+          const element = document.getElementById(`product-${productId}`);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 300);
+
+        // Remove highlight after 5 seconds
+        const timer = setTimeout(() => {
+          setActiveProductId(null);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [location.hash]);
 
   return (
     <div className="min-h-screen bg-white font-sans overflow-x-hidden">
@@ -281,7 +320,12 @@ const Products: React.FC = () => {
 
         <div className="divide-y divide-gray-100">
           {productsData.map((product, index) => (
-            <ProductRow key={product.id} product={product} index={index} />
+            <ProductRow 
+              key={product.id} 
+              product={product} 
+              index={index} 
+              isActive={activeProductId === product.id}
+            />
           ))}
         </div>
       </main>

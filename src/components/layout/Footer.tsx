@@ -131,22 +131,22 @@ const Footer: React.FC<FooterProps> = () => {
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Products</h4>
             <ul className="space-y-3">
               {[
-                'BITMART digital',
-                'Shopping Cart Systems',
-                'e-Commerce System',
-                'Lottery Apps',
-                'Entertainment',
-                'Insurance System',
-                'Feige IM',
-                'Warehouse Management ERP',
-                'Laundry POS',
-                'Restaurant POS',
-                'Retail POS'
+                { name: 'BITMART digital', id: 'product-1' },
+                { name: 'Shopping Cart Systems', id: 'product-2' },
+                { name: 'e-Commerce System', id: 'product-3' },
+                { name: 'Lottery Apps', id: 'product-4' },
+                { name: 'Entertainment', id: 'product-5' },
+                { name: 'Insurance System', id: 'product-6' },
+                { name: 'Feige IM', id: 'product-7' },
+                { name: 'Warehouse Management ERP', id: 'product-8' },
+                { name: 'Laundry POS', id: 'product-9' },
+                { name: 'Restaurant POS', id: 'product-10' },
+                { name: 'Retail POS', id: 'product-11' }
               ].map((item) => (
-                <li key={item}>
-                  <Link to="/products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
+                <li key={item.id}>
+                  <Link to={`/products#${item.id}`} className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
