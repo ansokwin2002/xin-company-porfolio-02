@@ -9,6 +9,7 @@ import WebAppDevelopment from './pages/WebAppDevelopment'; // Import the new com
 import DigitalMarketing from './pages/DigitalMarketing'; // Import the new component
 import ITConsultancyDevOpsService from './pages/ITConsultancy&DevOpsService'; // Import the new component
 import HostingServer from './pages/HostingServer';
+import Products from './pages/Products';
 import About from './pages/About';
 import Blog from './pages/Blog';
 import Careers from './pages/Careers';
@@ -86,6 +87,7 @@ const AppRoutes: React.FC<AppRoutesProps> = ({ showAnimations, scrollToSection }
         <Route path="/digital-marketing" element={<DigitalMarketing />} />
         <Route path="/it-consultancy-devops" element={<ITConsultancyDevOpsService />} />
         <Route path="/hosting-server" element={<HostingServer />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/careers" element={<Careers />} />

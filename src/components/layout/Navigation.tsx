@@ -37,6 +37,7 @@ const Navigation: React.FC = () => {
 
   const navItems = [
     { id: 'home', label: 'nav.home', type: 'link', path: '/' },
+    { id: 'products', label: 'nav.products', type: 'link', path: '/products' },
     {
       id: 'services',
       label: 'nav.services',
@@ -110,7 +111,13 @@ const Navigation: React.FC = () => {
               return (
                 <div key={item.id} className="relative group h-full flex items-center">
                   {item.type === 'link' ? (
-                    <button onClick={() => { navigate(item.path); setIsOpen(false); }} className={`text-sm py-1 ${goldLineClass} ${active ? activeGoldLineClass : 'text-gray-700 hover:text-gray-900'}`}>
+                    <button onClick={() => {
+                      navigate(item.path);
+                      if ((item as any).scrollId) {
+                        setTimeout(() => scrollToSection((item as any).scrollId), 0);
+                      }
+                      setIsOpen(false);
+                    }} className={`text-sm py-1 ${goldLineClass} ${active ? activeGoldLineClass : 'text-gray-700 hover:text-gray-900'}`}>
                       {t(item.label)}
                     </button>
                   ) : (
@@ -121,26 +128,28 @@ const Navigation: React.FC = () => {
                       </button>
                       {/* Dropdown Menu */}
                       <div className="absolute top-full left-1/2 -translate-x-1/2 opacity-0 -translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all pt-1 z-50">
-                        <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-2 w-72">
-                          {item.items?.map(sub => {
-                            const subActive = location.pathname === sub.path;
-                            return (
-                              <button 
-                                key={sub.id} 
-                                onClick={() => { 
-                                  if (sub.path && sub.path.startsWith('/')) {
-                                    navigate(sub.path); 
-                                  } else {
-                                    scrollToSection(sub.id);
-                                  }
-                                  setIsOpen(false);
-                                }} 
-                                className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${subActive ? 'text-gold font-medium bg-gray-50' : 'text-gray-700 hover:text-gold'}`}
-                              >
-                                {t(sub.label)}
-                              </button>
-                            );
-                          })}
+                        <div className="bg-white rounded-xl shadow-2xl border border-gray-100 p-2 w-80">
+                          <div className="grid grid-cols-2 gap-1">
+                            {item.items?.map(sub => {
+                              const subActive = location.pathname === sub.path;
+                              return (
+                                <button 
+                                  key={sub.id} 
+                                  onClick={() => { 
+                                    if (sub.path && sub.path.startsWith('/')) {
+                                      navigate(sub.path); 
+                                    } else {
+                                      scrollToSection(sub.id);
+                                    }
+                                    setIsOpen(false);
+                                  }} 
+                                  className={`text-left px-3 py-2.5 text-sm hover:bg-gray-50 transition-colors rounded-lg ${subActive ? 'text-gold font-medium bg-gray-50' : 'text-gray-700 hover:text-gold'}`}
+                                >
+                                  {t(sub.label)}
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
                       </div>
                     </>
@@ -194,7 +203,13 @@ const Navigation: React.FC = () => {
             return (
               <div key={item.id}>
                 {item.type === 'link' ? (
-                  <button onClick={() => { navigate(item.path); setIsOpen(false); }} className={`block w-full text-left py-2 text-base font-medium transition-colors ${active ? 'text-gold' : 'text-gray-700 hover:text-gold'}`}>
+                  <button onClick={() => {
+                    navigate(item.path);
+                    if ((item as any).scrollId) {
+                      setTimeout(() => scrollToSection((item as any).scrollId), 0);
+                    }
+                    setIsOpen(false);
+                  }} className={`block w-full text-left py-2 text-base font-medium transition-colors ${active ? 'text-gold' : 'text-gray-700 hover:text-gold'}`}>
                     {t(item.label)}
                   </button>
                 ) : (

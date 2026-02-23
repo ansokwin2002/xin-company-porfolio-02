@@ -6,8 +6,9 @@
   "testimonials": "Testimonials",
   "faq": "FAQ",
   "contact": "Contact",
-  "nav": {
+"nav": {
     "home": "首頁",
+    "products": "產品",
     "services": "服務",
     "services.creative_designs_ui_ux": "創意設計與 UI/UX 設計",
     "services.mobile_app_development": "行動應用程式開發",

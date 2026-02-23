@@ -6,8 +6,9 @@
   "testimonials": "ការវាយតម្លៃ",
   "faq": "សំណួរគេសួរញឹកញាប់",
   "contact": "ទំនាក់ទំនង",
-  "nav": {
+"nav": {
     "home": "ទំព័រដើម",
+    "products": "ផលិតផល",
     "services": "សេវាកម្ម",
     "services.creative_designs_ui_ux": "ការរចនាច្នៃប្រឌិត និង UI/UX",
     "services.mobile_app_development": "ការអភិវឌ្ឍន៍កម្មវិធីទូរស័ព្ទ",

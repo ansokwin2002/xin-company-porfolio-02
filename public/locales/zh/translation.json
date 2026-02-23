@@ -1,9 +1,14 @@
 {
-  "home": "主页",
+"home": "主页",
   "about": "关于",
   "portfolio": "作品集",
   "services": "服务",
   "testimonials": "感言",
   "faq": "常见问题",
-  "contact": "联系"
+  "contact": "联系",
+  "nav": {
+    "home": "主页",
+    "products": "产品",
+    "services": "服务"
+  }
 }

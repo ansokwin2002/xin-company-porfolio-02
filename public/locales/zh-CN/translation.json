@@ -6,8 +6,9 @@
   "testimonials": "感言",
   "faq": "常见问题",
   "contact": "联系",
-  "nav": {
+"nav": {
     "home": "主页",
+    "products": "产品",
     "services": "服务",
     "services.creative_designs_ui_ux": "创意设计与 UI/UX 设计",
     "services.mobile_app_development": "移动应用开发",

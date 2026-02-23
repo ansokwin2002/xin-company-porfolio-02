@@ -6,8 +6,9 @@
   "testimonials": "Testimonials",
   "faq": "FAQ",
   "contact": "Contact",
-  "nav": {
+"nav": {
     "home": "Home",
+    "products": "Products",
     "services": "Services",
     "services.creative_designs_ui_ux": "Creative designs and UI/UX designs",
     "services.mobile_app_development": "Mobile App Development",
