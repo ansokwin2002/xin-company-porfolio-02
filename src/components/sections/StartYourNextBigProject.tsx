@@ -122,7 +122,7 @@ const StartYourNextBigProject: React.FC = () => {
               </div>
             </div>
 
-            <a href="https://t.me/yourusername" target="_blank" rel="noreferrer" 
+            <a href="https://t.me/xin_qiyou" target="_blank" rel="noreferrer" 
                className="block bg-gradient-blue rounded-3xl p-7 text-white group shadow-sm hover:shadow-xl transition-all duration-300 active:scale-[0.98]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">

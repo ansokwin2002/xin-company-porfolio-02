@@ -3,7 +3,7 @@ import React from 'react';
 const TelegramLink: React.FC = () => {
   return (
     <a
-      href="https://t.me/your_username" // <-- Replace with your Telegram link
+      href="https://t.me/xin_qiyou"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-4 right-2 bg-transparent hover:opacity-80 transition-all duration-300 z-40"

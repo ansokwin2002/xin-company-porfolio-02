@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 const projects = [
   {
     id: 1,
-    title: "Al-Ahly Club App",
-    video: "/assets/videos/v1.mp4",
-    color: "bg-[#4a0e0e]"
-  },
-  {
-    id: 2,
     title: "Project Two",
     video: "/assets/videos/v2.mp4",
     color: "bg-[#7a1111]"
+  },
+  {
+    id: 2,
+    title: "Al-Ahly Club App",
+    video: "/assets/videos/v1.mp4",
+    color: "bg-[#4a0e0e]"
   },
   {
     id: 3,
@@ -24,6 +24,7 @@ const projects = [
 
 const ProjectsSlider: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -32,6 +33,16 @@ const ProjectsSlider: React.FC = () => {
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <section className="bg-black py-16 overflow-hidden">

@@ -106,7 +106,19 @@ const Footer: React.FC<FooterProps> = () => {
           >
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Products</h4>
             <ul className="space-y-3">
-              {['Event Ticketing App', 'E-Commerce Mobile App', 'Solevato', 'Congora', 'CMS Website'].map((item) => (
+              {[
+                'Bit-based cryptocurrency',
+                'FC Store',
+                'Origin Store website',
+                'Other websites',
+                'Lottery apps',
+                'Several games',
+                'Insurance systems',
+                'Feige IM',
+                'Laundry POS',
+                'Restaurant POS',
+                'Retail POS'
+              ].map((item) => (
                 <li key={item}>
                   <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
