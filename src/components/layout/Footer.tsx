@@ -107,14 +107,14 @@ const Footer: React.FC<FooterProps> = () => {
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Products</h4>
             <ul className="space-y-3">
               {[
-                'Bit-based cryptocurrency',
-                'FC Store',
-                'Origin Store website',
-                'Other websites',
-                'Lottery apps',
-                'Several games',
-                'Insurance systems',
+                'BITMART digital',
+                'Shopping Cart Systems',
+                'e-Commerce System',
+                'Lottery Apps',
+                'Entertainment',
+                'Insurance System',
                 'Feige IM',
+                'Warehouse Management ERP',
                 'Laundry POS',
                 'Restaurant POS',
                 'Retail POS'
