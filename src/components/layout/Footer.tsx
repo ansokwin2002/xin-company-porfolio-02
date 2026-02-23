@@ -33,8 +33,7 @@ const Footer: React.FC<FooterProps> = () => {
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Careers', path: '/careers' },
-    { name: 'Blog & News', path: '/blog' },
-    { name: 'Case Studies', path: '/products' },
+    { name: 'Blog', path: '/blog' },
   ];
 
   return (

@@ -125,7 +125,7 @@ const productsData = [
     features: ['Dine-in, Takeaway & Delivery modes','Table layout management','Split bill & merge table options','Modifier options (extra cheese, no sugar, etc.)','Automatic tax & service charge calculation','Multiple payment methods (Cash, Card, QR, Wallet)','Digital & printed receipts'],
     footerNote: "Designed to reduce waiting time and improve service flow.",
     image: "/assets/images/products/Restaurang POS.png",
-    links: ["https://www.onedashcambodia.com"],
+    links: [""],
     bgColor: "bg-blue-50"
   },
   {
