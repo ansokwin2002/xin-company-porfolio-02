@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 interface FooterProps {
   // Define any props if needed, e.g., for dynamic year
@@ -18,6 +19,23 @@ const Footer: React.FC<FooterProps> = () => {
     if (footerRef.current) observer.observe(footerRef.current);
     return () => observer.disconnect();
   }, []);
+
+  const serviceLinks = [
+    { name: 'UI/UX Design', path: '/creative-designs-ui-ux' },
+    { name: 'Mobile App Development', path: '/mobile-app-development' },
+    { name: 'Web App Development', path: '/web-app-development' },
+    { name: 'Digital Marketing', path: '/digital-marketing' },
+    { name: 'Hosting & Servers', path: '/hosting-server' },
+    { name: 'IT Consultancy & DevOps', path: '/it-consultancy-devops' },
+  ];
+
+  const companyLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Careers', path: '/careers' },
+    { name: 'Blog & News', path: '/blog' },
+    { name: 'Case Studies', path: '/products' },
+  ];
 
   return (
     <footer 
@@ -66,12 +84,15 @@ const Footer: React.FC<FooterProps> = () => {
           >
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Company</h4>
             <ul className="space-y-3">
-              {['Home', 'About Us', 'Careers', 'Blog & News', 'Case Studies'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/\s/g, '-')}`} className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
+              {companyLinks.map((item) => (
+                <li key={item.name}>
+                  <Link 
+                    to={item.path} 
+                    className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group"
+                  >
                     <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -86,12 +107,15 @@ const Footer: React.FC<FooterProps> = () => {
           >
             <h4 className="text-lg font-semibold text-yellow-300 mb-4">Services</h4>
             <ul className="space-y-3">
-              {['UI/UX Design', 'Mobile App Development', 'Web App Development', 'Digital Marketing', 'Hosting & Servers', 'IT Consultancy & DevOps'].map((item) => (
-                <li key={item}>
-                  <a href="#services" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
+              {serviceLinks.map((item) => (
+                <li key={item.name}>
+                  <Link 
+                    to={item.path} 
+                    className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group"
+                  >
                     <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -120,10 +144,10 @@ const Footer: React.FC<FooterProps> = () => {
                 'Retail POS'
               ].map((item) => (
                 <li key={item}>
-                  <a href="#products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
+                  <Link to="/products" className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
                     <span className="w-1.5 h-1.5 bg-white rounded-full transition-transform group-hover:scale-150"></span>
                     {item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
