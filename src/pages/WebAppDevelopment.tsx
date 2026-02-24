@@ -81,6 +81,11 @@ const WebAppDevelopment: React.FC = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   const [isTitleVisible, setIsTitleVisible] = useState(false);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     const observerOptions = { threshold: 0.1 };
     
@@ -214,7 +219,10 @@ const WebAppDevelopment: React.FC = () => {
             </div>
 
             <div className="flex justify-center">
-              <button className="group relative bg-gradient-blue hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl flex items-center gap-3 overflow-hidden">
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="group relative bg-gradient-blue hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl flex items-center gap-3 overflow-hidden"
+              >
                 <span className="relative z-10">{t('web_app_page.develop_section.cta_button')}</span>
                 <ArrowRight size={20} className="relative z-10 group-hover:translate-x-2 transition-transform" />
               </button>

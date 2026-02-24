@@ -72,6 +72,11 @@ const ProcessStep = ({ number, icon: Icon, title, desc, index }: any) => {
 const WebAgencyShowcase: React.FC = () => {
   const { t, i18n } = useTranslation();
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const stats = [
     { label: t('web_agency_showcase.stats.projects'), value: 300, suffix: "+" },
     { label: t('web_agency_showcase.stats.developers'), value: 25, suffix: "+" },
@@ -125,7 +130,10 @@ const WebAgencyShowcase: React.FC = () => {
 
           {/* CTA */}
           <div className="flex justify-center">
-             <button className="group relative bg-gradient-blue hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl flex items-center gap-3 overflow-hidden">
+             <button 
+                onClick={() => scrollToSection('contact')}
+                className="group relative bg-gradient-blue hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl flex items-center gap-3 overflow-hidden"
+              >
                 <span className="relative z-10">{t('web_agency_showcase.cta_button')}</span>
                 <ArrowRight size={20} className="relative z-10 group-hover:translate-x-2 transition-transform" />
               </button>

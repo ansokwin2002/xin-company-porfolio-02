@@ -19,6 +19,11 @@ const MobileAppDevelopment: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     // Trigger Hero animation immediately on mount
     setHeroVisible(true);
@@ -125,7 +130,10 @@ const MobileAppDevelopment: React.FC = () => {
               </div>
 
               {/* CTA Button */}
-              <button className="group w-full bg-gradient-to-r from-[#2b9aff] to-[#4facfe] text-white rounded-xl py-5 px-6 flex items-center justify-between shadow-lg shadow-blue-200 transition-all transform hover:-translate-y-1">
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="group w-full bg-gradient-to-r from-[#2b9aff] to-[#4facfe] text-white rounded-xl py-5 px-6 flex items-center justify-between shadow-lg shadow-blue-200 transition-all transform hover:-translate-y-1"
+              >
                 <div className="flex items-center gap-3">
                   <div className="bg-white/20 p-2 rounded-full">
                     <Rocket size={24} className="fill-current" />

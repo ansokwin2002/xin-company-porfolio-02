@@ -33,6 +33,11 @@ const ProjectsSlider: React.FC = () => {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     if (isPaused) return;
 
@@ -121,7 +126,10 @@ const ProjectsSlider: React.FC = () => {
 
         {/* Bottom CTA Button */}
         <div className="mt-8">
-          <button className="bg-gradient-blue text-white px-8 py-3.5 rounded-xl font-bold text-md shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 transition-transform flex items-center gap-2 mx-auto group">
+          <button 
+            onClick={() => scrollToSection('contact')}
+            className="bg-gradient-blue text-white px-8 py-3.5 rounded-xl font-bold text-md shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 transition-transform flex items-center gap-2 mx-auto group"
+          >
             {t('projects_slider.cta_button')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

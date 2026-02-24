@@ -96,6 +96,12 @@ const HostingFeatureItem: React.FC<HostingFeatureItemProps> = ({ Icon, title, in
 
 const HostingServer: React.FC = () => {
   const { t } = useTranslation();
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   // --- Animation States ---
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
@@ -217,7 +223,10 @@ const HostingServer: React.FC = () => {
             </div>
 
             <div className="flex justify-center mt-20">
-                <button className="bg-gradient-blue text-white font-bold py-4 px-10 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center gap-2">
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="bg-gradient-blue text-white font-bold py-4 px-10 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center gap-2"
+                >
                 {t('hosting_page.dark_section.cta_button')} <ChevronRight size={20} />
               </button>
             </div>

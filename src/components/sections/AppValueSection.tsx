@@ -8,6 +8,11 @@ const AppValueSection: React.FC = () => {
   const sectionRef2 = useRef<HTMLElement>(null);
   const [isVisible2, setIsVisible2] = useState(false);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     const observer2 = new IntersectionObserver(
       ([entry]) => {
@@ -60,7 +65,10 @@ const AppValueSection: React.FC = () => {
                 {t('app_value.desc')}
               </p>
 
-              <button className="flex items-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-xl bg-gradient-blue shadow-button hover:scale-105 transition-transform">
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="flex items-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-xl bg-gradient-blue shadow-button hover:scale-105 transition-transform"
+              >
                 <MessageCircle size={24} fill="white" className="bg-gradient-blue bg-clip-text text-transparent" />
                 <span>{t('app_value.cta_button')}</span>
                 <ArrowRight size={20} />
