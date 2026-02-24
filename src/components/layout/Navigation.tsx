@@ -54,7 +54,6 @@ const Navigation: React.FC = () => {
     },
     { id: 'company', label: 'nav.company', type: 'dropdown', items: [{ id: 'about', label: 'nav.company.about', path: '/about' }, { id: 'careers', label: 'nav.company.careers', path: '/careers' }] },
     { id: 'blog', label: 'nav.blog', type: 'link', path: '/blog' },
-    { id: 'contact', label: 'nav.contact', type: 'scroll', scrollId: 'contact' },
   ];
 
   const languages = [
@@ -232,7 +231,10 @@ const Navigation: React.FC = () => {
             </div>
 
             {/* Contact Button */}
-            <button onClick={() => scrollToSection('contact')} className="hidden lg:flex items-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-transform">
+            <button 
+              onClick={() => scrollToSection('contact')} 
+              className={`hidden lg:flex items-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-all duration-300 ${activeSection === 'contact' ? 'ring-2 ring-gold ring-offset-2 shadow-[0_0_15px_rgba(244,196,48,0.4)]' : ''}`}
+            >
               <ContactIcon />
               <span>{t('nav.contact')}</span>
             </button>
@@ -260,6 +262,10 @@ const Navigation: React.FC = () => {
                     }
                     setIsOpen(false);
                   }} className={`block w-full text-left py-2 text-base font-medium transition-colors ${active ? 'text-gold' : 'text-gray-700 hover:text-gold'}`}>
+                    {t(item.label)}
+                  </button>
+                ) : item.type === 'scroll' ? (
+                  <button onClick={() => scrollToSection(item.scrollId!)} className={`block w-full text-left py-2 text-base font-medium transition-colors ${active ? 'text-gold' : 'text-gray-700 hover:text-gold'}`}>
                     {t(item.label)}
                   </button>
                 ) : (
@@ -321,7 +327,10 @@ const Navigation: React.FC = () => {
           </div>
 
           {/* Mobile Contact Button */}
-          <button onClick={() => scrollToSection('contact')} className="w-full flex items-center justify-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-transform mt-4">
+          <button 
+            onClick={() => scrollToSection('contact')} 
+            className={`w-full flex items-center justify-center space-x-2 px-6 py-2.5 text-sm font-medium text-white rounded-button bg-gradient-blue shadow-button hover:scale-105 transition-all duration-300 mt-4 ${activeSection === 'contact' ? 'ring-2 ring-gold ring-offset-2' : ''}`}
+          >
             <ContactIcon />
             <span>{t('nav.contact')}</span>
           </button>

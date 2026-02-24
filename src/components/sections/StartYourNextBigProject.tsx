@@ -115,7 +115,7 @@ const StartYourNextBigProject: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-white text-slate-900 relative">
+    <section id="contact" ref={sectionRef} className="py-20 bg-white text-slate-900 relative">
       {/* Optional: Add the same background graphic as hero if desired, 
           currently kept clean white as per original structure */}
       
