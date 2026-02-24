@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import CountingNumber from '../specific/CountingNumber';
 
 // --- Sub-component for the White Info Cards ---
-const InfoCard = ({ icon: Icon, title, desc, index }: any) => {
+const InfoCard = ({ icon: Icon, title, desc, index, color }: any) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
@@ -22,13 +22,13 @@ const InfoCard = ({ icon: Icon, title, desc, index }: any) => {
   return (
     <div 
       ref={ref}
-      className={`bg-white p-8 rounded-3xl transition-all duration-700 ease-out shadow-sm hover:shadow-xl ${
+      className={`bg-white p-8 rounded-3xl transition-all duration-700 ease-out shadow-sm hover:shadow-xl group ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
-        <Icon size={24} />
+      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-white bg-gradient-to-br ${color} shadow-lg group-hover:rotate-6 transition-transform duration-300`}>
+        <Icon size={28} strokeWidth={1.5} />
       </div>
       <h4 className="text-xl font-bold text-gray-900 mb-3">{title}</h4>
       <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
@@ -37,7 +37,7 @@ const InfoCard = ({ icon: Icon, title, desc, index }: any) => {
 };
 
 // --- Sub-component for the Process Steps ---
-const ProcessStep = ({ number, icon: Icon, title, desc, index }: any) => {
+const ProcessStep = ({ number, icon: Icon, title, desc, index, color }: any) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
@@ -52,16 +52,16 @@ const ProcessStep = ({ number, icon: Icon, title, desc, index }: any) => {
   return (
     <div 
       ref={ref}
-      className={`relative bg-blue-50/50 border border-blue-100 p-8 rounded-3xl transition-all duration-1000 ${
+      className={`relative bg-blue-50/50 border border-blue-100 p-8 rounded-3xl transition-all duration-1000 group ${
         isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div className="absolute -top-4 -left-2 w-10 h-10 bg-gradient-blue rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+      <div className="absolute -top-4 -left-2 w-10 h-10 bg-gradient-blue rounded-full flex items-center justify-center text-white font-bold shadow-lg z-10">
         {number}
       </div>
-      <div className="w-14 h-14 bg-blue-200/50 rounded-2xl flex items-center justify-center mb-6 text-blue-600">
-        <Icon size={28} />
+      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-white bg-gradient-to-br ${color} shadow-lg group-hover:rotate-6 transition-transform duration-300`}>
+        <Icon size={28} strokeWidth={1.5} />
       </div>
       <h4 className="text-xl font-bold text-gray-900 mb-4">{title}</h4>
       <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
@@ -85,19 +85,19 @@ const WebAgencyShowcase: React.FC = () => {
   ];
 
   const infoCards = [
-    { icon: Users, title: t('web_agency_showcase.info_cards.customer.title'), desc: t('web_agency_showcase.info_cards.customer.desc') },
-    { icon: MapPin, title: t('web_agency_showcase.info_cards.regional.title'), desc: t('web_agency_showcase.info_cards.regional.desc') },
-    { icon: Zap, title: t('web_agency_showcase.info_cards.performance.title'), desc: t('web_agency_showcase.info_cards.performance.desc') },
-    { icon: MousePointer2, title: t('web_agency_showcase.info_cards.design.title'), desc: t('web_agency_showcase.info_cards.design.desc') },
-    { icon: Settings, title: t('web_agency_showcase.info_cards.agile.title'), desc: t('web_agency_showcase.info_cards.agile.desc') },
-    { icon: LifeBuoy, title: t('web_agency_showcase.info_cards.support.title'), desc: t('web_agency_showcase.info_cards.support.desc') },
+    { icon: Users, title: t('web_agency_showcase.info_cards.customer.title'), desc: t('web_agency_showcase.info_cards.customer.desc'), color: "from-blue-500 to-indigo-500" },
+    { icon: MapPin, title: t('web_agency_showcase.info_cards.regional.title'), desc: t('web_agency_showcase.info_cards.regional.desc'), color: "from-purple-500 to-pink-500" },
+    { icon: Zap, title: t('web_agency_showcase.info_cards.performance.title'), desc: t('web_agency_showcase.info_cards.performance.desc'), color: "from-yellow-400 to-orange-500" },
+    { icon: MousePointer2, title: t('web_agency_showcase.info_cards.design.title'), desc: t('web_agency_showcase.info_cards.design.desc'), color: "from-emerald-400 to-teal-500" },
+    { icon: Settings, title: t('web_agency_showcase.info_cards.agile.title'), desc: t('web_agency_showcase.info_cards.agile.desc'), color: "from-red-400 to-rose-500" },
+    { icon: LifeBuoy, title: t('web_agency_showcase.info_cards.support.title'), desc: t('web_agency_showcase.info_cards.support.desc'), color: "from-cyan-400 to-blue-500" },
   ];
 
   const steps = [
-    { icon: Search, title: t('web_agency_showcase.steps.discovery.title'), desc: t('web_agency_showcase.steps.discovery.desc') },
-    { icon: FileText, title: t('web_agency_showcase.steps.strategy.title'), desc: t('web_agency_showcase.steps.strategy.desc') },
-    { icon: Layout, title: t('web_agency_showcase.steps.design.title'), desc: t('web_agency_showcase.steps.design.desc') },
-    { icon: Code, title: t('web_agency_showcase.steps.development.title'), desc: t('web_agency_showcase.steps.development.desc') },
+    { icon: Search, title: t('web_agency_showcase.steps.discovery.title'), desc: t('web_agency_showcase.steps.discovery.desc'), color: "from-blue-500 to-cyan-400" },
+    { icon: FileText, title: t('web_agency_showcase.steps.strategy.title'), desc: t('web_agency_showcase.steps.strategy.desc'), color: "from-purple-500 to-indigo-500" },
+    { icon: Layout, title: t('web_agency_showcase.steps.design.title'), desc: t('web_agency_showcase.steps.design.desc'), color: "from-pink-500 to-rose-500" },
+    { icon: Code, title: t('web_agency_showcase.steps.development.title'), desc: t('web_agency_showcase.steps.development.desc'), color: "from-emerald-400 to-teal-500" },
   ];
 
   return (
