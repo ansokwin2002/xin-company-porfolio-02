@@ -31,6 +31,7 @@ const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const { i18n, t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,6 +54,7 @@ const Navigation: React.FC = () => {
     },
     { id: 'company', label: 'nav.company', type: 'dropdown', items: [{ id: 'about', label: 'nav.company.about', path: '/about' }, { id: 'careers', label: 'nav.company.careers', path: '/careers' }] },
     { id: 'blog', label: 'nav.blog', type: 'link', path: '/blog' },
+    { id: 'contact', label: 'nav.contact', type: 'scroll', scrollId: 'contact' },
   ];
 
   const languages = [
@@ -63,20 +65,64 @@ const Navigation: React.FC = () => {
   ];
 
   useEffect(() => {
+    if (location.pathname === '/' && location.state?.scrollTo) {
+      const id = location.state.scrollTo;
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        // Clear state to prevent scrolling again on refresh
+        navigate(location.pathname, { replace: true, state: {} });
+      }, 100);
+    }
+  }, [location, navigate]);
+
+  useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const sections = ['home', 'contact']; // Add other section IDs if needed
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
   const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: id } });
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
     setIsOpen(false);
   };
 
   const getCurrentLanguage = () => languages.find(l => l.code === i18n.language) || languages[0];
 
   const isItemActive = (item: any) => {
+    if (item.type === 'scroll') {
+      return activeSection === item.scrollId;
+    }
     if (item.type === 'link') {
       return location.pathname === item.path;
     }
@@ -118,6 +164,10 @@ const Navigation: React.FC = () => {
                       }
                       setIsOpen(false);
                     }} className={`text-sm py-1 ${goldLineClass} ${active ? activeGoldLineClass : 'text-gray-700 hover:text-gray-900'}`}>
+                      {t(item.label)}
+                    </button>
+                  ) : item.type === 'scroll' ? (
+                    <button onClick={() => scrollToSection(item.scrollId!)} className={`text-sm py-1 ${goldLineClass} ${active ? activeGoldLineClass : 'text-gray-700 hover:text-gray-900'}`}>
                       {t(item.label)}
                     </button>
                   ) : (

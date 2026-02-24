@@ -358,12 +358,13 @@ const StartYourNextBigProject: React.FC = () => {
               <div className="relative group">
                 <textarea 
                   value={formData.details}
+                  required
                   onChange={(e) => setFormData({...formData, details: e.target.value})}
                   className="w-full bg-transparent border-b-2 border-gray-300 py-3 text-gray-900 font-bold focus:outline-none focus:border-gray-900 transition-colors peer placeholder-transparent resize-y min-h-[80px] overflow-y-auto"
                   placeholder=" "
                 ></textarea>
                 <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                  {t('start_project.details_label')}
+                  {t('start_project.details_label')} *
                 </label>
               </div>
 
