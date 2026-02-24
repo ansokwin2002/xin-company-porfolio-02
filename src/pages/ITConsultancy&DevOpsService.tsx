@@ -117,6 +117,11 @@ const ITConsultancyDevOpsService: React.FC = () => {
   const [heroVisible, setHeroVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     // Immediate trigger for hero section pop-up
     setHeroVisible(true);
@@ -219,7 +224,10 @@ const ITConsultancyDevOpsService: React.FC = () => {
         <div className="bg-gradient-blue py-8">
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-white text-left">
             <p className="font-semibold text-xl text-center md:text-left">{t('it_consultancy_page.cta_strip.text')}</p>
-            <button className="bg-white text-black font-extrabold py-4 px-8 rounded-xl shadow-xl hover:bg-blue-50 transition-all flex items-center gap-2 whitespace-nowrap">
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="bg-white text-black font-extrabold py-4 px-8 rounded-xl shadow-xl hover:bg-blue-50 transition-all flex items-center gap-2 whitespace-nowrap"
+            >
               <Calendar size={20} /> {t('it_consultancy_page.cta_strip.button')}
             </button>
           </div>
