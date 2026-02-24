@@ -4,13 +4,35 @@ import { ArrowDown, ArrowRight, ChevronDown, X } from 'lucide-react';
 import { toast } from 'sonner';
 import CountingNumber from '../specific/CountingNumber';
 
-const countries = [
+const allCountries = [
+  // Priority / Asian Countries
   { code: 'kh', name: 'Cambodia', dial: '+855' },
-  { code: 'us', name: 'USA', dial: '+1' },
-  { code: 'gb', name: 'UK', dial: '+44' },
+  { code: 'cn', name: 'China', dial: '+86' },
+  { code: 'tw', name: 'Taiwan', dial: '+886' },
   { code: 'th', name: 'Thailand', dial: '+66' },
   { code: 'vn', name: 'Vietnam', dial: '+84' },
   { code: 'sg', name: 'Singapore', dial: '+65' },
+  { code: 'my', name: 'Malaysia', dial: '+60' },
+  { code: 'id', name: 'Indonesia', dial: '+62' },
+  { code: 'ph', name: 'Philippines', dial: '+63' },
+  { code: 'jp', name: 'Japan', dial: '+81' },
+  { code: 'kr', name: 'South Korea', dial: '+82' },
+  { code: 'hk', name: 'Hong Kong', dial: '+852' },
+  { code: 'la', name: 'Laos', dial: '+856' },
+  { code: 'mm', name: 'Myanmar', dial: '+95' },
+  { code: 'bn', name: 'Brunei', dial: '+673' },
+  // Other major countries
+  { code: 'us', name: 'USA', dial: '+1' },
+  { code: 'gb', name: 'UK', dial: '+44' },
+  { code: 'au', name: 'Australia', dial: '+61' },
+  { code: 'ca', name: 'Canada', dial: '+1' },
+  { code: 'ae', name: 'UAE', dial: '+971' },
+  { code: 'fr', name: 'France', dial: '+33' },
+  { code: 'de', name: 'Germany', dial: '+49' },
+  { code: 'ru', name: 'Russia', dial: '+7' },
+  { code: 'in', name: 'India', dial: '+91' },
+  { code: 'br', name: 'Brazil', dial: '+55' },
+  { code: 'za', name: 'South Africa', dial: '+27' },
 ];
 
 interface HeroProps {
@@ -20,11 +42,17 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({ name: '', email: '', budget: '', mobile: '', details: '' });
-  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  const [selectedCountry, setSelectedCountry] = useState(allCountries[0]);
   const [isBudgetOpen, setIsBudgetOpen] = useState(false);
   const [showCustomBudget, setShowCustomBudget] = useState(false);
   const [isCountryOpen, setIsCountryOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); // Added isSubmitting state
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredCountries = allCountries.filter(c => 
+    c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    c.dial.includes(searchQuery)
+  );
 
   // --- TYPEWRITER LOGIC ---
   const [text, setText] = useState('');
@@ -167,7 +195,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                     {/* 3. Floating Mobile Number (Redesigned to match Name/Email style) */}
                     <div className="relative group flex items-end border-b-2 border-gray-300 focus-within:border-gray-900 transition-colors pt-2">
                       {/* Country Selector */}
-                      <div className="relative" onMouseEnter={() => setIsCountryOpen(true)} onMouseLeave={() => setIsCountryOpen(false)}>
+                      <div className="relative" onMouseEnter={() => setIsCountryOpen(true)} onMouseLeave={() => { setIsCountryOpen(false); setSearchQuery(''); }}>
                         <button type="button" className="flex items-center gap-2 py-3 pr-3 font-bold text-sm text-gray-900 outline-none">
                           <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} className="w-5 rounded-sm" alt="flag" />
                           <span>{selectedCountry.dial}</span>
@@ -175,14 +203,41 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                         </button>
                         
                         {/* Dropdown List */}
-                        <div className={`absolute top-full left-0 pt-1 z-[60] transition-all duration-300 w-48 ${isCountryOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
-                          <div className="bg-white border border-gray-100 rounded-xl shadow-2xl max-h-48 overflow-y-auto py-2">
-                            {countries.map((c) => (
-                              <div key={c.code} onClick={() => { setSelectedCountry(c); setIsCountryOpen(false); }} className="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors text-sm font-bold text-gray-700">
-                                <img src={`https://flagcdn.com/w20/${c.code}.png`} className="w-5 rounded-sm" alt={c.name} />
-                                <span>{c.name}</span>
-                              </div>
-                            ))}
+                        <div className={`absolute top-full left-0 pt-1 z-[60] transition-all duration-300 w-64 ${isCountryOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
+                          <div className="bg-white border border-gray-100 rounded-xl shadow-2xl py-2 flex flex-col">
+                            {/* Search Input */}
+                            <div className="px-3 pb-2 border-b border-gray-100">
+                              <input 
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Search country..."
+                                className="w-full px-3 py-2 bg-gray-50 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 font-medium"
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            </div>
+                            
+                            <div className="max-h-48 overflow-y-auto">
+                              {filteredCountries.length > 0 ? (
+                                filteredCountries.map((c) => (
+                                  <div 
+                                    key={`${c.code}-${c.dial}`} 
+                                    onClick={() => { 
+                                      setSelectedCountry(c); 
+                                      setIsCountryOpen(false);
+                                      setSearchQuery('');
+                                    }} 
+                                    className="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 cursor-pointer transition-colors text-sm font-bold text-gray-700"
+                                  >
+                                    <img src={`https://flagcdn.com/w20/${c.code}.png`} className="w-5 rounded-sm" alt={c.name} />
+                                    <span className="flex-1 truncate">{c.name}</span>
+                                    <span className="text-gray-400 font-normal">{c.dial}</span>
+                                  </div>
+                                ))
+                              ) : (
+                                <div className="px-4 py-3 text-sm text-gray-500 text-center">No results</div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
