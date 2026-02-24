@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Client {
   name: string;
@@ -7,6 +8,7 @@ interface Client {
 }
 
 const OurClients: React.FC = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +57,7 @@ const OurClients: React.FC = () => {
         <h2 className={`text-3xl md:text-4xl font-black uppercase tracking-widest mb-20 text-gray-900 transition-all duration-1000 transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          OUR <span className="bg-gradient-blue bg-clip-text text-transparent">CLIENTS</span>
+          {t('clients_section.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('clients_section.title_highlight')}</span>
         </h2>
 
         {/* Grid Layout */}

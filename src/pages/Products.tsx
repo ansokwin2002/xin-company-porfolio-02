@@ -1,148 +1,154 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Navigation from '../components/layout/Navigation';
 import Footer from '../components/layout/Footer';
 import ScrollToTop from '../components/specific/ScrollToTop';
 import TelegramLink from '../components/specific/TelegramLink';
 
-// --- DATA ARRAY ---
-const productsData = [
-  {
-    id: 1,
-    title: "BITMART digital",
-    subtitle: "currency exchange is faster, better and stronger",
-    description: "Our design and develop BITMART Digital Asset Systems — complete cryptocurrency exchange platforms built for performance, security, and global scalability. From trading engines to wallet management and KYC systems, we deliver enterprise-grade digital asset infrastructure.",
-    featureTitle: "High-performance exchange capabilities:",
-    features: ['Crypto-to-crypto trading', 'Crypto-to-fiat conversion', 'Fiat-to-fiat exchange', 'Real-time rate updates', 'Automated liquidity integration', 'Spread & fee configuration', 'Instant swap functionality'],
-    footerNote: "Built with low-latency matching engine technology.",
-    image: "/assets/images/products/BITmart.png",
-    links: [""],
-    bgColor: "bg-white",
-    isBitmart: true
-  },
-  {
-    id: 2,
-    title: "Shopping Cart Systems",
-    subtitle: "Smart • Secure • Scalable • Revenue-Driven",
-    description: "We design and develop high-performance Shopping Cart Systems tailored for eCommerce platforms, marketplaces, subscription businesses, and digital product stores. Our solutions focus on smooth user experience, secure transactions, and powerful backend management.",
-    featureTitle: "User-friendly cart features:",
-    features: ['Add / Remove products instantly', 'Quantity adjustment with auto price update', 'Save for later option', 'Coupon & promo code integration', 'Estimated shipping calculator', 'Real-time tax calculation', 'Mobile-optimized design'],
-    footerNote: "Designed to reduce cart abandonment and increase conversions.",
-    image: "/assets/images/products/FP shop.png",
-    links: [""],
-    bgColor: "bg-blue-50",
-  },
-  {
-    id: 3,
-    title: "e-Commerce System",
-    subtitle: "Complete Retail Ecosystem",
-    description: "The Grocery Store Management Systems for supermarkets, mini-marts, wholesale markets, and online grocery platforms. Our solutions combine POS, inventory, supplier management, and eCommerce into one powerful ecosystem.",
-    featureTitle: "Fast and reliable checkout experience:",
-    features: ['Barcode & QR code scanning', 'Weighing scale integration (fruits & vegetables)', 'Discount & promo management', 'Multiple payment methods (cash, card, wallet, QR)', 'Receipt printing & digital invoice', 'Offline mode support', 'Daily sales & cashier reports'],
-    footerNote: "Designed for high-speed transactions during peak hours.",
-    image: "/assets/images/products/ORange.png",
-    links: ["https://www.kh-orange.shop"],
-    bgColor: "bg-white"
-  },
-  {
-    id: 4,
-    title: "Lottery Apps",
-    subtitle: "Secure Randomization • High Scalability • Regulatory-Ready • Revenue Optimized",
-    description: "Lottery apps provide a comprehensive, mobile-focused experience for purchasing tickets, checking results, and managing numbers. Modern lottery app content typically includes features for both official state lotteries and third-party courier services, focusing on user convenience, security, and real-time information. Our Client: NSL, Wingo, iBingo, Lelot, Hsin niu, Asian.... ",
-    featureTitle: "Smart ticket sales & management:",
-    features: ['Number selection (manual or auto-pick)', 'Single draw or multi-draw ticket purchase', 'Quick Pick (random number generator)', 'Retail agent portal', 'QR code / digital ticket generation', 'Secure transaction tracking'],
-    footerNote: "Supports both online and offline distribution models.",
-    image: "/assets/images/products/Lotto.png",
-    links: ["https://www.bingo637.com/", "http://nslotterys.com", "https://www.lotteryasian.com"],
-    bgColor: "bg-gray-50"
-  },
-  {
-    id: 5,
-    title: "Entertainment",
-    subtitle: "Interactive Gaming Experiences",
-    description: "We create interactive entertainment games designed to boost user engagement, increase retention, and maximize monetization. From lucky draws to interactive betting systems, our games combine creativity, psychology, and technology to deliver unforgettable experiences.",
-    featureTitle: "Build a full-featured online game ecosystem:",
-    features: ['Multiplayer support', 'Real-time scoring', 'Leaderboard & ranking system', 'In-app wallet integration', 'API integration (payment gateways)', 'Mobile + Web responsive design'],
-    footerNote: "Designed for scalability and high-performance traffic.",
-    image: "/assets/images/products/Entertainment.png",
-    links: ["https://www.igt.com"],
-    bgColor: "bg-white"
-  },
-  {
-    id: 6,
-    title: "Insurance System",
-    subtitle: "Robust Policy Lifecycle Management",
-    description: "An insurance system consists of core operational modules—policy administration, claims management, underwriting, billing, and reporting—designed to manage the entire policy lifecycle. It requires robust content infrastructure supporting document version control, compliance, e-signatures, and secure data storage. Key elements include the insured/insurer, premiums, and coverage, governed by principles like utmost good faith and indemnity. ",
-    featureTitle: "Efficient policy lifecycle management:",
-    features: ['Policy quotation & premium calculation', 'Automated underwriting workflows', 'Policy issuance & digital documentation', 'Policy renewal automation','Endorsement & modification tracking','Multi-product support (Life, Motor, Health, Property)','Commission calculation for agents'],
-    footerNote: "Reduce manual paperwork and improve processing speed.",
-    image: "/assets/images/products/Insurrance.png",
-    links: ["https://www.titaninsurance.info", "https://www.fincorpinsurancebroker.com.kh/"],
-    bgColor: "bg-blue-50"
-  },
-  {
-    id: 7,
-    title: "Feige IM",
-    subtitle: "Modern Social Messaging Platform",
-    description: "Feige IM is a modern social messaging platform designed to bring people closer through secure, fast, and intelligent communication. Whether you are chatting with friends, collaborating with teams, or building communities, Feige IM provides everything you need in one powerful app.",
-    featureTitle: "Key Features:",
-    features: ['Instant Messaging: Send real-time text messages with lightning-fast delivery.', 'Voice & Video Calls: High-quality voice and video communication anytime, anywhere.', 'Group Chats & Communities: Create private or public groups to connect with friends, family, or business teams.', 'Media Sharing: Share photos, videos, documents, and files easily.', 'Secure Communication: Advanced encryption ensures your conversations stay private.', 'Cross-Platform Access: Use Feige IM on mobile, tablet, or desktop seamlessly.','Smart Notifications: Stay updated without missing important messages.'],
-    footerNote: "Stay updated without missing important messages.",
-    image: "/assets/images/products/IM.png",
-    links: [""],
-    bgColor: "bg-white"
-  },
-  {
-    id: 8,
-    title: "Warehouse Management ERP",
-    subtitle: "Intelligent Operations • Total Inventory Visibility • Scalable Enterprise Control",
-    description: "We design and develop powerful Warehouse Management ERP Systems (WMS-ERP) that streamline inventory operations, automate workflows, and integrate seamlessly with finance, procurement, sales, and logistics. Our systems are built to support small warehouses, multi-branch distribution centers, and large enterprise supply chains.",
-    featureTitle: "End-to-end warehouse process automation:",
-    features: ['Goods receiving & quality inspection','Barcode / QR code / RFID scanning','Smart put-away & bin location tracking','Picking strategies (FIFO, LIFO, FEFO)','Packing & shipment verification','Batch, lot & serial number management','Real-time stock movement updates'],
-    footerNote: "Improves accuracy, speed, and operational efficiency.",
-    image: "/assets/images/products/Win Take.png",
-    links: ["https://www.wintake-tw.com"],
-    bgColor: "bg-blue-50"
-  },
-  {
-    id: 9,
-    title: "Laundry POS",
-    subtitle: "Smart Operations • Fast Billing • Real-Time Tracking • Customer Loyalty",
-    description: "Laundry POS (Point of Sale) Systems tailored for laundromats, dry cleaners, and multi-branch laundry businesses. Our solutions streamline daily operations — from order intake to delivery — while improving customer experience and business efficiency.",
-    featureTitle: "Easy and efficient front-desk operations:",
-    features: ['Quick order creation','Service selection (Wash, Dry, Iron, Dry Clean)','Automatic price calculation','Weight-based billing support','Barcode / QR receipt printing','Partial payment & advance payment','Express service surcharge'],
-    footerNote: "Designed to handle high customer volume smoothly.",
-    image: "/assets/images/products/Laundry1.png",
-    links: ["https://www.onedashcambodia.com"],
-    bgColor: "bg-white"
-  },
-  {
-    id: 10,
-    title: "Restaurant POS",
-    subtitle: "Speed up front-desk and table service",
-    description: "Modern Restaurant POS (Point of Sale) Systems built for cafés, fast food outlets, fine dining restaurants, food courts, and multi-branch chains. Our system streamlines order management, kitchen operations, billing, and reporting — all in one powerful platform.",
-    featureTitle: "Core features for restaurants:",
-    features: ['Dine-in, Takeaway & Delivery modes','Table layout management','Split bill & merge table options','Modifier options (extra cheese, no sugar, etc.)','Automatic tax & service charge calculation','Multiple payment methods (Cash, Card, QR, Wallet)','Digital & printed receipts'],
-    footerNote: "Designed to reduce waiting time and improve service flow.",
-    image: "/assets/images/products/Restaurang POS.png",
-    links: [""],
-    bgColor: "bg-blue-50"
-  },
-  {
-    id: 11,
-    title: "Retail POS",
-    subtitle: "High-Performance Sales & Analytics",
-    description: "high-performance Retail POS (Point of Sale) Systems tailored for fashion stores, supermarkets, electronics shops, pharmacies, convenience stores, and multi-branch retail chains. Our solutions combine sales, inventory, customer management, and analytics into one powerful platform.",
-    featureTitle: "Fast and intuitive checkout experience:",
-    features: ['Barcode & QR code scanning','Quick product search','Discount & promotion management','Split payment (cash, card, QR, wallet)','Gift card & voucher support','Tax & service charge automation','Printed & digital receipt options'],
-    footerNote: "Designed for speed and accuracy during peak hours.",
-    image: "/assets/images/products/Retailer.png",
-    links: ["http://h5.kh-orange.shop"],
-    bgColor: "bg-white"
-  }
-];
+// --- DATA COMPONENT ---
+const useProductsData = () => {
+  const { t } = useTranslation();
+  
+  return [
+    {
+      id: 1,
+      title: t('products_page.items.bitmart.title'),
+      subtitle: t('products_page.items.bitmart.subtitle'),
+      description: t('products_page.items.bitmart.desc'),
+      featureTitle: t('products_page.items.bitmart.feature_title'),
+      features: t('products_page.items.bitmart.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.bitmart.footer'),
+      image: "/assets/images/products/BITmart.png",
+      links: [""],
+      bgColor: "bg-white",
+      isBitmart: true
+    },
+    {
+      id: 2,
+      title: t('products_page.items.shopping_cart.title'),
+      subtitle: t('products_page.items.shopping_cart.subtitle'),
+      description: t('products_page.items.shopping_cart.desc'),
+      featureTitle: t('products_page.items.shopping_cart.feature_title'),
+      features: t('products_page.items.shopping_cart.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.shopping_cart.footer'),
+      image: "/assets/images/products/FP shop.png",
+      links: [""],
+      bgColor: "bg-blue-50",
+    },
+    {
+      id: 3,
+      title: t('products_page.items.ecommerce.title'),
+      subtitle: t('products_page.items.ecommerce.subtitle'),
+      description: t('products_page.items.ecommerce.desc'),
+      featureTitle: t('products_page.items.ecommerce.feature_title'),
+      features: t('products_page.items.ecommerce.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.ecommerce.footer'),
+      image: "/assets/images/products/ORange.png",
+      links: ["https://www.kh-orange.shop"],
+      bgColor: "bg-white"
+    },
+    {
+      id: 4,
+      title: t('products_page.items.lottery.title'),
+      subtitle: t('products_page.items.lottery.subtitle'),
+      description: t('products_page.items.lottery.desc'),
+      featureTitle: t('products_page.items.lottery.feature_title'),
+      features: t('products_page.items.lottery.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.lottery.footer'),
+      image: "/assets/images/products/Lotto.png",
+      links: ["https://www.bingo637.com/", "http://nslotterys.com", "https://www.lotteryasian.com"],
+      bgColor: "bg-gray-50"
+    },
+    {
+      id: 5,
+      title: t('products_page.items.entertainment.title'),
+      subtitle: t('products_page.items.entertainment.subtitle'),
+      description: t('products_page.items.entertainment.desc'),
+      featureTitle: t('products_page.items.entertainment.feature_title'),
+      features: t('products_page.items.entertainment.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.entertainment.footer'),
+      image: "/assets/images/products/Entertainment.png",
+      links: ["https://www.igt.com"],
+      bgColor: "bg-white"
+    },
+    {
+      id: 6,
+      title: t('products_page.items.insurance.title'),
+      subtitle: t('products_page.items.insurance.subtitle'),
+      description: t('products_page.items.insurance.desc'),
+      featureTitle: t('products_page.items.insurance.feature_title'),
+      features: t('products_page.items.insurance.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.insurance.footer'),
+      image: "/assets/images/products/Insurrance.png",
+      links: ["https://www.titaninsurance.info", "https://www.fincorpinsurancebroker.com.kh/"],
+      bgColor: "bg-blue-50"
+    },
+    {
+      id: 7,
+      title: t('products_page.items.feige_im.title'),
+      subtitle: t('products_page.items.feige_im.subtitle'),
+      description: t('products_page.items.feige_im.desc'),
+      featureTitle: t('products_page.items.feige_im.feature_title'),
+      features: t('products_page.items.feige_im.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.feige_im.footer'),
+      image: "/assets/images/products/IM.png",
+      links: [""],
+      bgColor: "bg-white"
+    },
+    {
+      id: 8,
+      title: t('products_page.items.warehouse.title'),
+      subtitle: t('products_page.items.warehouse.subtitle'),
+      description: t('products_page.items.warehouse.desc'),
+      featureTitle: t('products_page.items.warehouse.feature_title'),
+      features: t('products_page.items.warehouse.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.warehouse.footer'),
+      image: "/assets/images/products/Win Take.png",
+      links: ["https://www.wintake-tw.com"],
+      bgColor: "bg-blue-50"
+    },
+    {
+      id: 9,
+      title: t('products_page.items.laundry.title'),
+      subtitle: t('products_page.items.laundry.subtitle'),
+      description: t('products_page.items.laundry.desc'),
+      featureTitle: t('products_page.items.laundry.feature_title'),
+      features: t('products_page.items.laundry.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.laundry.footer'),
+      image: "/assets/images/products/Laundry1.png",
+      links: ["https://www.onedashcambodia.com"],
+      bgColor: "bg-white"
+    },
+    {
+      id: 10,
+      title: t('products_page.items.restaurant.title'),
+      subtitle: t('products_page.items.restaurant.subtitle'),
+      description: t('products_page.items.restaurant.desc'),
+      featureTitle: t('products_page.items.restaurant.feature_title'),
+      features: t('products_page.items.restaurant.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.restaurant.footer'),
+      image: "/assets/images/products/Restaurang POS.png",
+      links: [""],
+      bgColor: "bg-blue-50"
+    },
+    {
+      id: 11,
+      title: t('products_page.items.retail.title'),
+      subtitle: t('products_page.items.retail.subtitle'),
+      description: t('products_page.items.retail.desc'),
+      featureTitle: t('products_page.items.retail.feature_title'),
+      features: t('products_page.items.retail.features', { returnObjects: true }) as string[],
+      footerNote: t('products_page.items.retail.footer'),
+      image: "/assets/images/products/Retailer.png",
+      links: ["http://h5.kh-orange.shop"],
+      bgColor: "bg-white"
+    }
+  ];
+};
 
 const ProductRow: React.FC<{ product: any, index: number, isActive: boolean }> = ({ product, index, isActive }) => {
+
   const [isVisible, setIsVisible] = useState(false);
   const rowRef = useRef<HTMLDivElement>(null);
   const isImageLeft = index % 2 === 0;
@@ -249,12 +255,14 @@ const ProductRow: React.FC<{ product: any, index: number, isActive: boolean }> =
 };
 
 const Products: React.FC = () => {
+  const { t } = useTranslation();
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
   const [isH1Visible, setIsH1Visible] = useState(false);
   const [isPVisible, setIsPVisible] = useState(false);
   const [activeProductId, setActiveProductId] = useState<number | null>(null);
   const location = useLocation();
+  const productsData = useProductsData();
 
   useEffect(() => {
     const observerOptions = { threshold: 0.1 };
@@ -290,7 +298,7 @@ const Products: React.FC = () => {
         return () => clearTimeout(timer);
       }
     }
-  }, [location.hash]);
+  }, [location.hash, productsData]); // Added productsData as dependency
 
   return (
     <div className="min-h-screen bg-white font-sans overflow-x-hidden">
@@ -304,7 +312,7 @@ const Products: React.FC = () => {
                 isH1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              <span className="text-black">Our </span> <span className="text-white">Products</span>
+              <span className="text-black">{t('products_page.title_our')} </span> <span className="text-white">{t('products_page.title_products')}</span>
             </h1>
             <div 
               ref={pRef}
@@ -312,8 +320,8 @@ const Products: React.FC = () => {
                 isPVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              <p>From creative campaigns to custom tech solutions, Xin QiYOu Tech showcase how strategy meets storytelling.</p>
-              <p>See how we help brands grow, engage, and lead in the digital age.</p>
+              <p>{t('products_page.subtitle_line1')}</p>
+              <p>{t('products_page.subtitle_line2')}</p>
             </div>
           </div>
         </section>

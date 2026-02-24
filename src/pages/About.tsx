@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import Footer from '../components/layout/Footer';
@@ -65,6 +66,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ IconComponent, title, descrip
 
 // --- MAIN ABOUT PAGE ---
 const About: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [heroVisible, setHeroVisible] = useState(false);
   const [sectionVisible, setSectionVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -81,16 +83,16 @@ const About: React.FC = () => {
   }, []);
 
   const promises = [
-    { title: "Commitment on time delivery", icon: Clock, color: "from-blue-500 to-cyan-400", desc: "We guarantee on-time delivery for all projects, ensuring your business never misses a deadline." },
-    { title: "Money back guarantee", icon: ShieldCheck, color: "from-pink-500 to-rose-400", desc: "Your satisfaction is our priority. If not satisfied, we offer a hassle-free money-back guarantee." },
-    { title: "Effective partnerships", icon: Users, color: "from-orange-400 to-amber-500", desc: "We build lasting relationships with our clients, becoming true partners in their success journey." },
-    { title: "Expert consultation", icon: MessageSquare, color: "from-lime-400 to-green-500", desc: "Access to industry experts who provide valuable insights and strategic guidance for your projects." },
-    { title: "Transparent communication", icon: RefreshCw, color: "from-purple-500 to-indigo-500", desc: "Open and honest communication at every step, keeping you informed throughout the process." },
-    { title: "Result oriented solutions", icon: Target, color: "from-fuchsia-500 to-purple-400", desc: "Our focus is always on delivering measurable results that drive your business growth." }
+    { title: t('it_consultancy_page.promising_section.items.delivery.title'), icon: Clock, color: "from-blue-500 to-cyan-400", desc: t('it_consultancy_page.promising_section.items.delivery.desc') },
+    { title: t('it_consultancy_page.promising_section.items.money_back.title'), icon: ShieldCheck, color: "from-pink-500 to-rose-400", desc: t('it_consultancy_page.promising_section.items.money_back.desc') },
+    { title: t('it_consultancy_page.promising_section.items.partnership.title'), icon: Users, color: "from-orange-400 to-amber-500", desc: t('it_consultancy_page.promising_section.items.partnership.desc') },
+    { title: t('it_consultancy_page.promising_section.items.consultation.title'), icon: MessageSquare, color: "from-lime-400 to-green-500", desc: t('it_consultancy_page.promising_section.items.consultation.desc') },
+    { title: t('it_consultancy_page.promising_section.items.communication.title'), icon: RefreshCw, color: "from-purple-500 to-indigo-500", desc: t('it_consultancy_page.promising_section.items.communication.desc') },
+    { title: t('it_consultancy_page.promising_section.items.results.title'), icon: Target, color: "from-fuchsia-500 to-purple-400", desc: t('it_consultancy_page.promising_section.items.results.desc') }
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans overflow-x-hidden">
+    <div key={i18n.language} className="min-h-screen bg-white font-sans overflow-x-hidden">
       <Navigation />
 
       <main>
@@ -100,12 +102,12 @@ const About: React.FC = () => {
             <h1 className={`text-4xl md:text-6xl font-extrabold mb-6 leading-tight transition-all duration-1000 transform ${
               heroVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-10'
             }`}>
-              <span className="text-black">Unlocking Growth: by</span> <span className="text-white">Our Expert Team</span>
+              <span className="text-black">{t('about_page.hero.title_part1')}</span> <span className="text-white">{t('about_page.hero.title_part2')}</span>
             </h1>
             <p className={`text-white/90 text-lg md:text-xl max-w-3xl mx-auto font-medium transition-all duration-1000 delay-300 transform ${
               heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
-              QiYou Tech offers the best digital services for mobile apps, web apps development, hosting, DevOps services, and digital performance marketing. We have been developing global brands with enthusiasm and purpose since 2015 with an expert team.
+              {t('about_page.hero.desc')}
             </p>
           </div>
         </section>
@@ -115,7 +117,7 @@ const About: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6">
             <div className={`text-center mb-20 transition-all duration-1000 ${sectionVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
               <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-                What is QiYou Tech <span className="bg-gradient-blue bg-clip-text text-transparent">Vision & Mission?</span>
+                {t('about_page.vision_mission.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('about_page.vision_mission.title_highlight')}</span>
               </h2>
             </div>
 
@@ -144,17 +146,17 @@ const About: React.FC = () => {
                     <Quote size={48} className="fill-blue-600 rotate-180 opacity-90" />
                   </div>
 
-                  <div className="space-y-6 pl-4">
+                  <div className="space-y-6 pl-4 text-left">
                     {/* Vision Card */}
                     <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group">
                       <div className="flex items-center gap-4 mb-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center text-white shadow-[0_4px_15px_rgba(6,182,212,0.3)] shrink-0 group-hover:rotate-6 transition-transform">
                           <Eye size={24} />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-900">Our Vision</h3>
+                        <h3 className="text-2xl font-bold text-gray-900">{t('about_page.vision_mission.vision.title')}</h3>
                       </div>
                       <p className="text-gray-600 leading-relaxed text-[15px]">
-                        QiYou Tech is a leading digital solutions company focused on bringing the world to the digital era. Having an innovative team with more than 15 years of experience, QiYou offers wide services and products that foster your digital presence.
+                        {t('about_page.vision_mission.vision.desc')}
                       </p>
                     </div>
 
@@ -164,10 +166,10 @@ const About: React.FC = () => {
                         <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white shadow-[0_4px_15px_rgba(236,72,153,0.3)] shrink-0 group-hover:rotate-6 transition-transform">
                           <Rocket size={24} />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-900">Our Mission</h3>
+                        <h3 className="text-2xl font-bold text-gray-900">{t('about_page.vision_mission.mission.title')}</h3>
                       </div>
                       <p className="text-gray-600 leading-relaxed text-[15px]">
-                        Having an innovative team with more than 15 years of experience, QiYou Tech offers wide services and products that foster your digital presence and drive business growth.
+                        {t('about_page.vision_mission.mission.desc')}
                       </p>
                     </div>
                   </div>
@@ -185,11 +187,11 @@ const About: React.FC = () => {
         {/* --- PROMISING YOU SECTION --- */}
         <section className="py-24 bg-black overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What we are</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{t('about_page.promising.title_main')}</h2>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-16">
-              <span className="bg-gradient-blue bg-clip-text text-transparent">Promising You?</span>
+              <span className="bg-gradient-blue bg-clip-text text-transparent">{t('about_page.promising.title_highlight')}</span>
             </h2>
-            <p className='text-white mb-10'>Our commitment to excellence is backed by these core promises that ensure your success</p>
+            <p className='text-white mb-10'>{t('about_page.promising.subtitle')}</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {promises.map((service, idx) => (
                 <FeatureCard 

@@ -6,35 +6,38 @@ import HighLevelProcess from '../components/sections/HighLevelProcess';
 import ScrollToTop from '../components/specific/ScrollToTop';
 import TelegramLink from '../components/specific/TelegramLink';
 import { Wand2, RefreshCw, Building2, MessagesSquare } from 'lucide-react'; // Added for professional colorful icons
+import { useTranslation } from 'react-i18next';
 
 const CreativeDesignsUIUX: React.FC = () => {
+  const { t } = useTranslation();
+
   // --- Data Arrays ---
 
   const brandingServices = [
     {
-      title: "New Branding With Strategy",
-      description: "We will create a structured process to build or revitalize your brand identity using a strategic approach. This ensures it aligns with your business goals and vision, resonates with your target audience, and stands out in the market.",
+      title: t('creative_designs_page.branding.services.strategy.title'),
+      description: t('creative_designs_page.branding.services.strategy.desc'),
       IconComponent: Wand2,
       color: "from-purple-500 to-indigo-500",
       number: '01',
     },
     {
-      title: "Brand Re-innovation",
-      description: "QiYOU will enhance your marketing by revitalizing your brand's visual designs, leading to improved recognition and consistency. We will modernize the brand to increase its credibility and appeal to target audiences, ensuring a clear vision and strong identity.",
+      title: t('creative_designs_page.branding.services.innovation.title'),
+      description: t('creative_designs_page.branding.services.innovation.desc'),
       IconComponent: RefreshCw,
       color: "from-blue-500 to-cyan-400",
       number: '02',
     },
     {
-      title: "Corporate Identity",
-      description: "By building or enhancing your corporate identity, we will create a competitive edge for your brand presence, increase the effectiveness of your marketing activities, and align your brand's vision with both your customers and employees.",
+      title: t('creative_designs_page.branding.services.identity.title'),
+      description: t('creative_designs_page.branding.services.identity.desc'),
       IconComponent: Building2,
       color: "from-emerald-400 to-teal-500",
       number: '03',
     },
     {
-      title: "Brand Consultancy",
-      description: "This service specializes in brand consultancy, helping companies develop their brand identity and strategy. We analyze the current branding to provide creative solutions that align with the brand's values and vision. Our main goal is to differentiate the brand, enhance its perception, and support long-term growth.",
+      title: t('creative_designs_page.branding.services.consultancy.title'),
+      description: t('creative_designs_page.branding.services.consultancy.desc'),
       IconComponent: MessagesSquare,
       color: "from-orange-400 to-pink-500",
       number: '04',
@@ -42,34 +45,34 @@ const CreativeDesignsUIUX: React.FC = () => {
   ];
 
   const uiUxStats = [
-    { label: "Projects", value: "200+", icon: "📂" },
-    { label: "Years", value: "10+", icon: "🏆" },
-    { label: "Satisfaction", value: "98%", icon: "❤️" },
-    { label: "Rating", value: "4.9", icon: "⭐" },
+    { label: t('creative_designs_page.uiux.stats.projects'), value: "200+", icon: "📂" },
+    { label: t('creative_designs_page.uiux.stats.years'), value: "10+", icon: "🏆" },
+    { label: t('creative_designs_page.uiux.stats.satisfaction'), value: "98%", icon: "❤️" },
+    { label: t('creative_designs_page.uiux.stats.rating'), value: "4.9", icon: "⭐" },
   ];
 
   const uiUxFeatures = [
     {
-      title: "User-Centered Design",
-      desc: "Every design decision is rooted in understanding your users' needs, behaviors, and pain points.",
+      title: t('creative_designs_page.uiux.features.user_centered.title'),
+      desc: t('creative_designs_page.uiux.features.user_centered.desc'),
       icon: "👤",
       color: "bg-blue-50 text-blue-600"
     },
     {
-      title: "Thorough Research",
-      desc: "We dive deep into market analysis, competitor research, and user interviews to inform our designs.",
+      title: t('creative_designs_page.uiux.features.research.title'),
+      desc: t('creative_designs_page.uiux.features.research.desc'),
       icon: "🔍",
       color: "bg-indigo-50 text-indigo-600"
     },
     {
-      title: "Iterative Testing",
-      desc: "Continuous prototyping and testing ensures we deliver solutions that truly work.",
+      title: t('creative_designs_page.uiux.features.testing.title'),
+      desc: t('creative_designs_page.uiux.features.testing.desc'),
       icon: "🔄",
       color: "bg-purple-50 text-purple-600"
     },
     {
-      title: "Clear Communication",
-      desc: "Transparent collaboration and regular updates keep you informed at every stage.",
+      title: t('creative_designs_page.uiux.features.communication.title'),
+      desc: t('creative_designs_page.uiux.features.communication.desc'),
       icon: "💬",
       color: "bg-teal-50 text-teal-600"
     }
@@ -149,8 +152,8 @@ const CreativeDesignsUIUX: React.FC = () => {
                 isH1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              <span className="text-black">Elevate Your Brand with </span><br />
-              <span className="text-white">Creative UI/UX Design</span>
+              <span className="text-black">{t('creative_designs_page.hero.title_part1')} </span><br />
+              <span className="text-white">{t('creative_designs_page.hero.title_part2')}</span>
             </h1>
             <p 
               ref={pRef}
@@ -158,9 +161,7 @@ const CreativeDesignsUIUX: React.FC = () => {
                 isPVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              Create a high-performing website or mobile app with QiYou Tech’s expert design and 
-              development team. If you already have a live platform, our specialists can refine, 
-              enhance, and optimize your digital presence to support your business growth.
+              {t('creative_designs_page.hero.desc')}
             </p>
           </div>
         </section>
@@ -174,7 +175,7 @@ const CreativeDesignsUIUX: React.FC = () => {
                 isBadgeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              🎨 <span className="ml-2 uppercase tracking-wide bg-gradient-blue bg-clip-text text-transparent">Branding Services</span>
+              🎨 <span className="ml-2 uppercase tracking-wide bg-gradient-blue bg-clip-text text-transparent">{t('creative_designs_page.branding.badge')}</span>
             </div>
 
             <h2 
@@ -183,7 +184,7 @@ const CreativeDesignsUIUX: React.FC = () => {
                 isH2BrandingVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              How we brand <span className="bg-gradient-blue bg-clip-text text-transparent">Your Business?</span>
+              {t('creative_designs_page.branding.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('creative_designs_page.branding.title_highlight')}</span>
             </h2>
             <p 
               ref={pBrandingRef}
@@ -191,9 +192,7 @@ const CreativeDesignsUIUX: React.FC = () => {
                 isPBrandingVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              Our expert team elevates your brand across all categories, from visual identity to full brand 
-              systems. With experience supporting global companies, we deliver some of the most impactful 
-              branding solutions in the UAE.
+              {t('creative_designs_page.branding.desc')}
             </p>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
@@ -263,13 +262,13 @@ const CreativeDesignsUIUX: React.FC = () => {
                 <div className="lg:col-span-5 flex flex-col gap-6">
                   <div>
                     <h2 className="text-5xl md:text-6xl font-extrabold text-white leading-tight">
-                      Leading UI/UX <br />
+                      {t('creative_designs_page.uiux.title_main')} <br />
                       <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-500">
-                        Design Services
+                        {t('creative_designs_page.uiux.title_highlight')}
                       </span>
                     </h2>
                     <p className="mt-4 text-black text-lg">
-                      Crafting exceptional digital experiences that captivate users and drive measurable business growth.
+                      {t('creative_designs_page.uiux.subtitle')}
                     </p>
                   </div>
 
@@ -279,7 +278,7 @@ const CreativeDesignsUIUX: React.FC = () => {
 
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex items-center justify-between">
                     <div className="flex flex-col">
-                        <span className="text-white font-bold text-sm">Expert Team</span>
+                        <span className="text-white font-bold text-sm">{t('creative_designs_page.uiux.expert_team')}</span>
                         <div className="flex -space-x-2 mt-2">
                             {[1,2,3,4,5].map(i => (
                                 <div key={i} className="w-8 h-8 rounded-full bg-gray-300 border-2 border-blue-500"></div>
@@ -289,7 +288,7 @@ const CreativeDesignsUIUX: React.FC = () => {
                     </div>
                     <div className="text-right">
                         <span className="block text-2xl font-bold text-white">10+</span>
-                        <span className="text-xs text-white/70">Years Exp.</span>
+                        <span className="text-xs text-white/70">{t('creative_designs_page.uiux.years_exp')}</span>
                     </div>
                   </div>
                 </div>
@@ -307,9 +306,7 @@ const CreativeDesignsUIUX: React.FC = () => {
 
                   <div className="bg-white/10 backdrop-blur-sm border border-white/10 p-6 rounded-2xl">
                     <p className="text-black leading-relaxed text-sm md:text-base">
-                      Our experienced team follows a user-centered design process, conducting
-                      thorough research and iterative testing to ensure the highest quality.
-                      We align our work with your business goals and maintain clear communication throughout.
+                      {t('creative_designs_page.uiux.main_desc')}
                     </p>
                   </div>
 

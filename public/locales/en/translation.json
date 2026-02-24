@@ -6,7 +6,7 @@
   "testimonials": "Testimonials",
   "faq": "FAQ",
   "contact": "Contact",
-"nav": {
+  "nav": {
     "home": "Home",
     "products": "Products",
     "services": "Services",
@@ -57,5 +57,838 @@
       "submit": "Get Quote",
       "sending": "SENDING..."
     }
+  },
+  "services_showcase": {
+    "title_main": "How we help",
+    "title_highlight": "Businesses Grow?",
+    "subtitle": "Discover our comprehensive suite of services designed to elevate your digital presence.",
+    "learn_more": "Learn More",
+    "cta_button": "Let's Discuss Your Project",
+    "services": {
+      "creative": {
+        "title": "Creative designs and UI/UX designs",
+        "desc": "By combining creative design with effective UI/UX strategies, we gain a competitive edge in digital presence, enhance customer satisfaction, and..."
+      },
+      "mobile": {
+        "title": "Mobile App Development",
+        "desc": "We help enterprises and startups innovate and develop outstanding mobile applications (iOS & Android), turning ideas into reality while..."
+      },
+      "web": {
+        "title": "Web App Development",
+        "desc": "We have an expert team ready to digitize simple websites and/or implement a full digital transformation, providing a holistic overhaul of..."
+      },
+      "digital": {
+        "title": "Digital Marketing",
+        "desc": "Using top digital marketing and advertising services, we conduct in-depth audience needs analysis to identify the best ways to align..."
+      },
+      "it_consultancy": {
+        "title": "IT Consultancy & DevOps Service",
+        "desc": "If you're searching for a technical partner to be your software strategic partner and help grow your business, these services are designed to..."
+      },
+      "hosting": {
+        "title": "Hosting Server",
+        "desc": "We enhance security with advanced measures and regular backups to protect your data. These services optimize performance for faster load..."
+      }
+    },
+    "promises_section": {
+      "title_main": "What we",
+      "title_highlight": "Promise You?",
+      "subtitle": "Our commitment to excellence is backed by these core promises that ensure your success and satisfaction.",
+      "stats": {
+        "satisfaction": "Satisfaction Rate",
+        "support": "Support Available"
+      },
+      "list": {
+        "time": "Commitment on time delivery",
+        "money": "Money back guarantee",
+        "partnership": "Effective partnerships",
+        "consultation": "Expert consultation",
+        "communication": "Transparent communication",
+        "results": "Result oriented solutions"
+      }
+    }
+  },
+  "start_project": {
+    "title_main": "Start Your Next",
+    "title_highlight": "Big Project",
+    "subtitle": "Got an idea? Tell us about it, and we’ll bring it to life with world-class execution.",
+    "office_title": "QiYou Tech Office",
+    "office_address": "No. 37, St. 315, Sangkat Boeung Kak I, Khan Toul Kork, 12151 Phnom Penh.",
+    "follow_us": "Follow Us",
+    "telegram_chat": "Chat on Telegram",
+    "instant_response": "Instant response",
+    "form_title": "Send Us a Message",
+    "form_subtitle": "We'll get back to you within 24 hours",
+    "name_label": "Your Name *",
+    "email_label": "Work Email *",
+    "mobile_label": "Mobile Number *",
+    "budget_label": "Project Budget *",
+    "budget_custom_label": "Project Budget (Custom) *",
+    "details_label": "Project Details",
+    "submit_button": "Send Message",
+    "sending": "Sending...",
+    "success_message": "Your request has been sent successfully!",
+    "budget_options": [
+      "$1,000 - $5,000",
+      "$5,000 - $10,000",
+      "$10,000 - $50,000",
+      "$50,000+",
+      "Custom"
+    ]
+  },
+  "clients_section": {
+    "title_main": "OUR",
+    "title_highlight": "CLIENTS"
+  },
+  "footer": {
+    "partner_text": "Your Success Partner",
+    "description": "We transform your digital vision into reality through innovative web development, mobile apps, UI/UX design, and digital marketing solutions.",
+    "columns": {
+      "company": "Company",
+      "services": "Services",
+      "products": "Products"
+    },
+    "links": {
+      "home": "Home",
+      "about": "About Us",
+      "careers": "Careers",
+      "blog": "Blog",
+      "ui_ux": "UI/UX Design",
+      "mobile": "Mobile App Development",
+      "web": "Web App Development",
+      "digital": "Digital Marketing",
+      "hosting": "Hosting & Servers",
+      "it": "IT Consultancy & DevOps",
+      "bitmart": "BITMART digital",
+      "shopping_cart": "Shopping Cart Systems",
+      "ecommerce": "e-Commerce System",
+      "lottery": "Lottery Apps",
+      "entertainment": "Entertainment",
+      "insurance": "Insurance System",
+      "feige_im": "Feige IM",
+      "erp": "Warehouse Management ERP",
+      "laundry": "Laundry POS",
+      "restaurant": "Restaurant POS",
+      "retail": "Retail POS"
+    },
+    "copyright": "All Rights Reserved."
+  },
+  "products_page": {
+    "title_our": "Our",
+    "title_products": "Products",
+    "subtitle_line1": "From creative campaigns to custom tech solutions, Xin QiYOu Tech showcase how strategy meets storytelling.",
+    "subtitle_line2": "See how we help brands grow, engage, and lead in the digital age.",
+    "items": {
+      "bitmart": {
+        "title": "BITMART digital",
+        "subtitle": "currency exchange is faster, better and stronger",
+        "desc": "Our design and develop BITMART Digital Asset Systems — complete cryptocurrency exchange platforms built for performance, security, and global scalability. From trading engines to wallet management and KYC systems, we deliver enterprise-grade digital asset infrastructure.",
+        "feature_title": "High-performance exchange capabilities:",
+        "features": [
+          "Crypto-to-crypto trading",
+          "Crypto-to-fiat conversion",
+          "Fiat-to-fiat exchange",
+          "Real-time rate updates",
+          "Automated liquidity integration",
+          "Spread & fee configuration",
+          "Instant swap functionality"
+        ],
+        "footer": "Built with low-latency matching engine technology."
+      },
+      "shopping_cart": {
+        "title": "Shopping Cart Systems",
+        "subtitle": "Smart • Secure • Scalable • Revenue-Driven",
+        "desc": "We design and develop high-performance Shopping Cart Systems tailored for eCommerce platforms, marketplaces, subscription businesses, and digital product stores. Our solutions focus on smooth user experience, secure transactions, and powerful backend management.",
+        "feature_title": "User-friendly cart features:",
+        "features": [
+          "Add / Remove products instantly",
+          "Quantity adjustment with auto price update",
+          "Save for later option",
+          "Coupon & promo code integration",
+          "Estimated shipping calculator",
+          "Real-time tax calculation",
+          "Mobile-optimized design"
+        ],
+        "footer": "Designed to reduce cart abandonment and increase conversions."
+      },
+      "ecommerce": {
+        "title": "e-Commerce System",
+        "subtitle": "Complete Retail Ecosystem",
+        "desc": "The Grocery Store Management Systems for supermarkets, mini-marts, wholesale markets, and online grocery platforms. Our solutions combine POS, inventory, supplier management, and eCommerce into one powerful ecosystem.",
+        "feature_title": "Fast and reliable checkout experience:",
+        "features": [
+          "Barcode & QR code scanning",
+          "Weighing scale integration (fruits & vegetables)",
+          "Discount & promo management",
+          "Multiple payment methods (cash, card, wallet, QR)",
+          "Receipt printing & digital invoice",
+          "Offline mode support",
+          "Daily sales & cashier reports"
+        ],
+        "footer": "Designed for high-speed transactions during peak hours."
+      },
+      "lottery": {
+        "title": "Lottery Apps",
+        "subtitle": "Secure Randomization • High Scalability • Regulatory-Ready • Revenue Optimized",
+        "desc": "Lottery apps provide a comprehensive, mobile-focused experience for purchasing tickets, checking results, and managing numbers. Modern lottery app content typically includes features for both official state lotteries and third-party courier services, focusing on user convenience, security, and real-time information. Our Client: NSL, Wingo, iBingo, Lelot, Hsin niu, Asian....",
+        "feature_title": "Smart ticket sales & management:",
+        "features": [
+          "Number selection (manual or auto-pick)",
+          "Single draw or multi-draw ticket purchase",
+          "Quick Pick (random number generator)",
+          "Retail agent portal",
+          "QR code / digital ticket generation",
+          "Secure transaction tracking"
+        ],
+        "footer": "Supports both online and offline distribution models."
+      },
+      "entertainment": {
+        "title": "Entertainment",
+        "subtitle": "Interactive Gaming Experiences",
+        "desc": "We create interactive entertainment games designed to boost user engagement, increase retention, and maximize monetization. From lucky draws to interactive betting systems, our games combine creativity, psychology, and technology to deliver unforgettable experiences.",
+        "feature_title": "Build a full-featured online game ecosystem:",
+        "features": [
+          "Multiplayer support",
+          "Real-time scoring",
+          "Leaderboard & ranking system",
+          "In-app wallet integration",
+          "API integration (payment gateways)",
+          "Mobile + Web responsive design"
+        ],
+        "footer": "Designed for scalability and high-performance traffic."
+      },
+      "insurance": {
+        "title": "Insurance System",
+        "subtitle": "Robust Policy Lifecycle Management",
+        "desc": "An insurance system consists of core operational modules—policy administration, claims management, underwriting, billing, and reporting—designed to manage the entire policy lifecycle. It requires robust content infrastructure supporting document version control, compliance, e-signatures, and secure data storage. Key elements include the insured/insurer, premiums, and coverage, governed by principles like utmost good faith and indemnity.",
+        "feature_title": "Efficient policy lifecycle management:",
+        "features": [
+          "Policy quotation & premium calculation",
+          "Automated underwriting workflows",
+          "Policy issuance & digital documentation",
+          "Policy renewal automation",
+          "Endorsement & modification tracking",
+          "Multi-product support (Life, Motor, Health, Property)",
+          "Commission calculation for agents"
+        ],
+        "footer": "Reduce manual paperwork and improve processing speed."
+      },
+      "feige_im": {
+        "title": "Feige IM",
+        "subtitle": "Modern Social Messaging Platform",
+        "desc": "Feige IM is a modern social messaging platform designed to bring people closer through secure, fast, and intelligent communication. Whether you are chatting with friends, collaborating with teams, or building communities, Feige IM provides everything you need in one powerful app.",
+        "feature_title": "Key Features:",
+        "features": [
+          "Instant Messaging: Send real-time text messages with lightning-fast delivery.",
+          "Voice & Video Calls: High-quality voice and video communication anytime, anywhere.",
+          "Group Chats & Communities: Create private or public groups to connect with friends, family, or business teams.",
+          "Media Sharing: Share photos, videos, documents, and files easily.",
+          "Secure Communication: Advanced encryption ensures your conversations stay private.",
+          "Cross-Platform Access: Use Feige IM on mobile, tablet, or desktop seamlessly.",
+          "Smart Notifications: Stay updated without missing important messages."
+        ],
+        "footer": "Stay updated without missing important messages."
+      },
+      "warehouse": {
+        "title": "Warehouse Management ERP",
+        "subtitle": "Intelligent Operations • Total Inventory Visibility • Scalable Enterprise Control",
+        "desc": "We design and develop powerful Warehouse Management ERP Systems (WMS-ERP) that streamline inventory operations, automate workflows, and integrate seamlessly with finance, procurement, sales, and logistics. Our systems are built to support small warehouses, multi-branch distribution centers, and large enterprise supply chains.",
+        "feature_title": "End-to-end warehouse process automation:",
+        "features": [
+          "Goods receiving & quality inspection",
+          "Barcode / QR code / RFID scanning",
+          "Smart put-away & bin location tracking",
+          "Picking strategies (FIFO, LIFO, FEFO)",
+          "Packing & shipment verification",
+          "Batch, lot & serial number management",
+          "Real-time stock movement updates"
+        ],
+        "footer": "Improves accuracy, speed, and operational efficiency."
+      },
+      "laundry": {
+        "title": "Laundry POS",
+        "subtitle": "Smart Operations • Fast Billing • Real-Time Tracking • Customer Loyalty",
+        "desc": "Laundry POS (Point of Sale) Systems tailored for laundromats, dry cleaners, and multi-branch laundry businesses. Our solutions streamline daily operations — from order intake to delivery — while improving customer experience and business efficiency.",
+        "feature_title": "Easy and efficient front-desk operations:",
+        "features": [
+          "Quick order creation",
+          "Service selection (Wash, Dry, Iron, Dry Clean)",
+          "Automatic price calculation",
+          "Weight-based billing support",
+          "Barcode / QR receipt printing",
+          "Partial payment & advance payment",
+          "Express service surcharge"
+        ],
+        "footer": "Designed to handle high customer volume smoothly."
+      },
+      "restaurant": {
+        "title": "Restaurant POS",
+        "subtitle": "Speed up front-desk and table service",
+        "desc": "Modern Restaurant POS (Point of Sale) Systems built for cafés, fast food outlets, fine dining restaurants, food courts, and multi-branch chains. Our system streamlines order management, kitchen operations, billing, and reporting — all in one powerful platform.",
+        "feature_title": "Core features for restaurants:",
+        "features": [
+          "Dine-in, Takeaway & Delivery modes",
+          "Table layout management",
+          "Split bill & merge table options",
+          "Modifier options (extra cheese, no sugar, etc.)",
+          "Automatic tax & service charge calculation",
+          "Multiple payment methods (Cash, Card, QR, Wallet)",
+          "Digital & printed receipts"
+        ],
+        "footer": "Designed to reduce waiting time and improve service flow."
+      },
+      "retail": {
+        "title": "Retail POS",
+        "subtitle": "High-Performance Sales & Analytics",
+        "desc": "high-performance Retail POS (Point of Sale) Systems tailored for fashion stores, supermarkets, electronics shops, pharmacies, convenience stores, and multi-branch retail chains. Our solutions combine sales, inventory, customer management, and analytics into one powerful platform.",
+        "feature_title": "Fast and intuitive checkout experience:",
+        "features": [
+          "Barcode & QR code scanning",
+          "Quick product search",
+          "Discount & promotion management",
+          "Split payment (cash, card, QR, wallet)",
+          "Gift card & voucher support",
+          "Tax & service charge automation",
+          "Printed & digital receipt options"
+        ],
+        "footer": "Designed for speed and accuracy during peak hours."
+      }
+    }
+  },
+  "creative_designs_page": {
+    "hero": {
+      "title_part1": "Elevate Your Brand with",
+      "title_part2": "Creative UI/UX Design",
+      "desc": "Create a high-performing website or mobile app with QiYou Tech’s expert design and development team. If you already have a live platform, our specialists can refine, enhance, and optimize your digital presence to support your business growth."
+    },
+    "branding": {
+      "badge": "Branding Services",
+      "title_main": "How we brand",
+      "title_highlight": "Your Business?",
+      "desc": "Our expert team elevates your brand across all categories, from visual identity to full brand systems. With experience supporting global companies, we deliver some of the most impactful branding solutions.",
+      "services": {
+        "strategy": {
+          "title": "New Branding With Strategy",
+          "desc": "We will create a structured process to build or revitalize your brand identity using a strategic approach. This ensures it aligns with your business goals and vision, resonates with your target audience, and stands out in the market."
+        },
+        "innovation": {
+          "title": "Brand Re-innovation",
+          "desc": "QiYOU will enhance your marketing by revitalizing your brand's visual designs, leading to improved recognition and consistency. We will modernize the brand to increase its credibility and appeal to target audiences, ensuring a clear vision and strong identity."
+        },
+        "identity": {
+          "title": "Corporate Identity",
+          "desc": "By building or enhancing your corporate identity, we will create a competitive edge for your brand presence, increase the effectiveness of your marketing activities, and align your brand's vision with both your customers and employees."
+        },
+        "consultancy": {
+          "title": "Brand Consultancy",
+          "desc": "This service specializes in brand consultancy, helping companies develop their brand identity and strategy. We analyze the current branding to provide creative solutions that align with the brand's values and vision. Our main goal is to differentiate the brand, enhance its perception, and support long-term growth."
+        }
+      }
+    },
+    "uiux": {
+      "title_main": "Leading UI/UX",
+      "title_highlight": "Design Services",
+      "subtitle": "Crafting exceptional digital experiences that captivate users and drive measurable business growth.",
+      "expert_team": "Expert Team",
+      "years_exp": "Years Exp.",
+      "main_desc": "Our experienced team follows a user-centered design process, conducting thorough research and iterative testing to ensure the highest quality. We align our work with your business goals and maintain clear communication throughout.",
+      "stats": {
+        "projects": "Projects",
+        "years": "Years",
+        "satisfaction": "Satisfaction",
+        "rating": "Rating"
+      },
+      "features": {
+        "user_centered": {
+          "title": "User-Centered Design",
+          "desc": "Every design decision is rooted in understanding your users' needs, behaviors, and pain points."
+        },
+        "research": {
+          "title": "Thorough Research",
+          "desc": "We dive deep into market analysis, competitor research, and user interviews to inform our designs."
+        },
+        "testing": {
+          "title": "Iterative Testing",
+          "desc": "Continuous prototyping and testing ensures we deliver solutions that truly work."
+        },
+        "communication": {
+          "title": "Clear Communication",
+          "desc": "Transparent collaboration and regular updates keep you informed at every stage."
+        }
+      }
+    }
+  },
+  "high_level_process": {
+    "title_main": "What is our",
+    "title_highlight": "High-level Process?",
+    "steps_label": "Step",
+    "steps": {
+      "discovery": {
+        "title": "UX Discovery & Research",
+        "desc": "UX Discovery & Research involves understanding project goals and user needs through interviews and analysis of consumer behavior. This process ensures a user-centric approach."
+      },
+      "prototype": {
+        "title": "UX Prototype",
+        "desc": "Creating interactive representations of the product to test and refine design concepts and user flow. By incorporating user feedback, prototypes help validate design decisions and identify potential issues early in the process."
+      },
+      "design": {
+        "title": "UI Design Concept",
+        "desc": "Creating visual elements and layouts for digital interfaces, focusing on usability and maintaining brand consistency to enhance the overall user experience."
+      },
+      "validation": {
+        "title": "Validation & Testing",
+        "desc": "We analyze design solutions using various techniques to determine their efficacy. This involves usability testing, A/B testing, and heuristic evaluations to gather user feedback and identify areas for improvement."
+      },
+      "launch": {
+        "title": "Launch",
+        "desc": "Implementing the completed concept into practice and keeping an eye on its performance after launch. This entails managing the development process to guarantee design integrity."
+      }
+    }
+  },
+  "mobile_app_page": {
+    "hero": {
+      "title_part1": "Build... Launch ...",
+      "title_part2": "Grow",
+      "desc": "Got an idea? Partner with a leading app development team to build a high-quality mobile app that's designed, developed, and delivered the right way."
+    },
+    "main": {
+      "good_news": {
+        "title": "Good News!",
+        "desc": "Our experienced team has successfully delivered 500+ mobile applications for businesses worldwide. We handle all the technical complexity so you can focus on your business growth.",
+        "footer_part1": "Let us handle the",
+        "footer_highlight1": "technical hassle",
+        "footer_part2": "so you can focus on",
+        "footer_highlight2": "your success"
+      },
+      "cta_button": "Start Your App Project",
+      "challenges_section": {
+        "title_main": "Building Mobile Apps is",
+        "title_highlight": "Challenging",
+        "subtitle": "But we're here to help",
+        "desc": "Many businesses struggle with mobile app development due to complexity, cost, and technical expertise requirements. Here are common challenges we help overcome:",
+        "list": {
+          "engagement": "Low user engagement and retention rates leading to app abandonment",
+          "ui_design": "Poor user interface design resulting in negative user experience",
+          "performance": "Slow performance and long loading times frustrating users",
+          "scaling": "Difficulty scaling the app as your user base grows",
+          "integration": "Integration challenges with existing systems and third-party services"
+        }
+      }
+    }
+  },
+  "development_lifecycle": {
+    "title_main": "How we do it in",
+    "title_highlight": "3 Easy Steps",
+    "step_label": "Step",
+    "steps": {
+      "research": {
+        "title": "Research & Development",
+        "desc": "We carry out a thorough research and development process to deliver an app that not only meets your goals but gives you a competitive edge. Our expert team takes the time to deeply understand your business, ensuring every feature is aligned with your market, your users, and your growth.",
+        "points": [
+          "Market & competitor analysis",
+          "Technical feasibility study",
+          "User research & interviews",
+          "Project roadmap creation"
+        ]
+      },
+      "design": {
+        "title": "Design & Validation",
+        "desc": "We begin with a full UX analysis, then move into structured UX design. Once the experience is mapped out, we validate it with real users to gather insights and identify improvements. After that, we create the UI design and conduct another round of user validation to ensure the final interface is intuitive, engaging, and aligned with user expectations.",
+        "points": [
+          "UX wireframing & prototyping",
+          "User testing & feedback",
+          "UI design & branding",
+          "Design system creation"
+        ]
+      },
+      "development": {
+        "title": "Development & Launch",
+        "desc": "We follow a professional, agile Scrum-based process and keep you updated every week to ensure full alignment and product success. Before launch, we conduct a complete testing cycle to guarantee performance, stability, and a seamless user experience.",
+        "points": [
+          "Agile development sprints",
+          "Weekly progress updates",
+          "QA & testing cycles",
+          "App store submission & launch"
+        ]
+      }
+    }
+  },
+  "projects_slider": {
+    "title_main": "Our featured",
+    "title_highlight": "Projects",
+    "subtitle": "Explore our showcase of successful mobile applications that have transformed businesses",
+    "cta_button": "Let's Build Your App",
+    "projects": {
+      "project_two": "Project Two",
+      "al_ahly": "Al-Ahly Club App",
+      "al_mahatta": "Al-Mahatta App"
+    }
+  },
+  "value_proposition": {
+    "title_main": "Your time and Money",
+    "title_highlight": "Are important?",
+    "desc": "You worked hard for your business. And we know how frustrating that is to invest your hard-earned money on something hoping it'll pay off, but instead, it sets you back and lacks support. A quality app can be an absolute game-changer for a business but only if it's done right.",
+    "simpler_title": "We've made the whole mobile app creation process",
+    "simpler_highlight": "way simpler",
+    "stats": {
+      "savings": "Cost Savings",
+      "delivery": "Faster Delivery",
+      "support": "Support"
+    }
+  },
+  "app_value": {
+    "title_main": "Let's make people",
+    "title_highlight": "fall in love",
+    "title_with": "with your app",
+    "desc": "Tell us about your app idea, and our team will work with you to create something amazing that your users will absolutely love. Let's turn your vision into reality.",
+    "cta_button": "Let's Talk"
+  },
+  "web_app_page": {
+    "hero": {
+      "title_part1": "Design the right web",
+      "title_part2": "Application With Expert Team",
+      "desc": "Design the right website & web app, in the right way, at the right time with the Xin QiYou Tech web development team. And if your website is already live, ask our software engineers experts to improve your presence and support your business."
+    },
+    "develop_section": {
+      "title_main": "What We",
+      "title_highlight": "Develop?",
+      "subtitle": "We provide comprehensive web development solutions tailored to your business needs, from corporate websites to complex web applications.",
+      "cta_button": "Discuss Your Web Project",
+      "categories": {
+        "corporate": "Corporate Websites",
+        "ecommerce": "E-Commerce",
+        "web_apps": "Web Applications",
+        "landing": "Landing Pages",
+        "dashboards": "Dashboards",
+        "cms": "CMS Platforms"
+      },
+      "features": {
+        "localization": {
+          "title": "Localization & RTL Support",
+          "desc": "Multi-language websites with full RTL support for Arabic and other languages to reach global audiences."
+        },
+        "analytics": {
+          "title": "Analytics & Tracking",
+          "desc": "Comprehensive analytics integration to track user behavior and optimize conversions."
+        },
+        "uiux": {
+          "title": "UI/UX Design",
+          "desc": "Beautiful, intuitive interfaces designed with user experience as the top priority."
+        },
+        "performance": {
+          "title": "Performance Optimization",
+          "desc": "Lightning-fast load times with optimized code and modern caching strategies."
+        },
+        "conversion": {
+          "title": "Conversion Optimization",
+          "desc": "Strategic design focused on converting visitors into customers and leads."
+        },
+        "automation": {
+          "title": "Automation & Integration",
+          "desc": "Seamless integration with your existing tools and automated workflows."
+        }
+      }
+    }
+  },
+  "web_agency_showcase": {
+    "top_title": "Top Rated",
+    "top_highlight": "Web Agency",
+    "cta_button": "Discuss Your Web Project",
+    "results_title": "How We",
+    "results_highlight": "Deliver Results",
+    "stats": {
+      "projects": "Project Delivered",
+      "developers": "Expert Developers",
+      "years": "Years of Experience",
+      "satisfaction": "Clients Satisfaction"
+    },
+    "info_cards": {
+      "customer": {
+        "title": "Customer-Centric Approach",
+        "desc": "We put your business goals first, delivering solutions that drive real results and growth."
+      },
+      "regional": {
+        "title": "Regional Presence",
+        "desc": "With offices in UAE and Egypt, we understand the MENA market and its unique requirements."
+      },
+      "performance": {
+        "title": "High Performance",
+        "desc": "Our web solutions are optimized for speed, ensuring excellent user experience and SEO rankings."
+      },
+      "design": {
+        "title": "User-Friendly Design",
+        "desc": "Intuitive interfaces that make it easy for your customers to navigate and convert."
+      },
+      "agile": {
+        "title": "Agile Development",
+        "desc": "Flexible and iterative approach ensuring quick delivery and adaptation to changes."
+      },
+      "support": {
+        "title": "Ongoing Support",
+        "desc": "Comprehensive post-launch support and maintenance to keep your web presence running smoothly."
+      }
+    },
+    "steps": {
+      "discovery": {
+        "title": "Discovery & Research",
+        "desc": "We analyze your business requirements, target audience, and competitors to create a solid foundation."
+      },
+      "strategy": {
+        "title": "Strategy & Planning",
+        "desc": "Developing a comprehensive roadmap with clear milestones and deliverables for your project."
+      },
+      "design": {
+        "title": "Design & Prototyping",
+        "desc": "Creating beautiful, user-centered designs with interactive prototypes for validation."
+      },
+      "development": {
+        "title": "Development & Launch",
+        "desc": "Building your solution using modern technologies with rigorous testing before launch."
+      }
+    }
+  },
+  "digital_marketing_page": {
+    "hero": {
+      "title_part1": "Grow your digital presence by",
+      "title_part2": "performance marketing",
+      "desc": "We have a proven track record of helping businesses capture brand attention and strengthen relationships with various audiences. We conduct in-depth analysis of audience requirements to determine the best ways to connect brands with their business objectives through top digital marketing and advertising services."
+    },
+    "services_section": {
+      "title_main": "How we increase",
+      "title_highlight": "Company's Revenues?",
+      "subtitle": "Xin QiYou Tech’s marketing experts are dedicated to boosting your business revenue with tailored strategies designed to meet your unique needs. Discover our full range of digital marketing services designed to maximize performance and drive measurable growth.",
+      "items": {
+        "analytics": {
+          "title": "Analytics reports (G4 Analytics)",
+          "desc": "Data privacy compliance is a top priority in Google Analytics 4 (GA4), which leverages machine learning for predictive insights. We provide your business with unique, efficient reports using event-based tracking to deliver a comprehensive view of user interactions across platforms and devices."
+        },
+        "performance": {
+          "title": "Marketing performance improvement",
+          "desc": "We specialize in conversion rate (CRO) and cost-per-click (CPC) optimization to boost your ad ROI. By continuously testing and refining website elements, including all call-to-action buttons, and regularly analyzing key digital marketing metrics, we ensure your campaigns deliver better results consistently."
+        },
+        "acquisition": {
+          "title": "Customer Acquisition",
+          "desc": "Our business approach focuses on expanding your customer base by acquiring the right customers through digital channels. We target the right audience across various platforms, attracting more customers and transforming them into loyal brand advocates."
+        },
+        "seo": {
+          "title": "Website SEO",
+          "desc": "We optimize your app for both Apple App Store and Google Play Store to boost visibility and improve search rankings. By enhancing keywords, app metadata, including title, description, and screenshots, we attract real users, increase downloads, and drive meaningful engagement."
+        },
+        "aso": {
+          "title": "App Store Optimization",
+          "desc": "We will optimize your app in the Apple App Store and Google Play Store, as this is crucial for improving its visibility and ranking in search results. This will increase downloads and attract real users through key actions such as keyword optimization, app metadata enhancement (including app title, description, and detailed screenshots)."
+        },
+        "google_maps": {
+          "title": "Google Maps Listing",
+          "desc": "We optimize your Google Maps listing to boost your business’s online visibility and attract more customers. Our approach includes business verification, adding high-quality photos, selecting the right categories, creating a product catalog, and posting relevant updates to strengthen your brand presence."
+        }
+      }
+    },
+    "process_section": {
+      "title_main": "Our Process",
+      "title_highlight": "And how we work",
+      "steps": {
+        "discovery": {
+          "title": "Discovery",
+          "desc": "We start by researching your business, competitors, and target audience, analyzing market trends and business goals through SWOT, TWOS, and PESTEL analyses. This will set the foundation for a comprehensive marketing strategy."
+        },
+        "planning": {
+          "title": "Strategic Planning",
+          "desc": "Following our research, we define clear objectives and goals for your digital marketing campaign, confirm the target audience, and select the most effective channels to drive business growth."
+        },
+        "execution": {
+          "title": "Strategy Execution",
+          "desc": "After the discovery and strategic planning phases, we move into execution. Execution phase covers content creation, campaign setup, media buying, social media, email marketing, and more. All activities run seamlessly alongside ongoing SEO and SEM efforts to maximize results."
+        },
+        "reporting": {
+          "title": "Measuring & Reporting",
+          "desc": "Measuring and reporting are key to continuous improvement. We provide monthly reports to keep your business informed of results and take daily corrective actions to optimize your campaigns and achieve your target goals."
+        }
+      }
+    }
+  },
+  "it_consultancy_page": {
+    "hero": {
+      "title_part1": "IT Consultancy Services &",
+      "title_part2": "Security Auditing",
+      "desc": "We stand by a set of core commitments that guarantee quality, transparency, and results for your business."
+    },
+    "growth_section": {
+      "title_main": "Are you looking for a technology partner to",
+      "title_highlight": "support your technological growth?",
+      "subtitle": "Advisory services that support our customers in evaluating approaches and technologies to match network strategy with business objectives. We enhance performance, security, and profitability with expert consulting that fills the gaps where you need it most.",
+      "services": {
+        "it_auditing": {
+          "title": "IT Auditing",
+          "desc": "Your IT systems are the foundation of your company in the modern digital environment. Our professional IT auditing services ensure they're secure and operating at peak efficiency. We examine every part of your infrastructure, identifying potential threats, ensuring compliance, and highlighting efficiency gains."
+        },
+        "digital_transformation": {
+          "title": "Digital Transformation",
+          "desc": "Transform how you work with seamless digital experiences. We streamline operations, integrate modern technologies, and create a plan that fits your objectives—whether cloud migration, automation, or leveraging data—to keep you agile and future-proof."
+        },
+        "devops": {
+          "title": "DevOps as a Service",
+          "desc": "Streamline development and deployment by merging Dev and Ops. We automate workflows, optimize infrastructure for performance and security, and enable faster, more reliable releases so you can innovate and scale with confidence."
+        }
+      }
+    },
+    "cta_strip": {
+      "text": "Are you facing any challenges in your IT department? Let's schedule a free assessment.",
+      "button": "Schedule Now"
+    },
+    "promising_section": {
+      "title_main": "What we are",
+      "title_highlight": "Promising You?",
+      "subtitle": "Our commitment to excellence is backed by these core promises that ensure your success",
+      "items": {
+        "delivery": {
+          "title": "Commitment on time delivery",
+          "desc": "We guarantee on-time delivery for all projects, ensuring your business never misses a deadline."
+        },
+        "money_back": {
+          "title": "Money back guarantee",
+          "desc": "Your satisfaction is our priority. If not satisfied, we offer a hassle-free money-back guarantee."
+        },
+        "partnership": {
+          "title": "Effective partnerships",
+          "desc": "We build lasting relationships with our clients, becoming true partners in their success journey."
+        },
+        "consultation": {
+          "title": "Expert consultation",
+          "desc": "Access to industry experts who provide valuable insights and strategic guidance for your projects."
+        },
+        "communication": {
+          "title": "Transparent communication",
+          "desc": "Open and honest communication at every step, keeping you informed throughout the process."
+        },
+        "results": {
+          "title": "Result oriented solutions",
+          "desc": "Our focus is always on delivering measurable results that drive your business growth."
+        }
+      }
+    },
+    "process_section": {
+      "title_main": "What is our",
+      "title_highlight": "High-level Process?",
+      "steps": {
+        "gap_analysis": {
+          "title": "Gap analysis",
+          "desc": "We conduct analysis with stakeholders to understand the current situation and future goals using SWOT and TOWS techniques."
+        },
+        "auditing": {
+          "title": "Auditing & Assessment",
+          "desc": "Our expert team audits the current situation and provides a plan for the IT department aligned with market trends."
+        },
+        "planning": {
+          "title": "Strategy & Planning",
+          "desc": "We build a strategic plan with an action roadmap and SMART objectives to strengthen IT capabilities."
+        },
+        "execution": {
+          "title": "Plan Execution",
+          "desc": "We mentor execution, track progress, and take corrective actions quickly to ensure the plan succeeds."
+        },
+        "continuous_auditing": {
+          "title": "Continuous Auditing",
+          "desc": "After success, we continue auditing and measuring performance to keep the company on track."
+        }
+      }
+    }
+  },
+  "hosting_page": {
+    "hero": {
+      "title_part1": "Hosting and",
+      "title_part2": "Servers",
+      "desc": "Xin QiYou Tech provides website and mobile application hosting for SMEs, as well as enhanced services for larger projects through AWS. Our team will manage the servers and implement high-security standards, along with disaster recovery solutions."
+    },
+    "white_section": {
+      "title": "What's the Web Hosting and Mobile App hosting",
+      "web_hosting_desc": "Web hosting is a specific service provided by an expert team from Xin QiYou Tech, who will be responsible for keeping your website up and running 24/7. Web hosting can be provided for individuals, companies, and mega projects through specific servers through advanced technology services.",
+      "mobile_hosting_desc": "Mobile App hosting is a specific service to support the mobile app owners making their backend live 24/7 which makes the applications run smoothly and interact with cloud-based services. Xin QiYou Tech can provide you with shared hosting, VPS, or a dedicated server to fit your project size and budget.",
+      "features": {
+        "monitoring": "24/7 Server Monitoring",
+        "ssl": "SSL Certificates",
+        "backups": "Daily Backups",
+        "ddos": "DDoS Protection"
+      }
+    },
+    "dark_section": {
+      "title": "Are you looking for a technology arm to Hosting & Servers Services",
+      "cta_button": "Get Hosting Quote",
+      "items": {
+        "website": {
+          "title": "Websites hosting",
+          "desc": "Our technical & software engineering team will publish your website after creating it on the internet using your domain if you have one, or will help you find the suitable domain for your business if you don't have one."
+        },
+        "mobile": {
+          "title": "Mobile App hosting",
+          "desc": "Whether you already know where you want your mobile application to be hosted or still haven't decided yet, we will help you with the process so the application would get the greatest reach and number of downloads."
+        },
+        "vps": {
+          "title": "VPS Servers",
+          "desc": "We admire privacy so much at Xin QiYou Tech, so we help you get your virtual private server so you can get the chance of sharing the physical resources while you're absolutely sure you're privately secured."
+        },
+        "dedicated": {
+          "title": "Dedicated Servers",
+          "desc": "Dedicated servers should be used by bigger organizations, they are usually used by organizations that hit a lot of traffic each day. A dedicated server is usually used for a set of related company sites."
+        }
+      }
+    }
+  },
+  "about_page": {
+    "hero": {
+      "title_part1": "Unlocking Growth: by",
+      "title_part2": "Our Expert Team",
+      "desc": "QiYou Tech offers the best digital services for mobile apps, web apps development, hosting, DevOps services, and digital performance marketing. We have been developing global brands with enthusiasm and purpose since 2015 with an expert team."
+    },
+    "vision_mission": {
+      "title_main": "What is QiYou Tech",
+      "title_highlight": "Vision & Mission?",
+      "vision": {
+        "title": "Our Vision",
+        "desc": "QiYou Tech is a leading digital solutions company focused on bringing the world to the digital era. Having an innovative team with more than 15 years of experience, QiYou offers wide services and products that foster your digital presence."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "desc": "Having an innovative team with more than 15 years of experience, QiYou Tech offers wide services and products that foster your digital presence and drive business growth."
+      }
+    },
+    "promising": {
+      "title_main": "What we are",
+      "title_highlight": "Promising You?",
+      "subtitle": "Our commitment to excellence is backed by these core promises that ensure your success"
+    }
+  },
+  "core_values": {
+    "title_main": "What is our",
+    "title_highlight": "Core Values?",
+    "subtitle": "The fundamental beliefs that guide our actions and define who we are",
+    "values": {
+      "achievement": {
+        "title": "Achievement Oriented",
+        "desc": "Focusing on surpassing goals, driving performance, fostering innovation, and recognizing accomplishments within a high-performance culture."
+      },
+      "customer": {
+        "title": "Customer Focus",
+        "desc": "Identifying and responding to current and future client needs; providing service excellence to internal and external clients."
+      },
+      "teamwork": {
+        "title": "Teamwork",
+        "desc": "Collaborating effectively, sharing knowledge, supporting colleagues, and achieving collective goals through strong teamwork and mutual respect."
+      },
+      "ownership": {
+        "title": "Ownership",
+        "desc": "Taking responsibility for work, decisions, and growth, fostering accountability, initiative, and resilience within the organization."
+      },
+      "strategic": {
+        "title": "Visioning & Strategic Direction",
+        "desc": "Developing and inspiring commitment to a vision of success; supporting, promoting and ensuring alignment with the organization's vision and values."
+      }
+    }
+  },
+  "under_construction": {
+    "title_part1": "Under",
+    "title_part2": "Construction",
+    "coming_soon": "Coming Soon...",
+    "back_home": "Back to Home"
   }
 }

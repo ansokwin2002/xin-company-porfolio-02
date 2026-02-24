@@ -9,9 +9,11 @@ import AppValueSection from '../components/sections/AppValueSection';
 import ScrollToTop from '../components/specific/ScrollToTop';
 import TelegramLink from '../components/specific/TelegramLink';
 import ValuePropositionSection from '../components/sections/ValuePropositionSection';
+import { useTranslation } from 'react-i18next';
 
 
 const MobileAppDevelopment: React.FC = () => {
+  const { t } = useTranslation();
   // Animation states
   const [heroVisible, setHeroVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -41,32 +43,32 @@ const MobileAppDevelopment: React.FC = () => {
     {
       id: 1,
       icon: <Activity size={20} />,
-      text: "Low user engagement and retention rates leading to app abandonment",
+      text: t('mobile_app_page.main.challenges_section.list.engagement'),
       color: "bg-blue-100 text-blue-500",
       active: true 
     },
     {
       id: 2,
       icon: <Layout size={20} />,
-      text: "Poor user interface design resulting in negative user experience",
+      text: t('mobile_app_page.main.challenges_section.list.ui_design'),
       color: "bg-yellow-100 text-yellow-600",
     },
     {
       id: 3,
       icon: <Clock size={20} />,
-      text: "Slow performance and long loading times frustrating users",
+      text: t('mobile_app_page.main.challenges_section.list.performance'),
       color: "bg-purple-100 text-purple-500",
     },
     {
       id: 4,
       icon: <TrendingUp size={20} />,
-      text: "Difficulty scaling the app as your user base grows",
+      text: t('mobile_app_page.main.challenges_section.list.scaling'),
       color: "bg-blue-200 text-blue-600",
     },
     {
       id: 5,
       icon: <Layers size={20} />,
-      text: "Integration challenges with existing systems and third-party services",
+      text: t('mobile_app_page.main.challenges_section.list.integration'),
       color: "bg-green-100 text-green-500",
     }
   ];
@@ -82,14 +84,13 @@ const MobileAppDevelopment: React.FC = () => {
             {/* Animated Title */}
             <h1 className={`text-4xl md:text-5xl font-black mb-6 tracking-tight transition-all duration-1000 transform 
               ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              <span className="text-black">Build... Launch ... </span><span className="opacity-90">Grow</span>
+              <span className="text-black">{t('mobile_app_page.hero.title_part1')} </span><span className="opacity-90">{t('mobile_app_page.hero.title_part2')}</span>
             </h1>
             
             {/* Animated Paragraph with 300ms delay */}
             <p className={`text-base md:text-lg opacity-90 leading-relaxed max-w-2xl mx-auto transition-all duration-1000 delay-300 transform 
               ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-              Got an idea? Partner with a leading app development team to build a high-quality 
-              mobile app that's designed, developed, and delivered the right way.
+              {t('mobile_app_page.hero.desc')}
             </p>
           </div>
         </div>
@@ -113,13 +114,13 @@ const MobileAppDevelopment: React.FC = () => {
                   <div className="bg-yellow-400 p-2 rounded-lg text-white">
                     <Hand size={24} /> 
                   </div>
-                  <h3 className="font-bold text-xl text-gray-900">Good News!</h3>
+                  <h3 className="font-bold text-xl text-gray-900">{t('mobile_app_page.main.good_news.title')}</h3>
                 </div>
                 <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                  Our experienced team has successfully delivered 500+ mobile applications for businesses worldwide. We handle all the technical complexity so you can focus on your business growth.
+                  {t('mobile_app_page.main.good_news.desc')}
                 </p>
                 <p className="text-sm text-gray-800">
-                  Let us handle the <span className="bg-gray-900 text-white px-1 py-0.5 rounded text-xs font-medium">technical hassle</span> so you can focus on <span className="bg-[#2b9aff] text-white px-1 py-0.5 rounded text-xs font-medium">your success</span>
+                  {t('mobile_app_page.main.good_news.footer_part1')} <span className="bg-gray-900 text-white px-1 py-0.5 rounded text-xs font-medium">{t('mobile_app_page.main.good_news.footer_highlight1')}</span> {t('mobile_app_page.main.good_news.footer_part2')} <span className="bg-[#2b9aff] text-white px-1 py-0.5 rounded text-xs font-medium">{t('mobile_app_page.main.good_news.footer_highlight2')}</span>
                 </p>
               </div>
 
@@ -129,7 +130,7 @@ const MobileAppDevelopment: React.FC = () => {
                   <div className="bg-white/20 p-2 rounded-full">
                     <Rocket size={24} className="fill-current" />
                   </div>
-                  <span className="font-bold text-lg">Start Your App Project</span>
+                  <span className="font-bold text-lg">{t('mobile_app_page.main.cta_button')}</span>
                 </div>
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </button>
@@ -140,13 +141,13 @@ const MobileAppDevelopment: React.FC = () => {
               <div className={`transition-all duration-700 delay-100 transform 
                 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-2">
-                  Building Mobile Apps is <br />
-                  <span className="bg-[#2b9aff] bg-clip-text text-transparent bg-gradient-to-r from-[#2b9aff] to-[#4facfe]">Challenging</span>
+                  {t('mobile_app_page.main.challenges_section.title_main')} <br />
+                  <span className="bg-[#2b9aff] bg-clip-text text-transparent bg-gradient-to-r from-[#2b9aff] to-[#4facfe]">{t('mobile_app_page.main.challenges_section.title_highlight')}</span>
                 </h2>
-                <h3 className="text-xl font-bold text-gray-800 mb-6">But we're here to help</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-6">{t('mobile_app_page.main.challenges_section.subtitle')}</h3>
                 
                 <p className="text-gray-600 mb-10 leading-relaxed">
-                  Many businesses struggle with mobile app development due to complexity, cost, and technical expertise requirements. Here are common challenges we help overcome:
+                  {t('mobile_app_page.main.challenges_section.desc')}
                 </p>
               </div>
 

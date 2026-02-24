@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import Footer from '../components/layout/Footer';
@@ -94,6 +95,7 @@ const HostingFeatureItem: React.FC<HostingFeatureItemProps> = ({ Icon, title, in
 };
 
 const HostingServer: React.FC = () => {
+  const { t } = useTranslation();
   // --- Animation States ---
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
@@ -129,17 +131,17 @@ const HostingServer: React.FC = () => {
   }, []);
 
   const whiteSectionFeatures = [
-    { title: "24/7 Server Monitoring", icon: Eye, gradient: "from-blue-500 to-cyan-400" },
-    { title: "SSL Certificates", icon: ShieldCheck, gradient: "from-purple-500 to-indigo-500" },
-    { title: "Daily Backups", icon: RefreshCw, gradient: "from-green-400 to-emerald-500" },
-    { title: "DDoS Protection", icon: ShieldAlert, gradient: "from-rose-500 to-red-400" },
+    { title: t('hosting_page.white_section.features.monitoring'), icon: Eye, gradient: "from-blue-500 to-cyan-400" },
+    { title: t('hosting_page.white_section.features.ssl'), icon: ShieldCheck, gradient: "from-purple-500 to-indigo-500" },
+    { title: t('hosting_page.white_section.features.backups'), icon: RefreshCw, gradient: "from-green-400 to-emerald-500" },
+    { title: t('hosting_page.white_section.features.ddos'), icon: ShieldAlert, gradient: "from-rose-500 to-red-400" },
   ];
 
   const darkSectionCards = [
-    { title: "Websites hosting", image: "/assets/images/p12.png", desc: "Our technical & software engineering team will publish your website after creating it on the internet using your domain if you have one, or will help you find the suitable domain for your business if you don't have one." },
-    { title: "Mobile App hosting", image: "/assets/images/p13.png", desc: "Whether you already know where you want your mobile application to be hosted or still haven't decided yet, we will help you with the process so the application would get the greatest reach and number of downloads." },
-    { title: "VPS Servers", image: "/assets/images/p15.png", desc: "We admire privacy so much at Xin QiYou Tech, so we help you get your virtual private server so you can get the chance of sharing the physical resources while you're absolutely sure you're privately secured." },
-    { title: "Dedicated Servers", image: "/assets/images/p14.png", desc: "Dedicated servers should be used by bigger organizations, they are usually used by organizations that hit a lot of traffic each day. A dedicated server is usually used for a set of related company sites." }
+    { title: t('hosting_page.dark_section.items.website.title'), image: "/assets/images/p12.png", desc: t('hosting_page.dark_section.items.website.desc') },
+    { title: t('hosting_page.dark_section.items.mobile.title'), image: "/assets/images/p13.png", desc: t('hosting_page.dark_section.items.mobile.desc') },
+    { title: t('hosting_page.dark_section.items.vps.title'), image: "/assets/images/p15.png", desc: t('hosting_page.dark_section.items.vps.desc') },
+    { title: t('hosting_page.dark_section.items.dedicated.title'), image: "/assets/images/p14.png", desc: t('hosting_page.dark_section.items.dedicated.desc') }
   ];
 
   return (
@@ -155,7 +157,7 @@ const HostingServer: React.FC = () => {
                 isH1Visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              <span className="text-black">Hosting and</span> <span className="text-white">Servers</span>
+              <span className="text-black">{t('hosting_page.hero.title_part1')}</span> <span className="text-white">{t('hosting_page.hero.title_part2')}</span>
             </h1>
             <p 
               ref={pRef}
@@ -163,7 +165,7 @@ const HostingServer: React.FC = () => {
                 isPVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
             >
-              Xin QiYou Tech provides website and mobile application hosting for SMEs, as well as enhanced services for larger projects through AWS. Our team will manage the servers and implement high-security standards, along with disaster recovery solutions.
+              {t('hosting_page.hero.desc')}
             </p>
           </div>
         </section>
@@ -171,17 +173,17 @@ const HostingServer: React.FC = () => {
         {/* --- WHITE SECTION --- */}
         <section ref={sectionRef} className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start text-left">
               <div className={`transition-all duration-1000 transform ${sectionVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
                 <img src="/assets/images/p4.png" alt="Hosting" className="w-full max-w-[500px] mx-auto drop-shadow-2xl" />
               </div>
               <div className={`transition-all duration-1000 transform ${sectionVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
                 <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8">
-                  What's the <span className="bg-gradient-blue bg-clip-text text-transparent">Web Hosting</span> and <span className="bg-gradient-blue bg-clip-text text-transparent">Mobile App</span> hosting
+                  {t('hosting_page.white_section.title')}
                 </h2>
                 <div className="space-y-6 text-gray-600 mb-12">
-                  <p>Web hosting is a specific service provided by an expert team from Xin QiYou Tech, who will be responsible for keeping your website up and running 24/7. Web hosting can be provided for individuals, companies, and mega projects through specific servers through advanced technology services.</p>
-                  <p>Mobile App hosting is a specific service to support the mobile app owners making their backend live 24/7 which makes the applications run smoothly and interact with cloud-based services. Xin QiYou Tech can provide you with shared hosting, VPS, or a dedicated server to fit your project size and budget.</p>
+                  <p>{t('hosting_page.white_section.web_hosting_desc')}</p>
+                  <p>{t('hosting_page.white_section.mobile_hosting_desc')}</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10">
                   {whiteSectionFeatures.map((item, idx) => (
@@ -194,12 +196,11 @@ const HostingServer: React.FC = () => {
         </section>
 
         {/* --- DARK SERVICES SECTION --- */}
-        <section className="py-32 bg-black">
+        <section className="py-32 bg-black text-center">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-24">
-              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-                Are you looking for a technology <br />
-                arm to <span className="bg-gradient-blue bg-clip-text text-transparent">Hosting & Servers Services</span>
+            <div className="mb-24">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                {t('hosting_page.dark_section.title')}
               </h2>
             </div>
 
@@ -217,7 +218,7 @@ const HostingServer: React.FC = () => {
 
             <div className="flex justify-center mt-20">
                 <button className="bg-gradient-blue text-white font-bold py-4 px-10 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] flex items-center gap-2">
-                Get Hosting Quote <ChevronRight size={20} />
+                {t('hosting_page.dark_section.cta_button')} <ChevronRight size={20} />
               </button>
             </div>
           </div>

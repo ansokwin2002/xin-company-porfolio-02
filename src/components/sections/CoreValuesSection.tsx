@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface CoreValue {
   id: number;
@@ -9,6 +10,7 @@ interface CoreValue {
 }
 
 const CoreValues: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [activeStep, setActiveStep] = useState<number>(1);
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -16,33 +18,33 @@ const CoreValues: React.FC = () => {
   const values: CoreValue[] = [
     {
       id: 1,
-      title: 'Achievement Oriented',
+      title: t('core_values.values.achievement.title'),
       image: '/assets/images/p6.png', 
-      description: 'Focusing on surpassing goals, driving performance, fostering innovation, and recognizing accomplishments within a high-performance culture.',
+      description: t('core_values.values.achievement.desc'),
     },
     {
       id: 2,
-      title: 'Customer Focus',
+      title: t('core_values.values.customer.title'),
       image: '/assets/images/p7.png',
-      description: 'Identifying and responding to current and future client needs; providing service excellence to internal and external clients.',
+      description: t('core_values.values.customer.desc'),
     },
     {
       id: 3,
-      title: 'Teamwork',
+      title: t('core_values.values.teamwork.title'),
       image: '/assets/images/p8.png',
-      description: 'Collaborating effectively, sharing knowledge, supporting colleagues, and achieving collective goals through strong teamwork and mutual respect.',
+      description: t('core_values.values.teamwork.desc'),
     },
     {
       id: 4,
-      title: 'Ownership',
+      title: t('core_values.values.ownership.title'),
       image: '/assets/images/p9.png',
-      description: 'Taking responsibility for work, decisions, and growth, fostering accountability, initiative, and resilience within the organization.',
+      description: t('core_values.values.ownership.desc'),
     },
     {
       id: 5,
-      title: 'Visioning & Strategic Direction',
+      title: t('core_values.values.strategic.title'),
       image: '/assets/images/p10.png',
-      description: 'Developing and inspiring commitment to a vision of success; supporting, promoting and ensuring alignment with the organization\'s vision and values.',
+      description: t('core_values.values.strategic.desc'),
     }
   ];
 
@@ -61,6 +63,7 @@ const CoreValues: React.FC = () => {
   return (
     <section 
       ref={sectionRef}
+      key={i18n.language}
       className={`py-24 bg-white font-sans overflow-hidden transition-all duration-1000 ease-out ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
@@ -68,10 +71,10 @@ const CoreValues: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-            What is our <span className="bg-gradient-blue bg-clip-text text-transparent">Core Values?</span>
+            {t('core_values.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('core_values.title_highlight')}</span>
           </h2>
           <p className="text-gray-500 text-sm md:text-base">
-            The fundamental beliefs that guide our actions and define who we are
+            {t('core_values.subtitle')}
           </p>
         </div>
 

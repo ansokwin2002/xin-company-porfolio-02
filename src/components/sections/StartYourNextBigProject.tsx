@@ -3,6 +3,7 @@ import { FaFacebookF, FaTiktok, FaYoutube, FaTelegramPlane, FaArrowRight } from 
 import { MdEmail, MdPhone } from 'react-icons/md';
 import { ChevronDown, X } from 'lucide-react'; // Added ChevronDown and X from lucide-react
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 // Countries data from Hero.tsx
 const countries = [
@@ -15,6 +16,7 @@ const countries = [
 ];
 
 const StartYourNextBigProject: React.FC = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // For budget dropdown
   const [isCountryOpen, setIsCountryOpen] = useState(false); // For country dropdown
@@ -27,7 +29,8 @@ const StartYourNextBigProject: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', mobile: '', details: '' }); // Added mobile
 
   const sectionRef = useRef<HTMLDivElement>(null);
-  const budgetOptions = ['$1,000 - $5,000', '$5,000 - $10,000', '$10,000 - $50,000', '$50,000+', 'Custom'];
+  const budgetOptionsRaw = t('start_project.budget_options', { returnObjects: true });
+  const budgetOptions = Array.isArray(budgetOptionsRaw) ? budgetOptionsRaw : [];
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -38,7 +41,7 @@ const StartYourNextBigProject: React.FC = () => {
   }, []);
 
   const handleSelect = (option: string) => {
-    if (option === 'Custom') {
+    if (option === 'Custom' || option === 'ផ្ទាល់ខ្លួន' || option === '自定义' || option === '自訂') {
       setShowCustomInput(true);
       setSelectedBudget('');
     } else {
@@ -56,7 +59,7 @@ const StartYourNextBigProject: React.FC = () => {
       console.log('Form Submitted:', { ...formData, selectedBudget, mobileCountryDial: selectedCountry.dial });
 
       // Show success toast
-      toast.success('Your request has been sent successfully!');
+      toast.success(t('start_project.success_message'));
 
       // Reset form fields
       setFormData({ name: '', email: '', mobile: '', details: '' }); // Reset mobile as well
@@ -77,10 +80,10 @@ const StartYourNextBigProject: React.FC = () => {
         {/* Header */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">
-            Start Your Next <span className="bg-gradient-blue bg-clip-text text-transparent">Big Project</span>
+            {t('start_project.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('start_project.title_highlight')}</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-            Got an idea? Tell us about it, and we’ll bring it to life with world-class execution.
+            {t('start_project.subtitle')}
           </p>
         </div>
 
@@ -93,9 +96,9 @@ const StartYourNextBigProject: React.FC = () => {
               <div className="flex items-start gap-4 mb-8">
                 <img src="https://flagcdn.com/kh.svg" alt="KH" className="w-10 h-7 object-cover rounded-md shadow-sm" />
                 <div>
-                  <h3 className="font-bold text-lg text-gray-900">QiYou Tech Office</h3>
+                  <h3 className="font-bold text-lg text-gray-900">{t('start_project.office_title')}</h3>
                   <p className="text-xs text-gray-400 leading-relaxed mt-1">
-                    No. 37, St. 315, Sangkat Boeung Kak I, Khan Toul Kork, 12151 Phnom Penh.
+                    {t('start_project.office_address')}
                   </p>
                 </div>
               </div>
@@ -112,7 +115,7 @@ const StartYourNextBigProject: React.FC = () => {
             </div>
 
             <div className="bg-gray-900 rounded-3xl p-7 flex items-center justify-between text-white shadow-sm hover:shadow-xl transition-all duration-300">
-              <span className="font-bold uppercase tracking-widest ml-2 text-sm">Follow Us</span>
+              <span className="font-bold uppercase tracking-widest ml-2 text-sm">{t('start_project.follow_us')}</span>
               <div className="flex gap-3">
                 {[FaFacebookF, FaTiktok, FaYoutube].map((Icon, idx) => (
                   <a key={idx} href="#" className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-gradient-blue transition-all hover:-translate-y-1">
@@ -130,8 +133,8 @@ const StartYourNextBigProject: React.FC = () => {
                     <FaTelegramPlane size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg leading-tight">Chat on Telegram</h4>
-                    <p className="text-xs text-blue-100/80 mt-1 uppercase tracking-wider font-bold">Instant response</p>
+                    <h4 className="font-bold text-lg leading-tight">{t('start_project.telegram_chat')}</h4>
+                    <p className="text-xs text-blue-100/80 mt-1 uppercase tracking-wider font-bold">{t('start_project.instant_response')}</p>
                   </div>
                 </div>
                 <FaArrowRight className="transform group-hover:translate-x-2 transition-transform duration-300" />
@@ -143,8 +146,8 @@ const StartYourNextBigProject: React.FC = () => {
                       <div 
                         className={`lg:col-span-7 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl transition-all duration-300 bg-blue-100/30 backdrop-blur-md border border-white/40 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
                       >            <div className="text-left mb-10">
-              <h2 className="text-2xl font-bold text-gray-900">Send Us a Message</h2>
-              <p className="text-sm mt-2 text-gray-700">We'll get back to you within 24 hours</p>
+              <h2 className="text-2xl font-bold text-gray-900">{t('start_project.form_title')}</h2>
+              <p className="text-sm mt-2 text-gray-700">{t('start_project.form_subtitle')}</p>
             </div>
             
             <form className="space-y-8" onSubmit={handleSubmit}>
@@ -161,7 +164,7 @@ const StartYourNextBigProject: React.FC = () => {
                     placeholder=" " 
                   />
                   <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                    Your Name *
+                    {t('start_project.name_label')}
                   </label>
                 </div>
 
@@ -176,7 +179,7 @@ const StartYourNextBigProject: React.FC = () => {
                     placeholder=" " 
                   />
                   <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                    Work Email *
+                    {t('start_project.email_label')}
                   </label>
                 </div>
               </div>
@@ -216,7 +219,7 @@ const StartYourNextBigProject: React.FC = () => {
                   />
                     {/* Note: Translate Y is slightly less (-20px) here because of the flex layout container */}
                   <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform -z-10 peer-focus:-translate-y-8 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:scale-90">
-                    Mobile Number *
+                    {t('start_project.mobile_label')}
                   </label>
                 </div>
               </div>
@@ -234,7 +237,7 @@ const StartYourNextBigProject: React.FC = () => {
                     placeholder=" " 
                   />
                   <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform -translate-y-6 scale-90 text-gray-700">
-                    Project Budget (Custom) *
+                    {t('start_project.budget_custom_label')}
                   </label>
                   <button 
                     type="button"
@@ -257,7 +260,7 @@ const StartYourNextBigProject: React.FC = () => {
                   <label className={`absolute left-0 pointer-events-none transition-all duration-300 ease-out origin-left transform 
                     ${selectedBudget || isDropdownOpen ? '-translate-y-6 scale-90 top-3 text-gray-700' : 'top-3 text-gray-700 scale-100'}
                   `}>
-                    Project Budget *
+                    {t('start_project.budget_label')}
                   </label>
 
                   {/* Dropdown Options */}
@@ -282,7 +285,7 @@ const StartYourNextBigProject: React.FC = () => {
                   placeholder=" "
                 ></textarea>
                 <label className="absolute left-0 top-3 text-gray-700 pointer-events-none transition-all duration-300 ease-out origin-left transform peer-focus:-translate-y-6 peer-focus:scale-90 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-90">
-                  Project Details
+                  {t('start_project.details_label')}
                 </label>
               </div>
 
@@ -295,11 +298,11 @@ const StartYourNextBigProject: React.FC = () => {
                 {isSubmitting ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Sending...</span>
+                    <span>{t('start_project.sending')}</span>
                   </>
                 ) : (
                   <>
-                    <span>Send Message</span> <FaArrowRight size={18} />
+                    <span>{t('start_project.submit_button')}</span> <FaArrowRight size={18} />
                   </>
                 )}
               </button>

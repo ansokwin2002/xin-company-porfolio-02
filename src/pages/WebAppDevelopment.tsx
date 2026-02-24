@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import AppValueSection from '../components/sections/AppValueSection';
@@ -74,6 +75,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ IconComponent, title, descrip
 
 // --- MAIN COMPONENT ---
 const WebAppDevelopment: React.FC = () => {
+  const { t } = useTranslation();
   const heroRef = useRef<HTMLDivElement>(null);
   const sectionTitleRef = useRef<HTMLDivElement>(null);
   const [isHeroVisible, setIsHeroVisible] = useState(false);
@@ -100,48 +102,48 @@ const WebAppDevelopment: React.FC = () => {
   }, []);
 
   const categories = [
-    { name: 'Corporate Websites', icon: Building2 },
-    { name: 'E-Commerce', icon: ShoppingCart },
-    { name: 'Web Applications', icon: Globe },
-    { name: 'Landing Pages', icon: FileText },
-    { name: 'Dashboards', icon: LayoutDashboard },
-    { name: 'CMS Platforms', icon: Database },
+    { name: t('web_app_page.develop_section.categories.corporate'), icon: Building2 },
+    { name: t('web_app_page.develop_section.categories.ecommerce'), icon: ShoppingCart },
+    { name: t('web_app_page.develop_section.categories.web_apps'), icon: Globe },
+    { name: t('web_app_page.develop_section.categories.landing'), icon: FileText },
+    { name: t('web_app_page.develop_section.categories.dashboards'), icon: LayoutDashboard },
+    { name: t('web_app_page.develop_section.categories.cms'), icon: Database },
   ];
 
   const features = [
     {
-      title: 'Localization & RTL Support',
-      desc: 'Multi-language websites with full RTL support for Arabic and other languages to reach global audiences.',
+      title: t('web_app_page.develop_section.features.localization.title'),
+      desc: t('web_app_page.develop_section.features.localization.desc'),
       icon: Languages, 
       color: "from-blue-400 to-indigo-500"
     },
     {
-      title: 'Analytics & Tracking',
-      desc: 'Comprehensive analytics integration to track user behavior and optimize conversions.',
+      title: t('web_app_page.develop_section.features.analytics.title'),
+      desc: t('web_app_page.develop_section.features.analytics.desc'),
       icon: PieChart,
       color: "from-red-400 to-pink-500"
     },
     {
-      title: 'UI/UX Design',
-      desc: 'Beautiful, intuitive interfaces designed with user experience as the top priority.',
+      title: t('web_app_page.develop_section.features.uiux.title'),
+      desc: t('web_app_page.develop_section.features.uiux.desc'),
       icon: Palette,
       color: "from-purple-400 to-blue-500"
     },
     {
-      title: 'Performance Optimization',
-      desc: 'Lightning-fast load times with optimized code and modern caching strategies.',
+      title: t('web_app_page.develop_section.features.performance.title'),
+      desc: t('web_app_page.develop_section.features.performance.desc'),
       icon: Zap,
       color: "from-yellow-400 to-orange-500"
     },
     {
-      title: 'Conversion Optimization',
-      desc: 'Strategic design focused on converting visitors into customers and leads.',
+      title: t('web_app_page.develop_section.features.conversion.title'),
+      desc: t('web_app_page.develop_section.features.conversion.desc'),
       icon: MessageSquare,
       color: "from-green-400 to-teal-500"
     },
     {
-      title: 'Automation & Integration',
-      desc: 'Seamless integration with your existing tools and automated workflows.',
+      title: t('web_app_page.develop_section.features.automation.title'),
+      desc: t('web_app_page.develop_section.features.automation.desc'),
       icon: Cpu,
       color: "from-cyan-400 to-blue-500"
     },
@@ -162,11 +164,12 @@ const WebAppDevelopment: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div>
               <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
-                <span className="text-black">Design the right web</span><br />
-                <span className="text-white">Application With Expert Team</span>
+                <span className="text-black">{t('web_app_page.hero.title_part1')}</span><br />
+                <span className="text-white">{t('web_app_page.hero.title_part2')}</span>
               </h1>
               <p className="text-lg opacity-90 max-w-3xl mx-auto text-white leading-relaxed">
-               Design the right website & web app, in the right way, at the right time with the Xin QiYou Tech web development team. And if your website is already live, ask our software engineers experts to improve your presence and support your business.              </p>
+               {t('web_app_page.hero.desc')}
+              </p>
             </div>
           </div>
         </section>
@@ -179,10 +182,10 @@ const WebAppDevelopment: React.FC = () => {
             <div ref={sectionTitleRef}>
               <div className={`text-center mb-16 transition-all duration-700 ${isTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  What We <span className="bg-gradient-blue bg-clip-text text-transparent">Develop?</span>
+                  {t('web_app_page.develop_section.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('web_app_page.develop_section.title_highlight')}</span>
                 </h2>
                 <p className="text-gray-600 text-lg max-w-3xl mx-auto mb-8">
-                  We provide comprehensive web development solutions tailored to your business needs, from corporate websites to complex web applications.
+                  {t('web_app_page.develop_section.subtitle')}
                 </p>
               </div>
 
@@ -212,7 +215,7 @@ const WebAppDevelopment: React.FC = () => {
 
             <div className="flex justify-center">
               <button className="group relative bg-gradient-blue hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-2xl transition-all shadow-xl flex items-center gap-3 overflow-hidden">
-                <span className="relative z-10">Discuss Your Web Project</span>
+                <span className="relative z-10">{t('web_app_page.develop_section.cta_button')}</span>
                 <ArrowRight size={20} className="relative z-10 group-hover:translate-x-2 transition-transform" />
               </button>
             </div>

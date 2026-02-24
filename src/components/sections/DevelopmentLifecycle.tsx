@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Layers, ArrowRight, Rocket, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface StepStyles {
   listActiveBg: string;
@@ -25,6 +26,7 @@ interface ProcessStep {
 }
 
 const DevelopmentLifecycle: React.FC = () => {
+  const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState<number>(1);
   const lifecycleRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -32,17 +34,12 @@ const DevelopmentLifecycle: React.FC = () => {
   const steps: ProcessStep[] = [
     {
       id: 1,
-      subtitle: 'Step 01',
-      title: 'Research & Development',
-      headerTitle: 'Research & Development',
+      subtitle: `${t('development_lifecycle.step_label')} 01`,
+      title: t('development_lifecycle.steps.research.title'),
+      headerTitle: t('development_lifecycle.steps.research.title'),
       icon: Search,
-      description: 'We carry out a thorough research and development process to deliver an app that not only meets your goals but gives you a competitive edge. Our expert team takes the time to deeply understand your business, ensuring every feature is aligned with your market, your users, and your growth.',
-      points: [
-        'Market & competitor analysis',
-        'Technical feasibility study',
-        'User research & interviews',
-        'Project roadmap creation'
-      ],
+      description: t('development_lifecycle.steps.research.desc'),
+      points: t('development_lifecycle.steps.research.points', { returnObjects: true }) as string[],
       styles: {
         listActiveBg: 'bg-blue-50',
         listActiveBorder: 'border-blue-200',
@@ -57,17 +54,12 @@ const DevelopmentLifecycle: React.FC = () => {
     },
     {
       id: 2,
-      subtitle: 'Step 02',
-      title: 'Design & Validation',
-      headerTitle: 'Design & Validation',
+      subtitle: `${t('development_lifecycle.step_label')} 02`,
+      title: t('development_lifecycle.steps.design.title'),
+      headerTitle: t('development_lifecycle.steps.design.title'),
       icon: Layers,
-      description: 'We begin with a full UX analysis, then move into structured UX design. Once the experience is mapped out, we validate it with real users to gather insights and identify improvements. After that, we create the UI design and conduct another round of user validation to ensure the final interface is intuitive, engaging, and aligned with user expectations.',
-      points: [
-        'UX wireframing & prototyping',
-        'User testing & feedback',
-        'UI design & branding',
-        'Design system creation'
-      ],
+      description: t('development_lifecycle.steps.design.desc'),
+      points: t('development_lifecycle.steps.design.points', { returnObjects: true }) as string[],
       styles: {
         listActiveBg: 'bg-red-50',
         listActiveBorder: 'border-red-200',
@@ -82,17 +74,12 @@ const DevelopmentLifecycle: React.FC = () => {
     },
     {
       id: 3,
-      subtitle: 'Step 03',
-      title: 'Development & Launch',
-      headerTitle: 'Development & Launch',
+      subtitle: `${t('development_lifecycle.step_label')} 03`,
+      title: t('development_lifecycle.steps.development.title'),
+      headerTitle: t('development_lifecycle.steps.development.title'),
       icon: Rocket,
-      description: 'We follow a professional, agile Scrum-based process and keep you updated every week to ensure full alignment and product success. Before launch, we conduct a complete testing cycle to guarantee performance, stability, and a seamless user experience.',
-      points: [
-        'Agile development sprints',
-        'Weekly progress updates',
-        'QA & testing cycles',
-        'App store submission & launch'
-      ],
+      description: t('development_lifecycle.steps.development.desc'),
+      points: t('development_lifecycle.steps.development.points', { returnObjects: true }) as string[],
       styles: {
         listActiveBg: 'bg-orange-50',
         listActiveBorder: 'border-orange-200',
@@ -134,7 +121,7 @@ const DevelopmentLifecycle: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              How we do it in <span className="bg-gradient-blue bg-clip-text text-transparent">3 Easy Steps</span>
+              {t('development_lifecycle.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('development_lifecycle.title_highlight')}</span>
             </h2>
           </div>
 

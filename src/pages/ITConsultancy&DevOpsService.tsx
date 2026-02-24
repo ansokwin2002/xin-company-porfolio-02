@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import Footer from '../components/layout/Footer';
@@ -112,6 +113,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, I
 
 // --- MAIN PAGE ---
 const ITConsultancyDevOpsService: React.FC = () => {
+  const { t } = useTranslation();
   const [heroVisible, setHeroVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -121,18 +123,18 @@ const ITConsultancyDevOpsService: React.FC = () => {
   }, []);
 
   const serviceList = [
-    { id: 1, title: "IT Auditing", desc: "Your IT systems are the foundation of your company in the modern digital environment. Our professional IT auditing services ensure they're secure and operating at peak efficiency. We examine every part of your infrastructure, identifying potential threats, ensuring compliance, and highlighting efficiency gains." },
-    { id: 2, title: "Digital Transformation", desc: "Transform how you work with seamless digital experiences. We streamline operations, integrate modern technologies, and create a plan that fits your objectives—whether cloud migration, automation, or leveraging data—to keep you agile and future-proof." },
-    { id: 3, title: "DevOps as a Service", desc: "Streamline development and deployment by merging Dev and Ops. We automate workflows, optimize infrastructure for performance and security, and enable faster, more reliable releases so you can innovate and scale with confidence." }
+    { id: 1, title: t('it_consultancy_page.growth_section.services.it_auditing.title'), desc: t('it_consultancy_page.growth_section.services.it_auditing.desc') },
+    { id: 2, title: t('it_consultancy_page.growth_section.services.digital_transformation.title'), desc: t('it_consultancy_page.growth_section.services.digital_transformation.desc') },
+    { id: 3, title: t('it_consultancy_page.growth_section.services.devops.title'), desc: t('it_consultancy_page.growth_section.services.devops.desc') }
   ];
 
   const promises = [
-    { title: "Commitment on time delivery", icon: Clock, color: "from-blue-500 to-cyan-400", desc: "We guarantee on-time delivery for all projects, ensuring your business never misses a deadline." },
-    { title: "Money back guarantee", icon: ShieldCheck, color: "from-pink-500 to-rose-400", desc: "Your satisfaction is our priority. If not satisfied, we offer a hassle-free money-back guarantee." },
-    { title: "Effective partnerships", icon: Users, color: "from-orange-400 to-amber-500", desc: "We build lasting relationships with our clients, becoming true partners in their success journey." },
-    { title: "Expert consultation", icon: MessageSquare, color: "from-lime-400 to-green-500", desc: "Access to industry experts who provide valuable insights and strategic guidance for your projects." },
-    { title: "Transparent communication", icon: RefreshCw, color: "from-purple-500 to-indigo-500", desc: "Open and honest communication at every step, keeping you informed throughout the process." },
-    { title: "Result oriented solutions", icon: Target, color: "from-fuchsia-500 to-purple-400", desc: "Our focus is always on delivering measurable results that drive your business growth." }
+    { title: t('it_consultancy_page.promising_section.items.delivery.title'), icon: Clock, color: "from-blue-500 to-cyan-400", desc: t('it_consultancy_page.promising_section.items.delivery.desc') },
+    { title: t('it_consultancy_page.promising_section.items.money_back.title'), icon: ShieldCheck, color: "from-pink-500 to-rose-400", desc: t('it_consultancy_page.promising_section.items.money_back.desc') },
+    { title: t('it_consultancy_page.promising_section.items.partnership.title'), icon: Users, color: "from-orange-400 to-amber-500", desc: t('it_consultancy_page.promising_section.items.partnership.desc') },
+    { title: t('it_consultancy_page.promising_section.items.consultation.title'), icon: MessageSquare, color: "from-lime-400 to-green-500", desc: t('it_consultancy_page.promising_section.items.consultation.desc') },
+    { title: t('it_consultancy_page.promising_section.items.communication.title'), icon: RefreshCw, color: "from-purple-500 to-indigo-500", desc: t('it_consultancy_page.promising_section.items.communication.desc') },
+    { title: t('it_consultancy_page.promising_section.items.results.title'), icon: Target, color: "from-fuchsia-500 to-purple-400", desc: t('it_consultancy_page.promising_section.items.results.desc') }
   ];
 
   return (
@@ -147,15 +149,15 @@ const ITConsultancyDevOpsService: React.FC = () => {
             <h1 className={`text-4xl md:text-6xl font-extrabold mb-6 leading-tight transition-all duration-1000 transform ${
               heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
-              <span className="text-black">IT Consultancy Services &</span><br />
-              <span className="text-white">Security Auditing</span>
+              <span className="text-black">{t('it_consultancy_page.hero.title_part1')}</span><br />
+              <span className="text-white">{t('it_consultancy_page.hero.title_part2')}</span>
             </h1>
             
             {/* Subtext with Staggered Pop-up Animation */}
             <p className={`text-white/90 text-sm md:text-base max-w-2xl mx-auto font-medium transition-all duration-1000 delay-300 transform ${
               heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
-              We stand by a set of core commitments that guarantee quality, transparency, and results for your business.
+              {t('it_consultancy_page.hero.desc')}
             </p>
           </div>
         </section>
@@ -171,27 +173,27 @@ const ITConsultancyDevOpsService: React.FC = () => {
                 </div>
               </div>
 
-              <div className="w-full lg:w-1/2">
+              <div className="w-full lg:w-1/2 text-left">
                 <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-[1.1]">
-                  Are you looking for a technology partner to <br />
-                  <span className="bg-gradient-blue bg-clip-text text-transparent">support your technological growth?</span>
+                  {t('it_consultancy_page.growth_section.title_main')} <br />
+                  <span className="bg-gradient-blue bg-clip-text text-transparent">{t('it_consultancy_page.growth_section.title_highlight')}</span>
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed mb-10">
-                  Advisory services that support our customers in evaluating approaches and technologies to match network strategy with business objectives. We enhance performance, security, and profitability with expert consulting that fills the gaps where you need it most.
+                  {t('it_consultancy_page.growth_section.subtitle')}
                 </p>
 
                 <div className="space-y-0 border border-gray-100 rounded-3xl overflow-hidden shadow-sm">
                   {serviceList.map((item, index) => {
                     const isOpen = activeIndex === index;
                     return (
-                      <div key={item.id} className={index !== serviceList.length - 1 ? 'border-b border-gray-100' : ''}>
+                      <div key={item.title} className={index !== serviceList.length - 1 ? 'border-b border-gray-100' : ''}>
                         <button 
                           onClick={() => setActiveIndex(isOpen ? null : index)}
                           className={`w-full flex items-center justify-between p-6 transition-all duration-300 group ${isOpen ? 'bg-blue-50/30' : 'bg-white hover:bg-gray-50'}`}
                         >
                           <div className="flex items-center gap-5">
                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shadow-md transition-all duration-300 ${isOpen ? 'bg-blue-700 shadow-blue-200' : 'bg-gradient-blue shadow-blue-100'}`}>
-                              {item.id}
+                              {index + 1}
                             </div>
                             <span className={`text-xl font-bold transition-colors ${isOpen ? 'text-blue-600' : 'text-gray-800'}`}>
                               {item.title}
@@ -215,10 +217,10 @@ const ITConsultancyDevOpsService: React.FC = () => {
 
         {/* --- BLUE CTA STRIP --- */}
         <div className="bg-gradient-blue py-8">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-white">
-            <p className="font-semibold text-xl text-center md:text-left">Are you facing any challenges in your IT department? Let's schedule a free assessment.</p>
+          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-white text-left">
+            <p className="font-semibold text-xl text-center md:text-left">{t('it_consultancy_page.cta_strip.text')}</p>
             <button className="bg-white text-black font-extrabold py-4 px-8 rounded-xl shadow-xl hover:bg-blue-50 transition-all flex items-center gap-2 whitespace-nowrap">
-              <Calendar size={20} /> Schedule Now
+              <Calendar size={20} /> {t('it_consultancy_page.cta_strip.button')}
             </button>
           </div>
         </div>
@@ -226,9 +228,9 @@ const ITConsultancyDevOpsService: React.FC = () => {
         {/* --- PROMISING SECTION --- */}
         <section className="py-24 bg-black overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What we are <span className="bg-gradient-blue bg-clip-text text-transparent">Promising You?</span></h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{t('it_consultancy_page.promising_section.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('it_consultancy_page.promising_section.title_highlight')}</span></h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-16">
-              Our commitment to excellence is backed by these core promises that ensure your success
+              {t('it_consultancy_page.promising_section.subtitle')}
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {promises.map((service, idx) => (
@@ -241,13 +243,13 @@ const ITConsultancyDevOpsService: React.FC = () => {
         {/* --- PROCESS SECTION --- */}
         <section className="py-24 bg-white overflow-hidden">
           <div className="max-w-6xl mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-20">What is our <span className="bg-gradient-blue bg-clip-text text-transparent">High-level Process?</span></h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-20">{t('it_consultancy_page.process_section.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('it_consultancy_page.process_section.title_highlight')}</span></h2>
             <div className="relative">
-              <ProcessStep number="1.0" title="Gap analysis" description="We conduct analysis with stakeholders to understand the current situation and future goals using SWOT and TOWS techniques." Icon={Search} isReversed={false} />
-              <ProcessStep number="2.0" title="Auditing & Assessment" description="Our expert team audits the current situation and provides a plan for the IT department aligned with market trends." Icon={ClipboardCheck} isReversed={true} />
-              <ProcessStep number="3.0" title="Strategy & Planning" description="We build a strategic plan with an action roadmap and SMART objectives to strengthen IT capabilities." Icon={Map} isReversed={false} />
-              <ProcessStep number="4.0" title="Plan Execution" description="We mentor execution, track progress, and take corrective actions quickly to ensure the plan succeeds." Icon={Play} isReversed={true} />
-              <ProcessStep number="5.0" title="Continuous Auditing" description="After success, we continue auditing and measuring performance to keep the company on track." Icon={Activity} isReversed={false} />
+              <ProcessStep number="1.0" title={t('it_consultancy_page.process_section.steps.gap_analysis.title')} description={t('it_consultancy_page.process_section.steps.gap_analysis.desc')} Icon={Search} isReversed={false} />
+              <ProcessStep number="2.0" title={t('it_consultancy_page.process_section.steps.auditing.title')} description={t('it_consultancy_page.process_section.steps.auditing.desc')} Icon={ClipboardCheck} isReversed={true} />
+              <ProcessStep number="3.0" title={t('it_consultancy_page.process_section.steps.planning.title')} description={t('it_consultancy_page.process_section.steps.planning.desc')} Icon={Map} isReversed={false} />
+              <ProcessStep number="4.0" title={t('it_consultancy_page.process_section.steps.execution.title')} description={t('it_consultancy_page.process_section.steps.execution.desc')} Icon={Play} isReversed={true} />
+              <ProcessStep number="5.0" title={t('it_consultancy_page.process_section.steps.continuous_auditing.title')} description={t('it_consultancy_page.process_section.steps.continuous_auditing.desc')} Icon={Activity} isReversed={false} />
             </div>
           </div>
         </section>

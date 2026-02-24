@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface FooterProps {
   // Define any props if needed, e.g., for dynamic year
 }
 
 const Footer: React.FC<FooterProps> = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
 
@@ -21,19 +23,19 @@ const Footer: React.FC<FooterProps> = () => {
   }, []);
 
   const serviceLinks = [
-    { name: 'UI/UX Design', path: '/creative-designs-ui-ux' },
-    { name: 'Mobile App Development', path: '/mobile-app-development' },
-    { name: 'Web App Development', path: '/web-app-development' },
-    { name: 'Digital Marketing', path: '/digital-marketing' },
-    { name: 'Hosting & Servers', path: '/hosting-server' },
-    { name: 'IT Consultancy & DevOps', path: '/it-consultancy-devops' },
+    { name: t('footer.links.ui_ux'), path: '/creative-designs-ui-ux' },
+    { name: t('footer.links.mobile'), path: '/mobile-app-development' },
+    { name: t('footer.links.web'), path: '/web-app-development' },
+    { name: t('footer.links.digital'), path: '/digital-marketing' },
+    { name: t('footer.links.hosting'), path: '/hosting-server' },
+    { name: t('footer.links.it'), path: '/it-consultancy-devops' },
   ];
 
   const companyLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Blog', path: '/blog' },
+    { name: t('footer.links.home'), path: '/' },
+    { name: t('footer.links.about'), path: '/about' },
+    { name: t('footer.links.careers'), path: '/careers' },
+    { name: t('footer.links.blog'), path: '/blog' },
   ];
 
   return (
@@ -67,10 +69,10 @@ const Footer: React.FC<FooterProps> = () => {
               ></span>
             </div>
             <p className="text-xs text-white/90 font-medium uppercase tracking-wider">
-              Your Success Partner
+              {t('footer.partner_text')}
             </p>
             <p className="text-white/90 text-sm leading-relaxed">
-              We transform your digital vision into reality through innovative web development, mobile apps, UI/UX design, and digital marketing solutions.
+              {t('footer.description')}
             </p>
           </div>
 
@@ -81,7 +83,7 @@ const Footer: React.FC<FooterProps> = () => {
             }`}
             style={{ transitionDelay: '0.2s' }}
           >
-            <h4 className="text-lg font-semibold text-yellow-300 mb-4">Company</h4>
+            <h4 className="text-lg font-semibold text-yellow-300 mb-4">{t('footer.columns.company')}</h4>
             <ul className="space-y-3">
               {companyLinks.map((item) => (
                 <li key={item.name}>
@@ -104,7 +106,7 @@ const Footer: React.FC<FooterProps> = () => {
             }`}
             style={{ transitionDelay: '0.3s' }}
           >
-            <h4 className="text-lg font-semibold text-yellow-300 mb-4">Services</h4>
+            <h4 className="text-lg font-semibold text-yellow-300 mb-4">{t('footer.columns.services')}</h4>
             <ul className="space-y-3">
               {serviceLinks.map((item) => (
                 <li key={item.name}>
@@ -127,20 +129,20 @@ const Footer: React.FC<FooterProps> = () => {
             }`}
             style={{ transitionDelay: '0.4s' }}
           >
-            <h4 className="text-lg font-semibold text-yellow-300 mb-4">Products</h4>
+            <h4 className="text-lg font-semibold text-yellow-300 mb-4">{t('footer.columns.products')}</h4>
             <ul className="space-y-3">
               {[
-                { name: 'BITMART digital', id: 'product-1' },
-                { name: 'Shopping Cart Systems', id: 'product-2' },
-                { name: 'e-Commerce System', id: 'product-3' },
-                { name: 'Lottery Apps', id: 'product-4' },
-                { name: 'Entertainment', id: 'product-5' },
-                { name: 'Insurance System', id: 'product-6' },
-                { name: 'Feige IM', id: 'product-7' },
-                { name: 'Warehouse Management ERP', id: 'product-8' },
-                { name: 'Laundry POS', id: 'product-9' },
-                { name: 'Restaurant POS', id: 'product-10' },
-                { name: 'Retail POS', id: 'product-11' }
+                { name: t('footer.links.bitmart'), id: 'product-1' },
+                { name: t('footer.links.shopping_cart'), id: 'product-2' },
+                { name: t('footer.links.ecommerce'), id: 'product-3' },
+                { name: t('footer.links.lottery'), id: 'product-4' },
+                { name: t('footer.links.entertainment'), id: 'product-5' },
+                { name: t('footer.links.insurance'), id: 'product-6' },
+                { name: t('footer.links.feige_im'), id: 'product-7' },
+                { name: t('footer.links.erp'), id: 'product-8' },
+                { name: t('footer.links.laundry'), id: 'product-9' },
+                { name: t('footer.links.restaurant'), id: 'product-10' },
+                { name: t('footer.links.retail'), id: 'product-11' }
               ].map((item) => (
                 <li key={item.id}>
                   <Link to={`/products#${item.id}`} className="text-white/90 hover:text-white text-sm transition-colors duration-300 flex items-center gap-2 group">
@@ -156,7 +158,7 @@ const Footer: React.FC<FooterProps> = () => {
         {/* Bottom Copyright Section */}
         <div className={`pt-8 border-t border-white/20 transition-opacity duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <p className="text-white/80 text-sm text-center">
-            © {new Date().getFullYear()} QiYou Tech. All Rights Reserved.
+            © {new Date().getFullYear()} QiYou Tech. {t('footer.copyright')}
           </p>
         </div>
       </div>

@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Tag, Rocket, Headphones } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const ValuePropositionSection: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const sectionRef1 = useRef<HTMLElement>(null);
   const [isVisible1, setIsVisible1] = useState(false);
 
@@ -20,6 +22,7 @@ const ValuePropositionSection: React.FC = () => {
   return (
     <section
       ref={sectionRef1}
+      key={i18n.language}
       className={`bg-white py-20 lg:py-28 overflow-hidden transition-all duration-1000 ${
         isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
@@ -30,17 +33,17 @@ const ValuePropositionSection: React.FC = () => {
           {/* Left Column: Text Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-6">
-              Your time and Money <br />
-              <span className="bg-gradient-blue bg-clip-text text-transparent">Are important?</span>
+              {t('value_proposition.title_main')} <br />
+              <span className="bg-gradient-blue bg-clip-text text-transparent">{t('value_proposition.title_highlight')}</span>
             </h2>
 
             <p className="text-gray-600 text-lg mb-10 leading-relaxed">
-              You worked hard for your business. And we know how frustrating that is to invest your hard-earned money on something hoping it'll pay off, but instead, it sets you back and lacks support. A quality app can be an absolute game-changer for a business but only if it's done right.
+              {t('value_proposition.desc')}
             </p>
 
             <div className="border-l-4 border-blue-500 pl-6 mb-12">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                We've made the whole mobile app creation process <span className="bg-gradient-blue bg-clip-text text-transparent">way simpler</span>
+                {t('value_proposition.simpler_title')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('value_proposition.simpler_highlight')}</span>
               </h3>
             </div>
 
@@ -52,7 +55,7 @@ const ValuePropositionSection: React.FC = () => {
                   <Tag size={30} className="transform -rotate-45" strokeWidth={1.5} />
                 </div>
                 <span className="text-2xl font-black text-gray-900">35%</span>
-                <span className="text-sm text-gray-500 font-medium">Cost Savings</span>
+                <span className="text-sm text-gray-500 font-medium">{t('value_proposition.stats.savings')}</span>
               </div>
 
               {/* Stat 2 */}
@@ -61,7 +64,7 @@ const ValuePropositionSection: React.FC = () => {
                   <Rocket size={30} strokeWidth={1.5} />
                 </div>
                 <span className="text-2xl font-black text-gray-900">2x</span>
-                <span className="text-sm text-gray-500 font-medium">Faster Delivery</span>
+                <span className="text-sm text-gray-500 font-medium">{t('value_proposition.stats.delivery')}</span>
               </div>
 
               {/* Stat 3 */}
@@ -70,7 +73,7 @@ const ValuePropositionSection: React.FC = () => {
                   <Headphones size={30} strokeWidth={1.5} />
                 </div>
                 <span className="text-2xl font-black text-gray-900">24/7</span>
-                <span className="text-sm text-gray-500 font-medium">Support</span>
+                <span className="text-sm text-gray-500 font-medium">{t('value_proposition.stats.support')}</span>
               </div>
             </div>
           </div>

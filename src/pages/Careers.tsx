@@ -3,8 +3,10 @@ import Navigation from '../components/layout/Navigation';
 import Footer from '../components/layout/Footer';
 import { Briefcase, ArrowRight, Clock, Sparkles, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Careers: React.FC = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -37,13 +39,13 @@ const Careers: React.FC = () => {
 
             {/* Title with Gradient Text */}
             <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-6 leading-tight">
-              Under <span className="bg-gradient-blue bg-clip-text text-transparent">Construction</span>
+              {t('under_construction.title_part1')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('under_construction.title_part2')}</span>
             </h1>
 
             {/* Status Badge */}
             <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-blue-50 border border-blue-100 mb-8">
               <Clock size={18} className="text-blue-600 animate-pulse" />
-              <span className="bg-gradient-blue bg-clip-text text-transparent font-bold text-xs uppercase tracking-[0.2em]">Coming Soon...</span>
+              <span className="bg-gradient-blue bg-clip-text text-transparent font-bold text-xs uppercase tracking-[0.2em]">{t('under_construction.coming_soon')}</span>
             </div>
 
             {/* Action Buttons */}
@@ -52,7 +54,7 @@ const Careers: React.FC = () => {
                 to="/" 
                 className="bg-gradient-blue shadow-button text-white px-10 py-4 text-base font-bold transition-all duration-300 rounded-full inline-flex items-center gap-2 hover:scale-105 active:scale-95"
               >
-                Back to Home <ArrowRight size={20} />
+                {t('under_construction.back_home')} <ArrowRight size={20} />
               </Link>
 
             </div>

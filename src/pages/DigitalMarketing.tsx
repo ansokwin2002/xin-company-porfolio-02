@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navigation from '../components/layout/Navigation';
 import StartYourNextBigProject from '../components/sections/StartYourNextBigProject';
 import Footer from '../components/layout/Footer';
@@ -111,6 +112,7 @@ const ProcessStep: React.FC<ProcessStepProps> = ({ number, title, description, I
 
 // --- MAIN PAGE COMPONENT ---
 const DigitalMarketing: React.FC = () => {
+  const { t } = useTranslation();
   const heroRef = useRef<HTMLDivElement>(null);
   const [isHeroVisible, setIsHeroVisible] = useState(false);
 
@@ -123,19 +125,19 @@ const DigitalMarketing: React.FC = () => {
   }, []);
 
   const marketingServices = [
-    { title: 'Analytics reports (G4 Analytics)', desc: 'Data privacy compliance is a top priority in Google Analytics 4 (GA4), which leverages machine learning for predictive insights. We provide your business with unique, efficient reports using event-based tracking to deliver a comprehensive view of user interactions across platforms and devices.', icon: BarChart3, color: "from-blue-500 to-cyan-400" },
-    { title: 'Marketing performance improvement', desc: 'We specialize in conversion rate (CRO) and cost-per-click (CPC) optimization to boost your ad ROI. By continuously testing and refining website elements, including all call-to-action buttons, and regularly analyzing key digital marketing metrics, we ensure your campaigns deliver better results consistently.', icon: TrendingUp, color: "from-pink-500 to-rose-400" },
-    { title: 'Customer Acquisition', desc: 'Our business approach focuses on expanding your customer base by acquiring the right customers through digital channels. We target the right audience across various platforms, attracting more customers and transforming them into loyal brand advocates.', icon: Users, color: "from-orange-400 to-amber-500" },
-    { title: 'Website SEO', desc: 'We optimize your app for both Apple App Store and Google Play Store to boost visibility and improve search rankings. By enhancing keywords, app metadata, including title, description, and screenshots, we attract real users, increase downloads, and drive meaningful engagement.', icon: Search, color: "from-lime-400 to-green-500" },
-    { title: 'App Store Optimization', desc: 'We will optimize your app in the Apple App Store and Google Play Store, as this is crucial for improving its visibility and ranking in search results. This will increase downloads and attract real users through key actions such as keyword optimization, app metadata enhancement (including app title, description, and detailed screenshots).', icon: Smartphone, color: "from-purple-500 to-indigo-500" },
-    { title: 'Google Maps Listing', desc: 'We optimize your Google Maps listing to boost your business’s online visibility and attract more customers. Our approach includes business verification, adding high-quality photos, selecting the right categories, creating a product catalog, and posting relevant updates to strengthen your brand presence.', icon: MapPin, color: "from-fuchsia-500 to-purple-400" },
+    { title: t('digital_marketing_page.services_section.items.analytics.title'), desc: t('digital_marketing_page.services_section.items.analytics.desc'), icon: BarChart3, color: "from-blue-500 to-cyan-400" },
+    { title: t('digital_marketing_page.services_section.items.performance.title'), desc: t('digital_marketing_page.services_section.items.performance.desc'), icon: TrendingUp, color: "from-pink-500 to-rose-400" },
+    { title: t('digital_marketing_page.services_section.items.acquisition.title'), desc: t('digital_marketing_page.services_section.items.acquisition.desc'), icon: Users, color: "from-orange-400 to-amber-500" },
+    { title: t('digital_marketing_page.services_section.items.seo.title'), desc: t('digital_marketing_page.services_section.items.seo.desc'), icon: Search, color: "from-lime-400 to-green-500" },
+    { title: t('digital_marketing_page.services_section.items.aso.title'), desc: t('digital_marketing_page.services_section.items.aso.desc'), icon: Smartphone, color: "from-purple-500 to-indigo-500" },
+    { title: t('digital_marketing_page.services_section.items.google_maps.title'), desc: t('digital_marketing_page.services_section.items.google_maps.desc'), icon: MapPin, color: "from-fuchsia-500 to-purple-400" },
   ];
 
   const processSteps = [
-    { number: "1.0", title: "Discovery", description: "We start by researching your business, competitors, and target audience, analyzing market trends and business goals through SWOT, TWOS, and PESTEL analyses. This will set the foundation for a comprehensive marketing strategy.", Icon: Search, isReversed: false },
-    { number: "2.0", title: "Strategic Planning", description: "Following our research, we define clear objectives and goals for your digital marketing campaign, confirm the target audience, and select the most effective channels to drive business growth.", Icon: BrainCircuit, isReversed: true },
-    { number: "3.0", title: "Strategy Execution", description: "After the discovery and strategic planning phases, we move into execution. Execution phase covers content creation, campaign setup, media buying, social media, email marketing, and more. All activities run seamlessly alongside ongoing SEO and SEM efforts to maximize results.", Icon: PlayCircle, isReversed: false },
-    { number: "4.0", title: "Measuring & Reporting", description: "Measuring and reporting are key to continuous improvement. We provide monthly reports to keep your business informed of results and take daily corrective actions to optimize your campaigns and achieve your target goals.", Icon: BarChart4, isReversed: true }
+    { number: "1.0", title: t('digital_marketing_page.process_section.steps.discovery.title'), description: t('digital_marketing_page.process_section.steps.discovery.desc'), Icon: Search, isReversed: false },
+    { number: "2.0", title: t('digital_marketing_page.process_section.steps.planning.title'), description: t('digital_marketing_page.process_section.steps.planning.desc'), Icon: BrainCircuit, isReversed: true },
+    { number: "3.0", title: t('digital_marketing_page.process_section.steps.execution.title'), description: t('digital_marketing_page.process_section.steps.execution.desc'), Icon: PlayCircle, isReversed: false },
+    { number: "4.0", title: t('digital_marketing_page.process_section.steps.reporting.title'), description: t('digital_marketing_page.process_section.steps.reporting.desc'), Icon: BarChart4, isReversed: true }
   ];
 
   return (
@@ -147,11 +149,11 @@ const DigitalMarketing: React.FC = () => {
         <section ref={heroRef} className={`bg-gradient-blue pt-32 pb-24 text-center transition-all duration-1000 ease-out ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
-              <span className="text-black">Grow your digital presence by</span><br />
-              <span className="text-white">performance marketing</span>
+              <span className="text-black">{t('digital_marketing_page.hero.title_part1')}</span><br />
+              <span className="text-white">{t('digital_marketing_page.hero.title_part2')}</span>
             </h1>
             <p className="text-lg opacity-90 max-w-3xl mx-auto text-white leading-relaxed">
-              We have a proven track record of helping businesses capture brand attention and strengthen relationships with various audiences. We conduct in-depth analysis of audience requirements to determine the best ways to connect brands with their business objectives through top digital marketing and advertising services.
+              {t('digital_marketing_page.hero.desc')}
             </p>
           </div>
         </section>
@@ -161,9 +163,9 @@ const DigitalMarketing: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                How we increase <span className="bg-gradient-blue bg-clip-text text-transparent">Company's Revenues?</span>
+                {t('digital_marketing_page.services_section.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('digital_marketing_page.services_section.title_highlight')}</span>
               </h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">Xin QiYou Tech’s marketing experts are dedicated to boosting your business revenue with tailored strategies designed to meet your unique needs. Discover our full range of digital marketing services designed to maximize performance and drive measurable growth.</p>
+              <p className="text-gray-600 max-w-2xl mx-auto">{t('digital_marketing_page.services_section.subtitle')}</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
               {marketingServices.map((service, idx) => (
@@ -178,7 +180,7 @@ const DigitalMarketing: React.FC = () => {
           <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-20">
               <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
-                Our Process <span className="bg-gradient-blue bg-clip-text text-transparent">And how we work</span>
+                {t('digital_marketing_page.process_section.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('digital_marketing_page.process_section.title_highlight')}</span>
               </h2>
             </div>
             <div className="relative">

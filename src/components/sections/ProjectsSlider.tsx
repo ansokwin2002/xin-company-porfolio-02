@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-
-const projects = [
-  {
-    id: 1,
-    title: "Project Two",
-    video: "/assets/videos/v2.mp4",
-    color: "bg-[#7a1111]"
-  },
-  {
-    id: 2,
-    title: "Al-Ahly Club App",
-    video: "/assets/videos/v1.mp4",
-    color: "bg-[#4a0e0e]"
-  },
-  {
-    id: 3,
-    title: "Al-Mahatta App",
-    video: "/assets/videos/v3.mp4",
-    color: "bg-gray-100"
-  }
-];
+import { useTranslation } from 'react-i18next';
 
 const ProjectsSlider: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
+
+  const projects = [
+    {
+      id: 1,
+      video: "/assets/videos/v2.mp4",
+      color: "bg-[#7a1111]"
+    },
+    {
+      id: 2,
+      video: "/assets/videos/v1.mp4",
+      color: "bg-[#4a0e0e]"
+    },
+    {
+      id: 3,
+      video: "/assets/videos/v3.mp4",
+      color: "bg-gray-100"
+    }
+  ];
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
@@ -45,15 +44,15 @@ const ProjectsSlider: React.FC = () => {
   }, [isPaused]);
 
   return (
-    <section className="bg-black py-16 overflow-hidden">
+    <section key={i18n.language} className="bg-black py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 text-center">
         {/* Header Section */}
         <div className="mb-10">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-3">
-            Our featured <span className="bg-gradient-blue bg-clip-text text-transparent">Projects</span>
+            {t('projects_slider.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('projects_slider.title_highlight')}</span>
           </h2>
           <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto">
-            Explore our showcase of successful mobile applications that have transformed businesses
+            {t('projects_slider.subtitle')}
           </p>
         </div>
 
@@ -100,6 +99,12 @@ const ProjectsSlider: React.FC = () => {
                     muted
                     playsInline
                   />
+
+                  {/* Project Title Overlay - visible on active slide */}
+                  <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                    <h4 className="text-white font-bold text-lg">{project.title}</h4>
+                  </div>
+
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
                 </div>
               );
@@ -117,7 +122,7 @@ const ProjectsSlider: React.FC = () => {
         {/* Bottom CTA Button */}
         <div className="mt-8">
           <button className="bg-gradient-blue text-white px-8 py-3.5 rounded-xl font-bold text-md shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-105 transition-transform flex items-center gap-2 mx-auto group">
-            Let's Build Your App <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            {t('projects_slider.cta_button')} <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>

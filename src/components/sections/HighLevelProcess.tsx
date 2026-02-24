@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Layers, Palette, FlaskConical, Rocket, ArrowRight, Heart } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface StepStyles {
   activeBg: string;
@@ -21,6 +22,7 @@ interface ProcessStep {
 }
 
 const HighLevelProcess: React.FC = () => {
+  const { t } = useTranslation();
   const [activeStep, setActiveStep] = useState<number>(1);
   const lifecycleRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -28,11 +30,11 @@ const HighLevelProcess: React.FC = () => {
   const steps: ProcessStep[] = [
     {
       id: 1,
-      subtitle: 'Step 01',
-      title: 'UX Discovery & Research',
-      headerTitle: 'UX Discovery & Research',
+      subtitle: `${t('high_level_process.steps_label')} 01`,
+      title: t('high_level_process.steps.discovery.title'),
+      headerTitle: t('high_level_process.steps.discovery.title'),
       icon: Search,
-      description: 'UX Discovery & Research involves understanding project goals and user needs through interviews and analysis of consumer behavior. This process ensures a user-centric approach.',
+      description: t('high_level_process.steps.discovery.desc'),
       styles: {
         activeBg: 'bg-blue-50',
         activeBorder: 'border-blue-200',
@@ -44,11 +46,11 @@ const HighLevelProcess: React.FC = () => {
     },
     {
       id: 2,
-      subtitle: 'Step 02',
-      title: 'UX Prototype',
-      headerTitle: 'UX Prototype',
+      subtitle: `${t('high_level_process.steps_label')} 02`,
+      title: t('high_level_process.steps.prototype.title'),
+      headerTitle: t('high_level_process.steps.prototype.title'),
       icon: Layers,
-      description: 'Creating interactive representations of the product to test and refine design concepts and user flow. By incorporating user feedback, prototypes help validate design decisions and identify potential issues early in the process.',
+      description: t('high_level_process.steps.prototype.desc'),
       styles: {
         activeBg: 'bg-purple-50',
         activeBorder: 'border-purple-200',
@@ -60,11 +62,11 @@ const HighLevelProcess: React.FC = () => {
     },
     {
       id: 3,
-      subtitle: 'Step 03',
-      title: 'UI Design Concept',
-      headerTitle: 'UI Design Concept',
+      subtitle: `${t('high_level_process.steps_label')} 03`,
+      title: t('high_level_process.steps.design.title'),
+      headerTitle: t('high_level_process.steps.design.title'),
       icon: Palette,
-      description: 'Creating visual elements and layouts for digital interfaces, focusing on usability and maintaining brand consistency to enhance the overall user experience.',
+      description: t('high_level_process.steps.design.desc'),
       styles: {
         activeBg: 'bg-red-50',
         activeBorder: 'border-red-200',
@@ -76,11 +78,11 @@ const HighLevelProcess: React.FC = () => {
     },
     {
       id: 4,
-      subtitle: 'Step 04',
-      title: 'Validation & Testing',
-      headerTitle: 'Validation & Testing',
+      subtitle: `${t('high_level_process.steps_label')} 04`,
+      title: t('high_level_process.steps.validation.title'),
+      headerTitle: t('high_level_process.steps.validation.title'),
       icon: FlaskConical,
-      description: 'We analyze design solutions using various techniques to determine their efficacy. This involves usability testing, A/B testing, and heuristic evaluations to gather user feedback and identify areas for improvement.',
+      description: t('high_level_process.steps.validation.desc'),
       styles: {
         activeBg: 'bg-orange-50',
         activeBorder: 'border-orange-200',
@@ -92,11 +94,11 @@ const HighLevelProcess: React.FC = () => {
     },
     {
       id: 5,
-      subtitle: 'Step 05',
-      title: 'Launch',
-      headerTitle: 'Launch',
+      subtitle: `${t('high_level_process.steps_label')} 05`,
+      title: t('high_level_process.steps.launch.title'),
+      headerTitle: t('high_level_process.steps.launch.title'),
       icon: Rocket,
-      description: 'Implementing the completed concept into practice and keeping an eye on its performance after launch. This entails managing the development process to guarantee design integrity.',
+      description: t('high_level_process.steps.launch.desc'),
       styles: {
         activeBg: 'bg-green-50',
         activeBorder: 'border-green-200',
@@ -139,7 +141,7 @@ const HighLevelProcess: React.FC = () => {
           
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              What is our <span className="bg-gradient-blue bg-clip-text text-transparent">High-level Process?</span>
+              {t('high_level_process.title_main')} <span className="bg-gradient-blue bg-clip-text text-transparent">{t('high_level_process.title_highlight')}</span>
             </h2>
           </div>
 
