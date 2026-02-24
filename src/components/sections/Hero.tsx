@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { ArrowDown, ArrowRight, ChevronDown, X } from 'lucide-react';
 import { toast } from 'sonner';
 import CountingNumber from '../specific/CountingNumber';
@@ -41,6 +42,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', email: '', budget: '', mobile: '', details: '' });
   const [selectedCountry, setSelectedCountry] = useState(allCountries[0]);
   const [isBudgetOpen, setIsBudgetOpen] = useState(false);
@@ -96,11 +98,6 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
     const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
   }, [text, isDeleting, loopNum, typingSpeed]);
-
-  const scrollToWork = () => {
-    const section = document.getElementById('portfolio');
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -158,8 +155,8 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                   </p>
                 </div>
 
-                <button onClick={scrollToWork} className="group flex items-center space-x-2 px-6 py-3 rounded-xl font-medium border-2 bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300">
-                  <ArrowDown size={20} />
+                <button onClick={() => navigate('/products')} className="group flex items-center space-x-2 px-6 py-3 rounded-xl font-medium border-2 bg-transparent border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all duration-300">
+                  <ArrowRight size={20} />
                   <span>{t('hero.viewWork')}</span>
                 </button>
               </div>
