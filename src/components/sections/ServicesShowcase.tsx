@@ -120,6 +120,11 @@ const PromiseCard: React.FC<PromiseCardProps> = ({ IconComponent, title, number,
 const ServicesShowcase: React.FC = () => {
   const { t } = useTranslation();
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const services = [
     { 
       IconComponent: Palette, 
@@ -200,7 +205,10 @@ const ServicesShowcase: React.FC = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-gradient-blue shadow-button text-white px-8 py-4 text-sm font-bold transition-all duration-300 rounded-full inline-flex items-center gap-2 hover:scale-105">
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="bg-gradient-blue shadow-button text-white px-8 py-4 text-sm font-bold transition-all duration-300 rounded-full inline-flex items-center gap-2 hover:scale-105"
+            >
               {t('services_showcase.cta_button')} <ArrowRight size={20} />
             </button>
           </div>
