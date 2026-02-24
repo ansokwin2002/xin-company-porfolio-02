@@ -155,7 +155,7 @@ const HostingServer: React.FC = () => {
       <Navigation />
       <main>
         {/* --- HERO SECTION (Updated with Animation) --- */}
-        <section className="bg-gradient-blue pt-32 pb-24 text-center">
+        <section className="bg-gradient-blue pt-40 pb-24 text-center">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <h1 
               ref={h1Ref}

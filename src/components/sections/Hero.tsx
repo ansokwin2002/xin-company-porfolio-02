@@ -121,7 +121,7 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
       {/* Background Image */}
       <div className="absolute inset-0 bg-no-repeat bg-[url('/assets/images/image_hero.png')] bg-hero-pos-sm sm:bg-hero-pos-md bg-hero-sm sm:bg-hero-md animate-fast-zoom" style={{ zIndex: 0 }} />
 
-      <div className="relative min-h-screen flex items-center pt-24 pb-12" style={{ zIndex: 10 }}>
+      <div className="relative min-h-screen flex items-center pt-32 pb-12" style={{ zIndex: 10 }}>
         <div className="max-w-7xl mx-auto w-full px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             

@@ -304,7 +304,7 @@ const Products: React.FC = () => {
     <div className="min-h-screen bg-white font-sans overflow-x-hidden">
       <Navigation />
       <main>
-        <section className="bg-gradient-blue pt-32 pb-24 text-center">
+        <section className="bg-gradient-blue pt-40 pb-24 text-center">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <h1 
               ref={h1Ref}

@@ -162,7 +162,7 @@ const WebAppDevelopment: React.FC = () => {
         {/* --- 1. HERO SECTION --- */}
         <section 
           ref={heroRef}
-          className={`bg-gradient-blue pt-32 pb-24 text-center transition-all duration-1000 ease-out ${
+          className={`bg-gradient-blue pt-40 pb-24 text-center transition-all duration-1000 ease-out ${
             isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
@@ -180,7 +180,7 @@ const WebAppDevelopment: React.FC = () => {
         </section>
 
         {/* --- 2. WHAT WE DEVELOP SECTION --- */}
-        <section className="pt-24 pb-12 relative overflow-hidden bg-white">
+        <section className="pt-32 pb-12 relative overflow-hidden bg-white">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-50/50 rounded-l-full blur-3xl -z-10"></div>
 
           <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">

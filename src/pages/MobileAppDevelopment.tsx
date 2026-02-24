@@ -82,7 +82,7 @@ const MobileAppDevelopment: React.FC = () => {
     <div className="min-h-screen bg-white font-sans overflow-x-hidden">
       <Navigation />
       
-      <main className="pt-20"> 
+      <main className="pt-28"> 
         {/* --- HERO SECTION --- */}
         <div className="bg-gradient-to-b from-[#2b9aff] to-[#4facfe] text-white py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">

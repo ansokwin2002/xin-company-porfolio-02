@@ -138,15 +138,11 @@ const Navigation: React.FC = () => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-200 ${isScrolled ? 'bg-white shadow-sm border-b border-gray-100' : 'bg-white'} ${i18n.language === 'km' ? 'font-siemreap' : ''}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-24">
           
           {/* Logo */}
-          <div className="flex flex-col cursor-pointer" onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); }}>
-            <div className="relative">
-              <span className="font-bold text-2xl text-gold">QıYOU</span>
-              <span className="absolute w-1.5 h-1.5 rounded-full bg-red-500" style={{ top: '3px', left: '17.5px' }}></span>
-            </div>
-            <span className="text-xs text-gray-600 -mt-1">Your Success Partner</span>
+          <div className="flex items-center cursor-pointer" onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setIsOpen(false); }}>
+            <img src="/assets/images/Qiyou logo.png" alt="QiYou Logo" className="h-12 w-auto object-contain" />
           </div>
 
           {/* Desktop Nav Items */}

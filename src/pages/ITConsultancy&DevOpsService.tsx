@@ -148,7 +148,7 @@ const ITConsultancyDevOpsService: React.FC = () => {
 
       <main>
         {/* --- BLUE HERO SECTION (Matching Hosting Animation Style) --- */}
-        <section className="bg-gradient-blue pt-32 pb-24 text-center overflow-hidden">
+        <section className="bg-gradient-blue pt-40 pb-24 text-center overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             {/* Title with Pop-up Animation */}
             <h1 className={`text-4xl md:text-6xl font-extrabold mb-6 leading-tight transition-all duration-1000 transform ${

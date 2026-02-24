@@ -59,18 +59,9 @@ const Footer: React.FC<FooterProps> = () => {
             }`}
             style={{ transitionDelay: '0.1s' }}
           >
-            <div className="relative">
-              <span className="font-bold text-2xl text-gold">
-                QıYOU
-              </span>
-              <span
-                className="absolute w-1.5 h-1.5 rounded-full bg-red-500"
-                style={{ top: '3px', left: '17.5px' }}
-              ></span>
+            <div className="flex items-center">
+              <img src="/assets/images/Qiyou logo.png" alt="QiYou Logo" className="h-12 w-auto object-contain" />
             </div>
-            <p className="text-xs text-white/90 font-medium uppercase tracking-wider">
-              {t('footer.partner_text')}
-            </p>
             <p className="text-white/90 text-sm leading-relaxed">
               {t('footer.description')}
             </p>

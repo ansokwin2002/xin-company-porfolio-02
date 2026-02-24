@@ -17,7 +17,7 @@ const Blog: React.FC = () => {
     <div className="flex flex-col min-h-screen bg-white font-sans overflow-x-hidden">
       <Navigation />
       
-      <main className="flex-grow flex items-center justify-center pt-20 relative">
+      <main className="flex-grow flex items-center justify-center pt-28 relative">
         {/* Modern Background Accents */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-50/50 rounded-full blur-[120px] -z-10"></div>
 
