@@ -43,6 +43,9 @@ export default {
       colors: {
         gold: 'var(--color-gold)',
       },
+      fontFamily: {
+        siemreap: ['Siemreap', 'sans-serif'],
+      },
     },
   },
   plugins: [],

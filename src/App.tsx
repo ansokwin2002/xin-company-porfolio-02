@@ -6,6 +6,7 @@ import LoadingScreen from './components/specific/LoadingScreen';
 import { ThemeProvider } from './contexts/ThemeContext';
 import AppRoutes from './AppRoutes'; // Import AppRoutes
 import CursorEffect from './components/specific/CursorEffect';
+import { useTranslation } from 'react-i18next';
 
 interface MainLayoutProps {
   showAnimations: boolean;
@@ -20,6 +21,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ showAnimations, scrollToSection
 );
 
 function App() {
+  const { i18n } = useTranslation();
   const [showAnimations, setShowAnimations] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const loadingBarRef = useRef<any>(null); // Ref for LoadingBar
@@ -31,6 +33,11 @@ function App() {
       section.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  useEffect(() => {
+    // Update html lang attribute
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
 
   useEffect(() => {
     // Simulate loading time for better UX

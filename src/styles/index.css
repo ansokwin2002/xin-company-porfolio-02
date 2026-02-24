@@ -4,13 +4,25 @@
 
 @font-face {
   font-family: 'Siemreap';
-  src: url('/assets/fonts/Siemreap-Regular.ttf') format('truetype');
+  src: url('/assets/font/Siemreap-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
-html[lang="km"] {
-  font-family: 'Siemreap', sans-serif;
+@font-face {
+  font-family: 'Khmer M1';
+  src: url('/assets/font/Khmer M1 Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html[lang="km"],
+html[lang="km"] body,
+html[lang="km"] *,
+html[lang="km"] .font-sans {
+  font-family: 'Siemreap', sans-serif !important;
 }
 
 .font-siemreap {
