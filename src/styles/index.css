@@ -23,6 +23,15 @@ html[lang="km"] body,
 html[lang="km"] *,
 html[lang="km"] .font-sans {
   font-family: 'Siemreap', sans-serif !important;
+  line-height: 1.6 !important;
+}
+
+html[lang="km"] h1,
+html[lang="km"] h2,
+html[lang="km"] h3,
+html[lang="km"] .leading-tight,
+html[lang="km"] .leading-none {
+  line-height: 1.5 !important;
 }
 
 .font-siemreap {
