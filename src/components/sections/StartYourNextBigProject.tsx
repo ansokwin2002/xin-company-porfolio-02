@@ -47,6 +47,22 @@ const StartYourNextBigProject: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState(allCountries[0]); // Initial country
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const countryRef = useRef<HTMLDivElement>(null);
+  const budgetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryRef.current && !countryRef.current.contains(event.target as Node)) {
+        setIsCountryOpen(false);
+        setSearchQuery('');
+      }
+      if (budgetRef.current && !budgetRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const filteredCountries = allCountries.filter(c => 
     c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -99,7 +115,7 @@ const StartYourNextBigProject: React.FC = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-white text-slate-900 overflow-hidden relative">
+    <section ref={sectionRef} className="py-20 bg-white text-slate-900 relative">
       {/* Optional: Add the same background graphic as hero if desired, 
           currently kept clean white as per original structure */}
       
@@ -215,8 +231,12 @@ const StartYourNextBigProject: React.FC = () => {
               {/* 3. Floating Mobile Number (Redesigned to match Name/Email style) */}
               <div className="relative group flex items-end border-b-2 border-gray-300 focus-within:border-gray-900 transition-colors pt-2">
                 {/* Country Selector */}
-                <div className="relative" onMouseEnter={() => setIsCountryOpen(true)} onMouseLeave={() => { setIsCountryOpen(false); setSearchQuery(''); }}>
-                  <button type="button" className="flex items-center gap-2 py-3 pr-3 font-bold text-sm text-gray-900 outline-none">
+                <div className="relative" ref={countryRef}>
+                  <button 
+                    type="button" 
+                    onClick={() => setIsCountryOpen(!isCountryOpen)}
+                    className="flex items-center gap-2 py-3 pr-3 font-bold text-sm text-gray-900 outline-none"
+                  >
                     <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} className="w-5 rounded-sm" alt="flag" />
                     <span>{selectedCountry.dial}</span>
                     <ChevronDown size={14} className={`transition-transform duration-300 text-gray-500 ${isCountryOpen ? 'rotate-180' : ''}`} />
@@ -303,8 +323,11 @@ const StartYourNextBigProject: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
-                  <div className="w-full py-3 flex items-center justify-between cursor-pointer">
+                <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" ref={budgetRef}>
+                  <div 
+                    className="w-full py-3 flex items-center justify-between cursor-pointer"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  >
                     <span className={`font-bold transition-colors ${selectedBudget ? 'text-gray-900' : 'text-transparent'}`}>
                       {selectedBudget || "Placeholder"} 
                     </span>

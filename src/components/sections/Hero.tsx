@@ -48,11 +48,30 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const countryRef = useRef<HTMLDivElement>(null);
+  const budgetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryRef.current && !countryRef.current.contains(event.target as Node)) {
+        setIsCountryOpen(false);
+        setSearchQuery('');
+      }
+      if (budgetRef.current && !budgetRef.current.contains(event.target as Node)) {
+        setIsBudgetOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const filteredCountries = allCountries.filter(c => 
     c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
     c.dial.includes(searchQuery)
   );
+
+  const budgetOptionsRaw = t('hero.form.budget.options', { returnObjects: true });
+  const budgetOptions = Array.isArray(budgetOptionsRaw) ? budgetOptionsRaw : [];
 
   // --- TYPEWRITER LOGIC ---
   const [text, setText] = useState('');
@@ -195,8 +214,12 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                     {/* 3. Floating Mobile Number (Redesigned to match Name/Email style) */}
                     <div className="relative group flex items-end border-b-2 border-gray-300 focus-within:border-gray-900 transition-colors pt-2">
                       {/* Country Selector */}
-                      <div className="relative" onMouseEnter={() => setIsCountryOpen(true)} onMouseLeave={() => { setIsCountryOpen(false); setSearchQuery(''); }}>
-                        <button type="button" className="flex items-center gap-2 py-3 pr-3 font-bold text-sm text-gray-900 outline-none">
+                      <div className="relative" ref={countryRef}>
+                        <button 
+                          type="button" 
+                          onClick={() => setIsCountryOpen(!isCountryOpen)}
+                          className="flex items-center gap-2 py-3 pr-3 font-bold text-sm text-gray-900 outline-none"
+                        >
                           <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} className="w-5 rounded-sm" alt="flag" />
                           <span>{selectedCountry.dial}</span>
                           <ChevronDown size={14} className={`transition-transform duration-300 text-gray-500 ${isCountryOpen ? 'rotate-180' : ''}`} />
@@ -283,8 +306,11 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                         </button>
                       </div>
                     ) : (
-                      <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" onMouseEnter={() => setIsBudgetOpen(true)} onMouseLeave={() => setIsBudgetOpen(false)}>
-                        <div className="w-full py-3 flex items-center justify-between cursor-pointer">
+                      <div className="relative group border-b-2 border-gray-300 hover:border-gray-900 transition-colors" ref={budgetRef}>
+                        <div 
+                          className="w-full py-3 flex items-center justify-between cursor-pointer"
+                          onClick={() => setIsBudgetOpen(!isBudgetOpen)}
+                        >
                           <span className={`font-bold transition-colors ${formData.budget ? 'text-gray-900' : 'text-transparent'}`}>
                             {formData.budget || "Placeholder"} 
                           </span>
@@ -301,11 +327,11 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                         {/* Dropdown Options */}
                         <div className={`absolute top-full left-0 pt-1 w-full z-50 transition-all duration-300 ${isBudgetOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}>
                           <div className="bg-white border border-gray-100 rounded-xl shadow-2xl overflow-hidden py-1">
-                            {[t('hero.form.budget.options.0'), t('hero.form.budget.options.1'), t('hero.form.budget.options.2')].map((opt) => (
+                            {budgetOptions.map((opt) => (
                               <div 
                                 key={opt} 
                                 onClick={() => { 
-                                  if (opt === t('hero.form.budget.options.2')) {
+                                  if (opt === budgetOptions[budgetOptions.length - 1]) {
                                     setShowCustomBudget(true);
                                     setFormData({...formData, budget: ''});
                                   } else {
