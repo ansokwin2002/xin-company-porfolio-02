@@ -107,12 +107,12 @@ const WebAppDevelopment: React.FC = () => {
   }, []);
 
   const categories = [
-    { name: t('web_app_page.develop_section.categories.corporate'), icon: Building2 },
-    { name: t('web_app_page.develop_section.categories.ecommerce'), icon: ShoppingCart },
-    { name: t('web_app_page.develop_section.categories.web_apps'), icon: Globe },
-    { name: t('web_app_page.develop_section.categories.landing'), icon: FileText },
-    { name: t('web_app_page.develop_section.categories.dashboards'), icon: LayoutDashboard },
-    { name: t('web_app_page.develop_section.categories.cms'), icon: Database },
+    { name: t('web_app_page.develop_section.categories.corporate'), icon: Building2, color: "from-blue-500 to-indigo-500" },
+    { name: t('web_app_page.develop_section.categories.ecommerce'), icon: ShoppingCart, color: "from-purple-500 to-pink-500" },
+    { name: t('web_app_page.develop_section.categories.web_apps'), icon: Globe, color: "from-emerald-400 to-teal-500" },
+    { name: t('web_app_page.develop_section.categories.landing'), icon: FileText, color: "from-rose-400 to-red-500" },
+    { name: t('web_app_page.develop_section.categories.dashboards'), icon: LayoutDashboard, color: "from-orange-400 to-amber-500" },
+    { name: t('web_app_page.develop_section.categories.cms'), icon: Database, color: "from-cyan-400 to-blue-500" },
   ];
 
   const features = [
@@ -196,8 +196,10 @@ const WebAppDevelopment: React.FC = () => {
 
               <div className={`flex flex-wrap justify-center gap-4 mb-16 transition-all duration-700 ${isTitleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`} style={{ transitionDelay: '200ms' }}>
                 {categories.map((cat, idx) => (
-                  <div key={idx} className="bg-white/80 backdrop-blur-md border border-gray-100 px-6 py-4 rounded-2xl flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-                    <cat.icon size={22} className="text-blue-600" />
+                  <div key={idx} className="bg-white/80 backdrop-blur-md border border-gray-100 pl-3 pr-6 py-3 rounded-2xl flex items-center gap-4 shadow-sm hover:shadow-md transition-all group hover:scale-105">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${cat.color} shadow-lg transition-transform group-hover:rotate-6`}>
+                      <cat.icon size={20} strokeWidth={2} />
+                    </div>
                     <span className="font-bold text-gray-800">{cat.name}</span>
                   </div>
                 ))}
