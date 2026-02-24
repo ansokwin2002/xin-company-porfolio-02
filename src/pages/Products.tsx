@@ -41,7 +41,7 @@ const productsData = [
     features: ['Barcode & QR code scanning', 'Weighing scale integration (fruits & vegetables)', 'Discount & promo management', 'Multiple payment methods (cash, card, wallet, QR)', 'Receipt printing & digital invoice', 'Offline mode support', 'Daily sales & cashier reports'],
     footerNote: "Designed for high-speed transactions during peak hours.",
     image: "/assets/images/products/ORange.png",
-    links: [""],
+    links: ["https://www.kh-orange.shop"],
     bgColor: "bg-white"
   },
   {
@@ -53,7 +53,7 @@ const productsData = [
     features: ['Number selection (manual or auto-pick)', 'Single draw or multi-draw ticket purchase', 'Quick Pick (random number generator)', 'Retail agent portal', 'QR code / digital ticket generation', 'Secure transaction tracking'],
     footerNote: "Supports both online and offline distribution models.",
     image: "/assets/images/products/Lotto.png",
-    links: [""],
+    links: ["https://www.bingo637.com/", "http://nslotterys.com", "https://www.lotteryasian.com"],
     bgColor: "bg-gray-50"
   },
   {
@@ -65,7 +65,7 @@ const productsData = [
     features: ['Multiplayer support', 'Real-time scoring', 'Leaderboard & ranking system', 'In-app wallet integration', 'API integration (payment gateways)', 'Mobile + Web responsive design'],
     footerNote: "Designed for scalability and high-performance traffic.",
     image: "/assets/images/products/Entertainment.png",
-    links: [""],
+    links: ["https://www.igt.com"],
     bgColor: "bg-white"
   },
   {
@@ -77,7 +77,7 @@ const productsData = [
     features: ['Policy quotation & premium calculation', 'Automated underwriting workflows', 'Policy issuance & digital documentation', 'Policy renewal automation','Endorsement & modification tracking','Multi-product support (Life, Motor, Health, Property)','Commission calculation for agents'],
     footerNote: "Reduce manual paperwork and improve processing speed.",
     image: "/assets/images/products/Insurrance.png",
-    links: [""],
+    links: ["https://www.titaninsurance.info", "https://www.fincorpinsurancebroker.com.kh/"],
     bgColor: "bg-blue-50"
   },
   {
@@ -101,7 +101,7 @@ const productsData = [
     features: ['Goods receiving & quality inspection','Barcode / QR code / RFID scanning','Smart put-away & bin location tracking','Picking strategies (FIFO, LIFO, FEFO)','Packing & shipment verification','Batch, lot & serial number management','Real-time stock movement updates'],
     footerNote: "Improves accuracy, speed, and operational efficiency.",
     image: "/assets/images/products/Win Take.png",
-    links: [""],
+    links: ["https://www.wintake-tw.com"],
     bgColor: "bg-blue-50"
   },
   {
@@ -113,7 +113,7 @@ const productsData = [
     features: ['Quick order creation','Service selection (Wash, Dry, Iron, Dry Clean)','Automatic price calculation','Weight-based billing support','Barcode / QR receipt printing','Partial payment & advance payment','Express service surcharge'],
     footerNote: "Designed to handle high customer volume smoothly.",
     image: "/assets/images/products/Laundry1.png",
-    links: [""],
+    links: ["https://www.onedashcambodia.com"],
     bgColor: "bg-white"
   },
   {
@@ -137,7 +137,7 @@ const productsData = [
     features: ['Barcode & QR code scanning','Quick product search','Discount & promotion management','Split payment (cash, card, QR, wallet)','Gift card & voucher support','Tax & service charge automation','Printed & digital receipt options'],
     footerNote: "Designed for speed and accuracy during peak hours.",
     image: "/assets/images/products/Retailer.png",
-    links: [""],
+    links: ["http://h5.kh-orange.shop"],
     bgColor: "bg-white"
   }
 ];
