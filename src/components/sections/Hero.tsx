@@ -143,10 +143,10 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
                 </div>
 
                 <div className="space-y-4">
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-gray-900">
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.5] text-gray-900">
                     {t('hero.headline')}
                     <br />
-                    <span className="bg-gradient-blue bg-clip-text text-transparent min-w-[300px] inline-block">
+                    <span className="bg-gradient-blue bg-clip-text text-transparent min-w-[300px] inline-block py-2">
                       {text}<span className="ml-1 border-r-4 border-blue-500 animate-blink"></span>
                     </span>
                   </h1>
