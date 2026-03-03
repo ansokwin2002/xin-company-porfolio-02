@@ -99,21 +99,50 @@ const Hero: React.FC<HeroProps> = ({ showAnimations }) => {
     return () => clearTimeout(timer);
   }, [text, isDeleting, loopNum, typingSpeed]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true); // Set isSubmitting to true
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Form Submitted from Hero:', { ...formData, country: selectedCountry.dial });
+    setIsSubmitting(true);
+    
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: `${selectedCountry.dial}${formData.mobile}`,
+      budget: formData.budget,
+      message: formData.details
+    };
 
-      // Show success toast
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/contacts`;
+      console.log('Submitting to:', apiUrl);
+      
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Validation Error');
+      }
+
       toast.success('Your quote request has been sent successfully!');
-
-      // Reset form fields
       setFormData({ name: '', email: '', budget: '', mobile: '', details: '' });
       setShowCustomBudget(false);
-      setIsSubmitting(false); // Set isSubmitting to false after submission
-    }, 2000); // Simulate a 2-second delay
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      if (error.message === 'Failed to fetch') {
+        toast.error('Cannot reach the server. Is your Laravel backend running on port 8000?');
+      } else {
+        toast.error(error.message || 'Something went wrong.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

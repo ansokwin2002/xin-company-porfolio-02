@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Sparkles } from 'lucide-react';
 import { Fade } from 'react-awesome-reveal';
 import { useTheme } from '../contexts/ThemeContext';
+import { toast } from 'sonner';
 
 interface ContactProps {
   showAnimations: boolean;
@@ -17,16 +18,39 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
   });
   const { theme } = useTheme();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      alert('Thank you for your message! I\'ll get back to you within 24 hours.');
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/contacts`;
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
+      toast.success('Thank you for your message! I\'ll get back to you within 24 hours.');
       setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      if (error.message === 'Failed to fetch') {
+        toast.error('Server unreachable. Please check your backend port and CORS.');
+      } else {
+        toast.error(error.message || 'Something went wrong.');
+      }
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

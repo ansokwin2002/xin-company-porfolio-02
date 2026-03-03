@@ -95,23 +95,50 @@ const StartYourNextBigProject: React.FC = () => {
     setIsDropdownOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true); // Set isSubmitting to true
-    // Simulate API call or form submission
-    setTimeout(() => {
-      console.log('Form Submitted:', { ...formData, selectedBudget, mobileCountryDial: selectedCountry.dial });
+    setIsSubmitting(true);
+    
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: `${selectedCountry.dial}${formData.mobile}`,
+      budget: selectedBudget,
+      message: formData.details
+    };
 
-      // Show success toast
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/contacts`;
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message');
+      }
+
       toast.success(t('start_project.success_message'));
-
-      // Reset form fields
-      setFormData({ name: '', email: '', mobile: '', details: '' }); // Reset mobile as well
+      setFormData({ name: '', email: '', mobile: '', details: '' });
       setSelectedBudget('');
-      setShowCustomInput(false); // Reset custom input state
-      setSelectedCountry(allCountries[0]); // Reset country as well
-      setIsSubmitting(false); // Set isSubmitting to false after submission
-    }, 2000); // Simulate a 2-second delay for submission
+      setShowCustomInput(false);
+      setSelectedCountry(allCountries[0]);
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      if (error.message === 'Failed to fetch') {
+        toast.error('Cannot reach the server. Check your connection and CORS settings.');
+      } else {
+        toast.error(error.message || 'Something went wrong.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
