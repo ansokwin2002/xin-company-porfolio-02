@@ -102,6 +102,7 @@ const StartYourNextBigProject: React.FC = () => {
     const payload = {
       name: formData.name,
       email: formData.email,
+      country_code: selectedCountry.code,
       phone: `${selectedCountry.dial}${formData.mobile}`,
       budget: selectedBudget,
       message: formData.details

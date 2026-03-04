@@ -1,8 +1,38 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Sparkles } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Sparkles, ChevronDown } from 'lucide-react';
 import { Fade } from 'react-awesome-reveal';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import { toast } from 'sonner';
+
+// Countries data
+const allCountries = [
+  { code: 'kh', name: 'Cambodia', dial: '+855' },
+  { code: 'cn', name: 'China', dial: '+86' },
+  { code: 'tw', name: 'Taiwan', dial: '+886' },
+  { code: 'th', name: 'Thailand', dial: '+66' },
+  { code: 'vn', name: 'Vietnam', dial: '+84' },
+  { code: 'sg', name: 'Singapore', dial: '+65' },
+  { code: 'my', name: 'Malaysia', dial: '+60' },
+  { code: 'id', name: 'Indonesia', dial: '+62' },
+  { code: 'ph', name: 'Philippines', dial: '+63' },
+  { code: 'jp', name: 'Japan', dial: '+81' },
+  { code: 'kr', name: 'South Korea', dial: '+82' },
+  { code: 'hk', name: 'Hong Kong', dial: '+852' },
+  { code: 'la', name: 'Laos', dial: '+856' },
+  { code: 'mm', name: 'Myanmar', dial: '+95' },
+  { code: 'bn', name: 'Brunei', dial: '+673' },
+  { code: 'us', name: 'USA', dial: '+1' },
+  { code: 'gb', name: 'UK', dial: '+44' },
+  { code: 'au', name: 'Australia', dial: '+61' },
+  { code: 'ca', name: 'Canada', dial: '+1' },
+  { code: 'ae', name: 'UAE', dial: '+971' },
+  { code: 'fr', name: 'France', dial: '+33' },
+  { code: 'de', name: 'Germany', dial: '+49' },
+  { code: 'ru', name: 'Russia', dial: '+7' },
+  { code: 'in', name: 'India', dial: '+91' },
+  { code: 'br', name: 'Brazil', dial: '+55' },
+  { code: 'za', name: 'South Africa', dial: '+27' },
+];
 
 interface ContactProps {
   showAnimations: boolean;
@@ -10,19 +40,49 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(allCountries[0]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    mobile: '',
     subject: '',
     message: ''
   });
   const { theme } = useTheme();
+  const countryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryRef.current && !countryRef.current.contains(event.target as Node)) {
+        setIsCountryOpen(false);
+        setSearchQuery('');
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const filteredCountries = allCountries.filter(c => 
+    c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    c.dial.includes(searchQuery)
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        country_code: selectedCountry.code,
+        phone: `${selectedCountry.dial}${formData.mobile}`,
+        subject: formData.subject,
+        message: formData.message
+      };
+
       const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/contacts`;
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -30,7 +90,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
@@ -40,7 +100,8 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
       }
 
       toast.success('Thank you for your message! I\'ll get back to you within 24 hours.');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', mobile: '', subject: '', message: '' });
+      setSelectedCountry(allCountries[0]);
     } catch (error: any) {
       console.error('Submission error:', error);
       if (error.message === 'Failed to fetch') {
@@ -438,7 +499,7 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                 </h3>
                 
                 <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     <div>
                       <label htmlFor="name" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                         theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
@@ -481,6 +542,83 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                         }`}
                         placeholder="your.email@example.com"
                       />
+                    </div>
+
+                    <div className="sm:col-span-2 lg:col-span-1">
+                      <label htmlFor="mobile" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
+                        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                      }`}>
+                        Mobile Number *
+                      </label>
+                      <div className="flex relative" ref={countryRef}>
+                        <button 
+                          type="button" 
+                          onClick={() => setIsCountryOpen(!isCountryOpen)}
+                          className={`flex items-center gap-2 px-3 py-3 md:py-4 rounded-l-xl md:rounded-l-2xl border-y border-l transition-all duration-300 focus:outline-none ${
+                            theme === 'dark' 
+                              ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
+                              : 'bg-gray-50 border-gray-300 text-gray-900 hover:bg-gray-100'
+                          }`}
+                        >
+                          <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} className="w-5 rounded-sm" alt="flag" />
+                          <span className="text-xs md:text-sm font-bold">{selectedCountry.dial}</span>
+                          <ChevronDown size={14} className={`transition-transform duration-300 ${isCountryOpen ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        <input
+                          type="tel"
+                          id="mobile"
+                          name="mobile"
+                          value={formData.mobile}
+                          onChange={handleChange}
+                          required
+                          className={`flex-1 px-4 py-3 md:py-4 rounded-r-xl md:rounded-r-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
+                            theme === 'dark' 
+                              ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
+                              : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                          }`}
+                          placeholder="Phone number"
+                        />
+
+                        {/* Country Dropdown */}
+                        {isCountryOpen && (
+                          <div className={`absolute top-full left-0 mt-2 z-50 w-64 rounded-xl shadow-2xl overflow-hidden border ${
+                            theme === 'dark' ? 'bg-gray-800 border-white/10' : 'bg-white border-gray-200'
+                          }`}>
+                            <div className="p-2 border-b border-white/10">
+                              <input 
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Search country..."
+                                className={`w-full px-3 py-2 rounded-lg text-sm focus:outline-none ${
+                                  theme === 'dark' ? 'bg-white/5 text-white' : 'bg-gray-50 text-gray-900'
+                                }`}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            </div>
+                            <div className="max-h-48 overflow-y-auto">
+                              {filteredCountries.map((c) => (
+                                <div 
+                                  key={`${c.code}-${c.dial}`} 
+                                  onClick={() => { 
+                                    setSelectedCountry(c); 
+                                    setIsCountryOpen(false);
+                                    setSearchQuery('');
+                                  }} 
+                                  className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors text-sm ${
+                                    theme === 'dark' ? 'hover:bg-white/5 text-gray-300' : 'hover:bg-gray-50 text-gray-700'
+                                  }`}
+                                >
+                                  <img src={`https://flagcdn.com/w20/${c.code}.png`} className="w-5 rounded-sm" alt={c.name} />
+                                  <span className="flex-1 truncate font-bold">{c.name}</span>
+                                  <span className="opacity-60">{c.dial}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -568,16 +706,16 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
               </h3>
               
               <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                   <div>
-                    <label htmlFor="name" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
+                    <label htmlFor="name-static" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                       theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                     }`}>
                       Name *
                     </label>
                     <input
                       type="text"
-                      id="name"
+                      id="name-static"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
@@ -592,14 +730,14 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
+                    <label htmlFor="email-static" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
                       theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
                     }`}>
                       Email *
                     </label>
                     <input
                       type="email"
-                      id="email"
+                      id="email-static"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
@@ -611,6 +749,83 @@ const Contact: React.FC<ContactProps> = ({ showAnimations }) => {
                       }`}
                       placeholder="your.email@example.com"
                     />
+                  </div>
+
+                  <div className="sm:col-span-2 lg:col-span-1">
+                    <label htmlFor="mobile-static" className={`block text-xs md:text-sm font-semibold mb-2 md:mb-3 ${
+                      theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                    }`}>
+                      Mobile Number *
+                    </label>
+                    <div className="flex relative">
+                      <button 
+                        type="button" 
+                        onClick={() => setIsCountryOpen(!isCountryOpen)}
+                        className={`flex items-center gap-2 px-3 py-3 md:py-4 rounded-l-xl md:rounded-l-2xl border-y border-l transition-all duration-300 focus:outline-none ${
+                          theme === 'dark' 
+                            ? 'bg-white/10 border-white/20 text-white hover:bg-white/20' 
+                            : 'bg-gray-50 border-gray-300 text-gray-900 hover:bg-gray-100'
+                        }`}
+                      >
+                        <img src={`https://flagcdn.com/w20/${selectedCountry.code}.png`} className="w-5 rounded-sm" alt="flag" />
+                        <span className="text-xs md:text-sm font-bold">{selectedCountry.dial}</span>
+                        <ChevronDown size={14} className={`transition-transform duration-300 ${isCountryOpen ? 'rotate-180' : ''}`} />
+                      </button>
+
+                      <input
+                        type="tel"
+                        id="mobile-static"
+                        name="mobile"
+                        value={formData.mobile}
+                        onChange={handleChange}
+                        required
+                        className={`flex-1 px-4 py-3 md:py-4 rounded-r-xl md:rounded-r-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm md:text-base ${
+                          theme === 'dark' 
+                            ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
+                            : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                        }`}
+                        placeholder="Phone number"
+                      />
+
+                      {/* Country Dropdown */}
+                      {isCountryOpen && (
+                        <div className={`absolute top-full left-0 mt-2 z-50 w-64 rounded-xl shadow-2xl overflow-hidden border ${
+                          theme === 'dark' ? 'bg-gray-800 border-white/10' : 'bg-white border-gray-200'
+                        }`}>
+                          <div className="p-2 border-b border-white/10">
+                            <input 
+                              type="text"
+                              value={searchQuery}
+                              onChange={(e) => setSearchQuery(e.target.value)}
+                              placeholder="Search country..."
+                              className={`w-full px-3 py-2 rounded-lg text-sm focus:outline-none ${
+                                theme === 'dark' ? 'bg-white/5 text-white' : 'bg-gray-50 text-gray-900'
+                              }`}
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                          </div>
+                          <div className="max-h-48 overflow-y-auto">
+                            {filteredCountries.map((c) => (
+                              <div 
+                                key={`${c.code}-${c.dial}`} 
+                                onClick={() => { 
+                                  setSelectedCountry(c); 
+                                  setIsCountryOpen(false);
+                                  setSearchQuery('');
+                                }} 
+                                className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-colors text-sm ${
+                                  theme === 'dark' ? 'hover:bg-white/5 text-gray-300' : 'hover:bg-gray-50 text-gray-700'
+                                }`}
+                              >
+                                <img src={`https://flagcdn.com/w20/${c.code}.png`} className="w-5 rounded-sm" alt={c.name} />
+                                <span className="flex-1 truncate font-bold">{c.name}</span>
+                                <span className="opacity-60">{c.dial}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
 
